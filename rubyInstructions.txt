@@ -1,0 +1,12 @@
+Installing Ruby Stack:
+1)navigate to https://bitnami.com/stack/ruby/installer
+2)Choose prefered OS
+3)Run installation (Remember where you saved this at)
+Making a new Ruby project:
+4)Cd into your Ruby Stack
+5)run the command rails new filename
+Ruby on rails will do the rest of the work for you making the project folder
+Running a Rails server:
+6)Cd into your new project folder
+7)run the command bin/rails server
+The port and other information can edited in the project folder
