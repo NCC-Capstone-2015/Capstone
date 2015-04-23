@@ -114,6 +114,15 @@ The Administrator will be the only account that is able to create, update, or de
 <strong>Graduate Office Employees:</strong><br />
 The Graduate Office has the ability to search through the database information by any of the information that a User has provided to their account. After a search has been completed, the Graduate Office should be able to save individual users to a Saved List. The information displayed in a search result should be limited to name, degree program, email, employer, graduation date, and any other fields the Graduate Office account used to search to not clutter the screen. The Saved Lists need to be exportable into an Excel spreadsheet, along with their emails for use in sending group emails via Groupwise.
 
+<ul>
+<li>Grad account is able to look up users in a search</li>
+<li>Add a user or users to new list or list already made</li>
+<li>Delete a user or users from a list or the entire list</li>
+<li>Rename the list</li>
+<li>Have multiple lists</li>
+<li>Be able to export a list of emails for everyone in the selected list</li>
+</ul>
+
 <strong>Users:</strong><br />
 The User has the ability to search for other Users if they have opted-in to searches from other Users. Only basic fields such as name and degree should be shown.
 
