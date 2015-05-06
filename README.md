@@ -21,13 +21,14 @@ Click OK<br>
 Click the Commit button on the top of the SourceTree application<br>
 Select the files to commit<br>
 Enter comments of changes in the bottom text box<br>
+Optional: Under Commit Options in the bottom right, you can select Create Pull Request instead of using GitHub.com<br>
 Click Commit in the bottom right<br>
 
 ## Using Push
 Click the Push button on the top of the SourceTree application<br>
 Click OK<br>
 
-## Creating Pull Request
+## Creating Pull Request via Browser
 Go to GitHub.com<br>
 Select your The-Alum-Book repository<br>
 Click the green button on the left side of the page<br>
