@@ -16,18 +16,18 @@ From now on, before beginning any work on the program, run this command in the G
 <pre><code>
 $ git pull upstream master<br>
 </pre></code>
-Committing, pushing to origin, and creating pull request can be done from the GUI 
+Committing, pushing to origin, and creating pull request can be done from the GUI
 
 ## Changing mysql password
-use the manger in the rubystack file
-click on phpmyadmin
-click on the console on the bottom 
-run this command 
+*** if your username is different from root run this command***<br>
+<code>
+RENAME USER 'root'@'localhost' TO 'lamp'@'localhost';
+</code>
+use the manger in the rubystack file <br>
+click on phpmyadmin <br>
+click on the console on the bottom <br>
+run this command <br>
 <code>
 SET PASSWORD FOR root@localhost = PASSWORD('password');
 </code>
 this will change whatever your password was previously to password
-*** if your username is different from root run this command***
-<code>
-RENAME USER 'root'@'localhost' TO 'lamp'@'localhost';
-</code>
