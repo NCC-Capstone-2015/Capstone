@@ -1,16 +1,19 @@
 # Capstone Project
 
 ## Setting up origin
-Go to https://github.com/kachlikmatt/Capstone<br>
+Go to https://github.com/NCC-Capstone-2015/The-Alum-Book<br>
 On the far right, click Fork and fork to personal GitHub account<br>
-Create a folder to hold the repository on your personal computer<br>
-Using git bash, cd into that directory and enter the following commands:
+Using the GitHub GUI, clone the repo to your computer<br>
+Right click on the repo and select Open in Git Shell<br>
+Now enter these commands:<br>
 <pre><code>
-$ git init
-$ git remote add upstream git@github.com:kachlikmatt/Capstone.git<br>
+$ git remote add upstream git@github.com:NCC-Capstone-2015/The-Alum-Book.git<br>
 $ git remote add origin git@github.com:cddigi/Capstone.git  #Replace with own fork URL<br>
-$ git pull origin master<br>
-$ git pull upstream master<br>
-$ git remote set-url --push upstream no_push  
+$ git remote set-url --push upstream no_push  #Removes ability to push to upstream<br>
 </code></pre>
-The last command disables ability to push master to upstream<br>
+<p>
+From now on, before beginning any work on the program, run this command in the Git Shell:
+<pre><code>
+$ git pull upstream master<br>
+</pre></code>
+Committing and pushing to origin can be done from the GUI 
