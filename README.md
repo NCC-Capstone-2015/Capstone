@@ -21,7 +21,7 @@ Committing, pushing to origin, and creating pull request can be done from the GU
 ## Changing mysql password
 *** if your username is different from root run this command***<br>
 <code>
-RENAME USER 'root'@'localhost' TO 'lamp'@'localhost';
+RENAME USER 'root'@'localhost' TO 'root'@'localhost';
 </code>
 use the manger in the rubystack file <br>
 click on phpmyadmin <br>
