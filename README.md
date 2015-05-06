@@ -13,7 +13,7 @@ Choose a destination path and click Clone<br>
 In the top right corner click Settings, then Add<br>
 Make sure Default remote is NOT checked<br>
 Enter upstream for the Remote name field<br>
-Enter git@github.com:NCC-Capstone-2015/The-Alumbook.git in the URL / Path field<br>
+Enter https://github.com/NCC-Capstone-2015/The-Alumbook.git in the URL / Path field<br>
 Click OK<br>
 
 
