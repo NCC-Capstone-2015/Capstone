@@ -3,15 +3,19 @@
 ## Setting up origin for Windows users
 
 #### Git Client
-Go to https://github.com/NCC-Capstone-2015/The-Alum-Book<br>
+Go to https://github.com/NCC-Capstone-2015/The-Alumbook<br>
 On the far right, click Fork and fork to personal GitHub account<br>
 Go to https://www.sourcetreeapp.com/ to download and install SourceTree<br>
 Run SourceTree<br>
-In the top right corner click Clone / New<br>
-In the window that pops up, click the globe icon in the top right<br>
-Select Edit Accounts and login with your GitHub account<br>
-In the list of repositories, select The-Alum-Book where you are listed as owner<br>
+Login with your GitHub account<br>
+In the list of repositories, select The-Alumbook where you are listed as owner<br>
 Choose a destination path and click Clone<br>
+In the top right corner click Settings, then Add<br>
+Make sure Default remote is NOT checked<br>
+Enter upstream for the Remote name field<br>
+Enter git@github.com:NCC-Capstone-2015/The-Alumbook.git in the URL / Path field<br>
+Click OK<br>
+
 
 #### Using Pull
 Click the Pull button on the top of the SourceTree application<br>
@@ -32,7 +36,7 @@ Click OK<br>
 
 #### Creating Pull Request via Browser
 Go to GitHub.com<br>
-Select your The-Alum-Book repository<br>
+Select your The-Alumbook repository<br>
 Click the green button on the left side of the page<br>
 Click the green Create Pull Request button<br>
 
