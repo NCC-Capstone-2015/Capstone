@@ -16,4 +16,4 @@ From now on, before beginning any work on the program, run this command in the G
 <pre><code>
 $ git pull upstream master<br>
 </pre></code>
-Committing and pushing to origin can be done from the GUI 
+Committing, pushing to origin, and creating pull request can be done from the GUI 
