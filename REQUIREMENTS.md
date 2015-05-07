@@ -1,5 +1,5 @@
 # Requirements for Capstone Project
-######Created by Victor Bashorun, Andrew Bockus, Cornelius Donley, and Tim Schneider
+#####Created by Victor Bashorun, Andrew Bockus, Cornelius Donley, and Tim Schneider
 <hr />
 
 ### 1. Login
