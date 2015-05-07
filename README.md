@@ -41,7 +41,7 @@ Click the green button on the left side of the page<br>
 Click the green Create Pull Request button<br>
 
 
-## Changing mysql password
+### Changing mysql password
 *** if your username is different from root run this command***<br>
 <code>
 RENAME USER 'root'@'localhost' TO 'root'@'localhost';
@@ -54,3 +54,5 @@ run this command <br>
 SET PASSWORD FOR root@localhost = PASSWORD('password');
 </code>
 this will change whatever your password was previously to password
+
+
