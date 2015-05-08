@@ -35,7 +35,7 @@ Under Tools click Pull upstream<br>
 #### Commit and Push
 First click Rescan to get all the changes
 To commit changes, click Stage Changes, enter a commit message, then click Commit<br>
-To push comitted changes, click Push, make sure origin is selected, then click Push<br>
+To push comitted changes, click Push, make sure origin is selected under Destination Repository, then click Push<br>
 Enter your GitHub username and password<br>
 
 ## Setting up project using SourceTree
