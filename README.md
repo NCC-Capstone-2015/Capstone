@@ -9,7 +9,7 @@ Select 'Git GUI'<br>
 Choose Create New Repository<br>
 Select a folder where you want to store the application<br>
 <pre><code>example: F:\Capstone\Alumbook</code></pre>
-On the menu bar click Edit -> Options type in your GitHub username and email then click Save<br>
+On the menu bar click Edit -> Options type in your full name and email then click Save<br>
 In the menu bar select Repository -> Create Desktop Icon, save it in the parent directory<br>
 <pre><code>example: F:\Capstone\</code></pre>
 Double clicking that icon will now open the gui loaded with the project<br>
