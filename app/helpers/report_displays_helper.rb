@@ -1,0 +1,2 @@
+module ReportDisplaysHelper
+end
