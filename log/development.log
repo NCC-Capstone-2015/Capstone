@@ -3387,3 +3387,18 @@ Processing by UserInformationsController#index as HTML
   [1m[36mUserInformation Load (0.3ms)[0m  [1mSELECT `user_informations`.* FROM `user_informations`[0m
   Rendered user_informations/index.html.erb within layouts/application (2.0ms)
 Completed 200 OK in 138ms (Views: 136.9ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/" for ::1 at 2015-05-08 11:00:25 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Processing by WelcomesController#index as HTML
+  [1m[35mWelcome Load (0.2ms)[0m  SELECT `welcomes`.* FROM `welcomes`
+  Rendered welcomes/index.html.erb within layouts/application (9.5ms)
+Completed 200 OK in 355ms (Views: 343.9ms | ActiveRecord: 1.8ms)
+
+
+Started GET "/" for ::1 at 2015-05-08 11:00:26 -0500
+Processing by WelcomesController#index as HTML
+  [1m[36mWelcome Load (0.2ms)[0m  [1mSELECT `welcomes`.* FROM `welcomes`[0m
+  Rendered welcomes/index.html.erb within layouts/application (1.1ms)
+Completed 200 OK in 123ms (Views: 122.4ms | ActiveRecord: 0.2ms)
