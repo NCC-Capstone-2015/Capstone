@@ -9,8 +9,9 @@ RSpec.describe WelcomesController, type: :controller do
         get :new
         expect(response).to render_template("new")
       end
-  it 'creates a resource' do
-        get :update
-        expect(response).to respond_with_content_type(:json)
+  it "makes a new welcomes" do
+          welcome = Welcome.create!()
+          welcome.destroy()
       end
+
 end

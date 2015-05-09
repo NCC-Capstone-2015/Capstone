@@ -5,10 +5,5 @@ RSpec.describe UserInformationsController, type: :controller do
         get :index
         expect(response).to render_template("index")
       end
-  it "renders the show template" do
-        get :edit_welcome
-        expect(response).to render_template("edit")
-      end
-
 
 end
