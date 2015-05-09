@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :report_displays
+  resources :report_options
+  resources :reports
   resources :searches
   resources :welcomes
   resources :user_informations
