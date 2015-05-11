@@ -9,7 +9,7 @@
     <%= stylesheet_link_tag    "application" %>
     <%= javascript_include_tag "vendor/modernizr" %>
     <%= csrf_meta_tags %>
-    
+
     <%#These are the two nav bars that we need the first one is the student
     page the second is the officeworker/admin depending on which page
     you're creating change the if for testing when the login page is
@@ -106,7 +106,7 @@
                           <a href="#" class="a">Giving Back</a>
                       </li>
                       <li class="inactive">
-                          <a href="#">Reports</a>
+                        <%= link_to 'Reports', reports_path %>
                       </li>
                       <li class="has-dropdown">
                           <a href="#">My Profile</a>

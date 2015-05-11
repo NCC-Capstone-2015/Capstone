@@ -84,9 +84,8 @@ ActiveRecord::Schema.define(version: 20150511084452) do
 
   create_table "logins", force: :cascade do |t|
     t.string   "username",             limit: 255
-    t.string   "password",             limit: 255
+    t.string   "passoword",            limit: 255
     t.string   "first_name",           limit: 255
-    t.string   "middle_initial",       limit: 255
     t.string   "last_name",            limit: 255
     t.integer  "type",                 limit: 4
     t.datetime "last_login_timestamp"
@@ -243,7 +242,6 @@ ActiveRecord::Schema.define(version: 20150511084452) do
   create_table "users", force: :cascade do |t|
     t.integer  "login_id",              limit: 4
     t.string   "email_addr",            limit: 255
-    t.string   "street",                limit: 255
     t.string   "city",                  limit: 255
     t.string   "state",                 limit: 255
     t.string   "zip",                   limit: 255
@@ -252,7 +250,7 @@ ActiveRecord::Schema.define(version: 20150511084452) do
     t.string   "spouse_last_name",      limit: 255
     t.integer  "number_children",       limit: 4
     t.string   "birth_month",           limit: 255
-    t.integer  "birth_day",             limit: 4
+    t.string   "birth_day",             limit: 255
     t.integer  "birth_year",            limit: 4
     t.string   "ethnicity",             limit: 255
     t.integer  "general_opt_in",        limit: 4
@@ -268,6 +266,9 @@ ActiveRecord::Schema.define(version: 20150511084452) do
     t.datetime "created_at",                        null: false
     t.datetime "updated_at",                        null: false
   end
+
+  add_index "users", ["company_id"], name: "index_users_on_company_id", using: :btree
+  add_index "users", ["login_id"], name: "index_users_on_login_id", using: :btree
 
   create_table "welcomes", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -297,4 +298,6 @@ ActiveRecord::Schema.define(version: 20150511084452) do
   add_foreign_key "user_survey_responses", "user_surveys"
   add_foreign_key "user_surveys", "surveys"
   add_foreign_key "user_surveys", "users"
+  add_foreign_key "users", "companies"
+  add_foreign_key "users", "logins"
 end
