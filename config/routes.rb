@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :homepages
+  resources :account_logins
   resources :user_surveys
   resources :admin_surveys
   resources :report_displays
