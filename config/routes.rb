@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :user_surveys
+  resources :admin_surveys
   resources :report_displays
   resources :report_options
   resources :reports
