@@ -11,7 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150511084452) do
+ActiveRecord::Schema.define(version: 20150511164422) do
+
+  create_table "admin_surveys", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "colleges", force: :cascade do |t|
     t.string   "college_name", limit: 255
