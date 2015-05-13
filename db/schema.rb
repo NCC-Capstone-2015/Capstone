@@ -11,7 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150511164422) do
+ActiveRecord::Schema.define(version: 20150513173526) do
+
+  create_table "account_logins", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "admin_surveys", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -57,8 +62,6 @@ ActiveRecord::Schema.define(version: 20150511164422) do
     t.integer  "user_id",            limit: 4
     t.string   "subject",            limit: 255
     t.string   "position",           limit: 255
-    t.string   "description",        limit: 255
-    t.string   "requirements",       limit: 255
     t.boolean  "approved",           limit: 1
     t.boolean  "completed",          limit: 1
     t.integer  "type",               limit: 4
@@ -66,8 +69,10 @@ ActiveRecord::Schema.define(version: 20150511164422) do
     t.string   "contact_last_name",  limit: 255
     t.string   "contact_email",      limit: 255
     t.integer  "company_id",         limit: 4
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.text     "description",        limit: 65535
+    t.text     "requirements",       limit: 65535
   end
 
   add_index "giving_backs", ["company_id"], name: "index_giving_backs_on_company_id", using: :btree
@@ -77,15 +82,20 @@ ActiveRecord::Schema.define(version: 20150511164422) do
     t.integer  "user_id",         limit: 4
     t.integer  "college_id",      limit: 4
     t.integer  "degree_id",       limit: 4
-    t.string   "graduation_date", limit: 255
     t.integer  "status",          limit: 4
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.date     "graduation_date"
   end
 
   add_index "graduate_degrees", ["college_id"], name: "index_graduate_degrees_on_college_id", using: :btree
   add_index "graduate_degrees", ["degree_id"], name: "index_graduate_degrees_on_degree_id", using: :btree
   add_index "graduate_degrees", ["user_id"], name: "index_graduate_degrees_on_user_id", using: :btree
+
+  create_table "homepages", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "logins", force: :cascade do |t|
     t.string   "username",             limit: 255
@@ -126,9 +136,9 @@ ActiveRecord::Schema.define(version: 20150511164422) do
   create_table "saved_lists", force: :cascade do |t|
     t.integer  "login_id",   limit: 4
     t.string   "list_name",  limit: 255
-    t.string   "date_saved", limit: 255
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+    t.date     "date_saved"
   end
 
   add_index "saved_lists", ["login_id"], name: "index_saved_lists_on_login_id", using: :btree
@@ -141,9 +151,9 @@ ActiveRecord::Schema.define(version: 20150511164422) do
   create_table "survey_question_option_choices", force: :cascade do |t|
     t.integer  "survey_question_id", limit: 4
     t.integer  "display_order",      limit: 4
-    t.string   "text",               limit: 255
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.text     "text",               limit: 65535
   end
 
   add_index "survey_question_option_choices", ["survey_question_id"], name: "index_survey_question_option_choices_on_survey_question_id", using: :btree
@@ -151,9 +161,9 @@ ActiveRecord::Schema.define(version: 20150511164422) do
   create_table "survey_question_options", force: :cascade do |t|
     t.integer  "survey_question_id", limit: 4
     t.integer  "display_order",      limit: 4
-    t.string   "text",               limit: 255
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.text     "text",               limit: 65535
   end
 
   add_index "survey_question_options", ["survey_question_id"], name: "index_survey_question_options_on_survey_question_id", using: :btree
@@ -162,34 +172,35 @@ ActiveRecord::Schema.define(version: 20150511164422) do
     t.integer  "survey_id",     limit: 4
     t.integer  "type",          limit: 4
     t.integer  "display_order", limit: 4
-    t.string   "text",          limit: 255
     t.boolean  "required",      limit: 1
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.text     "text",          limit: 65535
   end
 
   add_index "survey_questions", ["survey_id"], name: "index_survey_questions_on_survey_id", using: :btree
 
   create_table "surveys", force: :cascade do |t|
-    t.string   "user_id",            limit: 255
     t.integer  "login_id",           limit: 4
     t.string   "survey_name",        limit: 255
-    t.string   "survey_description", limit: 255
-    t.string   "date_created",       limit: 255
     t.integer  "status",             limit: 4
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.text     "survey_description", limit: 65535
+    t.date     "date_created"
+    t.integer  "user_id",            limit: 4
   end
 
   add_index "surveys", ["login_id"], name: "index_surveys_on_login_id", using: :btree
+  add_index "surveys", ["user_id"], name: "index_surveys_on_user_id", using: :btree
 
   create_table "undergraduate_degrees", force: :cascade do |t|
     t.integer  "user_id",         limit: 4
     t.integer  "college_id",      limit: 4
     t.integer  "degree_id",       limit: 4
-    t.string   "graduation_date", limit: 255
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.date     "graduation_date"
   end
 
   add_index "undergraduate_degrees", ["college_id"], name: "index_undergraduate_degrees_on_college_id", using: :btree
@@ -216,19 +227,17 @@ ActiveRecord::Schema.define(version: 20150511164422) do
   add_index "user_phones", ["user_id"], name: "index_user_phones_on_user_id", using: :btree
 
   create_table "user_survey_responses", force: :cascade do |t|
-    t.integer  "user_survey_id",                    limit: 4
-    t.integer  "survey_question_id",                limit: 4
-    t.integer  "survey_question_option_id",         limit: 4
-    t.integer  "survey_question_option_choice_id",  limit: 4
-    t.string   "response_text",                     limit: 255
-    t.integer  "survey_question_option_choices_id", limit: 4
-    t.datetime "created_at",                                    null: false
-    t.datetime "updated_at",                                    null: false
+    t.integer  "user_survey_id",                   limit: 4
+    t.integer  "survey_question_id",               limit: 4
+    t.integer  "survey_question_option_id",        limit: 4
+    t.integer  "survey_question_option_choice_id", limit: 4
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
+    t.text     "response_text",                    limit: 65535
   end
 
   add_index "user_survey_responses", ["survey_question_id"], name: "index_user_survey_responses_on_survey_question_id", using: :btree
   add_index "user_survey_responses", ["survey_question_option_choice_id"], name: "fk_rails_78d8ef8246", using: :btree
-  add_index "user_survey_responses", ["survey_question_option_choices_id"], name: "index_user_survey_responses_on_survey_question_option_choices_id", using: :btree
   add_index "user_survey_responses", ["survey_question_option_id"], name: "index_user_survey_responses_on_survey_question_option_id", using: :btree
   add_index "user_survey_responses", ["user_survey_id"], name: "index_user_survey_responses_on_user_survey_id", using: :btree
 
@@ -254,9 +263,6 @@ ActiveRecord::Schema.define(version: 20150511164422) do
     t.string   "spouse_middle_initial", limit: 255
     t.string   "spouse_last_name",      limit: 255
     t.integer  "number_children",       limit: 4
-    t.string   "birth_month",           limit: 255
-    t.string   "birth_day",             limit: 255
-    t.integer  "birth_year",            limit: 4
     t.string   "ethnicity",             limit: 255
     t.integer  "general_opt_in",        limit: 4
     t.integer  "email_opt_in",          limit: 4
@@ -264,12 +270,13 @@ ActiveRecord::Schema.define(version: 20150511164422) do
     t.integer  "badges_opt_in",         limit: 4
     t.integer  "status",                limit: 4
     t.integer  "company_id",            limit: 4
-    t.string   "salary_range",          limit: 255
     t.string   "job_title",             limit: 255
-    t.string   "start_date",            limit: 255
-    t.string   "end_date",              limit: 255
     t.datetime "created_at",                        null: false
     t.datetime "updated_at",                        null: false
+    t.date     "birth_day"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.integer  "salary_range",          limit: 4
   end
 
   add_index "users", ["company_id"], name: "index_users_on_company_id", using: :btree
@@ -293,6 +300,7 @@ ActiveRecord::Schema.define(version: 20150511164422) do
   add_foreign_key "survey_question_options", "survey_questions"
   add_foreign_key "survey_questions", "surveys"
   add_foreign_key "surveys", "logins"
+  add_foreign_key "surveys", "users"
   add_foreign_key "undergraduate_degrees", "colleges"
   add_foreign_key "undergraduate_degrees", "degrees"
   add_foreign_key "undergraduate_degrees", "users"
