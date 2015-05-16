@@ -1,4 +1,86 @@
 <p id="notice"><%= notice %></p>
 
-<%= link_to 'Edit', edit_user_information_path(@user_information) %> |
-<%= link_to 'Back', user_informations_path %>
+<section>
+		<fieldset>
+				<legend>User Information</legend>
+						<div class="row">
+						<!-- User Name and Photo block -->
+						<div class="small-12 large-3 columns">
+								<div class="small-12">
+										<p>Last Name, First Name</p>
+										<p>User Name:</p> 
+								</div>
+								<div class="small-12">
+										<img src="/assets/img1.jpg" />
+								</div>
+						</div>
+								
+						<!-- User Information Tab block -->
+						<div class="small-12 large-9 columns">
+								<div class="">
+										<dl class="tabs" data-tab> 
+												<dd class="active">
+														<a href="#pnlContactInfo">Contact</a>
+												</dd>
+												<dd>
+														<a href="#pnlEducationInfo">Education</a>
+												</dd>
+												<dd>
+														<a href="#pnlEmploymentInfo">Employment</a>
+												</dd>
+												<dd>
+														<a href="#pnlPersonalInfo">Personal</a>
+												</dd>
+												<dd>
+														<a href="#pnlPrivacyInfo">Privacy</a>
+												</dd>
+										</dl>
+										<div class="tabs-content">
+												<div class="content active" id="pnlContactInfo">
+														<p>Address:<br>
+																Street Address<br>
+																City, State, Zip<br></p>
+														<p>EMail Address<br><ul>
+																		<li>Phone 1</li>
+																		<li>Phone 2</li>
+																</ul></p>
+												</div>
+												<div class="content" id="pnlEducationInfo">
+														<p>Student or Alumni</p>
+														<p>Degrees<ul>
+																		<li>List item</li>
+																		<li>List item</li>
+																</ul></p>
+												</div>
+												<div class="content" id="pnlEmploymentInfo">
+														<p>Employer<br>
+																Job Title<br></p>
+														<p>Address:<br>
+																Address line<br>
+																City, State Zip Code</p>
+														<p>Company Phone</p>
+														<p>Salary Range:</p>
+														<p>Start Date: 4/1/2012<br>
+																End Date:</p>
+												</div>
+												<div class="content" id="pnlPersonalInfo">
+														<p>Birth Date:</p>
+														<p>Ethnicity</p>
+														<p>Spouse Name</p>
+														<p>Number of children</p>
+												</div>
+												<div class="content" id="pnlPrivacyInfo">
+														<fieldset>
+																<legend>Opt In?</legend>
+																		<p>General opt In:</p>
+																		<p>Email opt in:</p>
+																		<p>Phone opt in:</p>
+																		<p>Badges opt in:</p>
+														</fieldset>
+												</div>
+										</div>
+								</div>
+						</div>
+				</div>
+		</fieldset>
+</section>         

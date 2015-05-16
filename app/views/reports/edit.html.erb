@@ -1,6 +1,8 @@
-<h1>Editing Report</h1>
+<div class="row" align="center">
+<h2>Editing <%= params[:report_type].capitalize %> Report Options</h2>
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @report %> |
-<%= link_to 'Back', reports_path %>
+<br/><br/>
+<%= link_to 'Back', reports_path, class: "button radius" %>
+</div>
