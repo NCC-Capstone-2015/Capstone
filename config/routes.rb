@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  devise_for :users
+  devise_for :account_logins
   resources :homepages
   resources :account_logins
   resources :user_surveys
@@ -14,11 +16,13 @@ Rails.application.routes.draw do
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
+  
+
   # You can have the root of your site routed with "root"
    root 'homepages#index'
 
   # Example of regular route:
-  #   get 'products/:id' => 'catalog#view'
+  #get 'Home/:id' => 'homepages#view'
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
