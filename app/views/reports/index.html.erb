@@ -12,66 +12,151 @@
   </div>
 </div>
 <br />
+<!--
 <div class="row">
   <div class="large-6 small-12 small-centered large-centered columns panel">
     <p align="center">Please click on a button to run a report.<br/>Export options will be available on the next page.</p>
   </div>
 </div>
 <br />
+-->
+<script>
+
+var last_report = "";
+
+function loadOptions(report_type)
+{
+  var report_button = report_type + " Button";
+
+  if(document.getElementById(report_type).style.display === "none" &&
+     document.getElementById("report_title").innerHTML === "")
+  {
+    // Display corresponding form
+    document.getElementById(report_type).style.display = "inline";
+    document.getElementById("form_end").style.display = "inline";
+    // Display form title
+    document.getElementById("report_title").innerHTML = String(report_type) + " Report";
+    document.getElementById("report_title").style.display = "inline";
+    // Change to cancel button
+    document.getElementById(report_button).className = "button radius alert";
+    document.getElementById(report_button).innerHTML = "Cancel";
+  }
+  else
+  {
+    // Hide form
+    document.getElementById(lastReport).style.display = "none";
+    document.getElementById("form_end").style.display = "none";
+    // Hide and remove title
+    document.getElementById("report_title").style.display = "none";
+    document.getElementById("report_title").innerHTML = "";
+    // Reset button
+    document.getElementById(report_button).className = "button radius";
+    document.getElementById(report_button).innerHTML = 'Run "' + report_type + '" Report';
+
+  }
+
+  lastReport = report_type;
+}
+</script>
 <div class="row">
   <div class="small-12 large-4 columns">
     <div align="center">
-      <a href="#" class="button round">Run Job Report</a>
+      <a id="Date Entered Button" onclick='loadOptions("Date Entered")' class="button radius">&nbsp;&nbsp;Run "Date Entered" Report&nbsp;&nbsp;</a>
     </div>
   </div>
   <div class="small-12 large-4 columns">
     <div align="center">
-      <a href="#" class="button round">Run Salary Report</a>
+      <a id="Graduating Class Button" onclick='loadOptions("Graduating Class")' class="button radius">Run "Graduating Class" Report</a>
     </div>
   </div>
   <div class="small-12 large-4 columns">
     <div align="center">
-      <a href="#" class="button round">Run Address Report</a>
-    </div>
-  </div>
-</div><br />
-<div class="row">
-  <div class="small-12 large-4 columns">
-    <div align="center">
-      <a href="#" class="button round">Run Survey Report</a>
-    </div>
-  </div>
-  <div class="small-12 large-4 columns">
-    <div align="center">
-      <a href="#" class="button round">Run Degree Report</a>
-    </div>
-  </div>
-  <div class="small-12 large-4 columns">
-    <div align="center">
-      <a href="#" class="button round">Run Test Report</a>
+      <a id="Graduate Program Button" onclick='loadOptions("Graduate Program")' class="button radius">Run "Graduate Program" Report</a>
     </div>
   </div>
 </div>
+<br />
+<div class="row">
+  <div class="small-12 large-4 columns">
+    <div align="center">
+      <a id="User Employer Button" onclick='loadOptions("User Employer")' class="button radius">&nbsp;Run "User Employer" Report&nbsp;</a>
+    </div>
+  </div>
+  <div class="small-12 large-4 columns">
+    <div align="center">
+      <a id="Taken Surveys Button" onclick='loadOptions("Taken Surveys")' class="button radius">&nbsp;&nbsp;Run "Taken Surveys" Report&nbsp;&nbsp;</a>
+    </div>
+  </div>
+  <div class="small-12 large-4 columns">
+    <div align="center">
+      <a id="Giving Back Button" onclick='loadOptions("Giving Back")' class="button radius">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Run "Giving Back" Report&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+    </div>
+  </div>
+</div>
+<br/><br/>
+<div class="row" align="center">
+    <h2 id="report_title" style="display:none;"></h2>
+</div>
+<br/><br/>
+<div class="row">
+  <%= form_tag reports_show_path, method: "post" do %>
+    <div id="Date Entered" style="display: none;" class="row">
+      <div class="row" align="center">
+        <div class="large-3 small-12 columns">
+          <%= label_tag(:date, "Month entered:") %>
+          <%= text_field :date, :month %>
+        </div>
+        <div class="large-3 small-12 columns">
+          <%= label_tag(:date, "Year entered:") %>
+          <%= text_field :date, :year %>
+        </div>
+      </div>
+    </div>
+    <div id="Graduating Class" style="display: none;" class="row">
+      <div class="large-12 small-12 columns">
+        <%= label_tag(:grad_year, "Graduation year:") %>
+        <%= date_select("grad_year", "year", start_year: Time.now.year, end_year: 1980,
+                        discard_day: true, discard_month: true, include_blank: true) %>
+      </div>
+    </div>
+    <div id="Graduate Program" style="display: none;" class="row">
+      <div class="large-12 small-12 columns">
+        <%= label_tag(:grad_program, "Graduate Program:") %>
+        <%= select_tag "grad_program", "<option></option><option>Business</option><option>Computer Science</option><option>Design</option>".html_safe %>
+      </div>
+    </div>
+    <div id="User Employer" style="display: none;" class="row">
+      <div class="large-12 small-12 columns">
+        <%= label_tag(:employer, "Employer:") %>
+        <%= text_field :employer, :name %>
+    </div>
+    <div id="Taken Surveys" style="display: none;" class="row">
 
+    </div>
+    <div id="Giving Back" style="display: none;" class="row">
+      
+    </div>
+    <div id="form_end" style="display: none;">
+      <div class="large-6 small-12 columns">
+        <%= label_tag(:grad_status, "Graduate Status:") %>
+        <%= select_tag "grad_status", "<option>All Students</option><option>Current Students</option><option>Alumni</option>".html_safe %>
+      </div>
+      <div class="large-6 small-12 columns">
+        <%= label_tag(:saved_list, "Apply to Saved List?") %>
+        <%= select_tag "saved_list", '<option selected="selected">No</option><option>Saved List 1</option><option>Saved List 2</option>'.html_safe %>
+      </div><br/>
+      <div class="row">
+        <div class="large-4 small-12 columns" align="center">
+          <div align="center">
+          <%= submit_tag "Submit", class: "button radius" %>
+        </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
 
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @reports.each do |report| %>
-      <tr>
-        <td><%= link_to 'Show', report %></td>
-        <td><%= link_to 'Edit', edit_report_path(report) %></td>
-        <td><%= link_to 'Destroy', report, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Report', new_report_path %>
+  <div id="reportModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+    <h2 id="modalTitle"><%= '#{report_name}' %></h2>
+    <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+  </div>
