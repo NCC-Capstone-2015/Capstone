@@ -10,7 +10,8 @@ class UserInformationsController < ApplicationController
   # GET /user_informations/1
   # GET /user_informations/1.json
   def show
-  end
+
+	end
 
   # GET /user_informations/new
   def new
@@ -64,7 +65,7 @@ class UserInformationsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user_information
-      @user_information = UserInformation.find(params[:id])
+
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

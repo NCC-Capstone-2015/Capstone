@@ -54,21 +54,18 @@
                          <a href="#">My Profile</a>
                          <ul class="dropdown">
                              <li>
-                                 <a href="#">View</a>
+																 <%= link_to 'View', {:action => 'show', :controller => 'user_informations', :id => 1} %>
                              </li>
                              <li>
-                                 <a href="#">Edit</a>
+																 <%= link_to 'Edit', {:action => 'edit', :controller => 'user_informations', :id => 1} %>
                              </li>
                              <li>
-                                 <a href="#">Privacy Settings</a>
-                             </li>
-                             <li>
-                                 <a href="#">Log Out</a>
+																 <a href="#">Log Out</a>
                              </li>
                          </ul>
                      </li>
                      <li class="inactive">
-                         <a href="#">Search</a>
+												<a href="#">Search</a>
                      </li>
                  </ul>
                  <!-- Right Nav Section -->
