@@ -1,6 +1,8 @@
 class HomepagesController < ApplicationController
   before_action :set_homepage, only: [:show, :edit, :update, :destroy]
 
+  before_filter :authenticate_user!
+  
   # GET /homepages
   # GET /homepages.json
   def index
