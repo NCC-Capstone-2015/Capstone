@@ -4,7 +4,10 @@ class SearchesController < ApplicationController
   # GET /searches
   # GET /searches.json
   def index
-    @searches = Search.all
+    @search = Search.search(params[:q])
+    @searches = @search.result
+    @search.build_condition if @search.conditions.empty?
+    @search.build_sort if @search.sorts.empty?
   end
 
   # GET /searches/1

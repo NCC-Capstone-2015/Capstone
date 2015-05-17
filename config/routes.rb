@@ -8,7 +8,9 @@ Rails.application.routes.draw do
   resources :report_displays
   resources :report_options
   resources :reports
-  resources :searches
+  resources :searches do
+    collection { post :search, to: 'searches#index' }
+  end
   resources :welcomes
   resources :user_informations
   get 'welcomes/index'

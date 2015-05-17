@@ -1,152 +1,18 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Listing Searches</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @searches.each do |search| %>
-      <tr>
-        <td><%= link_to 'Show', search %></td>
-        <td><%= link_to 'Edit', edit_search_path(search) %></td>
-        <td><%= link_to 'Destroy', search, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+<h1>Advanced Search</h1>
+<%= search_form_for @search, url: search_searches_path, method: :post do |f| %>
+  <% (1..3).each do |i| %>
+    <%= f.condition_fields do |c| %>
+      <%= render "condition_fields", f: c %>
+    <% end %>    
+  <% end %>
+  
+  <p><%= link_to_add_fields "Add", f, :condition, class: "button" %></p>
+  <div class="field">
+    Sort:
+    <%= f.sort_fields do |s| %>
+      <%= s.sort_select %>
     <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Search', new_search_path %>
-
-<div class="row">
-<div class="large-8 medium-8 columns">
-  <form>
-	<div class="row">
-	  <div class="large-4 columns">
-		<select>
-		  <option value="first_name">First Name</option>
-		  <option value="last_name">Last Name</option>
-		  <option value="id">Student ID</option>
-		  <option value="major_name">Major</option>
-		  <option value="email_addr">Email Address</option>
-		  <option value="zip">ZIP</option>
-		  <option value="spouse_first_name">Spouse's First Name</option>
-		  <option value="spouse_last_name">Spouse's Last Name</option>
-		  <option value="number_children">Number of Children</option>
-		  <option value="ethnicity">Ethnicity</option>
-		  <option value="job_title">Job Title</option>
-		  <option value="college_name">Previous School</option>
-		  <option value="company_name">Employer</option>
-		  <option value="company_infos_zip">Employer ZIP</option>
-		</select>
-	  </div>
-	  <div class="large-5 medium-5 columns">
-		<input type="text" />
-	  </div>
-	</div>
-	<div class="row">
-	  <div class="large-2 columns">
-		<select>
-		  <option value="and">AND</option>
-		  <option value="or">OR</option>
-		  <option value="not">NOT</option>
-		</select>
-	  </div>
-	  <div class="large-3 columns">
-		<select>
-		  <option value="first_name">First Name</option>
-		  <option value="last_name">Last Name</option>
-		  <option value="id">Student ID</option>
-		  <option value="major_name">Major</option>
-		  <option value="email_addr">Email Address</option>
-		  <option value="zip">ZIP</option>
-		  <option value="spouse_first_name">Spouse's First Name</option>
-		  <option value="spouse_last_name">Spouse's Last Name</option>
-		  <option value="number_children">Number of Children</option>
-		  <option value="ethnicity">Ethnicity</option>
-		  <option value="job_title">Job Title</option>
-		  <option value="college_name">Previous School</option>
-		  <option value="company_name">Employer</option>
-		  <option value="company_infos_zip">Employer ZIP</option>
-		</select>
-	  </div>
-	  <div class="large-5 medium-5 columns">
-		<input type="text" />
-	  </div>
-	</div>
-	<div class="row">
-	  <div class="large-2 columns">
-		<select>
-		  <option value="and">AND</option>
-		  <option value="or">OR</option>
-		  <option value="not">NOT</option>
-		</select>
-	  </div>
-	  <div class="large-3 columns">
-		<select>
-		  <option value="first_name">First Name</option>
-		  <option value="last_name">Last Name</option>
-		  <option value="id">Student ID</option>
-		  <option value="major_name">Major</option>
-		  <option value="email_addr">Email Address</option>
-		  <option value="zip">ZIP</option>
-		  <option value="spouse_first_name">Spouse's First Name</option>
-		  <option value="spouse_last_name">Spouse's Last Name</option>
-		  <option value="number_children">Number of Children</option>
-		  <option value="ethnicity">Ethnicity</option>
-		  <option value="job_title">Job Title</option>
-		  <option value="college_name">Previous School</option>
-		  <option value="company_name">Employer</option>
-		  <option value="company_infos_zip">Employer ZIP</option>
-		</select>
-	  </div>
-	  <div class="large-5 medium-5 columns">
-		<input type="text" />
-	  </div>
-	</div>
-	<div class="row">
-	  <div class="large-2 columns">
-		<select>
-		  <option value="and">AND</option>
-		  <option value="or">OR</option>
-		  <option value="not">NOT</option>
-		</select>
-	  </div>
-	  <div class="large-3 columns">
-		<select>
-		  <option value="first_name">First Name</option>
-		  <option value="last_name">Last Name</option>
-		  <option value="id">Student ID</option>
-		  <option value="major_name">Major</option>
-		  <option value="email_addr">Email Address</option>
-		  <option value="zip">ZIP</option>
-		  <option value="spouse_first_name">Spouse's First Name</option>
-		  <option value="spouse_last_name">Spouse's Last Name</option>
-		  <option value="number_children">Number of Children</option>
-		  <option value="ethnicity">Ethnicity</option>
-		  <option value="job_title">Job Title</option>
-		  <option value="college_name">Previous School</option>
-		  <option value="company_name">Employer</option>
-		  <option value="company_infos_zip">Employer ZIP</option>
-		</select>
-	  </div>
-	  <div class="large-5 medium-5 columns">
-		<input type="text" />
-	  </div>
-	  <a href="#" class="small secondary button">+</a>
-	</div>
-  </form>
-</div>
-</div>
-<hr/>
-<div align="center">
-<a href="#" class="medium secondary button">Reset</a>
-<a href="#" class="medium secondary button">Search</a><br>
+  </div>
+  <%= f.submit "Search", :class => "button" %>
+<% end %>
 <label><a href="#">Privacy Policy</a> | <a href="#">Contact Us</a></label>
-</div>
