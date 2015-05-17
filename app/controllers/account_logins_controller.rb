@@ -1,7 +1,5 @@
 class AccountLoginsController < ApplicationController
-  #before_action :set_account_login, only: [:show, :edit, :update, :destroy]
-  #added
-  before_filter :authenticate_user!
+  before_action :set_account_login, only: [:show, :edit, :update, :destroy]
 
   # GET /account_logins
   # GET /account_logins.json

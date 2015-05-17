@@ -14,7 +14,7 @@
     page the second is the officeworker/admin depending on which page
     you're creating change the if for testing when the login page is
     done then we will be able to dynamically switch it in and out %>
-  <% if user_signed_in? %>
+
     <% if true %>
       <nav class="top-bar" data-topbar>
              <ul class="title-area">
@@ -28,7 +28,7 @@
              <section class="top-bar-section">
                  <ul class="right">
                      <li class="inactive">
-                         <%= link_to 'Home', homepages_path %>
+                         <a href="#">Home</a>
                      </li>
                      <li class="inactive">
                          <a href="#">Surveys</a>
@@ -54,27 +54,18 @@
                          <a href="#">My Profile</a>
                          <ul class="dropdown">
                              <li>
-                                 <a href="#">View</a>
+																 <%= link_to 'View', {:action => 'show', :controller => 'user_informations', :id => 1} %>
                              </li>
                              <li>
-                                 <a href="#">Edit</a>
+																 <%= link_to 'Edit', {:action => 'edit', :controller => 'user_informations', :id => 1} %>
                              </li>
                              <li>
-                                 <a href="#">Privacy Settings</a>
-                             </li>
-                             <li>
-				<% if user_signed_in? %>
-				  <li>
-				<%= link_to('Logout', destroy_user_session_path, :method => :delete) %>  
-				  
-				  </li>
-				  
-				<% end %>
+																 <a href="#">Log Out</a>
                              </li>
                          </ul>
                      </li>
                      <li class="inactive">
-			<a href="#">Search</a>									<a href="#">Search</a>
+												<a href="#">Search</a>
                      </li>
                  </ul>
                  <!-- Right Nav Section -->
@@ -98,9 +89,8 @@
               <section class="top-bar-section">
                   <ul class="right">
                       <li class="inactive">
-			  <%= link_to 'Homepage', homepages_path %>
+                          <a href="#">Home</a>
                       </li>
-		      
                       <li class="has-dropdown">
                           <a href="#">Surveys</a>
                           <ul class="dropdown">
@@ -136,18 +126,7 @@
               </section>
           </nav>
       <% end %>
-  <% else %>
-        <nav class="top-bar" data-topbar>
-              <ul class="title-area">
-                  <li class="name">
-                      <h1><a href="#">North Central College</a></h1>
-                  </li>
-                  <li class="toggle-topbar menu-icon">
-                      <a href="#">Menu</a>
-                  </li>
-              </ul>
-          </nav>
-      <% end %>
+
   </head>
 
   <body>
