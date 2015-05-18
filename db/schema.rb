@@ -52,10 +52,10 @@ ActiveRecord::Schema.define(version: 20150515181333) do
   add_index "company_infos", ["company_id"], name: "index_company_infos_on_company_id", using: :btree
 
   create_table "degrees", force: :cascade do |t|
-    t.string   "major_name", limit: 255
-    t.integer  "type",       limit: 4
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.string   "major_name",  limit: 255
+    t.integer  "degree_type", limit: 4
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
   create_table "giving_backs", force: :cascade do |t|
@@ -64,7 +64,7 @@ ActiveRecord::Schema.define(version: 20150515181333) do
     t.string   "position",           limit: 255
     t.boolean  "approved",           limit: 1
     t.boolean  "completed",          limit: 1
-    t.integer  "type",               limit: 4
+    t.integer  "giving_back_type",   limit: 4
     t.string   "contact_first_name", limit: 255
     t.string   "contact_last_name",  limit: 255
     t.string   "contact_email",      limit: 255
@@ -101,7 +101,7 @@ ActiveRecord::Schema.define(version: 20150515181333) do
     t.string   "username",             limit: 255
     t.string   "first_name",           limit: 255
     t.string   "last_name",            limit: 255
-    t.integer  "type",                 limit: 4
+    t.integer  "login_type",           limit: 4
     t.datetime "last_login_timestamp"
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
@@ -169,13 +169,13 @@ ActiveRecord::Schema.define(version: 20150515181333) do
   add_index "survey_question_options", ["survey_question_id"], name: "index_survey_question_options_on_survey_question_id", using: :btree
 
   create_table "survey_questions", force: :cascade do |t|
-    t.integer  "survey_id",     limit: 4
-    t.integer  "type",          limit: 4
-    t.integer  "display_order", limit: 4
-    t.boolean  "required",      limit: 1
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
-    t.text     "text",          limit: 65535
+    t.integer  "survey_id",            limit: 4
+    t.integer  "survey_question_type", limit: 4
+    t.integer  "display_order",        limit: 4
+    t.boolean  "required",             limit: 1
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+    t.text     "text",                 limit: 65535
   end
 
   add_index "survey_questions", ["survey_id"], name: "index_survey_questions_on_survey_id", using: :btree
@@ -213,15 +213,15 @@ ActiveRecord::Schema.define(version: 20150515181333) do
   end
 
   create_table "user_phones", force: :cascade do |t|
-    t.integer  "user_id",      limit: 4
-    t.string   "country_code", limit: 255
-    t.string   "area_code",    limit: 255
-    t.string   "prefix",       limit: 255
-    t.string   "suffix",       limit: 255
-    t.string   "extension",    limit: 255
-    t.integer  "type",         limit: 4
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.integer  "user_id",          limit: 4
+    t.string   "country_code",     limit: 255
+    t.string   "area_code",        limit: 255
+    t.string   "prefix",           limit: 255
+    t.string   "suffix",           limit: 255
+    t.string   "extension",        limit: 255
+    t.integer  "user_phones_type", limit: 4
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
   end
 
   add_index "user_phones", ["user_id"], name: "index_user_phones_on_user_id", using: :btree
