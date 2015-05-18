@@ -5,7 +5,7 @@ class CreateLogins < ActiveRecord::Migration
       t.string :passoword
       t.string :first_name
       t.string :last_name
-      t.integer :type
+      t.integer :login_type
       t.timestamp :last_login_timestamp
 
       t.timestamps null: false
