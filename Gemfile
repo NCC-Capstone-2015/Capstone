@@ -38,6 +38,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 # Using Foundation 5
 gem 'foundation-rails'
 
+gem 'ransack'
 gem 'capybara'
 group :development, :test do
   gem 'rspec-rails'

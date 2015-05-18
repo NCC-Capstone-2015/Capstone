@@ -64,11 +64,11 @@ class AdminSurveysController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_admin_survey
-      @admin_survey = AdminSurvey.find(params[:id])
+      @admin_survey = Survey.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def admin_survey_params
-      params[:admin_survey]
+      params[:survey]
     end
 end

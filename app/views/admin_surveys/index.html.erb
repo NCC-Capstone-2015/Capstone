@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+<%= render "menu/admin" %>
 
 <h1>Surveys</h1>
 
@@ -72,4 +72,4 @@
   </tr>
 </table>
 
-<a class="button radius" <%= link_to 'Create New', "admin_surveys/survey_title"%></a>
+<a class="button radius" <%= link_to "Create new", "admin_surveys/survey_type", :remote => true %></a>
