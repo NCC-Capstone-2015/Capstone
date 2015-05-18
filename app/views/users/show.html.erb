@@ -1,0 +1,30 @@
+<p>
+  <strong>User name:</strong>
+  <%= @user.login.username %>
+</p>
+
+<p>
+  <strong>First name:</strong>
+  <%= @user.first_name %>
+</p>
+<p>
+  <strong>Middle initial:</strong>
+  <%= @user.middle_initial %>
+</p>
+<p>
+  <strong>Last name:</strong>
+  <%= @user.last_name %>
+</p>
+<p>
+  <strong>Type:</strong>
+  <%= @user.account_type %>
+</p>
+<p>
+  <strong>Last login:</strong>
+  <%= @user.last_login %>
+</p>
+
+
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'All users', users_path %> |
+<%= link_to 'Home', root_path %>

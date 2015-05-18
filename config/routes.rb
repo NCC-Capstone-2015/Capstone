@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :report_displays
   resources :report_options
   resources :reports
+  resources :users
   resources :searches do
     collection { post :search, to: 'searches#index' }
   end

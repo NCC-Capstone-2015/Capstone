@@ -10,131 +10,13 @@
     <%= javascript_include_tag "vendor/modernizr" %>
     <%= csrf_meta_tags %>
 
-    <%#These are the two nav bars that we need the first one is the student
-    page the second is the officeworker/admin depending on which page
-    you're creating change the if for testing when the login page is
-    done then we will be able to dynamically switch it in and out %>
-
-    <% if true %>
-      <nav class="top-bar" data-topbar>
-             <ul class="title-area">
-                 <li class="name">
-                     <h1><a href="#">North Central College</a></h1>
-                 </li>
-                 <li class="toggle-topbar menu-icon">
-                     <a href="#">Menu</a>
-                 </li>
-             </ul>
-             <section class="top-bar-section">
-                 <ul class="right">
-                     <li class="inactive">
-                         <a href="#">Home</a>
-                     </li>
-                     <li class="inactive">
-                         <a href="#">Surveys</a>
-                     </li>
-                     <li class="has-dropdown">
-                         <a href="#">Giving Back</a>
-                         <ul class="dropdown">
-                             <li>
-                                 <a href="#">Internships</a>
-                             </li>
-                             <li>
-                                 <a href="#">Mentoring</a>
-                             </li>
-                             <li>
-                                 <a href="#">Speaking</a>
-                             </li>
-                             <li>
-                                 <a href="#">Other</a>
-                             </li>
-                         </ul>
-                     </li>
-                     <li class="has-dropdown">
-                         <a href="#">My Profile</a>
-                         <ul class="dropdown">
-                             <li>
-																 <%= link_to 'View', {:action => 'show', :controller => 'user_informations', :id => 1} %>
-                             </li>
-                             <li>
-																 <%= link_to 'Edit', {:action => 'edit', :controller => 'user_informations', :id => 1} %>
-                             </li>
-                             <li>
-																 <a href="#">Log Out</a>
-                             </li>
-                         </ul>
-                     </li>
-                     <li class="inactive">
-												<a href="#">Search</a>
-                     </li>
-                 </ul>
-                 <!-- Right Nav Section -->
-                 <!-- Left Nav Section -->
-                 <ul class="left">
-                     <li>
-                    </li>
-                 </ul>
-             </section>
-         </nav>
-      <% else %>
-        <nav class="top-bar" data-topbar>
-              <ul class="title-area">
-                  <li class="name">
-                      <h1><a href="#">North Central College</a></h1>
-                  </li>
-                  <li class="toggle-topbar menu-icon">
-                      <a href="#">Menu</a>
-                  </li>
-              </ul>
-              <section class="top-bar-section">
-                  <ul class="right">
-                      <li class="inactive">
-                          <a href="#">Home</a>
-                      </li>
-                      <li class="has-dropdown">
-                          <a href="#">Surveys</a>
-                          <ul class="dropdown">
-                              <li>
-                                  <a href="#">First link in dropdown</a>
-                              </li>
-                          </ul>
-                      </li>
-                      <li class="inactive">
-                          <a href="#" class="a">Giving Back</a>
-                      </li>
-                      <li class="inactive">
-                        <%= link_to 'Reports', reports_path %>
-                      </li>
-                      <li class="has-dropdown">
-                          <a href="#">My Profile</a>
-                          <ul class="dropdown">
-                              <li>
-                                  <a href="#">First link in dropdown</a>
-                              </li>
-                          </ul>
-                      </li>
-                      <li class="inactive">
-                          <a href="#">Search</a>
-                      </li>
-                  </ul>
-                  <!-- Right Nav Section -->
-                  <!-- Left Nav Section -->
-                  <ul class="left">
-                      <li>
-                      </li>
-                  </ul>
-              </section>
-          </nav>
-      <% end %>
 
   </head>
 
   <body>
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
+
 
 
     <%= yield %>
-    <%= javascript_include_tag "application" %>
   </body>
 </html>
