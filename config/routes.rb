@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :logins
   resources :homepages
   resources :account_logins
   resources :user_surveys
