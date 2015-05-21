@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150515181333) do
+ActiveRecord::Schema.define(version: 20150521015919) do
 
   create_table "account_logins", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -277,6 +277,7 @@ ActiveRecord::Schema.define(version: 20150515181333) do
     t.date     "start_date"
     t.date     "end_date"
     t.integer  "salary_range",          limit: 4
+    t.string   "street",                limit: 255
   end
 
   add_index "users", ["company_id"], name: "index_users_on_company_id", using: :btree
