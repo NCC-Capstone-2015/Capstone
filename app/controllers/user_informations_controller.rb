@@ -1,4 +1,8 @@
+# Author: Craig Sterling
+# Date: 5/20/2015
 class UserInformationsController < ApplicationController
+  helper_method :convert_opt_in, :convert_user_status, :concatenate_phone,
+                :convert_phone_type
   before_action :set_user_information, only: [:show, :edit, :update, :destroy]
 
   # GET /user_informations
@@ -65,7 +69,52 @@ class UserInformationsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user_information
+      @login = Login.find(params[:id])
+      @user = User.find_by_login_id(@login.id)
+      @user_phones = UserPhone.where(user_id: @user.id)
+      @company = Company.find(@user.company_id)
+      @company_info = CompanyInfo.find_by_company_id(@company.id)
+    end
 
+    # helper method to convert user.status from number stored in tables
+    # to verbiage
+    def convert_user_status (status)
+
+      if status == 0
+        status_description = "Enrolled"
+      else
+        status_description = "Alumni"
+      end
+    end
+
+    # helper method to convert opt_in_values from number stored in tables
+    # to verbiage
+    def convert_opt_in (opt_in_value)
+      if opt_in_value == 0
+        opt_in_text = "No"
+      else
+        opt_in_text = "Yes"
+      end
+    end
+
+    # helper method to concatenate the elements of the phone number into
+    # a string
+    def concatenate_phone (phone_country_code, phone_area_code,
+                           phone_prefix, phone_suffix)
+      phone_text = (phone_country_code + "." + phone_area_code + "." +
+                   phone_prefix + "." + phone_suffix)
+    end
+
+    # helper method to convert phone_type from number stored in tables
+    # to verbiage
+    def convert_phone_type (phone_type)
+      if phone_type == 0
+        phone_type_text = "Home"
+      elsif phone_type == 1
+        phone_type_text = "Work"
+      else phone_type == 2
+        phone_type_text = "Mobile"
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
