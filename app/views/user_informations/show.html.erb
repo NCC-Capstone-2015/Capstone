@@ -13,7 +13,7 @@
 					<p><%= "User Name: " + @login.username %></p>
 				</div>
 				<div class="small-12">
-					<img src="/assets/placeholder-person.png" />
+					<img src=<%= get_photo_path(@login.last_name, @login.first_name) %>>
 				</div>
 			</div>
 
@@ -39,7 +39,7 @@
 					</dl>
 						<div class="tabs-content">
 							<!-- Contact Information Tab block -->
-							<div class="content" id="pnlContactInfo">
+							<div class="content active" id="pnlContactInfo">
 								<p>Address:<br>
 									<%= @user.street %><br>
 									<%= @user.city + ", " +  @user.state + " " + @user.zip %><br>
@@ -82,7 +82,7 @@
 							<!-- Employment Information Tab block -->
 							<div class="content" id="pnlEmploymentInfo">
 								<p><%= @company.company_name %><br>
-									Job Title<br>
+									<%= @user.job_title %>
 								</p>
 								<p>Address:<br>
 									<%= @company_info.street %><br>
@@ -111,7 +111,7 @@
 								<p>Number of children: <%= @user.number_children %></p>
 							</div>
 							<!-- Privacy Information Tab block -->
-							<div class="content active" id="pnlPrivacyInfo">
+							<div class="content" id="pnlPrivacyInfo">
 								<fieldset>
 									<legend>Opt In?</legend>
 										<p>General opt in: <%= convert_opt_in(@user.general_opt_in) %></p>
@@ -125,4 +125,5 @@
 				</div>
 			</div>
 	</fieldset>
+	<a class="button radius" href="/user_informations/1/edit"> Edit</a>
 </section>
