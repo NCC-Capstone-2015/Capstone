@@ -2,7 +2,7 @@
 # Date: 5/20/2015
 class UserInformationsController < ApplicationController
   helper_method :convert_opt_in, :convert_user_status, :concatenate_phone,
-                :convert_phone_type
+                :convert_phone_type, :get_photo_path
   before_action :set_user_information, only: [:show, :edit, :update, :destroy]
 
   # GET /user_informations
@@ -24,6 +24,7 @@ class UserInformationsController < ApplicationController
 
   # GET /user_informations/1/edit
   def edit
+
   end
 
   # POST /user_informations
@@ -117,7 +118,22 @@ class UserInformationsController < ApplicationController
       end
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
+    # helper method to get phot_path if it exists,
+    # otherwise get the default photo_path
+    def get_photo_path (l_name, f_name)
+      photo_file_name = l_name + "_" + f_name + ".png"
+      photo_path_and_file_name = Rails.root.join "app", "assets", "images",
+                                                                photo_file_name
+      if (File.file?(photo_path_and_file_name))
+        asset_name = "/assets/" + photo_file_name
+      else
+        asset_name = "/assets/placeholder-person.png"
+      end
+      return asset_name
+    end
+
+    # Never trust parameters from the scary internet,
+    # only allow the white list through.
     def user_information_params
       params[:user_information]
     end
