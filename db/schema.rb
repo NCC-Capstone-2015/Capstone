@@ -11,7 +11,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150515181333) do
+
+ActiveRecord::Schema.define(version: 20150521015919) do
 
   create_table "account_logins", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -98,15 +99,28 @@ ActiveRecord::Schema.define(version: 20150515181333) do
   end
 
   create_table "logins", force: :cascade do |t|
-    t.string   "username",             limit: 255
-    t.string   "first_name",           limit: 255
-    t.string   "last_name",            limit: 255
-    t.integer  "login_type",           limit: 4
+    t.string   "username",               limit: 255
+    t.string   "first_name",             limit: 255
+    t.string   "last_name",              limit: 255
+    t.integer  "login_type",             limit: 4
     t.datetime "last_login_timestamp"
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
-    t.string   "password",             limit: 255
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
+    t.string   "password",               limit: 255
+    t.string   "email",                  limit: 255, default: "", null: false
+    t.string   "encrypted_password",     limit: 255, default: "", null: false
+    t.string   "reset_password_token",   limit: 255
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          limit: 4,   default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip",     limit: 255
+    t.string   "last_sign_in_ip",        limit: 255
   end
+
+  add_index "logins", ["email"], name: "index_logins_on_email", unique: true, using: :btree
+  add_index "logins", ["reset_password_token"], name: "index_logins_on_reset_password_token", unique: true, using: :btree
 
   create_table "report_displays", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -277,6 +291,7 @@ ActiveRecord::Schema.define(version: 20150515181333) do
     t.date     "start_date"
     t.date     "end_date"
     t.integer  "salary_range",          limit: 4
+    t.string   "street",                limit: 255
   end
 
   add_index "users", ["company_id"], name: "index_users_on_company_id", using: :btree

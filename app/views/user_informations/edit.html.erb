@@ -1,236 +1,229 @@
 <section>
-		<form> 
-				<fieldset>
-						<legend>User Information</legend>
+	<form>
+		<fieldset>
+			<legend>User Information</legend>
 
-						<div class="row">
-								<!-- User Name and Photo block -->
-								<div class="small-12 large-3 columns">
-										<div class="small-12">
-												<input type="text" name="first_name" placeholder="Last Name"/>
-										</div>
-										<div class="small-8">
-												<input type="text" name="last_name" placeholder="First Name"/>
-										</div>
-										<div class="small-3">
-												<input type="text" name="middle_initial" placeholder="Initial"/>
-										</div>
-										<div class="small-12">
-												<img src="/assets/img1.jpg"/>
-										</div>
+			<div class="row">
+				<!-- User Name and Photo block -->
+				<div class="small-12 large-3 columns">
+					<div class="small-12">
+						<input type="text" name="first_name" placeholder=<%= @login.last_name %>>
+					</div>
+					<div class="small-8">
+						<input type="text" name="last_name" placeholder=<%= @login.first_name %>>
+					</div>
+					<div class="small-3">
+						<input type="text" name="middle_initial" placeholder="Initial">
+					</div>
+					<div class="small-12">
+						<img src=<%= get_photo_path(@login.last_name, @login.first_name) %>>
+					</div>
+				</div>
+				<!-- User Information Tab block -->
+				<div class="small-12 large-9 columns">
+					<div class="">
+						<dl class="tabs" data-tab>
+							<dd class="active">
+								<a href="#pnlContactInfo">Contact</a>
+							</dd>
+							<dd>
+								<a href="#pnlEducationInfo">Education</a>
+							</dd>
+							<dd>
+								<a href="#pnlEmploymentInfo">Employment</a>
+							</dd>
+							<dd>
+								<a href="#pnlPersonalInfo">Personal</a>
+							</dd>
+							<dd>
+								<a href="#pnlPrivacyInfo">Privacy</a>
+							</dd>
+						</dl>
+						<div class="tabs-content">
+							<!-- Contact Information Tab block -->
+							<div class="content active" id="pnlContactInfo">
+								<div class="row">
+									<div class="small-12 columns">
+										Address:
+									</div>
+									<div class="small-10 columns">
+										<input type="text" name="street" placeholder=<%= @user.street %>>
+									</div>
+									<div class="small-6 columns">
+										<input type="text" name="city" placeholder=<%= @user.city %>>
+									</div>
+									<div class="small-2 columns">
+										<input type="text" name="state" placeholder=<%= @user.state %>>
+									</div>
+									<div class="small-2 columns end">
+										<input type="text" name="zip" placeholder=<%= @user.zip %>>
+									</div>
 								</div>
-								<!-- User Information Tab block -->
-								<div class="small-12 large-9 columns">
-										<div class="">
-												<dl class="tabs" data-tab> 
-														<dd class="active">
-																<a href="#pnlContactInfo">Contact</a>
-														</dd>
-														<dd>
-																<a href="#pnlEducationInfo">Education</a>
-														</dd>
-														<dd>
-																<a href="#pnlEmploymentInfo">Employment</a>
-														</dd>
-														<dd>
-																<a href="#pnlPersonalInfo">Personal</a>
-														</dd>
-														<dd>
-																<a href="#pnlPrivacyInfo">Privacy</a>
-														</dd>
-												</dl>
-												<div class="tabs-content">
-														<div class="content active" id="pnlContactInfo">
-																<div class="row">
-																		<div class="small-12 columns">
-																				Address:
-																		</div>
-																		<div class="small-10 columns">
-																				<input type="text" name="street" placeholder="Street"/>
-																		</div>
-																		<div class="small-6 columns">
-																				<input type="text" name="city" placeholder="City"/>
-																		</div>
-																		<div class="small-2 columns">
-																				<input type="text" name="state" placeholder="State"/>
-																		</div>
-																		<div class="small-2 columns end">
-																				<input type="text" name="zip" placeholder="Zip Code"/>
-																		</div>
-																</div>
-																<div class="row">																		
-																		<div class="small-10 columns">
-																				<input type="text" name="email_addr" placeholder="eMail Address"/>
-																		</div>
-																		<div class="small-12 columns">
-																				<ul style="list-style-type:none">
-																						<li>Phone 1</li>
-																						<li>Phone 2</li>
-																				</ul>
-																		</div>
-																</div>
-														</div>
-														<div class="content" id="pnlEducationInfo">
-																<div class="row">
-																		<div class="small-2 columns">
-																				<label>Student Status</label>
-																		</div>
-																		<div class="small-3 columns end">
-																				<input type="text" name="status" placeholder="Status"/>
-																		</div>
-																</div>
-																<div class="row">
-																<div class="small-12 columns">
-																		<p>Degrees:</p>
-																</div>
-																		<ul style="list-style-type:none">
-																				<li>List item</li>
-																				<li>List item</li>
-																		</ul>
-																</div>
-														</div>
-														<div class="content" id="pnlEmploymentInfo">
-																<div class="row">
-																		<div class="small-2 columns">
-																				<label>Employer</label>
-																		</div>
-																		<div class="small-4 columns end">
-																				<input type="text" name="company_name" placeholder="Employer"/>
-																		</div>
-																</div>
-																<div class="row">
-																		<div class="small-2 columns">
-																				<label>Job Title</label>
-																		</div>
-																		<div class="small-4 columns end">
-																				<input type="text" name="job_title" placeholder="Job Title"/>
-																		</div>
-																</div>
-																<div class="row">
-																		<div class="small-12 columns">
-																				Address:
-																		</div>
-																		<div class="small-12 columns">
-																				<input type="text" name="street" placeholder="Street"/>
-																		</div>
-																		<div class="small-6 columns">
-																				<input type="text" name="city" placeholder="City"/>
-																		</div>
-																		<div class="small-2 columns">
-																				<input type="text" name="state" placeholder="State"/>
-																		</div>
-																		<div class="small-2 columns end">
-																				<input type="text" name="zip" placeholder="Zip Code"/>
-																		</div>
-																</div>
-																<div class="row">
-																		<div class="small-2 columns">
-																				<label>Company Phone</label>
-																		</div>
-																		<div class="small-4 columns end">
-																				<input type="text" name="company_phone" placeholder="Phone Number"/>
-																		</div>
-																</div>
-																<div class="row">
-																		<div class="small-2 columns">
-																				<label>Salary Range</label>
-																		</div>
-																		<div class="small-4 columns end">
-																				<input type="text" name="salary_range" placeholder="Salary Range"/>
-																		</div>
-																</div>
-																<div class="row">
-																		<div class="small-2 columns">
-																				<label>Start Date</label>
-																		</div>
-																		<div class="small-2 columns">
-																				<input type="text" name="start_date" placeholder="Start Date"/>
-																		</div>
-																		<div class="small-2 columns">
-																				<label>End Date</label>
-																		</div>
-																		<div class="small-2 columns end">
-																				<input type="text" name="start_date" placeholder="Start Date"/>
-																		</div>																				
-																</div>
-														</div>
-														<div class="content" id="pnlPersonalInfo">
-																<div class="row">
-																		<div class="small-2 columns">
-																				<label>Birth Month</label>
-																		</div>
-																		<div class="small-2 columns">
-																				<input type="text" name="birth_month" placeholder="Month"/>
-																		</div>
-																		<div class="small-2 columns">
-																				<label>Birth Day</label>
-																		</div>
-																		<div class="small-2 columns">
-																				<input type="text" name="birth_day" placeholder="Day"/>
-																		</div>
-																		<div class="small-2 columns">
-																				<label>Birth Year</label>
-																		</div>
-																		<div class="small-2 columns">
-																				<input type="text" name="birth_year" placeholder="Year"/>
-																		</div>
-																</div>
-																<div class="row">
-																		<div class="small-2 columns">
-																				<label>Ethnicity</>
-																		</div>
-																		<div class="small-4 columns end">
-																				<input type="text" name="ethnicity" placeholder="Ethnicity"/>
-																		</div>
-																</div>
-																<div class="row">
-																		<div class="small-2 columns">
-																				<label>Spouse</label>
-																		</div>
-																		<div class="small-4 columns">
-																				<input type="text" name="spouse_last_name" placeholder="Last"/>
-																		</div>
-																		<div class="small-4 columns">
-																				<input type="text" name="spouse_first_name" placeholder="First"/>
-																		</div>
-																		<div class="small-2 columns">
-																				<input type="text" name="spouse_middle_initial" placeholder="Initial"/>
-																		</div>
-																</div>
-																<div class="row">
-																		<div class="small-3 columns">
-																				<label>Number of children</label>
-																		</div>
-																		<div class="small-1 columns end">
-																				<input type="text" name="number_children"/>
-																		</div>
-																</div>
-														</div>
-														<div class="content" id="pnlPrivacyInfo">                       
-																<fieldset>
-																		<legend>Opt In?</legend>
-																		<div class="row">
-																				<input id="general_opt_in" type="checkbox">
-																				<label for="general_opt_in">General opt in</label>
-																		</div>
-																		<div class="row">
-																				<input id="email_opt_in" type="checkbox">
-																				<label for="email_opt_in">eMail opt in</label>
-																		</div>
-																		<div class="row">
-																				<input id="phone_opt_in" type="checkbox">
-																				<label for="phone_opt_in">Phone opt in</label>
-																		</div>
-																		<div class="row">
-																				<input id="badges_opt_in" type="checkbox">
-																				<label for="badges_opt_in">Badge opt in</label>
-																		</div>
-																</fieldset>
-														</div>
-												</div>
-										</div>
+								<div class="row">
+									<div class="small-10 columns">
+										<input type="text" name="email_addr" placeholder=<%=@user.email_addr %>>
+									</div>
+									<div class="small-12 columns">
+										<ul style="list-style-type:none">
+											<li>Phone 1</li>
+											<li>Phone 2</li>
+										</ul>
+									</div>
 								</div>
+							</div>
+							<!-- Education Information Tab block -->
+							<div class="content" id="pnlEducationInfo">
+								<div class="row">
+									<div class="small-2 columns">
+										<label>Student Status</label>
+									</div>
+									<div class="small-3 columns end">
+										<input type="text" name="status" placeholder="Status"/>
+									</div>
+								</div>
+								<div class="row">
+									<div class="small-12 columns">
+										<p>Degrees:</p>
+									</div>
+									<ul style="list-style-type:none">
+										<li>List item</li>
+										<li>List item</li>
+									</ul>
+								</div>
+							</div>
+							<!-- Employment Information Tab block -->
+							<div class="content" id="pnlEmploymentInfo">
+								<div class="row">
+									<div class="small-2 columns">
+										<label>Employer</label>
+									</div>
+									<div class="small-4 columns end">
+										<input type="text" name="company_name" placeholder=<%= @company.company_name %>>
+									</div>
+								</div>
+								<div class="row">
+									<div class="small-2 columns">
+										<label>Job Title</label>
+									</div>
+									<div class="small-4 columns end">
+										<input type="text" name="job_title" placeholder=<%= @user.job_title %>>
+									</div>
+								</div>
+								<div class="row">
+									<div class="small-12 columns">
+										Address:
+									</div>
+									<div class="small-12 columns">
+										<input type="text" name="street" placeholder="Street"/>
+									</div>
+									<div class="small-6 columns">
+										<input type="text" name="city" placeholder="City"/>
+									</div>
+									<div class="small-2 columns">
+										<input type="text" name="state" placeholder="State"/>
+									</div>
+									<div class="small-2 columns end">
+										<input type="text" name="zip" placeholder="Zip Code"/>
+									</div>
+								</div>
+								<div class="row">
+									<div class="small-2 columns">
+										<label>Company Phone</label>
+									</div>
+									<div class="small-4 columns end">
+										<input type="text" name="company_phone" placeholder="Phone Number"/>
+									</div>
+								</div>
+								<div class="row">
+									<div class="small-2 columns">
+										<label>Salary Range</label>
+									</div>
+									<div class="small-4 columns end">
+										<input type="text" name="salary_range" placeholder=<%= @user.salary_range %>>
+									</div>
+								</div>
+								<div class="row">
+									<div class="small-2 columns">
+										<label>Start Date</label>
+									</div>
+									<div class="small-2 columns">
+										<input type="text" name="start_date" placeholder=<%= @user.start_date %>>
+									</div>
+									<div class="small-2 columns">
+										<label>End Date</label>
+									</div>
+									<div class="small-2 columns end">
+										<input type="text" name="end_date" placeholder=<%= @user.end_date %>>
+									</div>
+								</div>
+							</div>
+							<!-- Personal Information Tab block -->
+							<div class="content" id="pnlPersonalInfo">
+								<div class="row">
+									<div class="small-2 columns">
+										<label>Birth Date</label>
+									</div>
+									<div class="small-2 columns">
+										<input type="text" name="birth_date" placeholder=<%= @user.birth_day %>>
+									</div>
+								</div>
+								<div class="row">
+									<div class="small-2 columns">
+										<label>Ethnicity</>
+									</div>
+									<div class="small-4 columns end">
+										<input type="text" name="ethnicity" placeholder=<%= @user.ethnicity %>>
+									</div>
+								</div>
+								<div class="row">
+									<div class="small-2 columns">
+										<label>Spouse</label>
+									</div>
+									<div class="small-4 columns">
+										<input type="text" name="spouse_last_name" placeholder=<%= @user.spouse_last_name %>>
+									</div>
+									<div class="small-4 columns">
+										<input type="text" name="spouse_first_name" placeholder=<%= @user.spouse_first_name %>>
+									</div>
+									<div class="small-2 columns">
+										<input type="text" name="spouse_middle_initial" placeholder=<%= @user.spouse_middle_initial %>>
+									</div>
+								</div>
+								<div class="row">
+									<div class="small-3 columns">
+										<label>Number of children</label>
+									</div>
+									<div class="small-1 columns end">
+										<input type="text" name=<%= @user.number_children %>>
+									</div>
+								</div>
+							</div>
+							<!-- Privacy Information Tab block -->
+							<div class="content" id="pnlPrivacyInfo">
+								<fieldset>
+									<legend>Opt In?</legend>
+									<div class="row">
+										<input id="general_opt_in" type="checkbox">
+										<label for="general_opt_in">General opt in</label>
+									</div>
+									<div class="row">
+										<input id="email_opt_in" type="checkbox">
+										<label for="email_opt_in">eMail opt in</label>
+									</div>
+									<div class="row">
+										<input id="phone_opt_in" type="checkbox">
+										<label for="phone_opt_in">Phone opt in</label>
+									</div>
+									<div class="row">
+										<input id="badges_opt_in" type="checkbox">
+										<label for="badges_opt_in">Badge opt in</label>
+									</div>
+								</fieldset>
+							</div>
 						</div>
-				</fieldset>
-		</form>             
+					</div>
+				</div>
+			</div>
+		</fieldset>
+	</form>
 </section>
