@@ -1,0 +1,14 @@
+<%= render "menu/student" %>
+<div class="row">
+  <h1 class="medium-5-column">Search People</h1>
+</div>
+<%= search_form_for @search, url: search_basic_searches_path, method: :post do |f| %>
+  <%= f.condition_fields do |c| %>
+    <%= render "condition_fields", f: c %>
+  <% end %>
+  <div class="row">
+    <%= f.submit "Search", :class => "button medium-5-column" %>
+  </div>
+<% end %>
+<%= render "results" %>
+<%= render "disclaimer" %>
