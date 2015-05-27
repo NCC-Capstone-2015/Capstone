@@ -4,28 +4,37 @@
   <thead>
     <tr>
       <th>name:</th>
-      <th>First name:</th>
-      <th>Last name:</th>
-      <th>password:</th>
+      <th>phone:</th>
+      <th>email:</th>
+      <th>program:</th>
+      <th>Actions:</th>
     </tr>
   </thead>
   <tbody>
     <% @users.each do |user| %>
       <tr>
-        <td><%= user.login.username  %></td>
-        <td><%= user.login.first_name %></td>
-        <td><%= user.login.last_name %></td>
-        <td><%= user.login.password %></td>
-        <td><%= link_to 'Show',user_path(user) %> </td>
-        <td><%= link_to 'Edit',edit_user_path(user) %> </td>
-        <td><%= link_to 'Destroy', user_path(user),
+        <td><%= user.login.first_name %> <%= user.login.last_name %></td>
+        <td>
+        <% user.user_phones do |user_phone| %>
+          <%= user_phone.area_code %> <%= user_phone.prefix %> - <%= user_phone.suffix %>
+        <% end %></td>
+
+        <td><%= user.email_addr %></td>
+        <td></td>
+
+        <td><%= link_to 'Show',user_path(user) %> |
+        <%= link_to 'Edit',edit_user_path(user) %> |
+        <%= link_to 'Destroy', user_path(user),
                 method: :delete,
-                data: { confirm: 'Are you sure?' } %></td>
+                data: { confirm: 'Are you sure?' } %>
       </tr>
     <% end %>
   </tbody>
 </table>
 <div class="row">
-  <div class="large-4 medium-6 columns">
-<p><%=link_to 'Create new profile', new_user_path %></p>
+  <div class="large-12 large-centered columns">
+    <div align="center">
+      <%=link_to 'Create new profile', new_user_path, class: "button radius" %>
+    </div>
+  </div>
 </div>
