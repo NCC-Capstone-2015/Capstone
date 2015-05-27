@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :basic_searches, only: :index do
     collection { post :search, to: 'basic_searches#index' }
-    match 'basic_search' => 'basic_searches#index', 
+    match 'basic_search' => 'basic_searches#index',
       on: :collection, via: [:get, :post], as: :basic_search
   end
   resources :homepages
@@ -14,13 +14,14 @@ Rails.application.routes.draw do
   resources :users
   resources :searches, only: :index do
     collection { post :search, to: 'searches#index' }
-    match 'advanced_search' => 'searches#index', 
+    match 'advanced_search' => 'searches#index',
       on: :collection, via: [:get, :post], as: :advanced_search
   end
   resources :welcomes
   resources :user_informations
   get 'welcomes/index'
   post '/reports/show' => 'reports#show'
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
