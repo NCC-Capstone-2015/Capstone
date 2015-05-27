@@ -22,13 +22,21 @@
                 <%= link_to 'Reports', reports_path %>
               </li>
               <li class="has-dropdown">
-                  <a href="#">My Profile</a>
-                  <ul class="dropdown">
-                      <li>
-                          <a href="#">First link in dropdown</a>
-                      </li>
-                  </ul>
-              </li>
+                         <a href="#">My Profile</a>
+                         <ul class="dropdown">
+                             <li>
+                                 <a href="#">Privacy Settings</a>
+                             </li>
+                             <li>
+                              <!--sign out added by Ryan and Andrew-->
+				<% if login_signed_in? %>
+				  <li>
+				<%= link_to('Sign Out', destroy_login_session_path, :method => :delete) %>  
+				  </li>
+				<% end %>
+                             </li>
+                         </ul>
+                     </li>
               <li class="inactive">
                 <%= link_to 'Searches', searches_path %>
               </li>

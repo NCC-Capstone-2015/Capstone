@@ -3,18 +3,19 @@
 <h1>Advanced Search</h1>
 <%= search_form_for @search, url: search_searches_path, method: :post do |f| %>
   <%= f.condition_fields do |c| %>
-    <% (1..3).each do |i| %>
-      <%= render "condition_fields", f: c %>
-    <% end %>
+    <%= render "condition_fields", f: c %>
   <% end %>
 
-  <p><%= link_to_add_fields "Add", f, :condition, class: "button" %></p>
-  <div class="field">
-    Sort:
-    <%= f.sort_fields do |s| %>
-      <%= s.sort_select %>
-    <% end %>
+  <p><%= link_to_add_fields "+", f, :condition, class: "button" %></p>
+  <div class="field row">
+    <div class="medium-5 column">
+      Sort:
+      <%= f.sort_fields do |s| %>
+        <%= s.sort_select %>
+      <% end %>
+    </div>
   </div>
+  <%= content_tag :p, display_query_sql(@searches) %>
   <%= f.submit "Search", :class => "button" %>
 <% end %>
 <label><a href="#">Privacy Policy</a> | <a href="#">Contact Us</a></label>

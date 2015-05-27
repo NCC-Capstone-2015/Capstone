@@ -7,4 +7,7 @@ module SearchesHelper
     end
     link_to(name, '#', class: "add_fields " + locals[:class], data: {id: id, fields: fields.gsub("\n", "")})
   end
+  def display_query_sql(users)
+    "SQL: #{users.to_sql}"
+  end
 end
