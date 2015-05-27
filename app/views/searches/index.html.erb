@@ -1,21 +1,18 @@
 <%= render "menu/admin" %>
-
-<h1>Advanced Search</h1>
+<div class="row">
+  <h1 class="medium-5-column">Advanced Search</h1>
+</div>
 <%= search_form_for @search, url: search_searches_path, method: :post do |f| %>
   <%= f.condition_fields do |c| %>
     <%= render "condition_fields", f: c %>
   <% end %>
 
-  <p><%= link_to_add_fields "+", f, :condition, class: "button" %></p>
-  <div class="field row">
-    <div class="medium-5 column">
-      Sort:
-      <%= f.sort_fields do |s| %>
-        <%= s.sort_select %>
-      <% end %>
-    </div>
+  <div class="row"
+    <p class="medium-5-column"><%= link_to_add_fields "+", f, :condition, class: "button" %></p>
   </div>
-  <%= content_tag :p, display_query_sql(@searches) %>
-  <%= f.submit "Search", :class => "button" %>
+  <div class="row">
+    <%= f.submit "Search", :class => "button medium-5-column" %>
+  </div>
 <% end %>
-<label><a href="#">Privacy Policy</a> | <a href="#">Contact Us</a></label>
+<%= render "results" %>
+<%= render "disclaimer" %>

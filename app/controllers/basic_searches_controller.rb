@@ -1,6 +1,6 @@
-class SearchesController < ApplicationController
-  # GET /searches
-  # GET /searches.json
+class BasicSearchesController < ApplicationController
+  # GET /basic_searches
+  # GET /basic_searches.json
   def index
     @search = Login.search(params[:q])
     @searches = @search.result
