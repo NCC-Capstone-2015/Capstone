@@ -12,8 +12,17 @@ class AdminSurveysController < ApplicationController
   def show
   end
 
+
+
+
   # GET /admin_surveys/new
   def new
+    @admin_survey = AdminSurvey.new
+  end
+
+
+  # GET /admin_surveys/survey_type
+  def survey_type
     @admin_survey = AdminSurvey.new
   end
 
@@ -64,7 +73,7 @@ class AdminSurveysController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_admin_survey
-      @admin_survey = Survey.find(params[:id])
+      @admin_survey = AdminSurvey.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
