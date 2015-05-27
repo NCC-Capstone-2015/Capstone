@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150526143611) do
+ActiveRecord::Schema.define(version: 20150527185459) do
 
   create_table "account_logins", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -111,6 +111,7 @@ ActiveRecord::Schema.define(version: 20150526143611) do
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
     t.string   "password",             limit: 255
+    t.string   "middle_initial",       limit: 255
   end
 
   create_table "report_displays", force: :cascade do |t|
@@ -218,15 +219,15 @@ ActiveRecord::Schema.define(version: 20150526143611) do
   end
 
   create_table "user_phones", force: :cascade do |t|
-    t.integer  "user_id",          limit: 4
-    t.string   "country_code",     limit: 255
-    t.string   "area_code",        limit: 255
-    t.string   "prefix",           limit: 255
-    t.string   "suffix",           limit: 255
-    t.string   "extension",        limit: 255
-    t.integer  "user_phones_type", limit: 4
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.integer  "user_id",         limit: 4
+    t.string   "country_code",    limit: 255
+    t.string   "area_code",       limit: 255
+    t.string   "prefix",          limit: 255
+    t.string   "suffix",          limit: 255
+    t.string   "extension",       limit: 255
+    t.integer  "user_phone_type", limit: 4
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
   add_index "user_phones", ["user_id"], name: "index_user_phones_on_user_id", using: :btree
