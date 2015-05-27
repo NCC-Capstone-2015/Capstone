@@ -49,7 +49,7 @@
 										<% if !(@user_phones.blank?) %>
 									  	<% @user_phones.each do |c| %>
 										  <li>
-												<%= convert_phone_type(c.user_phones_type) + ": " +
+												<%= convert_phone_type(c.user_phone_type) + ": " +
 														concatenate_phone(c.country_code,
 																							c.area_code,
 																							c.prefix,
@@ -68,7 +68,7 @@
 										<% if !(@user_phones.blank?) %>
 									  	<% @user_phones.each do |c| %>
 										  <li>
-										    <%= convert_phone_type(c.user_phones_type) + ": " +
+										    <%= convert_phone_type(c.user_phone_type) + ": " +
 														concatenate_phone(c.country_code,
 																							c.area_code,
 																							c.prefix,
