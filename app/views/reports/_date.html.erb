@@ -1,11 +1,31 @@
-<br/>
+<!-- Created by Andrew Bockus -->
 <div class="row">
-  <div class="large-6 small-12 column">
-    <p>Month Entered:</p>
-    <%= text_field :date, :month %>
+  <div class="small-12 small-centered columns">
+    <h2 align="center">Date Entered Report Options</h2>
   </div>
-  <div class="large-6 small-12 columns">
-    <p>Year Entered:</p>
-    <%= text_field :date, :year %>
+</div>
+<hr /><br />
+<div class="row">
+  <div class="large-6 large-centered small-12 column">
+    <div class="row">
+      <div class="large-6 small-12 column">
+        <h4>Month Entered:</h4>
+      </div>
+      <div class="large-6 small-12 column">
+        <%= select_month(Date.today, :prefix => 'selected_date', include_blank: true) %>
+      </div>
+    </div>
+  </div>
+</div><br />
+<div class="row">
+  <div class="large-6 large-centered small-12 column">
+    <div class="row">
+      <div class="large-6 small-12 column">
+        <h4>Year Entered:</h4>
+      </div>
+      <div class="large-6 small-12 column">
+        <%= select_year Date.today, :prefix => 'selected_date', start_year: Date.today.year, end_year: 1980 %>
+      </div>
+    </div>
   </div>
 </div>
