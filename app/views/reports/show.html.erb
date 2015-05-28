@@ -1,7 +1,13 @@
+<!-- Created by Andrew Bockus -->
+
+<%= render "menu/admin" %>
+
 <p id="notice"><%= notice %></p>
 <div align="center">
-<%= params[:grad_status] %>
-<%= params[:date] %>
 
-<%= link_to 'Back', reports_path, class: "button radius" %>
+<%= Time.now
+<%= params %>
+
+<br/>
+<a href="<%= reports_path %>" class="button radius">Back</a>
 </div>

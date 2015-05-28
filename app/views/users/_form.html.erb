@@ -14,38 +14,59 @@
  <% end %>
 
   <div class="row">
-    <div class="large-12 columns">
-      <p>
-        <%= f.label :login_id %><br>
-        <%= f.text_field :login_id, :type =>"text" %>
-      </p>
-    </div>
-  </div>
-  <div class="row">
-    <div class="large-12 columns">
-      <p>
-        <%= f.label :email_addr %><br>
-        <%= f.password_field :email_addr, :type =>"text" %>
-      </p>
-    </div>
-  </div>
-  <div class="row">
     <div class="large-5 columns">
       <p>
-        <%= f.label :spouse_first_name %><br>
-        <%= f.text_field :spouse_first_name, :type =>"text" %>
+        <%= f.label :first_name %><br>
+        <%= f.text_field :first_name, :type =>"text" %>
       </p>
     </div>
     <div class="large-2 columns">
       <p>
-        <%= f.label :spouse_middle_initial %><br>
-        <%= f.text_field :spouse_middle_initial, :type =>"text" %>
+        <%= f.label "Middle Initial" %><br>
+        <%= f.text_field :middle_initial, :type =>"text" %>
       </p>
     </div>
     <div class="large-5 columns">
       <p>
-        <%= f.label :spouse_last_name %><br>
-        <%= f.text_field :spouse_last_name, :type =>"text" %>
+        <%= f.label "Last Name" %><br>
+        <%= f.text_field :last_name, :type =>"text" %>
+      </p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="large-2 columns">
+      <p>
+        <%= f.text_field :area_code, :type =>"text" %>
+      </p>
+    </div>
+    <div class="large-2 columns">
+      <p>
+        <%= f.text_field :prefix, :type =>"text" %>
+      </p>
+    </div>
+    <div class="large-2 columns">
+      <p>
+        <%= f.text_field :suffix, :type =>"text" %>
+      </p>
+    </div>
+    <div class="large-6 columns">
+      <p>
+        <%= f.label :email_addr %><br>
+        <%= f.text_field :email_addr, :type =>"text" %>
+      </p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="large-6 columns">
+      <p>
+        <%= f.label :ncc_id %><br>
+        <%= f.text_field :ncc_id, :type =>"text" %>
+      </p>
+    </div>
+    <div class="large-6 columns">
+      <p>
+        <%= f.label :program %><br>
+        <%= f.select :program, options_for_select([["Buisness Administration", 'BA'],["International Buisness Administration",'IBA'],["Education",'Education'],["Leadership Studies",'Leadership Studies'],["Liberal Studies",'Liberal studies'],["Management Information Systems",'MIS'],["Web and Internet application",'Web Application']]),{:include_blank => 'None'} %>
       </p>
     </div>
   </div>
@@ -61,13 +82,15 @@
 
       <br>
         <div class="large-4 columns">
-          <%= f.submit "submit", :class => "small button" %>
+            <%= f.submit "submit"%>
         </div>
     </div>
 
 <% end %>
 <div class="row">
   <div class="large-4 medium-6 columns">
-      <%= link_to 'Back', users_path, :class => "small button" %>
+      <div class="button radius">
+        <%= link_to 'Back', users_path %>
+      </div>
     </div>
 </div>
