@@ -28,3 +28,6 @@ user_phone3 = UserPhone.create(user_id: user3.id, area_code: '110', prefix: '120
 login4 = Login.create(username: 'cwuser', password: 'password', first_name: 'Christian', last_name: 'Winger', login_type: 0)
 user4 = User.create(login_id: login4.id, email_addr: 'cwinger@noctrl.edu', city: 'Bloomington', state: 'IL', zip: '61705', number_children: 0, ethnicity: 'caucasian', general_opt_in: 0, email_opt_in: 1, phone_opt_in: 1, badges_opt_in: 1, status: 0, birth_day: '1993-04-10', start_date:'2011-09-15', salary_range: 0, street: '9507 Grandville')
 user_phone4 = UserPhone.create(user_id: user4.id, area_code: '309', prefix: '826', suffix: '2303', user_phone_type: 0)
+
+list1 = SavedList.create(login_id: login1.id, list_name: 'My First List', date_saved: '2015-05-28')
+list_users1 = SavedListUser.create(saved_list_id: list.id, user_id: user3.id)
