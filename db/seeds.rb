@@ -30,4 +30,4 @@ user4 = User.create(login_id: login4.id, email_addr: 'cwinger@noctrl.edu', city:
 user_phone4 = UserPhone.create(user_id: user4.id, area_code: '309', prefix: '826', suffix: '2303', user_phone_type: 0)
 
 list1 = SavedList.create(login_id: login1.id, list_name: 'My First List', date_saved: '2015-05-28')
-list_users1 = SavedListUser.create(saved_list_id: list.id, user_id: user3.id)
+list_users1 = SavedListUser.create(saved_list_id: list1.id, user_id: user3.id)
