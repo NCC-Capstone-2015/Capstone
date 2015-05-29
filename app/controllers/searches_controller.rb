@@ -2,8 +2,12 @@ class SearchesController < ApplicationController
   # GET /searches
   # GET /searches.json
   def index
-    @search = Login.search(params[:q])
-    @searches = @search.result
-    @search.build_condition if @search.conditions.empty?
+    @q = Login.ransack(params[:q])
+    @searches = @q.result
+    @q.build_condition if @q.conditions.empty?
+  end
+  def search
+    index
+    render :index
   end
 end

@@ -4,6 +4,9 @@ class BasicSearchesController < ApplicationController
   def index
     @search = Login.search(params[:q])
     @searches = @search.result
-    @search.build_condition if @search.conditions.empty?
+  end
+  def search
+    index
+    render :index
   end
 end

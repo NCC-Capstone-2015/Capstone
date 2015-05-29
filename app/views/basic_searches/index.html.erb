@@ -2,13 +2,12 @@
 <div class="row">
   <h1 class="medium-5-column">Search People</h1>
 </div>
-<%= search_form_for @search, url: search_basic_searches_path, method: :post do |f| %>
-  <%= f.condition_fields do |c| %>
-    <%= render "condition_fields", f: c %>
-  <% end %>
-  <div class="row">
+<div class="row">
+  <%= search_form_for @search, url: search_basic_searches_path, html: { method: :post } do |f| %>
+    <%= f.label :username_or_first_name_or_middle_initial_or_last_name_cont %>
+    <%= f.text_field :username_or_first_name_or_middle_initial_or_last_name_cont %>
     <%= f.submit "Search", :class => "button medium-5-column" %>
-  </div>
-<% end %>
+  <% end %>
+</div>
 <%= render "results" %>
 <%= render "disclaimer" %>

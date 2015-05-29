@@ -18,16 +18,13 @@ module SearchesHelper
     end
     .html_safe
   end
-  def action
-    action_name == 'advanced_search' ? :post : :get
-  end
   def model_fields
     # which fields to display and sort by
-    [:first_name, :last_name]
+    [:username, :first_name, :middle_initial, :last_name]
   end
   def display_sort_column_headers(search)
     model_fields.each_with_object('') do |field, string|
-      string << content_tag(:th, sort_link(search, field, {}, method: action))
+      string << content_tag(:th, sort_link(search, field, {}, method: :post))
     end
   end
 end
