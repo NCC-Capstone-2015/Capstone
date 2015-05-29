@@ -1,7 +1,7 @@
 module BasicSearchesHelper
   def display_sort_column_headers(search)
     model_fields.each_with_object('') do |field, string|
-      string << content_tag(:th, sort_link(search, field, {}, method: action))
+      string << content_tag(:th, sort_link(search, field, {}, method: :get))
     end
   end
   def display_search_results(objects)
@@ -17,9 +17,6 @@ module BasicSearchesHelper
   end
   def model_fields
     # which fields to display and sort by
-    [:first_name, :last_name]
-  end
-  def action
-    action_name == 'basic_search' ? :post : :get
+    [:username, :first_name, :middle_initial, :last_name]
   end
 end

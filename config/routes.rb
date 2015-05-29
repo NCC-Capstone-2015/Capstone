@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
-  resources :basic_searches, only: :index do
-    collection { post :search, to: 'basic_searches#index' }
-    match 'basic_search' => 'basic_searches#index',
-      on: :collection, via: [:get, :post], as: :basic_search
+  resources :basic_searches do
+    collection do
+      match 'search' => 'basic_searches#index', via: [:post], as: :search
+    end
   end
+  resources :logins
   resources :homepages
   resources :account_logins
   resources :user_surveys
@@ -12,10 +13,10 @@ Rails.application.routes.draw do
   resources :report_options
   resources :reports
   resources :users
-  resources :searches, only: :index do
-    collection { post :search, to: 'searches#index' }
-    match 'advanced_search' => 'searches#index',
-      on: :collection, via: [:get, :post], as: :advanced_search
+  resources :searches do
+    collection do
+      match 'search' => 'searches#index', via: [:post], as: :search
+    end
   end
   resources :welcomes
   resources :user_informations
