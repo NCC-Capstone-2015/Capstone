@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
   devise_for :logins
+  resources :basic_searches do
+    collection do
+      match 'search' => 'basic_searches#index', via: [:post], as: :search
+    end
+  end
+  resources :logins
   resources :homepages
   resources :account_logins
   resources :user_surveys
@@ -9,12 +15,15 @@ Rails.application.routes.draw do
   resources :reports
   resources :users
   resources :searches do
-    collection { post :search, to: 'searches#index' }
+    collection do
+      match 'search' => 'searches#index', via: [:post], as: :search
+    end
   end
   resources :welcomes
   resources :user_informations
   get 'welcomes/index'
-  post '/reports/show' => 'reports#show'
+  post 'reports/options' => 'reports#options'
+  post 'reports/display' => 'reports#display'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

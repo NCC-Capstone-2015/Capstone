@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150521015919) do
+ActiveRecord::Schema.define(version: 20150530230638) do
 
   create_table "account_logins", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -19,6 +19,11 @@ ActiveRecord::Schema.define(version: 20150521015919) do
   end
 
   create_table "admin_surveys", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "basic_searches", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -107,6 +112,7 @@ ActiveRecord::Schema.define(version: 20150521015919) do
     t.datetime "updated_at",                                      null: false
     t.string   "password",               limit: 255
     t.string   "email",                  limit: 255, default: "", null: false
+    t.string   "middle_initial",       limit: 255
     t.string   "encrypted_password",     limit: 255, default: "", null: false
     t.string   "reset_password_token",   limit: 255
     t.datetime "reset_password_sent_at"
@@ -198,13 +204,12 @@ ActiveRecord::Schema.define(version: 20150521015919) do
     t.integer  "status",             limit: 4
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
+    t.integer  "user_id",            limit: 4
     t.text     "survey_description", limit: 65535
     t.date     "date_created"
-    t.integer  "user_id",            limit: 4
   end
 
   add_index "surveys", ["login_id"], name: "index_surveys_on_login_id", using: :btree
-  add_index "surveys", ["user_id"], name: "index_surveys_on_user_id", using: :btree
 
   create_table "undergraduate_degrees", force: :cascade do |t|
     t.integer  "user_id",         limit: 4
@@ -225,15 +230,15 @@ ActiveRecord::Schema.define(version: 20150521015919) do
   end
 
   create_table "user_phones", force: :cascade do |t|
-    t.integer  "user_id",          limit: 4
-    t.string   "country_code",     limit: 255
-    t.string   "area_code",        limit: 255
-    t.string   "prefix",           limit: 255
-    t.string   "suffix",           limit: 255
-    t.string   "extension",        limit: 255
-    t.integer  "user_phones_type", limit: 4
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.integer  "user_id",         limit: 4
+    t.string   "country_code",    limit: 255
+    t.string   "area_code",       limit: 255
+    t.string   "prefix",          limit: 255
+    t.string   "suffix",          limit: 255
+    t.string   "extension",       limit: 255
+    t.integer  "user_phone_type", limit: 4
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
   add_index "user_phones", ["user_id"], name: "index_user_phones_on_user_id", using: :btree
@@ -290,6 +295,8 @@ ActiveRecord::Schema.define(version: 20150521015919) do
     t.date     "end_date"
     t.integer  "salary_range",          limit: 4
     t.string   "street",                limit: 255
+    t.string   "nccid",                 limit: 255
+    t.string   "program",               limit: 255
   end
 
   add_index "users", ["company_id"], name: "index_users_on_company_id", using: :btree
@@ -313,7 +320,6 @@ ActiveRecord::Schema.define(version: 20150521015919) do
   add_foreign_key "survey_question_options", "survey_questions"
   add_foreign_key "survey_questions", "surveys"
   add_foreign_key "surveys", "logins"
-  add_foreign_key "surveys", "users"
   add_foreign_key "undergraduate_degrees", "colleges"
   add_foreign_key "undergraduate_degrees", "degrees"
   add_foreign_key "undergraduate_degrees", "users"

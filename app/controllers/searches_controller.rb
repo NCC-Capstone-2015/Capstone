@@ -2,10 +2,12 @@ class SearchesController < ApplicationController
   # GET /searches
   # GET /searches.json
   def index
-    @search = User.search(params[:q])
-    @searches = @search.result
-    @search.build_condition if @search.conditions.empty?
-    @search.build_sort if @search.sorts.empty?
+    @q = Login.ransack(params[:q])
+    @searches = @q.result
+    @q.build_condition if @q.conditions.empty?
+  end
+  def search
+    index
+    render :index
   end
 end
-# http://www.sitepoint.com/advanced-search-ransack/
