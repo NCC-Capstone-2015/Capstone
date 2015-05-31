@@ -9,7 +9,7 @@
 login1 = Login.create(username: 'cvdonley', password: 'RonPaul2012', email: 'cvdonley@noctrl.edu', first_name: 'Cornelius', last_name: 'Donley', login_type: 1, middle_initial: 'VA')
 
 company2 = Company.create(company_name: 'RobCo')
-login2 = Login.create(username: 'jduser', password: 'password', email: 'jjdoe@noctrl.edu', created_at: DateTime.now, sign_in_count: 0, updated_at: DateTime.now,first_name: "John", last_name: 'Doe', login_type: 2)
+login2 = Login.create(username: 'jduser', password: 'password', email: 'jjdoe@noctrl.edu', created_at: DateTime.now, sign_in_count: 0, updated_at: DateTime.now, first_name: 'John', last_name: 'Doe', login_type: 2)
 user2 = User.create(login_id: login2.id, email_addr: 'jjdoe@noctrl.edu', city: 'Naperville', state: 'IL', zip: '60540', nccid: '0220123', program: 'Computer Science', spouse_first_name: 'Jane', spouse_last_name: 'Doe', spouse_middle_initial: 'J', number_children: 1, ethnicity: 'hispanic', general_opt_in: 1, email_opt_in: 1, phone_opt_in: 1, badges_opt_in: 1, status: 1, company_id: company2.id, job_title: 'Systems Analyst', birth_day: '1980-01-01', start_date:'2014-09-15', salary_range: 3, street: '610 N. Brainard St.')
 user_phone2 = UserPhone.create(user_id: user2.id, country_code: '1', area_code: '260', prefix: '630', suffix: '1031', user_phone_type: 1)
 college2 = College.create(college_name: 'North Central College')
@@ -21,7 +21,7 @@ college3 = College.create(college_name: 'North Central College')
 graduate_degree2 = GraduateDegree.create(user_id: user2.id, college_id: college3.id, degree_id: degree3.id, graduation_date: '2016-12-21', status: 1)
 
 company3 = Company.create(company_name: 'Vandelay Industries')
-login3 = Login.create(username: 'gcuser', password: 'password', email: 'gcostanza@noctrl.edu', created_at: DateTime.now, sign_in_count: 0, updated_at: DateTime.now,first_name: "George", last_name: 'Costanza', login_type: 2)
+login3 = Login.create(username: 'gcuser', password: 'password', email: 'gcostanza@noctrl.edu', created_at: DateTime.now, sign_in_count: 0, updated_at: DateTime.now, first_name: 'George', last_name: 'Costanza', login_type: 2)
 user3 = User.create(login_id: login3.id, email_addr: 'gcostanza@noctrl.edu', city: 'Manhattan', state: 'NY', zip: '12345', nccid: '0120124', program: 'Business Administration', number_children: 0, ethnicity: 'caucasian', general_opt_in: 0, email_opt_in: 0, phone_opt_in: 0, badges_opt_in: 1, status: 1, company_id: company3.id, job_title: 'Importer/Exporter', birth_day: '1968-02-02', start_date:'2014-09-15', salary_range: 2, street: '1100 South St.')
 user_phone3 = UserPhone.create(user_id: user3.id, area_code: '110', prefix: '120', suffix: '1111', user_phone_type: 0)
 
@@ -48,19 +48,29 @@ survey1 = Survey.create(login_id: login5.id, survey_name: 'Seed Survey', status:
 survey_question1 = SurveyQuestion.create(survey_id: survey1.id, survey_question_type: 0, display_order: 0, required: true, text: 'Sample text response question')
 
 survey_question2 = SurveyQuestion.create(survey_id: survey1.id, survey_question_type: 1, display_order: 1, required: true, text: 'Sample single answer question')
-survey_question_option21 = SurveyQuestionOption.create(survey_question_id: survey_question2.id, display_order: 0, text: "Option 1")
-survey_question_option22 = SurveyQuestionOption.create(survey_question_id: survey_question2.id, display_order: 1, text: "Option 2")
-survey_question_option23 = SurveyQuestionOption.create(survey_question_id: survey_question2.id, display_order: 2, text: "Option 3")
+survey_question_option21 = SurveyQuestionOption.create(survey_question_id: survey_question2.id, display_order: 0, text: 'Option 1')
+survey_question_option22 = SurveyQuestionOption.create(survey_question_id: survey_question2.id, display_order: 1, text: 'Option 2')
+survey_question_option23 = SurveyQuestionOption.create(survey_question_id: survey_question2.id, display_order: 2, text: 'Option 3')
 
 survey_question3 = SurveyQuestion.create(survey_id: survey1.id, survey_question_type: 2, display_order: 2, required: true, text: 'Sample multiple answer question')
-survey_question_option31 = SurveyQuestionOption.create(survey_question_id: survey_question3.id, display_order: 0, text: "Option 1")
-survey_question_option32 = SurveyQuestionOption.create(survey_question_id: survey_question3.id, display_order: 1, text: "Option 2")
-survey_question_option33 = SurveyQuestionOption.create(survey_question_id: survey_question3.id, display_order: 2, text: "Option 3")
+survey_question_option31 = SurveyQuestionOption.create(survey_question_id: survey_question3.id, display_order: 0, text: 'Option 1')
+survey_question_option32 = SurveyQuestionOption.create(survey_question_id: survey_question3.id, display_order: 1, text: 'Option 2')
+survey_question_option33 = SurveyQuestionOption.create(survey_question_id: survey_question3.id, display_order: 2, text: 'Option 3')
 
 survey_question4 = SurveyQuestion.create(survey_id: survey1.id, survey_question_type: 3, display_order: 3, required: true, text: 'Sample multiple sub-question')
-survey_question_option41 = SurveyQuestionOption.create(survey_question_id: survey_question4.id, display_order: 0, text: "Sub-Question 1")
-survey_question_option42 = SurveyQuestionOption.create(survey_question_id: survey_question4.id, display_order: 1, text: "Sub-Question 2")
-survey_question_option43 = SurveyQuestionOption.create(survey_question_id: survey_question4.id, display_order: 2, text: "Sub-Question 3")
-survey_question_option_ch41 = SurveyQuestionOptionChoice.create(survey_question_id: survey_question4.id, display_order: 0, text: "Choice 1")
-survey_question_option_ch42 = SurveyQuestionOptionChoice.create(survey_question_id: survey_question4.id, display_order: 1, text: "Choice 2")
-survey_question_option_ch43 = SurveyQuestionOptionChoice.create(survey_question_id: survey_question4.id, display_order: 2, text: "Choice 3")
+survey_question_option41 = SurveyQuestionOption.create(survey_question_id: survey_question4.id, display_order: 0, text: 'Sub-Question 1')
+survey_question_option42 = SurveyQuestionOption.create(survey_question_id: survey_question4.id, display_order: 1, text: 'Sub-Question 2')
+survey_question_option43 = SurveyQuestionOption.create(survey_question_id: survey_question4.id, display_order: 2, text: 'Sub-Question 3')
+survey_question_option_ch41 = SurveyQuestionOptionChoice.create(survey_question_id: survey_question4.id, display_order: 0, text: 'Choice 1')
+survey_question_option_ch42 = SurveyQuestionOptionChoice.create(survey_question_id: survey_question4.id, display_order: 1, text: 'Choice 2')
+survey_question_option_ch43 = SurveyQuestionOptionChoice.create(survey_question_id: survey_question4.id, display_order: 2, text: 'Choice 3')
+
+#Survey entry for User 2
+user_survey2 = UserSurvey.create(user_id: user2.id, survey_id: survey1.id, date_completed: Date.now, anonymous: false)
+user_survey_response21 = UserSurveyResponse.create(user_survey_id: user_survey2.id, survey_question_id: survey_question1.id, response_text: 'Response to a text field question.')
+user_survey_response22 = UserSurveyResponse.create(user_survey_id: user_survey2.id, survey_question_id: survey_question2.id, response_text: survey_question_option22.display_order.to_str)
+user_survey_response23 = UserSurveyResponse.create(user_survey_id: user_survey2.id, survey_question_id: survey_question3.id, response_text: survey_question_option31.display_order.to_str + ',' + survey_question_option33.display_order.to_str)
+user_survey_response24 = UserSurveyResponse.create(user_survey_id: user_survey2.id, survey_question_id: survey_question4.id, response_text: survey_question_option_ch43.display_order.to_str + ',' + survey_question_option_ch42.display_order.to_str + ',' + survey_question_option_ch41.display_order.to_str)
+
+#Giving Back for User 2
+giving_back2 = GivingBack.create(user_id: user2.id, company_id: company2.id, subject: 'Internship', position: 'Summer Intern', description: 'A summer internship in tech support!', requirements: 'None really.', approved: false, completed: false, giving_back_type: 0, contact_first_name: 'Bill', contact_last_name: 'Gates', contact_email: 'BillGates@Microsoft.com')
