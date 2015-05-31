@@ -1,6 +1,6 @@
 class AdminSurveysController < ApplicationController
   before_action :set_admin_survey, only: [:show, :edit, :update, :destroy]
-
+  
   # GET /admin_surveys
   # GET /admin_surveys.json
   def index

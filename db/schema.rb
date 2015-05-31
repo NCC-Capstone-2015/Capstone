@@ -11,7 +11,6 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
 ActiveRecord::Schema.define(version: 20150521015919) do
 
   create_table "account_logins", force: :cascade do |t|
@@ -120,7 +119,6 @@ ActiveRecord::Schema.define(version: 20150521015919) do
   end
 
   add_index "logins", ["email"], name: "index_logins_on_email", unique: true, using: :btree
-  add_index "logins", ["reset_password_token"], name: "index_logins_on_reset_password_token", unique: true, using: :btree
 
   create_table "report_displays", force: :cascade do |t|
     t.datetime "created_at", null: false
