@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :logins
   resources :basic_searches do
     collection do
       match 'search' => 'basic_searches#index', via: [:post], as: :search
@@ -28,6 +29,7 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
    root 'homepages#index'
+
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
