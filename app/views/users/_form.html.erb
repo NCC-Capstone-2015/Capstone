@@ -1,4 +1,4 @@
-<%= form_for @login = Login.create do |f| %>
+<%= form_for @login = Login.new do |f| %>
 
   <div class="row">
     <div class="large-5 columns">
@@ -22,7 +22,7 @@
   </div>
   <% end %>
 
-    <%= form_for @user = User.create do |u| %>
+    <%= form_for @user = User.new do |u| %>
     <div class="row">
         <div class="large-4 columns">
           <p>
@@ -45,7 +45,7 @@
       </div>
     <% end %>
 
-    <%= form_for @phone = UserPhone.create do |phone| %>
+    <%= form_for @phone = UserPhone.new do |phone| %>
 
     <div clas="row">
       <div class="medium-3 columns">
