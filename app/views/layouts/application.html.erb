@@ -8,15 +8,17 @@
 
     <%= stylesheet_link_tag    'application' %>
     <%= javascript_include_tag 'vendor/modernizr' %>
-
     <%= csrf_meta_tags %>
-
   </head>
 
   <body>
-
-
     <%= yield %>
     <%= javascript_include_tag 'application' %>
+    <!-- James Maher -->
+    <div class="row">
+    </div>
+    <div class="text-center">
+      <%= link_to "Privacy Policy", privacy_policy_disclaimers_path %> | <%= link_to "Contact Us", contact_us_disclaimers_path %>
+    </div>
   </body>
 </html>
