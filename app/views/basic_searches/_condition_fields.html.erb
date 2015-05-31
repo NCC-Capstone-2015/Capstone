@@ -1,0 +1,15 @@
+<div class="field row">
+  <div class="medium-3 column">
+    <%= f.attribute_fields do |a| %>
+      <%= a.attribute_select associations: [:category] %>
+    <% end %>
+  </div>
+  <div class="medium-3 column">
+    <%= f.predicate_select %>
+  </div>
+  <div class="medium-3 column">
+    <%= f.value_fields do |v| %>
+      <%= v.text_field :value %>
+    <% end %>
+  </div>
+</div>

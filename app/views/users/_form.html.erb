@@ -1,73 +1,89 @@
-<%= form_for @user do |f| %>
-<% if @user.errors.any? %>
-   <div id="error_explanation">
-     <h2>
-       <%= pluralize(@user.errors.count, "error") %> prohibited
-       this user from being saved:
-     </h2>
-     <ul>
-       <% @user.errors.full_messages.each do |msg| %>
-         <li><%= msg %></li>
-       <% end %>
-     </ul>
-   </div>
- <% end %>
+<%= form_for @login = Login.new do |f| %>
 
-  <div class="row">
-    <div class="large-12 columns">
-      <p>
-        <%= f.label :login_id %><br>
-        <%= f.text_field :login_id, :type =>"text" %>
-      </p>
-    </div>
-  </div>
-  <div class="row">
-    <div class="large-12 columns">
-      <p>
-        <%= f.label :email_addr %><br>
-        <%= f.password_field :email_addr, :type =>"text" %>
-      </p>
-    </div>
-  </div>
   <div class="row">
     <div class="large-5 columns">
       <p>
-        <%= f.label :spouse_first_name %><br>
-        <%= f.text_field :spouse_first_name, :type =>"text" %>
+        <%= f.label :first_name %><br>
+        <%= f.text_field :first_name, :type =>"text" %>
       </p>
     </div>
     <div class="large-2 columns">
       <p>
-        <%= f.label :spouse_middle_initial %><br>
-        <%= f.text_field :spouse_middle_initial, :type =>"text" %>
+        <%= f.label "Middle Initial" %><br>
+        <%= f.text_field :middle_initial, :type =>"text" %>
       </p>
     </div>
     <div class="large-5 columns">
       <p>
-        <%= f.label :spouse_last_name %><br>
-        <%= f.text_field :spouse_last_name, :type =>"text" %>
+        <%= f.label "Last Name" %><br>
+        <%= f.text_field :last_name, :type =>"text" %>
       </p>
     </div>
   </div>
+  <% end %>
 
-
+    <%= form_for @user = User.new do |u| %>
     <div class="row">
-      <div class="large-4 columns">
+        <div class="large-4 columns">
+          <p>
+            <%= u.label :nccid %><br>
+            <%= u.text_field :nccid, :type =>"text" %>
+          </p>
+        </div>
+        <div class="large-4 columns">
+          <p>
+            <%= u.label :program %><br>
+            <%= u.select :program, options_for_select([["Buisness Administration", 'BA'],["International Buisness Administration",'IBA'],["Education",'Education'],["Leadership Studies",'Leadership Studies'],["Liberal Studies",'Liberal studies'],["Management Information Systems",'MIS'],["Web and Internet application",'Web Application']]),{:include_blank => 'None'} %>
+          </p>
+        </div>
+        <div class="large-4 columns">
+          <p>
+              <%= u.label "email adress" %><br>
+              <%= u.text_field :email_addr, :type =>"text" %>
+          </p>
+        </div>
+      </div>
+    <% end %>
+
+    <%= form_for @phone = UserPhone.new do |phone| %>
+
+    <div clas="row">
+      <div class="medium-3 columns">
         <p>
-          <%= f.label :city, 'Student id'%><br>
-          <%= f.text_field :city, :type =>"text" %>
+          <%= phone.label "phone number" %><br>
+          <%= phone.text_field :country_code, :type =>"text" %>
         </p>
       </div>
 
-      <br>
-        <div class="large-4 columns">
-          <%= f.submit "submit", :class => "small button" %>
+      <div class="medium-3 columns">
+      <p>
+        <%= phone.label "area code " %><br>
+        <%= phone.text_field :area_code, :type =>"text" %>
+      </p>
+    </div>
+    <div class="medium-3 columns">
+      <p>
+        <%= phone.label "prefix " %><br>
+        <%= phone.text_field :prefix, :type =>"text" %>
+      </p>
+    </div>
+    <div class="medium-3 columns">
+      <p>
+        <%= phone.label "suffix " %><br>
+        <%= phone.text_field :suffix, :type =>"text" %>
+      </p>
+    </div>
+  </div>
+    <div class="row">
+      <div class="large-6 columns">
+          <%= link_to 'Back', users_path,class: "button radius" %>
+          <%= phone.submit "submit",class: "button radius"%>
         </div>
-    </div>
+  </div>
 
-<% end %>
-<div class="row">
-  <div class="large-4 medium-6 columns">
-      <%= link_to 'Back', users_path, :class => "small button" %>
-    </div>
-</div>
+
+
+
+
+
+  <% end %>
