@@ -112,7 +112,6 @@ ActiveRecord::Schema.define(version: 20150530230638) do
     t.datetime "updated_at",                                      null: false
     t.string   "password",               limit: 255
     t.string   "email",                  limit: 255, default: "", null: false
-    t.string   "middle_initial",       limit: 255
     t.string   "encrypted_password",     limit: 255, default: "", null: false
     t.string   "reset_password_token",   limit: 255
     t.datetime "reset_password_sent_at"
@@ -122,6 +121,7 @@ ActiveRecord::Schema.define(version: 20150530230638) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip",     limit: 255
     t.string   "last_sign_in_ip",        limit: 255
+    t.string   "middle_initial",         limit: 255
   end
 
   add_index "logins", ["email"], name: "index_logins_on_email", unique: true, using: :btree

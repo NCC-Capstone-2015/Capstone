@@ -205,8 +205,8 @@ DEPENDENCIES
   byebug
   capybara
   coffee-rails (~> 4.1.0)
-  devise
   coffee-script-source (= 1.8.0)
+  devise
   factory_girl_rails
   foundation-rails
   jbuilder (~> 2.0)
