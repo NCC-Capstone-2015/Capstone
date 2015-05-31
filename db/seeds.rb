@@ -66,11 +66,11 @@ survey_question_option_ch42 = SurveyQuestionOptionChoice.create(survey_question_
 survey_question_option_ch43 = SurveyQuestionOptionChoice.create(survey_question_id: survey_question4.id, display_order: 2, text: 'Choice 3')
 
 #Survey entry for User 2
-user_survey2 = UserSurvey.create(user_id: user2.id, survey_id: survey1.id, date_completed: Date.now, anonymous: false)
+user_survey2 = UserSurvey.create(user_id: user2.id, survey_id: survey1.id, date_completed: DateTime.now, anonymous: false)
 user_survey_response21 = UserSurveyResponse.create(user_survey_id: user_survey2.id, survey_question_id: survey_question1.id, response_text: 'Response to a text field question.')
-user_survey_response22 = UserSurveyResponse.create(user_survey_id: user_survey2.id, survey_question_id: survey_question2.id, response_text: survey_question_option22.display_order.to_str)
-user_survey_response23 = UserSurveyResponse.create(user_survey_id: user_survey2.id, survey_question_id: survey_question3.id, response_text: survey_question_option31.display_order.to_str + ',' + survey_question_option33.display_order.to_str)
-user_survey_response24 = UserSurveyResponse.create(user_survey_id: user_survey2.id, survey_question_id: survey_question4.id, response_text: survey_question_option_ch43.display_order.to_str + ',' + survey_question_option_ch42.display_order.to_str + ',' + survey_question_option_ch41.display_order.to_str)
+user_survey_response22 = UserSurveyResponse.create(user_survey_id: user_survey2.id, survey_question_id: survey_question2.id, response_text: survey_question_option22.display_order.to_s())
+user_survey_response23 = UserSurveyResponse.create(user_survey_id: user_survey2.id, survey_question_id: survey_question3.id, response_text: survey_question_option31.display_order.to_s() + ',' + survey_question_option33.display_order.to_s())
+user_survey_response24 = UserSurveyResponse.create(user_survey_id: user_survey2.id, survey_question_id: survey_question4.id, response_text: survey_question_option_ch43.display_order.to_s() + ',' + survey_question_option_ch42.display_order.to_s() + ',' + survey_question_option_ch41.display_order.to_s())
 
 #Giving Back for User 2
 giving_back2 = GivingBack.create(user_id: user2.id, company_id: company2.id, subject: 'Internship', position: 'Summer Intern', description: 'A summer internship in tech support!', requirements: 'None really.', approved: false, completed: false, giving_back_type: 0, contact_first_name: 'Bill', contact_last_name: 'Gates', contact_email: 'BillGates@Microsoft.com')
