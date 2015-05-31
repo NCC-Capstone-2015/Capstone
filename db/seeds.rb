@@ -25,15 +25,7 @@ login3 = Login.create(username: 'gcuser', password: 'password', email: 'gcostanz
 user3 = User.create(login_id: login3.id, email_addr: 'gcostanza@noctrl.edu', city: 'Manhattan', state: 'NY', zip: '12345', nccid: '0120124', program: 'Business Administration', number_children: 0, ethnicity: 'caucasian', general_opt_in: 0, email_opt_in: 0, phone_opt_in: 0, badges_opt_in: 1, status: 1, company_id: company3.id, job_title: 'Importer/Exporter', birth_day: '1968-02-02', start_date:'2014-09-15', salary_range: 2, street: '1100 South St.')
 user_phone3 = UserPhone.create(user_id: user3.id, area_code: '110', prefix: '120', suffix: '1111', user_phone_type: 0)
 
-login4 = Login.create(username: 'cwuser', password: 'password', email: 'cwinger@noctrl.edu', created_at: DateTime.now, sign_in_count: 0, updated_at: DateTime.now, first_name: 'Christian', last_name: 'Winger', login_type: 2)
-college4 = College.create(college_name: 'Vandelay Tech')
-degree4 = Degree.create(major_name: 'Economics', degree_type: 3)
-undergraduate_degree3 = UndergraduateDegree.create(user_id: user3.id, college_id: college4.id, degree_id: degree4.id, graduation_date: '2012-12-21')
-degree5 = Degree.create(major_name: 'Business Administration', degree_type: 4)
-college5 = College.create(college_name: 'North Central College')
-graduate_degree4 = GraduateDegree.create(user_id: user3.id, college_id: college5.id, degree_id: degree5.id, graduation_date: '2017-6-21', status: 1)
-
-login4 = Login.create(username: 'cwuser', password: 'password', first_name: 'Christian', last_name: 'Winger', login_type: 2)
+login4 = Login.create(username: 'cwuser', password: 'password', first_name: 'Christian', last_name: 'Winger', email: 'cwinger@noctrl.edu', created_at: DateTime.now, sign_in_count: 0, updated_at: DateTime.now, login_type: 2)
 user4 = User.create(login_id: login4.id, email_addr: 'cwinger@noctrl.edu', city: 'Bloomington', state: 'IL', zip: '61705', nccid: '1120123', program: 'Mathematics', number_children: 0, ethnicity: 'caucasian', general_opt_in: 0, email_opt_in: 1, phone_opt_in: 1, badges_opt_in: 1, status: 0, birth_day: '1993-04-10', start_date:'2011-09-15', salary_range: 0, street: '9507 Grandville')
 user_phone4 = UserPhone.create(user_id: user4.id, area_code: '309', prefix: '826', suffix: '2303', user_phone_type: 0)
 college6 = College.create(college_name: 'Illinois State')
@@ -45,7 +37,7 @@ graduate_degree5 = GraduateDegree.create(user_id: user4.id, college_id: college7
 degree8 = Degree.create(major_name: 'Mathematics', degree_type: 5)
 graduate_degree5 = GraduateDegree.create(user_id: user4.id, college_id: college7.id, degree_id: degree8.id, graduation_date: '2017-6-21', status: 1)
 
-login5 = Login.create(username: 'worker', password: 'password', first_name: 'Jane', last_name: 'Doe', login_type: 0)
+login5 = Login.create(username: 'worker', password: 'password', first_name: 'Jane', last_name: 'Doe', email: 'jddoe@noctrl.edu', created_at: DateTime.now, sign_in_count: 0, updated_at: DateTime.now, login_type: 0)
 
 list1 = SavedList.create(login_id: login1.id, list_name: 'My First List', date_saved: '2015-05-28')
 list_users1 = SavedListUser.create(saved_list_id: list1.id, user_id: user3.id)
