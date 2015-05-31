@@ -4,8 +4,8 @@
   <thead>
     <tr>
       <th>name:</th>
-      <th>phone:</th>
       <th>email:</th>
+      <th>student status:</th>
       <th>program:</th>
       <th>Actions:</th>
     </tr>
@@ -14,12 +14,13 @@
     <% @users.each do |user| %>
       <tr>
         <td><%= user.login.first_name %> <%= user.login.last_name %></td>
-        <td>
-        <% user.user_phones do |user_phone| %>
-          <%= user_phone.area_code %> <%= user_phone.prefix %> - <%= user_phone.suffix %>
-        <% end %></td>
-
         <td><%= user.email_addr %></td>
+        <% if user.status == 1 %>
+          <td> Enrolled </td>
+        <% else %>
+          <td>Alumni</td>
+        <% end %>
+        
         <td></td>
 
         <td><%= link_to 'Show',user_path(user) %> |

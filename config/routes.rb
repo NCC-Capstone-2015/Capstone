@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   resources :report_options
   resources :reports
   resources :users
+  resources :user_phones
   resources :searches do
     collection do
       match 'search' => 'searches#index', via: [:post], as: :search
