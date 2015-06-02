@@ -43,7 +43,9 @@ class UsersController < ApplicationController
     @login.middle_initial = params["middle_initial"]
     @login.login_type = params["login_type"]
     @login.username = params["username"]
-    if @login.save()
+    @login.sign_in_count = 0
+    @login.email = params["email"]
+    if @login.save
       redirect_to users_path
     else
       render 'new'

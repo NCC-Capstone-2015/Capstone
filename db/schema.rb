@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150531015516) do
+ActiveRecord::Schema.define(version: 20150530230638) do
 
   create_table "account_logins", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -19,6 +19,11 @@ ActiveRecord::Schema.define(version: 20150531015516) do
   end
 
   create_table "admin_surveys", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "basic_searches", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -155,6 +160,11 @@ ActiveRecord::Schema.define(version: 20150531015516) do
   end
 
   add_index "saved_lists", ["login_id"], name: "index_saved_lists_on_login_id", using: :btree
+
+  create_table "searches", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "survey_question_option_choices", force: :cascade do |t|
     t.integer  "survey_question_id", limit: 4
