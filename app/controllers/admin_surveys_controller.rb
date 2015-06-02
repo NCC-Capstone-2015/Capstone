@@ -1,10 +1,10 @@
 class AdminSurveysController < ApplicationController
   before_action :set_admin_survey, only: [:show, :edit, :update, :destroy]
-  
+
   # GET /admin_surveys
   # GET /admin_surveys.json
   def index
-    @admin_surveys = AdminSurvey.all
+    @admin_surveys = Survey.all
   end
 
   # GET /admin_surveys/1
@@ -12,28 +12,30 @@ class AdminSurveysController < ApplicationController
   def show
   end
 
-
-
-
   # GET /admin_surveys/new
   def new
-    @admin_survey = AdminSurvey.new
+    @admin_survey = Survey.new
   end
 
+  # GET /admin_surveys/survey_question
+  def survey_question
+    @admin_survey = Survey.new
+  end
 
-  # GET /admin_surveys/survey_type
-  def survey_type
-    @admin_survey = AdminSurvey.new
+  def question_type
+    
   end
 
   # GET /admin_surveys/1/edit
   def edit
+    @admin_survey = Survey.find(params[:id])
+    @question = SurveyQuestion.find(params[:survey_id]) rescue nil
   end
 
   # POST /admin_surveys
   # POST /admin_surveys.json
   def create
-    @admin_survey = AdminSurvey.new(admin_survey_params)
+    @admin_survey = Survey.new(admin_survey_params)
 
     respond_to do |format|
       if @admin_survey.save
@@ -73,7 +75,7 @@ class AdminSurveysController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_admin_survey
-      @admin_survey = AdminSurvey.find(params[:id])
+      @admin_survey = params[:survey]
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -8,61 +8,44 @@
 <br>
 
 <h3>In Process</h3>
-<table id="t01">
-  <tr>
-    <th>Survey Name</th>
-    <th>Last Modified</th>
-    <th>Author</th>
-    <th></th>
-    <th></th>
+      <table id="t01">
+        <tr>
+          <th>Status</th>
+          <th>Survey</th>
+          <th>Date Created</th>
+          <th colspan="4"></th>
+        </tr>
+        <% @admin_surveys.each do |s| %>
+          <% if s.status == 0 %>
+            <tr>
+              <td><%= s.status %></td>
+              <td><%= s.survey_name %></td>
+              <td><%= s.date_created %></td>
+              <td><%= link_to 'edit', action: 'edit', :id => s, :survey_id => s %></td>
+            </tr>
+          <% end %>
+        <% end %>
+  </table>
 
 
-  </tr>
-  <tr>
-    <td>Mind Blowing Survey</td>
-    <td>4/2/15</td>
-    <td>Rafaki</td>
-    <td><%= link_to 'Edit', "#"%></td>
-    <td><%= link_to 'Destroy', "#"%></td>
-  </tr>
-  <tr>
-    <td>Tangled Survey</td>
-    <td>4/23/15</td>
-    <td>Flynn Ryder</td>
-    <td><%= link_to 'Edit', "#"%></td>
-    <td><%= link_to 'Destroy', "#"%></td>
-  </tr>
-</table>
-<br>
-<a href="#" class="button radius">Edit</a>
-<a href="#" class="button radius">Delete</a>
+<h3>Completed</h3>
+      <table id="t01">
+        <tr>
+          <th>Status</th>
+          <th>Survey</th>
+          <th>Date Created</th>
+          <th colspan="4"></th>
+        </tr>
+        <% @admin_surveys.each do |s| %>
+          <% if s.status == 1 %>
+            <tr>
+              <td><%= s.status %></td>
+              <td><%= s.survey_name %></td>
+              <td><%= s.date_created %></td>
+            </tr>
+          <% end %>
+        <% end %>
+      </table>
 
-<br>
-<br>
-<br>
-
-<h3>Completed Surveys</h3>
-<table id="t01">
-  <tr>
-    <th>Survey Name</th>
-    <th>Date Completed</th>
-    <th>Author</th>
-  </tr>
-  <tr>
-    <td>Beginning Survey</td>
-    <td>4/2/15</td>
-    <td>Rafaki</td>
-  </tr>
-  <tr>
-    <td>Ending Survey</td>
-    <td>3/2/15</td>
-    <td>Corey</td>
-  </tr>
-  <tr>
-    <td>Mini Survey</td>
-    <td>9/12/21</td>
-    <td>Drew</td>
-  </tr>
-</table>
 
 <a class="button radius" <%= link_to "Create new", "admin_surveys/new"%></a>
