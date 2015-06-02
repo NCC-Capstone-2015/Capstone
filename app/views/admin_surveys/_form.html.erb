@@ -1,4 +1,4 @@
-<%= form_for(@admin_survey) do |f| %>
+<%= form_tag(@admin_survey) do |f| %>
   <% if @admin_survey.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@admin_survey.errors.count, "error") %> prohibited this admin_survey from being saved:</h2>
