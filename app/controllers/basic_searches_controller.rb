@@ -1,3 +1,4 @@
+# James Maher
 class BasicSearchesController < ApplicationController
   # GET /basic_searches
   # GET /basic_searches.json

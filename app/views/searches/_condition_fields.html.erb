@@ -1,7 +1,8 @@
-<div class="field row">
+<!--James Maher-->
+<div class="field">
   <div class="medium-3 column">
     <%= f.attribute_fields do |a| %>
-      <%= a.attribute_select associations: [:category] %>
+      <%= a.attribute_select associations: :user %>
     <% end %>
   </div>
   <div class="medium-3 column">
@@ -12,7 +13,5 @@
       <%= v.text_field :value %>
     <% end %>
   </div>
-  <div class="medium-3 column">
-    <%= link_to "X", '#', class: "remove_fields secondary button" %>
-  </div>
+  <%= link_to "X", '#', class: "remove_fields secondary button" %>
 </div>

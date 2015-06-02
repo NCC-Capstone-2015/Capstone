@@ -1,3 +1,4 @@
+# James Maher
 module SearchesHelper
   def link_to_add_fields(name, f, type, locals={})
     new_object = f.object.send "build_#{type}"
@@ -20,7 +21,7 @@ module SearchesHelper
   end
   def model_fields
     # which fields to display and sort by
-    [:username, :first_name, :middle_initial, :last_name]
+    [:first_name, :middle_initial, :last_name]
   end
   def display_sort_column_headers(search)
     model_fields.each_with_object('') do |field, string|

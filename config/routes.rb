@@ -5,6 +5,12 @@ Rails.application.routes.draw do
       match 'search' => 'basic_searches#index', via: [:post], as: :search
     end
   end
+  resources :disclaimers do
+    collection do
+      match 'privacy_policy' => 'disclaimers#privacy_policy', via: [:get]
+      match 'contact_us' => 'disclaimers#contact_us', via: [:get]
+    end
+  end
   resources :logins
   resources :homepages
   resources :account_logins
