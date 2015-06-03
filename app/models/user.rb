@@ -7,4 +7,5 @@ class User < ActiveRecord::Base
   has_many :user_phones
   has_many :graduate_degrees
   has_many :undergraduate_degrees
+  
 end
