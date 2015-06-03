@@ -18,7 +18,7 @@
     <div class="row">
       <div class="large-6 large-centered small-12 columns">
         <%= form_tag "reports/options", :html=>{:id=>'report_form'}, method: "post" do %>
-        <%= select_tag(:report_type, options_for_select([["-- Choose Report --", ""], ["Date Entered", 'date'], ["Graduating Class", 'grad_class'], ["Graduate Program", 'grad_program'], ["User Employer", 'employer'], ["Taken Surveys", 'taken_surveys'], ["Given Back", 'given_back'], ["Survey Completion", 'survey_completion'], ["Survey Results", 'survey_results'], ["User Survey Response", 'user_survey_response']]), {onchange: 'this.form.submit();'})%>
+        <%= select_tag(:report_type, options_for_select([["-- Choose Report --", ""], ["Date Entered", 'date'], ["Graduating Class", 'grad_class'], ["Graduate Program", 'grad_program'], ["User Employer", 'employer'], ["Given Back", 'given_back'], ["Survey Completion", 'survey_completion'], ["Survey Results", 'survey_results'], ["User Survey Response", 'user_survey_response']]), {onchange: 'this.form.submit();'})%>
         <br /><br />
         <div align="center">
           <%= submit_tag "Submit", class: "button radius" %>

@@ -1,4 +1,8 @@
+# James Maher
 class SearchesController < AuthenticationController
+
+
+
   # GET /searches
   # GET /searches.json
   def index

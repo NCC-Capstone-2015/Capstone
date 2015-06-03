@@ -1,4 +1,4 @@
-<nav class="top-bar" data-topbar>
+<nav class="top-bar noprint" data-topbar>
       <ul class="title-area">
           <li class="name">
               <h1><a href="/">North Central College</a></h1>
@@ -28,7 +28,7 @@
                               <!--sign out added by Ryan and Andrew-->
 				<% if login_signed_in? %>
 				  <li>
-				<%= link_to('Sign Out', destroy_login_session_path, :method => :delete) %>  
+				<%= link_to('Sign Out', destroy_login_session_path, :method => :delete) %>
 				  </li>
 				<% end %>
                              </li>

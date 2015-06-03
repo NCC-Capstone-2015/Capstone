@@ -1,3 +1,3 @@
-class Search < ActiveRecord::Base
-  
+# James Maher
+class Search < ActiveRecord::Base 
 end
