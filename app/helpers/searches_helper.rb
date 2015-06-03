@@ -26,14 +26,17 @@ module SearchesHelper
     [:first_name, :middle_initial, :last_name]
   end
   def display_search_results_row(object)
+    fieldCount = 0
     # display row with link in first name field
     model_fields.each_with_object('') do |field, string|
-      # If the user's first name is the field being displayed, make it a link to the user's profile
-      if (field == :first_name)
+      # If this is the first column, make it a link to the user's profile
+      if fieldCount == 0
         string << content_tag(:td, link_to(object.send(field), users_path + '/' + object.id.to_s, :style=>'color:#0011CC;'))
       else # no link
         string << content_tag(:td, object.send(field))
       end
+      
+      fieldCount += 1
     end
     .html_safe
   end
