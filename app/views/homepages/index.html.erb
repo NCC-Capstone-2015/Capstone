@@ -1,7 +1,14 @@
 <% if login_signed_in? %>
+  
+  <%if current_login.login_type == 1 || current_login.login_type == 2 %>
     <%= render "menu/admin" %>
 <%else%>
     <%= render "menu/student" %>
 <%end%>
-<!--<p id="notice"><%= notice %></p>-->
-<p class="getfit"><img src="https://farm8.staticflickr.com/7382/9548360790_818826c12b_h.jpg"></p>
+<%end%>
+<!--<p id="notice"><%= notice %></p>
+
+<%image_tag "ncc.jpg", alt: "NCC", width: '100%', :style => "background-size: cover"%>
+-->
+<!--image from url-->
+<p class="getfit"><img src=https://farm8.staticflickr.com/7382/9548360790_818826c12b_h.jpg</p>

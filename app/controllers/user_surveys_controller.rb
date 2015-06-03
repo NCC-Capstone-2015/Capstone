@@ -1,4 +1,4 @@
-class UserSurveysController < ApplicationController
+class UserSurveysController < AuthenticationController
   before_action :set_user_survey, only: [:show, :edit, :update, :destroy]
 
   # GET /user_surveys

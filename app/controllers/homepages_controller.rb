@@ -1,4 +1,4 @@
-class HomepagesController < ApplicationController
+class HomepagesController < AuthenticationController
   before_action :set_homepage, only: [:show, :edit, :update, :destroy]
 
   # GET /homepages

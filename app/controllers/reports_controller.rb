@@ -1,7 +1,12 @@
+
+class ReportsController < AuthenticationController
+  skip_before_filter :verify_authenticity_token, :only => :create
+
 require 'csv'
 
-class ReportsController < ApplicationController
+
   #skip_before_filter :verify_authenticity_token, :only => :create
+
 
   def index
   end

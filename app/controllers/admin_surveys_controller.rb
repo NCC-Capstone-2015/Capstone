@@ -1,4 +1,4 @@
-class AdminSurveysController < ApplicationController
+class AdminSurveysController < AuthenticationController
   before_action :set_admin_survey, only: [:show, :edit, :update, :destroy]
 
   # GET /admin_surveys

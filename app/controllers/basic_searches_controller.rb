@@ -1,5 +1,6 @@
 # James Maher
-class BasicSearchesController < ApplicationController
+class BasicSearchesController < AuthenticationController
+
   # GET /basic_searches
   # GET /basic_searches.json
   def index

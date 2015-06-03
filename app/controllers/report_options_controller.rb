@@ -1,4 +1,4 @@
-class ReportOptionsController < ApplicationController
+class ReportOptionsController < AuthenticationController
   before_action :set_report_option, only: [:show, :edit, :update, :destroy]
 
   # GET /report_options

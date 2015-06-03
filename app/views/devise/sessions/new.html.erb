@@ -1,25 +1,24 @@
-
-<table>
+<!--Login page configured by Ryan and Andrew-->
 <%= render "menu/login" %>
 
 <br />
 <div class="row">
   <div class="large-12 small-12" align="center">
  
-
+ <div class="panel" style="width: 350px">
   
 <h2>Log in</h2>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="field">
     <div style="width:300px">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
+    <%= f.label :Username %><br />
+    <%= f.text_field :logon, autofocus: true %>
     </div>
   </div>
 
   <div class="field">
-    <div style="width:200px">
+    <div style="width:300px">
     <%= f.label :password %><br />
     <%= f.password_field :password, autocomplete: "off" %>
     </div>
@@ -37,5 +36,4 @@
   </div>
 <% end %>
 
-</table>
-
+</div>
