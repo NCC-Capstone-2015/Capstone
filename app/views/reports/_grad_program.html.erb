@@ -1,17 +1,17 @@
 <!-- Created by Andrew Bockus -->
 <div class="row">
   <div class="small-12 small-centered columns">
-    <h2 align="center">Survey Completion Report Options</h2>
+    <h2 align="center">Graduate Program Report Options</h2>
   </div>
 </div><hr /><br />
 <div class="row">
   <div class="large-6 large-centered columns">
     <div class="row">
       <div class="large-6 small-12 column">
-        <h4>Survey:</h4>
+        <h4>Graduate Program:</h4>
       </div>
       <div class="large-6 small-12 column">
-        <%= select_tag "selected_survey", options_from_collection_for_select(@survey_array, "id", "survey_name"), {:include_blank => 'None'} %>
+        <%= select_tag "selected_program", options_from_collection_for_select(@grad_program_array, "id", "major_name"), {:include_blank => 'None'} %>
       </div>
     </div>
   </div>
