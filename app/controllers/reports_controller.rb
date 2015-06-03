@@ -1,4 +1,4 @@
-class ReportsController < ApplicationController
+class ReportsController < AuthenticationController
   skip_before_filter :verify_authenticity_token, :only => :create
 
   def index

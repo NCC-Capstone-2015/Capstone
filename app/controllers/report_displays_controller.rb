@@ -1,4 +1,4 @@
-class ReportDisplaysController < ApplicationController
+class ReportDisplaysController < AuthenticationController
   before_action :set_report_display, only: [:show, :edit, :update, :destroy]
 
   # GET /report_displays

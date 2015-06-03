@@ -1,4 +1,4 @@
-class WelcomesController < ApplicationController
+class WelcomesController < AuthenticationController
   before_action :set_welcome, only: [:show, :edit, :update, :destroy]
 
   # GET /welcomes
