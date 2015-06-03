@@ -1,12 +1,9 @@
-
-<table>
+<!--Login page configured by Ryan and Andrew-->
 <%= render "menu/login" %>
 
 <br />
 <div class="row">
   <div class="large-12 small-12" align="center">
- 
-
   
 <h2>Log in</h2>
 
@@ -19,7 +16,7 @@
   </div>
 
   <div class="field">
-    <div style="width:200px">
+    <div style="width:300px">
     <%= f.label :password %><br />
     <%= f.password_field :password, autocomplete: "off" %>
     </div>
@@ -36,6 +33,4 @@
     <%= f.submit "Log in", :class => "button radius" %>
   </div>
 <% end %>
-
-</table>
 
