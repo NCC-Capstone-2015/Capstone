@@ -53,7 +53,7 @@ class UsersController < ApplicationController
 
     @user = User.new()
     @user.login_id = @login.id
-    @user.email_addr = params["username"]
+    @user.email_addr = params["email"]
 
 
     @user_phone = UserPhone.new()
