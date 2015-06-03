@@ -1,7 +1,7 @@
 <!-- James Maher -->
 <%= render "menu/admin" %>
 <div class="row">
-  <div class="column">
+  <div class="column" id="content">
     <h1>Advanced Search</h1>
     <%= search_form_for @q, url: search_searches_path, html: { method: :post } do |f| %>
       <%= f.condition_fields do |c| %>
