@@ -14,7 +14,7 @@
     <% @users.each do |user| %>
       <tr>
         <td><%= user.login.first_name %> <%= user.login.last_name %></td>
-        <td><%= user.email_addr %></td>
+        <td><%= user.login.email %></td>
         <% if user.status == 1 %>
           <td> Enrolled </td>
         <% else %>
