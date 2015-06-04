@@ -20,8 +20,8 @@
         <% else %>
           <td>Alumni</td>
         <% end %>
-        
-        <td></td>
+
+        <td><%= user.program %></td>
 
         <td><%= link_to 'Show',user_path(user) %> |
         <%= link_to 'Edit',edit_user_path(user) %> |

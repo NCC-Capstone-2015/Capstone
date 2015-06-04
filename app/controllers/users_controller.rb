@@ -37,32 +37,47 @@ class UsersController < AuthenticationController
 
   def create
     @login = Login.new()
-    @login.first_name = params["first_name"]
-    @login.last_name = params["last_name"]
-    @login.password = params["password"]
-    @login.middle_initial = params["middle_initial"]
-    @login.login_type = params["login_type"]
-    @login.username = params["username"]
-    @login.sign_in_count = 0
-    @login.email = params["email"]
+      @login.first_name = params["first_name"]
+      @login.last_name = params["last_name"]
+      @login.password = params["password"]
+      @login.middle_initial = params["middle_initial"]
+      @login.login_type = params["login"]
+      @login.username = params["username"]
+      @login.email = params["email"]
+      @login.created_at = DateTime.now
+      @login.updated_at = DateTime.now
+      @login.last_sign_in_at = @login.updated_at
+
+
+
     if @login.save
-      redirect_to users_path
+      #only make a user profile if they are not a worker
+      if params["login"] == 0
+        @user = User.new()
+        @user.login_id = @login.id
+        @user.email_addr = params["email"]
+        @user.program = params["program"]
+        @user.status = params["status"]
+        if @user.save
+          @user_phone = UserPhone.new()
+          @user_phone.user_id = @user.id
+          if @user.save
+            redirct_to users_path
+          else
+            redirect_to "new"
+          end
+        else
+          redirect_to "new"
+        end
+      else
+        redirct_to users_path
+      end
     else
-      render 'new'
+      redirect_to "new"
     end
 
-    @user = User.new()
-    @user.login_id = @login.id
-    @user.email_addr = params["email"]
 
 
-    @user_phone = UserPhone.new()
-    @user_phone.user_id = @user.id
-    if @user.save
-
-    else
-      render 'new'
-    end
   end
 
   def update
