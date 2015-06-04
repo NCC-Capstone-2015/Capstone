@@ -1,3 +1,5 @@
+# Associations implemented by Cornelius Donley
+
 class UserSurveyResponse < ActiveRecord::Base
   belongs_to :user_survey
   belongs_to :survey_question
