@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :giving_backs
   devise_for :logins
   resources :basic_searches do
     collection do
