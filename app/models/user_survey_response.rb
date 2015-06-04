@@ -1,6 +1,6 @@
 class UserSurveyResponse < ActiveRecord::Base
-  belongs_to :user_survey, dependent: :destroy
-  belongs_to :survey_question, dependent: :destroy
-  belongs_to :survey_question_option, dependent: :destroy
-  belongs_to :survey_question_option_choice, dependent: :destroy
+  belongs_to :user_survey
+  belongs_to :survey_question
+  belongs_to :survey_question_option
+  belongs_to :survey_question_option_choice
 end
