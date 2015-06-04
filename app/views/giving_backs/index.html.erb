@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Giving Backs</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Company info</th>
+      <th>Subject</th>
+      <th>Position</th>
+      <th>Description</th>
+      <th>Requirements</th>
+      <th>Approved</th>
+      <th>Completed</th>
+      <th>Giving back type</th>
+      <th>Contact first name</th>
+      <th>Contact last name</th>
+      <th>Contact email</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @giving_backs.each do |giving_back| %>
+      <tr>
+        <td><%= giving_back.user_id %></td>
+        <td><%= giving_back.company_info_id %></td>
+        <td><%= giving_back.subject %></td>
+        <td><%= giving_back.position %></td>
+        <td><%= giving_back.description %></td>
+        <td><%= giving_back.requirements %></td>
+        <td><%= giving_back.approved %></td>
+        <td><%= giving_back.completed %></td>
+        <td><%= giving_back.giving_back_type %></td>
+        <td><%= giving_back.contact_first_name %></td>
+        <td><%= giving_back.contact_last_name %></td>
+        <td><%= giving_back.contact_email %></td>
+        <td><%= link_to 'Show', giving_back %></td>
+        <td><%= link_to 'Edit', edit_giving_back_path(giving_back) %></td>
+        <td><%= link_to 'Destroy', giving_back, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Giving back', new_giving_back_path %>
