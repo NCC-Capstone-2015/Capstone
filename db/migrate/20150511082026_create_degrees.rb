@@ -1,3 +1,6 @@
+# Created by Christian Winger
+# Initial table create
+
 class CreateDegrees < ActiveRecord::Migration
   def change
     create_table :degrees do |t|

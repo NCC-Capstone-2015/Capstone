@@ -1,3 +1,6 @@
+# Created by Christian Winger
+# Initial table create
+
 class CreateCompanies < ActiveRecord::Migration
   def change
     create_table :companies do |t|

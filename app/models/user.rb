@@ -1,3 +1,5 @@
+# Associations implemented by Cornelius Donley
+
 class User < ActiveRecord::Base
   belongs_to :login
   belongs_to :company_info

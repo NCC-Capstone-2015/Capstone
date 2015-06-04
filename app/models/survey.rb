@@ -1,3 +1,5 @@
+# Associations implemented by Cornelius Donley
+
 class Survey < ActiveRecord::Base
   belongs_to :login
   has_many :survey_questions, :dependent => :destroy

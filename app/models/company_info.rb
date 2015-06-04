@@ -1,3 +1,5 @@
+# Associations implemented by Cornelius Donley
+
 class CompanyInfo < ActiveRecord::Base
   has_one :company
   belongs_to :giving_back
