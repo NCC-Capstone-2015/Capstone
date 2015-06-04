@@ -1,8 +1,6 @@
 # Author: Craig Sterling
 # Date: 5/20/2015
-class UserInformationsController < AuthenticationController
-  helper_method :convert_opt_in, :convert_user_status, :concatenate_phone,
-                :convert_phone_type, :get_photo_path
+class UserInformationsController < ApplicationController
   before_action :set_user_information, only: [:show, :edit, :update, :destroy]
 
   # GET /user_informations
@@ -71,65 +69,7 @@ class UserInformationsController < AuthenticationController
     # Use callbacks to share common setup or constraints between actions.
     def set_user_information
       @login = Login.find(params[:id])
-      @user = User.find_by_login_id(@login.id)
-      @user_phones = UserPhone.where(user_id: @user.id)
-      @company = Company.find(@user.company_id)
-      @company_info = CompanyInfo.find_by_company_id(@company.id)
-    end
-
-    # helper method to convert user.status from number stored in tables
-    # to verbiage
-    def convert_user_status (status)
-
-      if status == 0
-        status_description = "Enrolled"
-      else
-        status_description = "Alumni"
-      end
-    end
-
-    # helper method to convert opt_in_values from number stored in tables
-    # to verbiage
-    def convert_opt_in (opt_in_value)
-      if opt_in_value == 0
-        opt_in_text = "No"
-      else
-        opt_in_text = "Yes"
-      end
-    end
-
-    # helper method to concatenate the elements of the phone number into
-    # a string
-    def concatenate_phone (phone_country_code, phone_area_code,
-                           phone_prefix, phone_suffix)
-      phone_text = (phone_country_code + "." + phone_area_code + "." +
-                   phone_prefix + "." + phone_suffix)
-    end
-
-    # helper method to convert phone_type from number stored in tables
-    # to verbiage
-    def convert_phone_type (phone_type)
-      if phone_type == 0
-        phone_type_text = "Home"
-      elsif phone_type == 1
-        phone_type_text = "Work"
-      else phone_type == 2
-        phone_type_text = "Mobile"
-      end
-    end
-
-    # helper method to get phot_path if it exists,
-    # otherwise get the default photo_path
-    def get_photo_path (l_name, f_name)
-      photo_file_name = l_name + "_" + f_name + ".png"
-      photo_path_and_file_name = Rails.root.join "app", "assets", "images",
-                                                                photo_file_name
-      if (File.file?(photo_path_and_file_name))
-        asset_name = "/assets/" + photo_file_name
-      else
-        asset_name = "/assets/placeholder-person.png"
-      end
-      return asset_name
+#      @company = Company.find(@login.user.company_id)
     end
 
     # Never trust parameters from the scary internet,
