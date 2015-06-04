@@ -1,16 +1,14 @@
 <!--James Maher-->
 <%= render "menu/student" %>
 <div class="row">
-  <h1 class="medium-5 column">Search People</h1>
-</div>
-<div class="row">
-  <%= search_form_for @search, url: search_basic_searches_path, html: { method: :post } do |f| %>
-    <div class="large-9 small-9 columns">
-      <%= f.text_field :username_or_first_name_or_middle_initial_or_last_name_cont %>
-    </div>
-    <div class="large-3 small-3 columns">
+  <div class="column" id="content">
+    <h1>Search People</h1>
+    <%= search_form_for @search, url: search_basic_searches_path, html: { method: :post } do |f| %>
+      <div class="large-9 small-9 column">
+        <%= f.text_field :username_or_first_name_or_middle_initial_or_last_name_cont %>
+      </div>
       <%= f.submit "Search", :class => "button" %>
-    </div>
-  <% end %>
+    <% end %>
+    <%= render "results" %>
+  </div>
 </div>
-<%= render "results" %>

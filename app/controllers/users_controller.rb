@@ -50,19 +50,28 @@ class UsersController < AuthenticationController
 
 
 
-    if @login.save!
-      @user = User.new()
-      @user.login_id = @login.id
-      @user.email_addr = params["email"]
-      @user.program = params["program"]
-      @user.status = params["status"]
-
-
-      @user_phone = UserPhone.new()
-      @user_phone.user_id = @user.id
-      @user.save
-
-      redirect_to users_path
+    if @login.save
+      #only make a user profile if they are not a worker
+      if params["login"] == 0
+        @user = User.new()
+        @user.login_id = @login.id
+        @user.email_addr = params["email"]
+        @user.program = params["program"]
+        @user.status = params["status"]
+        if @user.save
+          @user_phone = UserPhone.new()
+          @user_phone.user_id = @user.id
+          if @user.save
+            redirct_to users_path
+          else
+            redirect_to "new"
+          end
+        else
+          redirect_to "new"
+        end
+      else
+        redirct_to users_path
+      end
     else
       redirect_to "new"
     end
