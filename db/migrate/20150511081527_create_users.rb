@@ -1,3 +1,6 @@
+# Created by Christian Winger
+# Initial table create
+
 class CreateUsers < ActiveRecord::Migration
   def change
     create_table :users do |t|

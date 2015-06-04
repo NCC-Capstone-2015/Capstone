@@ -1,3 +1,7 @@
+# Created by Cornelius Donley
+# Combined date fields into single column with type date
+# Changed salary to type integer
+
 class ChangeUsers < ActiveRecord::Migration
   def change
     change_table :users do |t|

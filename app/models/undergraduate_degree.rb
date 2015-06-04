@@ -1,3 +1,5 @@
+# Associations implemented by Cornelius Donley
+
 class UndergraduateDegree < ActiveRecord::Base
   belongs_to :user
   belongs_to :college

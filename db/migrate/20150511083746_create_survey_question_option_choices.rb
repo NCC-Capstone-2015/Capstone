@@ -1,3 +1,6 @@
+# Created by Christian Winger
+# Initial table create
+
 class CreateSurveyQuestionOptionChoices < ActiveRecord::Migration
   def change
     create_table :survey_question_option_choices do |t|

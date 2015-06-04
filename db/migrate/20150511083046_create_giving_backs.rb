@@ -1,3 +1,6 @@
+# Created by Christian Winger
+# Initial table create
+
 class CreateGivingBacks < ActiveRecord::Migration
   def change
     create_table :giving_backs do |t|
