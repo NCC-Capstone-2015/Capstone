@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  belongs_to :login
+  belongs_to :login, dependent: :destroy
   has_one :company_info
   has_many :saved_lists, through: :saved_list_users
   has_many :giving_backs
