@@ -1,3 +1,5 @@
 class CompanyInfo < ActiveRecord::Base
-  belongs_to :company
+  has_one :company
+  belongs_to :giving_back
+  belongs_to :user
 end

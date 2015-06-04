@@ -1,7 +1,6 @@
 class CreateUsers < ActiveRecord::Migration
   def change
     create_table :users do |t|
-      t.integer :login_id
       t.string :email_addr
       t.string :city
       t.string :state
@@ -19,13 +18,12 @@ class CreateUsers < ActiveRecord::Migration
       t.integer :phone_opt_in
       t.integer :badges_opt_in
       t.integer :status
-      t.integer :company_id
       t.string :salary_range
       t.string :job_title
       t.string :start_date
       t.string :end_date
       t.references :login, index: true, foreign_key: true
-      t.references :company, index: true, foreign_key: true
+      t.references :company_info, index: true, foreign_key: true
 
       t.timestamps null: false
     end
