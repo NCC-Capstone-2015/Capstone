@@ -1,0 +1,90 @@
+<%-# authored by Matthew Kachlik -%>
+
+
+<%= form_tag({controller: "users", action: "create"}, method: "post") do%>
+<div class= "row">
+  <div class="large-6 columns">
+    <%= label_tag 'username','Username:' %>
+    <%= text_field_tag 'username' %>
+  </div>
+  <div class="large-6 columns">
+    <%= label_tag 'password','Password:' %>
+    <%= text_field_tag 'password' %>
+  </div>
+</div>
+ <div class ="row">
+   <div class="large-4 columns">
+     <p>
+        <%= label_tag 'first_name','First name:' %>
+        <%= text_field_tag 'first_name' %>
+      </p>
+   </div>
+   <div class="large-4 columns">
+     <%= label_tag 'middle_name','Middle Initial:' %>
+     <%= text_field_tag 'middle_initial' %>
+   </div>
+   <div class="large-4 columns">
+     <%= label_tag 'last_name','Last name:' %>
+     <%= text_field_tag 'last_name' %>
+   </div>
+ </div>
+ <div class="row">
+   <div class="large-3 columns">
+    <p>
+      <%= label_tag 'email','Email address:' %>
+      <%= text_field_tag 'email' %>
+    </p>
+  </div>
+   <div class="large-3 columns">
+    <p>
+      <%= label_tag 'login','Type:' %>
+      <%= select_tag "login",options_for_select([['Worker', 0],["Student",2]]) %>
+    </p>
+  </div>
+  <div class="large-3 columns">
+   <p>
+     <%= label_tag 'status','Status:' %>
+     <%= select_tag "status",options_for_select([['Alumi', 0],["Enrolled",1]]) %>
+   </p>
+ </div>
+   <div class="large-3 columns">
+    <p>
+      <%= label_tag 'program','Program:' %>
+      <%= select_tag "program",options_for_select([['Buisness Administration', 'Buisness Administration'],["International Buisness Administration",'International Buisness Administration'],["Education",'Education'],["Leadership Studies",'Leadership Studies'],["Liberal Studies",'Liberal studies'],["Management Information Systems",'Management Information Systems'],["Web and Internet application",'Web and Internet application']]) %>
+    </p>
+  </div>
+ </div>
+ <div class="row">
+   <div class="large-3 columns">
+    <p>
+      <%= label_tag 'country_code','Phone Country code:' %>
+      <%= text_field_tag 'country_code', "+1", maxlength: 2 %>
+    </p>
+  </div>
+  <div class="large-3 columns">
+   <p>
+     <%= label_tag 'area_code','Area code:' %>
+     <%= text_field_tag 'area_code', nil, maxlength: 3 %>
+   </p>
+ </div>
+ <div class="large-3 columns">
+  <p>
+    <%= label_tag 'prefix','Prefix:' %>
+    <%= text_field_tag 'prefix', nil, maxlength: 3 %>
+  </p>
+</div>
+<div class="large-3 columns">
+ <p>
+   <%= label_tag 'prefix','Suffix:' %>
+   <%= text_field_tag 'suffix', nil, maxlength: 4 %>
+ </p>
+</div>
+
+ </div>
+    <div class="row">
+      <div class="text-center">
+          <%= link_to 'Back', users_path,class: "button radius" %>
+          <%= submit_tag "submit",class: "button radius"%>
+      </div>
+    </div>
+<%end%>

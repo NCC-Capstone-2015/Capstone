@@ -17,7 +17,11 @@
 </p>
 <p>
   <strong>Type:</strong>
-  <%= @user.login.login_type %>
+  <% if @user.login.login_type == 0 %>
+    Worker
+  <% elsif @user.login.login_type == 2 %>
+    Student
+  <% end %>
 </p>
 <p>
   <strong>Last login:</strong>
