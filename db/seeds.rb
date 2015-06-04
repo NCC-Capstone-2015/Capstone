@@ -65,6 +65,28 @@ survey_question_option_ch41 = SurveyQuestionOptionChoice.create(survey_question_
 survey_question_option_ch42 = SurveyQuestionOptionChoice.create(survey_question_id: survey_question4.id, display_order: 1, text: 'Choice 2')
 survey_question_option_ch43 = SurveyQuestionOptionChoice.create(survey_question_id: survey_question4.id, display_order: 2, text: 'Choice 3')
 
+survey2 = Survey.create(login_id: login5.id, survey_name: 'Seed Survey Complete', status: 1, survey_description: 'A complete survey for testing', date_created: Date.current)
+
+survey_question1 = SurveyQuestion.create(survey_id: survey2.id, survey_question_type: 0, display_order: 0, required: true, text: 'Sample text response question')
+
+survey_question2 = SurveyQuestion.create(survey_id: survey2.id, survey_question_type: 1, display_order: 1, required: true, text: 'Sample single answer question')
+survey_question_option21 = SurveyQuestionOption.create(survey_question_id: survey_question2.id, display_order: 0, text: 'Option 1')
+survey_question_option22 = SurveyQuestionOption.create(survey_question_id: survey_question2.id, display_order: 1, text: 'Option 2')
+survey_question_option23 = SurveyQuestionOption.create(survey_question_id: survey_question2.id, display_order: 2, text: 'Option 3')
+
+survey_question3 = SurveyQuestion.create(survey_id: survey2.id, survey_question_type: 2, display_order: 2, required: true, text: 'Sample multiple answer question')
+survey_question_option31 = SurveyQuestionOption.create(survey_question_id: survey_question3.id, display_order: 0, text: 'Option 1')
+survey_question_option32 = SurveyQuestionOption.create(survey_question_id: survey_question3.id, display_order: 1, text: 'Option 2')
+survey_question_option33 = SurveyQuestionOption.create(survey_question_id: survey_question3.id, display_order: 2, text: 'Option 3')
+
+survey_question4 = SurveyQuestion.create(survey_id: survey2.id, survey_question_type: 3, display_order: 3, required: true, text: 'Sample multiple sub-question')
+survey_question_option41 = SurveyQuestionOption.create(survey_question_id: survey_question4.id, display_order: 0, text: 'Sub-Question 1')
+survey_question_option42 = SurveyQuestionOption.create(survey_question_id: survey_question4.id, display_order: 1, text: 'Sub-Question 2')
+survey_question_option43 = SurveyQuestionOption.create(survey_question_id: survey_question4.id, display_order: 2, text: 'Sub-Question 3')
+survey_question_option_ch41 = SurveyQuestionOptionChoice.create(survey_question_id: survey_question4.id, display_order: 0, text: 'Choice 1')
+survey_question_option_ch42 = SurveyQuestionOptionChoice.create(survey_question_id: survey_question4.id, display_order: 1, text: 'Choice 2')
+survey_question_option_ch43 = SurveyQuestionOptionChoice.create(survey_question_id: survey_question4.id, display_order: 2, text: 'Choice 3')
+
 #Survey entry for User 2
 user_survey2 = UserSurvey.create(user_id: user2.id, survey_id: survey1.id, date_completed: DateTime.now, anonymous: false)
 user_survey_response21 = UserSurveyResponse.create(user_survey_id: user_survey2.id, survey_question_id: survey_question1.id, response_text: 'Response to a text field question.')
