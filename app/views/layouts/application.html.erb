@@ -6,17 +6,16 @@
 
     <title><%= content_for?(:title) ? yield(:title) : 'The Alumbook' %></title>
 
-    <%= stylesheet_link_tag    'application' %>
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
     <%= javascript_include_tag 'vendor/modernizr' %>
     <%= csrf_meta_tags %>
   </head>
 
   <body>
     <%= yield %>
-    <%= javascript_include_tag 'application' %>
-    <!-- James Maher -->
-    <div class="row">
-    </div>
+    
+    <!-- Disclaimers by James Maher -->
     <div class="text-center noprint" align="center" style="position: fixed; bottom:0; width:100%; text-align: center;">
       <br /><%= link_to "Privacy Policy", privacy_policy_disclaimers_path %> | <%= link_to "Contact Us", contact_us_disclaimers_path %><br /><br />
     </div>

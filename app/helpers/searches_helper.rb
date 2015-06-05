@@ -17,7 +17,6 @@ module SearchesHelper
   end
   def display_basic_search_results(objects)
     # display basic search results table
-   
     objects.each_with_object('') do |object, string|
       string << content_tag(:tr, display_basic_search_results_row(object))
     end
@@ -36,7 +35,6 @@ module SearchesHelper
       else # no link
         string << content_tag(:td, object.send(field))
       end
-      
       fieldCount += 1
     end
     .html_safe
