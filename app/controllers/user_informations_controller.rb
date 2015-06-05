@@ -4,20 +4,18 @@ class UserInformationsController < ApplicationController
   before_action :set_user_information, only: [:show, :edit, :update, :destroy]
 
   # GET /user_informations
-  # GET /user_informations.json
   def index
-    @user_informations = UserInformation.all
+
   end
 
   # GET /user_informations/1
-  # GET /user_informations/1.json
   def show
 
 	end
 
   # GET /user_informations/new
   def new
-    @user_information = UserInformation.new
+
   end
 
   # GET /user_informations/1/edit
@@ -26,50 +24,55 @@ class UserInformationsController < ApplicationController
   end
 
   # POST /user_informations
-  # POST /user_informations.json
   def create
-    @user_information = UserInformation.new(user_information_params)
 
-    respond_to do |format|
-      if @user_information.save
-        format.html { redirect_to @user_information, notice: 'User information was successfully created.' }
-        format.json { render :show, status: :created, location: @user_information }
-      else
-        format.html { render :new }
-        format.json { render json: @user_information.errors, status: :unprocessable_entity }
-      end
-    end
   end
 
   # PATCH/PUT /user_informations/1
-  # PATCH/PUT /user_informations/1.json
   def update
-    respond_to do |format|
-      if @user_information.update(user_information_params)
-        format.html { redirect_to @user_information, notice: 'User information was successfully updated.' }
-        format.json { render :show, status: :ok, location: @user_information }
-      else
-        format.html { render :edit }
-        format.json { render json: @user_information.errors, status: :unprocessable_entity }
-      end
-    end
+
+    flash[:notice] = convert_user_status_to_numbers(params[:status])
+
+    @login = Login.find(params[:id])
+    @login.first_name = params[:first_name]
+    @login.middle_initial = params[:middle_initial]
+    @login.email = params[:email]
+    @login.user.street = params[:street]
+    @login.user.city = params[:city]
+    @login.user.state = params[:state]
+    @login.user.zip = params[:zip]
+#    @login.user.status = convert_user_status_to_numbers(params[:status])
+    @login.user.spouse_last_name = params[:spouse_last_name]
+    @login.user.spouse_first_name = params[:spouse_first_name]
+    @login.user.spouse_middle_initial = params[:spouse_middle_initial]
+    @login.user.number_children = params[:number_children]
+#    @login.user.birth_day = params[:birth_day]
+    @login.user.ethnicity = params[:ethnicity]
+#    @login.user.general_opt_in = params[:zip]
+#    @login.user.email_opt_in = params[:zip]
+#    @login.user.phone_opt_in = params[:zip]
+#    @login.user.badges_opt_in = params[:zip]
+#    @login.user.status = params[:zip]
+#    @login.user.salary_range = params[:zip]
+    @login.user.job_title = params[:job_title]
+#    @login.user.start_date = params[:start_date]
+#    @login.user.end_date = params[:end_date]
+    @login.save
+    @login.user.save
+
+    redirect_to '/user_informations/' + @login.id.to_s
+
   end
 
   # DELETE /user_informations/1
-  # DELETE /user_informations/1.json
   def destroy
-    @user_information.destroy
-    respond_to do |format|
-      format.html { redirect_to user_informations_url, notice: 'User information was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user_information
       @login = Login.find(params[:id])
-#      @company = Company.find(@login.user.company_id)
     end
 
     # Never trust parameters from the scary internet,
@@ -77,4 +80,15 @@ class UserInformationsController < ApplicationController
     def user_information_params
       params[:user_information]
     end
+
+    # Method to convert status from words to a number
+    def convert_user_status_to_numbers (status_text)
+
+      if status_text == "Student"
+        status_num = 0
+      elsif status_text == "Alumni"
+        status_num = 1
+      end
+    end
+
 end
