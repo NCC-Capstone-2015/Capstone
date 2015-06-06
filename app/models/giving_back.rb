@@ -1,4 +1,6 @@
+# Associations implemented by Cornelius Donley
+
 class GivingBack < ActiveRecord::Base
   belongs_to :user
-  belongs_to :company
+  has_one :company_info
 end

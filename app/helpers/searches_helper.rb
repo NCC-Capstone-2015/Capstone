@@ -17,6 +17,7 @@ module SearchesHelper
   end
   def display_basic_search_results(objects)
     # display basic search results table
+   
     objects.each_with_object('') do |object, string|
       string << content_tag(:tr, display_basic_search_results_row(object))
     end
@@ -31,7 +32,7 @@ module SearchesHelper
     model_fields.each_with_object('') do |field, string|
       # If this is the first column, make it a link to the user's profile
       if fieldCount == 0
-        string << content_tag(:td, link_to(object.send(field), users_path + '/' + object.id.to_s, :style=>'color:#0011CC;'))
+        string << content_tag(:td, link_to(object.send(field), user_informations_path + '/' + object.id.to_s, :style=>'color:#0011CC;'))
       else # no link
         string << content_tag(:td, object.send(field))
       end

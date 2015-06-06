@@ -1,0 +1,64 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @giving_back.user_id %>
+</p>
+
+<p>
+  <strong>Company info:</strong>
+  <%= @giving_back.company_info_id %>
+</p>
+
+<p>
+  <strong>Subject:</strong>
+  <%= @giving_back.subject %>
+</p>
+
+<p>
+  <strong>Position:</strong>
+  <%= @giving_back.position %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @giving_back.description %>
+</p>
+
+<p>
+  <strong>Requirements:</strong>
+  <%= @giving_back.requirements %>
+</p>
+
+<p>
+  <strong>Approved:</strong>
+  <%= @giving_back.approved %>
+</p>
+
+<p>
+  <strong>Completed:</strong>
+  <%= @giving_back.completed %>
+</p>
+
+<p>
+  <strong>Giving back type:</strong>
+  <%= @giving_back.giving_back_type %>
+</p>
+
+<p>
+  <strong>Contact first name:</strong>
+  <%= @giving_back.contact_first_name %>
+</p>
+
+<p>
+  <strong>Contact last name:</strong>
+  <%= @giving_back.contact_last_name %>
+</p>
+
+<p>
+  <strong>Contact email:</strong>
+  <%= @giving_back.contact_email %>
+</p>
+
+<%= link_to 'Edit', edit_giving_back_path(@giving_back) %> |
+<%= link_to 'Back', giving_backs_path %>

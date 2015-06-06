@@ -1,3 +1,6 @@
+# Associations implemented by Cornelius Donley
+# Devise authentication added by Andrew Fredrickson and Ryan Figge
+
 class Login < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -6,8 +9,8 @@ class Login < ActiveRecord::Base
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :authentication_keys => [:logon]
-  has_many :saved_lists
-  has_one :user
+  has_many :saved_lists, :dependent => :destroy
+  has_one :user, :dependent => :destroy
   has_many :surveys
   
   #adds case insensitivity for username

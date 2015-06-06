@@ -1,0 +1,1 @@
+json.extract! @giving_back, :id, :user_id, :company_info_id, :subject, :position, :description, :requirements, :approved, :completed, :giving_back_type, :contact_first_name, :contact_last_name, :contact_email, :created_at, :updated_at
