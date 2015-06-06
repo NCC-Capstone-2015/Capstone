@@ -37,45 +37,49 @@ class UsersController < AuthenticationController
 
   def create
     @login = Login.new()
-      @login.first_name = params["first_name"]
-      @login.last_name = params["last_name"]
-      @login.password = params["password"]
-      @login.middle_initial = params["middle_initial"]
-      @login.login_type = params["login"]
-      @login.username = params["username"]
-      @login.email = params["email"]
-      @login.created_at = DateTime.now
-      @login.updated_at = DateTime.now
-      @login.last_sign_in_at = @login.updated_at
+    @login.first_name = params["first_name"]
+    @login.last_name = params["last_name"]
+    @login.password = params["password"]
+    @login.middle_initial = params["middle_initial"]
+    @login.login_type = params["login_type"].to_i
+    @login.username = params["username"]
+    @login.email = params["email"]
+    @login.created_at = DateTime.now
+    @login.updated_at = DateTime.now
+    @login.last_sign_in_at = DateTime.now
+    @login.sign_in_count = 0
 
 
 
-    if @login.save
+    if @login.save!
+      if params["login_type"].to_i == 2
       #only make a user profile if they are not a worker
-      if params["login"] == 0
         @user = User.new()
         @user.login_id = @login.id
-        @user.email_addr = params["email"]
         @user.program = params["program"]
         @user.status = params["status"]
-        if @user.save
+        if @user.save!
           @user_phone = UserPhone.new()
+          @user_phone.country_code = params["country_code"]
+          @user_phone.area_code = params["area_code"]
+          @user_phone.prefix = params["prefix"]
+          @user_phone.suffix = params["suffix"]
           @user_phone.user_id = @user.id
-          if @user.save
-            redirct_to users_path
+          @user_phone.user_phone_type = 1
+          if @user_phone.save!
+            redirect_to users_path
           else
-            redirect_to "new"
+            redirect_to new_users_path
           end
         else
-          redirect_to "new"
+          redirect_to new_user_path
         end
       else
-        redirct_to users_path
+        redirect_to users_path
       end
     else
-      redirect_to "new"
+      redirect_to user_path
     end
-
 
 
   end
