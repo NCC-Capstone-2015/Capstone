@@ -1,11 +1,3 @@
-<% if login_signed_in? %>
-  
-  <%if current_login.login_type == 1 || current_login.login_type == 2 %>
-    <%= render "menu/admin" %>
-<%else%>
-    <%= render "menu/student" %>
-<%end%>
-<%end%>
 <!--<p id="notice"><%= notice %></p>
 
 <%image_tag "ncc.jpg", alt: "NCC", width: '100%', :style => "background-size: cover"%>
