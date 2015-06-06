@@ -8,13 +8,13 @@
 				<!-- User Name and Photo block -->
 				<div class="small-12 large-3 columns">
 					<div class="small-12">
-						<%= text_field_tag "lastname", @login.last_name %>
+						<%= text_field_tag "last_name", @login.last_name %>
 					</div>
 					<div class="small-8">
-						<%= text_field_tag "firstname", @login.first_name %>
+						<%= text_field_tag "first_name", @login.first_name %>
 					</div>
 					<div class="small-3">
-						<%= text_field_tag "middleinitial", @login.middle_initial %>
+						<%= text_field_tag "middle_initial", @login.middle_initial %>
 					</div>
 					<div class="small-12">
 						<img src=<%= get_photo_path(@login.last_name, @login.first_name) %>>
@@ -62,24 +62,29 @@
 								</div>
 								<div class="row">
 									<div class="small-10 columns">
-										<%= text_field_tag "emailaddr", @login.email %>
-									</div>
-									<div class="small-12 columns">
-										<ul style="list-style-type:none">
-											<li>Phone 1</li>
-											<li>Phone 2</li>
-										</ul>
+										<%= text_field_tag "email", @login.email %>
 									</div>
 								</div>
+								<div class="row">
+									<div class="small-12 columns">
+										<p>Phones:</p>
+									</div>
+									<ul style="list-style-type:none">
+										<li>List item</li>
+										<li>List item</li>
+									</ul>
+								</div>
+
 							</div>
 							<!-- Education Information Tab block -->
 							<div class="content" id="pnlEducationInfo">
 								<div class="row">
-									<div class="small-2 columns">
+									<div class="small-3 columns">
 										<label>Student Status</label>
 									</div>
 									<div class="small-3 columns end">
-										<%= select_tag "status", options_for_select([ "Alumni", "Student" ], @login.user.status) %>
+										<%= select_tag "status", options_for_select([ "Alumni", "Student" ],
+																																convert_user_status_to_words(@login.user.status)) %>
 									</div>
 								</div>
 								<div class="row">
@@ -99,7 +104,7 @@
 										<label>Employer</label>
 									</div>
 									<div class="small-4 columns end">
-										<%= text_field_tag "companyname", @login.user.company_info.company.company_name %>
+										<%= text_field_tag "company_name", @login.user.company_info.company.company_name %>
 									</div>
 								</div>
 								<div class="row">
@@ -107,7 +112,7 @@
 										<label>Job Title</label>
 									</div>
 									<div class="small-4 columns end">
-										<%= text_field_tag "jobtitle", @login.user.job_title %>
+										<%= text_field_tag "job_title", @login.user.job_title %>
 									</div>
 								</div>
 								<div class="row">
@@ -115,16 +120,16 @@
 										Address:
 									</div>
 									<div class="small-12 columns">
-										<%= text_field_tag "companystreet", @login.user.company_info.street %>
+										<%= text_field_tag "company_street", @login.user.company_info.street %>
 									</div>
 									<div class="small-6 columns">
-										<%= text_field_tag "companycity", @login.user.company_info.city %>
+										<%= text_field_tag "company_city", @login.user.company_info.city %>
 									</div>
 									<div class="small-2 columns">
-										<%= text_field_tag "companystate", @login.user.company_info.state %>
+										<%= text_field_tag "company_state", @login.user.company_info.state %>
 									</div>
 									<div class="small-2 columns end">
-										<%= text_field_tag "companyzip", @login.user.company_info.zip %>
+										<%= text_field_tag "company_zip", @login.user.company_info.zip %>
 									</div>
 								</div>
 								<div class="row">
@@ -132,7 +137,7 @@
 										<label>Company Phone</label>
 									</div>
 									<div class="small-4 columns end">
-										<%= text_field_tag "companyphone", @login.user.status
+										<%= text_field_tag "company_phone", @login.user.status
 																concatenate_phone(@login.user.company_info.country_code,
 																						 			@login.user.company_info.area_code,
 																						 			@login.user.company_info.prefix,
@@ -144,7 +149,13 @@
 										<label>Salary Range</label>
 									</div>
 									<div class="small-4 columns end">
-										<%= select_tag "salaryrange", options_for_select([ "< $ 49,000", "$ 50,000 to $ 99,000", "$ 100,000 to $ 149,000", "$ 150,000 to $ 199,000", "> $ 200,000" ], convert_salary_range(@login.user.salary_range)) %>
+										<%= select_tag "salary_range",
+																	 options_for_select([ "< $ 49,000",
+																												"$ 50,000 to $ 99,000",
+																												"$ 100,000 to $ 149,000",
+																												"$ 150,000 to $ 199,000",
+																												"> $ 200,000" ],
+																												convert_salary_range_to_words(@login.user.salary_range)) %>
 									</div>
 								</div>
 								<div class="row">
@@ -152,13 +163,13 @@
 										<label>Start Date</label>
 									</div>
 									<div class="small-2 columns">
-										<%= text_field_tag "startdate", @login.user.start_date %>
+										<%= date_field_tag "start_date", @login.user.start_date %>
 									</div>
 									<div class="small-2 columns">
 										<label>End Date</label>
 									</div>
 									<div class="small-2 columns end">
-										<%= text_field_tag "enddate", @login.user.end_date %>
+										<%= date_field_tag "end_date", @login.user.end_date %>
 									</div>
 								</div>
 							</div>
@@ -169,7 +180,7 @@
 										<label>Birth Date</label>
 									</div>
 									<div class="small-2 columns end">
-										<%= text_field_tag "birthdate", @login.user.birth_day %>
+										<%= date_field_tag "birth_day", @login.user.birth_day %>
 									</div>
 								</div>
 								<div class="row">
@@ -185,13 +196,13 @@
 										<label>Spouse</label>
 									</div>
 									<div class="small-4 columns">
-										<%= text_field_tag "spouselastname", @login.user.spouse_last_name %>
+										<%= text_field_tag "spouse_last_name", @login.user.spouse_last_name %>
 									</div>
 									<div class="small-3 columns">
-										<%= text_field_tag "spouselastname", @login.user.spouse_first_name %>
+										<%= text_field_tag "spouse_first_name", @login.user.spouse_first_name %>
 									</div>
 									<div class="small-2 columns end">
-										<%= text_field_tag "spouselastname", @login.user.spouse_middle_initial %>
+										<%= text_field_tag "spouse_middle_initial", @login.user.spouse_middle_initial %>
 									</div>
 								</div>
 								<div class="row">
@@ -199,7 +210,7 @@
 										<label>Number of children</label>
 									</div>
 									<div class="small-1 columns end">
-										<%= text_field_tag "numberchildren", @login.user.number_children %>
+										<%= text_field_tag "number_children", @login.user.number_children %>
 									</div>
 								</div>
 							</div>
@@ -208,19 +219,28 @@
 								<fieldset>
 									<legend>Opt In?</legend>
 									<div class="row">
-										<input id="general_opt_in" type="checkbox">
+										<%= hidden_field_tag :general_opt_in, false %>
+										<%= check_box_tag 'general_opt_in', 1,
+																	convert_opt_in_to_true_false(@login.user.general_opt_in) %>
 										<label for="general_opt_in">General opt in</label>
 									</div>
+
 									<div class="row">
-										<input id="email_opt_in" type="checkbox">
+										<%= hidden_field_tag :email_opt_in, false %>
+										<%= check_box_tag 'email_opt_in', 1,
+																	convert_opt_in_to_true_false(@login.user.email_opt_in) %>
 										<label for="email_opt_in">eMail opt in</label>
 									</div>
 									<div class="row">
-										<input id="phone_opt_in" type="checkbox">
+										<%= hidden_field_tag :phone_opt_in, false %>
+										<%= check_box_tag 'phone_opt_in', 1,
+																	convert_opt_in_to_true_false(@login.user.phone_opt_in) %>
 										<label for="phone_opt_in">Phone opt in</label>
 									</div>
 									<div class="row">
-										<input id="badges_opt_in" type="checkbox">
+										<%= hidden_field_tag :badges_opt_in, false %>
+										<%= check_box_tag 'badges_opt_in', 1,
+																	convert_opt_in_to_true_false(@login.user.badges_opt_in) %>
 										<label for="badges_opt_in">Badge opt in</label>
 									</div>
 								</fieldset>
@@ -230,5 +250,10 @@
 				</div>
 			</div>
 		</fieldset>
+		<div class="row">
+			<div class="text-center">
+				<%= submit_tag "Update", class: "button radius" %>
+			</div>
+		</div>
 	<% end %>
 </section>

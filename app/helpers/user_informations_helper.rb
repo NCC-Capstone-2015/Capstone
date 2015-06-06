@@ -16,95 +16,95 @@ module UserInformationsHelper
 
   # helper method to convert user.status from number stored in tables
   # to verbiage
-  def convert_user_status (status)
+  def convert_user_status_to_words (status_num)
 
-    if status == 0
-      status_description = "Enrolled"
-    else
-      status_description = "Alumni"
+    if status_num == 0
+      status_text = "Student"
+    elsif status_num == 1
+      status_text = "Alumni"
     end
   end
 
   # helper method to convert opt_in_values from number stored in tables
   # to true/false
-  def convert_opt_in_to_true_false (opt_in_value)
-    if opt_in_value == 0
-      opt_in_text = false
-    else
-      opt_in_text = true
+  def convert_opt_in_to_true_false (opt_in_value_num)
+    if opt_in_value_num == 0
+      opt_in_boolean = false
+    elsif opt_in_value_num == 1
+      opt_in_boolean = true
     end
   end
 
   # helper method to convert opt_in_values from number stored in tables
   # to CHECKED or ""
-  def convert_opt_in_to_value_for_input_type (opt_in_value)
-    if opt_in_value == 0
-      opt_in_text = " "
-    else
-      opt_in_text = " CHECKED "
+  def convert_opt_in_to_value_for_input_type (opt_in_value_num)
+    if opt_in_value_num == 0
+      opt_in_value = " "
+    elsif opt_in_value_num
+      opt_in_value = " CHECKED "
     end
   end
 
   # helper method to convert opt_in_values from number stored in tables
   # to in or out
-  def convert_opt_in_to_words (opt_in_value)
-    if opt_in_value == 0
+  def convert_opt_in_to_words (opt_in_value_num)
+    if opt_in_value_num == 0
       opt_in_text = "no"
-    else
+    elsif opt_in_value_num
       opt_in_text = "yes"
     end
   end
 
   # helper method to convert phone_type from number stored in tables
   # to verbiage
-  def convert_phone_type (phone_type)
-    if phone_type == 0
+  def convert_phone_type (phone_type_num)
+    if phone_type_num == 0
       phone_type_text = "Home"
-    elsif phone_type == 1
+    elsif phone_type_num == 1
       phone_type_text = "Work"
-    else phone_type == 2
+    else phone_type_num == 2
       phone_type_text = "Mobile"
     end
   end
 
   # helper method to convert salary_range from number stored in tables
   # to verbiage
-  def convert_salary_range (salary_range)
-    if salary_range == 0
+  def convert_salary_range_to_words (salary_range_num)
+    if salary_range_num == 0
       salary_range_text = "< $ 49,000"
-    elsif salary_range == 1
+    elsif salary_range_num == 1
       salary_range_text = "$ 50,000 to $ 99,000"
-    elsifsalary_range == 2
+    elsif salary_range_num == 2
       salary_range_text = "$ 100,000 to $ 149,000"
-    elsif salary_range == 3
+    elsif salary_range_num == 3
       salary_range_text = "$ 150,000 to $ 199,000"
-    else salary_range == 4
+    else salary_range_num == 4
       salary_range_text = "> $ 200,000"
     end
   end
 
   # helper method to convert degree_type from number stored in tables
   # to verbiage
-  def convert_degree_type (degree_type)
-    case degree_type
+  def convert_degree_type (degree_type_num)
+    case degree_type_num
       when 0
-        convert_degree_type = "A.A."
+        convert_degree_text = "A.A."
       when 1
-        convert_degree_type = "A.S."
+        convert_degree_text = "A.S."
       when 2
-        convert_degree_type = "B.A."
+        convert_degree_text = "B.A."
       when 3
-        convert_degree_type = "B.S."
+        convert_degree_text = "B.S."
       when 4
-        convert_degree_type = "M.A."
+        convert_degree_text = "M.A."
       when 5
-        convert_degree_type = "M.S."
+        convert_degree_text = "M.S."
       when 6
-        convert_degree_type = "Ph.D."
+        convert_degree_text = "Ph.D."
       when 7
-        convert_degree_type = "M.D."
+        convert_degree_text = "M.D."
       else
-        convert_degree_type = degree_type
+        convert_degree_text = degree_type
     end
   end
 

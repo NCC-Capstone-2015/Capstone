@@ -63,7 +63,7 @@
 							</div>
 							<!-- Education Information Tab block -->
 							<div class="content" id="pnlEducationInfo">
-								<p>Student status: <%= convert_user_status(@login.user.status) %></p>
+								<p>Student status: <%= convert_user_status_to_words(@login.user.status) %></p>
 								<p>Degrees:
 									<ul id="degrees">
 										<% if !(@login.user.undergraduate_degrees.all.blank?) %>
@@ -108,7 +108,7 @@
 																				 @login.user.company_info.suffix) %>
 								</p>
 								<% end %>
-								<p>Salary Range: <%= convert_salary_range(@login.user.salary_range) %></p>
+								<p>Salary Range: <%= convert_salary_range_to_words(@login.user.salary_range) %></p>
 								<p>Start Date: <%= @login.user.start_date %><br>
 									End Date: <%= @login.user.end_date %>
 								</p>
