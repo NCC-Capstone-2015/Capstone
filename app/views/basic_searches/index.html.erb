@@ -1,10 +1,10 @@
-<!--James Maher-->
+<!--James Maher & Lei Guo-->
 <%= render "menu/student" %>
 <div class="row">
-  <div class="column" id="content">
+  <div class="small-12 medium-12 large-12 column" id="content">
     <h1>Search People</h1>
     <%= search_form_for @q, url: search_basic_searches_path, html: { method: :post } do |f| %>
-      <div class="large-9 small-9 column">
+      <div class="small-12 medium-9 large-9 column">
         <%= f.text_field :username_or_first_name_or_middle_initial_or_last_name_cont %>
       </div>
       <%= f.submit "Search", :class => "button" %>
