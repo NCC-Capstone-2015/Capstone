@@ -39,7 +39,7 @@ Rails.application.routes.draw do
 
   post 'admin_surveys/question_type' => 'admin_surveys#question_type'
   post 'admin_surveys/options' => 'admin_surveys#options'
-  
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
@@ -48,7 +48,8 @@ Rails.application.routes.draw do
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
-
+  mount Rapidfire::Engine => "/rapidfire"
+  
   # Example resource route with options:
   #   resources :products do
   #     member do
