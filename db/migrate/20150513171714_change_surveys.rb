@@ -1,3 +1,7 @@
+# Created by Cornelius Donley
+# Changed text response from type string to type text
+# Changed date column to type date
+
 class ChangeSurveys < ActiveRecord::Migration
   def change
     change_table :surveys do |t|

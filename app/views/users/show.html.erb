@@ -5,23 +5,27 @@
 
 <p>
   <strong>First name:</strong>
-  <%= @user.first_name %>
+  <%= @user.login.first_name %>
 </p>
 <p>
   <strong>Middle initial:</strong>
-  <%= @user.middle_initial %>
+  <%= @user.login.middle_initial %>
 </p>
 <p>
   <strong>Last name:</strong>
-  <%= @user.last_name %>
+  <%= @user.login.last_name %>
 </p>
 <p>
   <strong>Type:</strong>
-  <%= @user.account_type %>
+  <% if @user.login.login_type == 0 %>
+    Worker
+  <% elsif @user.login.login_type == 2 %>
+    Student
+  <% end %>
 </p>
 <p>
   <strong>Last login:</strong>
-  <%= @user.last_login %>
+  <%= @user.login.last_sign_in_at %>
 </p>
 
 

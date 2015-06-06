@@ -1,3 +1,6 @@
+# Created by Christian Winger
+# Initial table create
+
 class CreateGraduateDegrees < ActiveRecord::Migration
   def change
     create_table :graduate_degrees do |t|

@@ -1,3 +1,6 @@
+# Created by Christian Winger
+# Initial table create
+
 class CreateLogins < ActiveRecord::Migration
   def change
     create_table :logins do |t|

@@ -1,3 +1,6 @@
+# Created by Christian Winger
+# Initial table create
+
 class CreateUserPhones < ActiveRecord::Migration
   def change
     create_table :user_phones do |t|

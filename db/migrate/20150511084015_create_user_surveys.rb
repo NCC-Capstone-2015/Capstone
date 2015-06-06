@@ -1,3 +1,6 @@
+# Created by Christian Winger
+# Initial table create
+
 class CreateUserSurveys < ActiveRecord::Migration
   def change
     create_table :user_surveys do |t|

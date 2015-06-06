@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150530230638) do
+ActiveRecord::Schema.define(version: 20150604072342) do
 
   create_table "account_logins", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -35,13 +35,15 @@ ActiveRecord::Schema.define(version: 20150530230638) do
   end
 
   create_table "companies", force: :cascade do |t|
-    t.string   "company_name", limit: 255
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.string   "company_name",    limit: 255
+    t.integer  "company_info_id", limit: 4
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
+  add_index "companies", ["company_info_id"], name: "index_companies_on_company_info_id", using: :btree
+
   create_table "company_infos", force: :cascade do |t|
-    t.integer  "company_id",   limit: 4
     t.string   "street",       limit: 255
     t.string   "city",         limit: 255
     t.string   "state",        limit: 255
@@ -54,8 +56,6 @@ ActiveRecord::Schema.define(version: 20150530230638) do
     t.datetime "updated_at",               null: false
   end
 
-  add_index "company_infos", ["company_id"], name: "index_company_infos_on_company_id", using: :btree
-
   create_table "degrees", force: :cascade do |t|
     t.string   "major_name",  limit: 255
     t.integer  "degree_type", limit: 4
@@ -64,7 +64,6 @@ ActiveRecord::Schema.define(version: 20150530230638) do
   end
 
   create_table "giving_backs", force: :cascade do |t|
-    t.integer  "user_id",            limit: 4
     t.string   "subject",            limit: 255
     t.string   "position",           limit: 255
     t.boolean  "approved",           limit: 1
@@ -73,14 +72,15 @@ ActiveRecord::Schema.define(version: 20150530230638) do
     t.string   "contact_first_name", limit: 255
     t.string   "contact_last_name",  limit: 255
     t.string   "contact_email",      limit: 255
-    t.integer  "company_id",         limit: 4
+    t.integer  "user_id",            limit: 4
+    t.integer  "company_info_id",    limit: 4
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
     t.text     "description",        limit: 65535
     t.text     "requirements",       limit: 65535
   end
 
-  add_index "giving_backs", ["company_id"], name: "index_giving_backs_on_company_id", using: :btree
+  add_index "giving_backs", ["company_info_id"], name: "index_giving_backs_on_company_info_id", using: :btree
   add_index "giving_backs", ["user_id"], name: "index_giving_backs_on_user_id", using: :btree
 
   create_table "graduate_degrees", force: :cascade do |t|
@@ -271,8 +271,6 @@ ActiveRecord::Schema.define(version: 20150530230638) do
   add_index "user_surveys", ["user_id"], name: "index_user_surveys_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.integer  "login_id",              limit: 4
-    t.string   "email_addr",            limit: 255
     t.string   "city",                  limit: 255
     t.string   "state",                 limit: 255
     t.string   "zip",                   limit: 255
@@ -286,8 +284,9 @@ ActiveRecord::Schema.define(version: 20150530230638) do
     t.integer  "phone_opt_in",          limit: 4
     t.integer  "badges_opt_in",         limit: 4
     t.integer  "status",                limit: 4
-    t.integer  "company_id",            limit: 4
     t.string   "job_title",             limit: 255
+    t.integer  "login_id",              limit: 4
+    t.integer  "company_info_id",       limit: 4
     t.datetime "created_at",                        null: false
     t.datetime "updated_at",                        null: false
     t.date     "birth_day"
@@ -295,11 +294,10 @@ ActiveRecord::Schema.define(version: 20150530230638) do
     t.date     "end_date"
     t.integer  "salary_range",          limit: 4
     t.string   "street",                limit: 255
-    t.string   "nccid",                 limit: 255
     t.string   "program",               limit: 255
   end
 
-  add_index "users", ["company_id"], name: "index_users_on_company_id", using: :btree
+  add_index "users", ["company_info_id"], name: "index_users_on_company_info_id", using: :btree
   add_index "users", ["login_id"], name: "index_users_on_login_id", using: :btree
 
   create_table "welcomes", force: :cascade do |t|
@@ -307,8 +305,8 @@ ActiveRecord::Schema.define(version: 20150530230638) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "company_infos", "companies"
-  add_foreign_key "giving_backs", "companies"
+  add_foreign_key "companies", "company_infos"
+  add_foreign_key "giving_backs", "company_infos"
   add_foreign_key "giving_backs", "users"
   add_foreign_key "graduate_degrees", "colleges"
   add_foreign_key "graduate_degrees", "degrees"
@@ -330,6 +328,6 @@ ActiveRecord::Schema.define(version: 20150530230638) do
   add_foreign_key "user_survey_responses", "user_surveys"
   add_foreign_key "user_surveys", "surveys"
   add_foreign_key "user_surveys", "users"
-  add_foreign_key "users", "companies"
+  add_foreign_key "users", "company_infos"
   add_foreign_key "users", "logins"
 end

@@ -34,25 +34,21 @@
                    <a href="#">My Profile</a>
                    <ul class="dropdown">
                        <li>
-                           <%= link_to 'View', {:action => 'show', :controller => 'user_informations', :id => 1} %>
+                           <%= link_to 'View', {:action => 'show', :controller => 'user_informations', :id => 2} %>
                        </li>
                        <li>
-                           <%= link_to 'Edit', {:action => 'edit', :controller => 'user_informations', :id => 1} %>
+                           <%= link_to 'Edit', {:action => 'edit', :controller => 'user_informations', :id => 2} %>
                        </li>
                        <li>
                               <!--sign out added by Ryan and Andrew-->
 				  <li>
-				<%= link_to('Sign Out', destroy_login_session_path, :method => :delete) %>  
+				<%= link_to('Sign Out', destroy_login_session_path, :method => :delete) %>
                                   </li>
                              </li>
                    </ul>
                </li>
-	       
-	       <form>
-		     <input type="text" name="People">
-	       </form>
                <li class="inactive">
-                 <%= link_to 'Search People', basic_searches_path %>
+                 <%= link_to image_tag("search.png"), basic_searches_path %> <!-- James Maher -->
                </li>
            </ul>
            <!-- Right Nav Section -->

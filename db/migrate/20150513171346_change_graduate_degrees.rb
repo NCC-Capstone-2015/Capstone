@@ -1,3 +1,6 @@
+# Created by Cornelius Donley
+# Changed graduation date to type date
+
 class ChangeGraduateDegrees < ActiveRecord::Migration
   def change
     change_table :graduate_degrees do |t|

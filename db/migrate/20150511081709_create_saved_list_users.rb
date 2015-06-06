@@ -1,3 +1,6 @@
+# Created by Christian Winger
+# Initial table create
+
 class CreateSavedListUsers < ActiveRecord::Migration
   def change
     create_table :saved_list_users do |t|
