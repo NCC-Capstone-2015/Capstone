@@ -10,14 +10,14 @@
 					<div class="small-12">
 						<%= text_field_tag "last_name", @login.last_name %>
 					</div>
-					<div class="small-8">
+					<div class="small-7">
 						<%= text_field_tag "first_name", @login.first_name %>
 					</div>
-					<div class="small-3">
+					<div class="small-2">
 						<%= text_field_tag "middle_initial", @login.middle_initial %>
 					</div>
 					<div class="small-12">
-						<img src=<%= get_photo_path(@login.last_name, @login.first_name) %>>
+						<img src=<%= get_photo_path(@login.id) %>>
 					</div>
 				</div>
 				<!-- User Information Tab block -->
@@ -44,57 +44,93 @@
 							<!-- Contact Information Tab block -->
 							<div class="content active" id="pnlContactInfo">
 								<div class="row">
-									<div class="small-12 columns">
-										Address:
-									</div>
-									<div class="small-10 columns">
-										<%= text_field_tag "street", @login.user.street %>
-									</div>
-									<div class="small-6 columns">
-										<%= text_field_tag "city", @login.user.city %>
-									</div>
-									<div class="small-2 columns">
-										<%= text_field_tag "state", @login.user.state %>
-									</div>
-									<div class="small-2 columns end">
-										<%= text_field_tag "zip", @login.user.zip %>
+									<div class="small-3 columns end">
+										<label>Address:</label>
 									</div>
 								</div>
 								<div class="row">
-									<div class="small-10 columns">
+									<div class="small-8 columns">
+										<%= text_field_tag "street", (@login.user.present? ? @login.user.street : "") %>
+									</div>
+									<div class="small-5 columns">
+										<%= text_field_tag "city", (@login.user.present? ? @login.user.city : "") %>
+									</div>
+									<div class="small-1 columns">
+										<%= text_field_tag "state", (@login.user.present? ? @login.user.state : "") %>
+									</div>
+									<div class="small-2 columns end">
+										<%= text_field_tag "zip", (@login.user.present? ? @login.user.zip : "") %>
+									</div>
+								</div>
+								<div class="row">
+									<div class="small-1 columns">
+										<label>email:</label>
+									</div>
+									<div class="small-7 columns end">
 										<%= text_field_tag "email", @login.email %>
 									</div>
 								</div>
 								<div class="row">
 									<div class="small-12 columns">
-										<p>Phones:</p>
+										<p><ins>Phone Numbers</ins></p>
 									</div>
-									<ul style="list-style-type:none">
-										<li>List item</li>
-										<li>List item</li>
-									</ul>
-								</div>
 
+									<ul id="user_phones">
+										<% if (@login.user.present?) and (@login.user.user_phones.all.present?) %>
+									  	<% @login.user.user_phones.all.each do |c| %>
+											  <li>
+													<%= convert_phone_type(c.user_phone_type) + ": " +
+															concatenate_phone(c.country_code,
+																								c.area_code,
+																								c.prefix,
+																								c.suffix) %>
+											  </li>
+										  <% end %>
+										<% end %>
+
+								</div>
 							</div>
 							<!-- Education Information Tab block -->
 							<div class="content" id="pnlEducationInfo">
 								<div class="row">
 									<div class="small-3 columns">
-										<label>Student Status</label>
+										<label>Education Status</label>
 									</div>
 									<div class="small-3 columns end">
 										<%= select_tag "status", options_for_select([ "Alumni", "Student" ],
-																																convert_user_status_to_words(@login.user.status)) %>
+																												(@login.user.present? ?
+																												convert_user_status_to_words(@login.user.status) :
+																												"Student")) %>
 									</div>
 								</div>
 								<div class="row">
 									<div class="small-12 columns">
-										<p>Degrees:</p>
+
+										<p><ins>Degrees</ins>
+											<ul id="degrees">
+												<% if (@login.user.present?) and (@login.user.undergraduate_degrees.all.present?) %>
+											  	<% @login.user.undergraduate_degrees.all.each do |ud| %>
+												  <li>
+														<%= convert_degree_type(ud.degree.degree_type) %>
+														 		<%= ud.degree.major_name %> from
+																<%= ud.college.college_name %> on
+																<%= ud.graduation_date %>
+												  </li>
+												  <% end %>
+												<% end %>
+												<% if (@login.user.present?) and (@login.user.graduate_degrees.present?) %>
+											  	<% @login.user.graduate_degrees.all.each do |gd| %>
+												  <li>
+														<%= convert_degree_type(gd.degree.degree_type) %>
+														 		<%= gd.degree.major_name %> from
+																<%= gd.college.college_name %> on
+																<%= gd.graduation_date %>
+												  </li>
+												  <% end %>
+												<% end %>
+											</ul>
+										</p>
 									</div>
-									<ul style="list-style-type:none">
-										<li>List item</li>
-										<li>List item</li>
-									</ul>
 								</div>
 							</div>
 							<!-- Employment Information Tab block -->
@@ -104,7 +140,9 @@
 										<label>Employer</label>
 									</div>
 									<div class="small-4 columns end">
-										<%= text_field_tag "company_name", @login.user.company_info.company.company_name %>
+										<%= text_field_tag "company_name", @login.user.present? ?
+																											 @login.user.company_info.company.company_name :
+																											 "" %>
 									</div>
 								</div>
 								<div class="row">
@@ -112,7 +150,8 @@
 										<label>Job Title</label>
 									</div>
 									<div class="small-4 columns end">
-										<%= text_field_tag "job_title", @login.user.job_title %>
+										<%= text_field_tag "job_title", @login.user.present? ?
+																										@login.user.job_title : "" %>
 									</div>
 								</div>
 								<div class="row">
@@ -120,16 +159,20 @@
 										Address:
 									</div>
 									<div class="small-12 columns">
-										<%= text_field_tag "company_street", @login.user.company_info.street %>
+										<%= text_field_tag "company_street", @login.user.present? ?
+																												 @login.user.company_info.street : "" %>
 									</div>
 									<div class="small-6 columns">
-										<%= text_field_tag "company_city", @login.user.company_info.city %>
+										<%= text_field_tag "company_city", @login.user.present? ?
+																											 @login.user.company_info.city : "" %>
 									</div>
 									<div class="small-2 columns">
-										<%= text_field_tag "company_state", @login.user.company_info.state %>
+										<%= text_field_tag "company_state", @login.user.present? ?
+																												@login.user.company_info.state : "" %>
 									</div>
 									<div class="small-2 columns end">
-										<%= text_field_tag "company_zip", @login.user.company_info.zip %>
+										<%= text_field_tag "company_zip", @login.user.present? ?
+																											@login.user.company_info.zip : "" %>
 									</div>
 								</div>
 								<div class="row">
@@ -137,11 +180,13 @@
 										<label>Company Phone</label>
 									</div>
 									<div class="small-4 columns end">
-										<%= text_field_tag "company_phone", @login.user.status
-																concatenate_phone(@login.user.company_info.country_code,
-																						 			@login.user.company_info.area_code,
-																						 			@login.user.company_info.prefix,
-																						 			@login.user.company_info.suffix) %>
+										<%= text_field_tag "company_phone", (@login.user.present? ?
+										 																		 concatenate_phone(
+																														@login.user.company_info.country_code,
+																						 								@login.user.company_info.area_code,
+																						 								@login.user.company_info.prefix,
+																						 								@login.user.company_info.suffix) :
+																														"") %>
 									</div>
 								</div>
 								<div class="row">
@@ -155,7 +200,9 @@
 																												"$ 100,000 to $ 149,000",
 																												"$ 150,000 to $ 199,000",
 																												"> $ 200,000" ],
-																												convert_salary_range_to_words(@login.user.salary_range)) %>
+																												(@login.user.present? ?
+																												convert_salary_range_to_words(@login.user.salary_range) :
+																												"")) %>
 									</div>
 								</div>
 								<div class="row">
@@ -163,13 +210,15 @@
 										<label>Start Date</label>
 									</div>
 									<div class="small-2 columns">
-										<%= date_field_tag "start_date", @login.user.start_date %>
+										<%= date_field_tag "start_date", @login.user.present? ?
+																											@login.user.start_date : "" %>
 									</div>
 									<div class="small-2 columns">
 										<label>End Date</label>
 									</div>
 									<div class="small-2 columns end">
-										<%= date_field_tag "end_date", @login.user.end_date %>
+										<%= date_field_tag "end_date", @login.user.present? ?
+																											@login.user.end_date : "" %>
 									</div>
 								</div>
 							</div>
@@ -180,7 +229,8 @@
 										<label>Birth Date</label>
 									</div>
 									<div class="small-2 columns end">
-										<%= date_field_tag "birth_day", @login.user.birth_day %>
+										<%= date_field_tag "birth_day", @login.user.present? ?
+																										@login.user.birth_day : "" %>
 									</div>
 								</div>
 								<div class="row">
@@ -188,7 +238,8 @@
 										<label>Ethnicity</>
 									</div>
 									<div class="small-4 columns end">
-										<%= text_field_tag "etnicity", @login.user.ethnicity %>
+										<%= text_field_tag "etnicity", @login.user.present? ?
+																									 @login.user.ethnicity : "" %>
 									</div>
 								</div>
 								<div class="row">
@@ -196,13 +247,16 @@
 										<label>Spouse</label>
 									</div>
 									<div class="small-4 columns">
-										<%= text_field_tag "spouse_last_name", @login.user.spouse_last_name %>
+										<%= text_field_tag "spouse_last_name", @login.user.present? ?
+																													 @login.user.spouse_last_name : "" %>
 									</div>
 									<div class="small-3 columns">
-										<%= text_field_tag "spouse_first_name", @login.user.spouse_first_name %>
+										<%= text_field_tag "spouse_first_name", @login.user.present? ?
+																														@login.user.spouse_first_name : "" %>
 									</div>
 									<div class="small-2 columns end">
-										<%= text_field_tag "spouse_middle_initial", @login.user.spouse_middle_initial %>
+										<%= text_field_tag "spouse_middle_initial", @login.user.present? ?
+																																@login.user.spouse_middle_initial : "" %>
 									</div>
 								</div>
 								<div class="row">
@@ -210,7 +264,8 @@
 										<label>Number of children</label>
 									</div>
 									<div class="small-1 columns end">
-										<%= text_field_tag "number_children", @login.user.number_children %>
+										<%= text_field_tag "number_children", @login.user.present? ?
+																													@login.user.number_children : "" %>
 									</div>
 								</div>
 							</div>
@@ -220,27 +275,30 @@
 									<legend>Opt In?</legend>
 									<div class="row">
 										<%= hidden_field_tag :general_opt_in, false %>
-										<%= check_box_tag 'general_opt_in', 1,
-																	convert_opt_in_to_true_false(@login.user.general_opt_in) %>
+										<%= check_box_tag 'general_opt_in', 1, (@login.user.present? ?
+																	convert_opt_in_to_true_false(@login.user.general_opt_in) : "") %>
 										<label for="general_opt_in">General opt in</label>
 									</div>
 
 									<div class="row">
 										<%= hidden_field_tag :email_opt_in, false %>
-										<%= check_box_tag 'email_opt_in', 1,
-																	convert_opt_in_to_true_false(@login.user.email_opt_in) %>
+										<%= check_box_tag 'email_opt_in', 1, (convert_opt_in_to_true_false(
+																														@login.user.present? ?
+																														@login.user.email_opt_in : 0)) %>
 										<label for="email_opt_in">eMail opt in</label>
 									</div>
 									<div class="row">
 										<%= hidden_field_tag :phone_opt_in, false %>
-										<%= check_box_tag 'phone_opt_in', 1,
-																	convert_opt_in_to_true_false(@login.user.phone_opt_in) %>
+										<%= check_box_tag 'phone_opt_in', 1,(convert_opt_in_to_true_false(
+																														@login.user.present? ?
+																														@login.user.phone_opt_in : 0)) %>
 										<label for="phone_opt_in">Phone opt in</label>
 									</div>
 									<div class="row">
 										<%= hidden_field_tag :badges_opt_in, false %>
-										<%= check_box_tag 'badges_opt_in', 1,
-																	convert_opt_in_to_true_false(@login.user.badges_opt_in) %>
+										<%= check_box_tag 'badges_opt_in', 1,(convert_opt_in_to_true_false(
+																														@login.user.present? ?
+																														@login.user.badges_opt_in : 0)) %>
 										<label for="badges_opt_in">Badge opt in</label>
 									</div>
 								</fieldset>
