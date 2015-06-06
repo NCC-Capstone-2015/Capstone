@@ -1,7 +1,7 @@
 <!-- James Maher -->
 <%= render "menu/admin" %>
 <div class="row">
-  <div class="column" id="content">
+  <div class="small-12 medium-12 large-12 column" id="content">
     <h1>Advanced Search</h1>
     <%= search_form_for @q, url: search_searches_path, html: { method: :post } do |f| %>
       <%= f.condition_fields do |c| %>
@@ -10,6 +10,9 @@
       <%= link_to_add_fields "+", f, :condition, class: "button" %><br>
       <%= f.submit "Search", :class => "button" %>
     <% end %>
-    <%= render "results" %>
+    <% if @display_results %>
+      <%= render "results" %>
+    <% end %>
+    <%= collection_select(:saved_list, :login_id, Login.all, :id, nil, prompt: true) %>
   </div>
 </div>
