@@ -1,17 +1,15 @@
+<!-- James Maher -->
 <%= render "menu/admin" %>
 <div class="row">
-  <h1 class="medium-5-column">Advanced Search</h1>
+  <div class="column">
+    <h1>Advanced Search</h1>
+    <%= search_form_for @q, url: search_searches_path, html: { method: :post } do |f| %>
+      <%= f.condition_fields do |c| %>
+        <%= render "condition_fields", f: c %>
+      <% end %>
+      <%= link_to_add_fields "+", f, :condition, class: "button" %><br>
+      <%= f.submit "Search", :class => "button" %>
+    <% end %>
+    <%= render "results" %>
+  </div>
 </div>
-<%= search_form_for @q, url: search_searches_path, html: { method: :post } do |f| %>
-  <%= f.condition_fields do |c| %>
-    <%= render "condition_fields", f: c %>
-  <% end %>
-  <div class="row">
-    <%= link_to_add_fields "+", f, :condition, class: "button" %>
-  </div>
-  <div class="row">
-    <%= f.submit "Search", :class => "button medium-5-column" %>
-  </div>
-<% end %>
-<%= render "results" %>
-<%= render "disclaimer" %>

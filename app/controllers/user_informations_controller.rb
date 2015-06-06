@@ -1,6 +1,6 @@
 # Author: Craig Sterling
 # Date: 5/20/2015
-class UserInformationsController < ApplicationController
+class UserInformationsController < AuthenticationController
   helper_method :convert_opt_in, :convert_user_status, :concatenate_phone,
                 :convert_phone_type, :get_photo_path
   before_action :set_user_information, only: [:show, :edit, :update, :destroy]

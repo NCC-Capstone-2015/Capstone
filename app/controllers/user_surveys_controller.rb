@@ -1,10 +1,10 @@
-class UserSurveysController < ApplicationController
+class UserSurveysController < AuthenticationController
   before_action :set_user_survey, only: [:show, :edit, :update, :destroy]
 
   # GET /user_surveys
   # GET /user_surveys.json
   def index
-    @user_surveys = UserSurvey.all
+    @user_surveys = Survey.all.where("status = ?", 1)
   end
 
   # GET /user_surveys/1
@@ -14,7 +14,7 @@ class UserSurveysController < ApplicationController
 
   # GET /user_surveys/new
   def new
-    @user_survey = UserSurvey.new
+    @user_survey = Survey.new
   end
 
   # GET /user_surveys/1/edit

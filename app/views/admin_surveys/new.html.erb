@@ -1,33 +1,31 @@
 <%= render "menu/admin" %>
 
-
-
-<div class="row">
-    <div class="large-4 columns large-centered columns">
-        <h4>Title:</h4>
-        <input type="text" />
-    </div>
-</div>
-
-
-
-<div class="row">
-    <div class="large-6 large-centered columns">
-        <h4>Description:</h4>
-        <textarea></textarea>
-    </div>
-</div>
-<br>
-<div class="row">
-    <div class="large-4 columns large-centered columns">
-      <h4>Author:</h4>
-        <input type="text"  />
-    </div>
-</div>
-<br>
-<div class="row">
-  <div class= "large-centered columns">
-      <a class="button radius" <%= link_to "Submit", "survey_type"%></a>
-      <a class="button radius" <%= link_to "Delete", admin_surveys_path(@admin_surveys) %></a>
+<%= form_tag 'question_type', method: "post" do %>
+  <div class="row">
+      <div class="large-4 columns large-left columns">
+        <%= label_tag 'title', 'Title' %>
+        <%= text_field_tag 'title' %>
+      </div>
   </div>
-</div>
+  <br>
+  <div class="row">
+      <div class="large-6 large-left columns">
+        <%= label_tag 'description', 'Desctription' %>
+        <%= text_area_tag 'description' %>
+      </div>
+  </div>
+  <br>
+  <div class="row">
+      <div class="large-4 columns large-left columns">
+        <%= label_tag 'author', 'Author' %>
+        <%= text_field_tag 'author' %>
+      </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class= "large-left columns">
+        <%= submit_tag "Submit", class: "button radius" %>
+        <a class="button radius" <%= link_to "Back", admin_surveys_path(@admin_surveys) %></a>
+    </div>
+  </div>
+<% end %>
