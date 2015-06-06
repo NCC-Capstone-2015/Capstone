@@ -43,6 +43,7 @@ Rails.application.routes.draw do
 
   post 'user_informations/:id' => 'user_informations#update'
 
+  mount Rapidfire::Engine => "/rapidfire"
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
