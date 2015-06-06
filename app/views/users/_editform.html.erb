@@ -1,0 +1,63 @@
+<%-# authored by Matthew Kachlik -%>
+<%= form_tag({controller: "users", action: "edit"}, method: "post") do%>
+<div class= "row">
+  <div class="large-6 columns">
+    <%= label_tag 'username','Username: (must be unique)' %>
+    <%= text_field_tag 'username' %>
+  </div>
+  <div class="large-6 columns">
+    <%= label_tag 'password','Password: (at least 8 characters)' %>
+    <%= text_field_tag 'password' %>
+  </div>
+</div>
+ <div class ="row">
+   <div class="large-4 columns">
+     <p>
+        <%= label_tag 'first_name','First name:' %>
+        <%= text_field_tag 'first_name' %>
+      </p>
+   </div>
+   <div class="large-4 columns">
+     <%= label_tag 'middle_name','Middle Initial:' %>
+     <%= text_field_tag 'middle_initial' %>
+   </div>
+   <div class="large-4 columns">
+     <%= label_tag 'last_name','Last name:' %>
+     <%= text_field_tag 'last_name' %>
+   </div>
+ </div>
+ <div class="row">
+   <div class="large-6 columns">
+    <p>
+      <%= label_tag 'email','Email address: (must be unique)' %>
+      <%= text_field_tag 'email' %>
+    </p>
+  </div>
+   <div class="large-6 columns">
+    <p>
+      <%= label_tag 'type','Type:' %>
+      <%= select_tag "login_type",options_for_select([['Worker', 0],["Student",2]]) %>
+    </p>
+  </div>
+</div>
+<div class="row">
+  <div class="large-6 columns">
+   <p>
+     <%= label_tag 'status','Status: (only used for student accounts)' %>
+     <%= select_tag "status",options_for_select([['Enrolled', 1],["Alumni",0]]) %>
+   </p>
+ </div>
+   <div class="large-6 columns">
+    <p>
+      <%= label_tag 'program','Program: (only used for student accounts)' %>
+      <%= select_tag "program",options_for_select([['Buisness Administration', 'Buisness Administration'],["International Buisness Administration",'International Buisness Administration'],["Education",'Education'],["Leadership Studies",'Leadership Studies'],["Liberal Studies",'Liberal studies'],["Management Information Systems",'Management Information Systems'],["Web and Internet application",'Web and Internet application']]) %>
+    </p>
+  </div>
+ </div>
+    <div class="row">
+      <div class="text-center">
+          <%= link_to 'Back', users_path,class: "button radius" %>
+          <%= submit_tag "submit",class: "button radius"%>
+      </div>
+    </div>
+<%end%>

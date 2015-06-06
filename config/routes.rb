@@ -42,7 +42,8 @@ Rails.application.routes.draw do
   post 'admin_surveys/options' => 'admin_surveys#options'
 
   post 'user_informations/:id' => 'user_informations#update'
-
+  post 'users/:id' => 'users#edit'
+  post '/users/:id/edit(.:format)' => 'users#edit'
   mount Rapidfire::Engine => "/rapidfire"
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
