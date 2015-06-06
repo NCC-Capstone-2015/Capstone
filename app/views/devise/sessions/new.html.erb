@@ -5,9 +5,9 @@
 <br />
 <div class="row">
   <div class="large-12 small-12" align="center">
- 
 
-  
+
+
 <h2>Log in</h2>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
@@ -19,7 +19,7 @@
   </div>
 
   <div class="field">
-    <div style="width:200px">
+    <div style="width:300px">
     <%= f.label :password %><br />
     <%= f.password_field :password, autocomplete: "off" %>
     </div>
@@ -38,4 +38,3 @@
 <% end %>
 
 </table>
-
