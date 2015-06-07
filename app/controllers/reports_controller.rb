@@ -19,7 +19,6 @@ require 'csv'
           @user_status = params[:user_status]
           @selected_saved_list = params[:selected_saved_list]
 
-          #@results = Login.all.where('extract(year from created_at) = ?', @year)
           if @selected_saved_list.blank? #No list selected
             if @user_status == '-1' #All students
               if @month.blank? #All months, Selected Year
@@ -113,29 +112,82 @@ require 'csv'
             end
           end
 
-        # when "grad_class" # IN PROGRESS - Stores all users who graduate in a specific year into the @results variable
-        #   @grad_year = params[:grad_year]
-        #   @user_status = params[:user_status]
-        #   @selected_saved_list = params[:selected_saved_list]
-        #
-        #   if @selected_saved_list == ""
-        #     if @user_status == -1
-        #       @results = User.undergraduate_degrees.all.where('extract(year from graduation_date) = ?', @grad_year)
-        #     else
-        #       @results = User.undergraduate_degrees.all.where('extract(year from graduation_date) = ? and status = ?', @grad_year, @user_status)
-        #     end
-        #   else
-        #     if @user_status == -1
-        #       @results = Login.find(current_user).saved_lists.find(@selected_saved_list).saved_list_users.undergraduate_degrees.all.where('extract(year from created_at) = ? and extract(month from created_at) = ?', @grad_year)
-        #     else
-        #       if !@month.nil? && !@year.nil?
-        #         @results = Login.find(1).saved_lists.find(@selected_saved_list).saved_list_users.where('extract(year from created_at) = ? and extract(month from created_at) = ? and status = ?', @year, @month, @user_status)
-        #       else @month.nil?
-        #         @results = Login.find(1).saved_lists.find(@selected_saved_list).saved_list_users.where('extract(year from created_at) = ? and status = ?', @year, @user_status)
-        #       end
-        #     end
-        #   end
-        #
+        when "grad_class" # Stores all users who graduate in a specific year into the @results variable
+          @grad_year = params[:grad_year][:year]
+          @user_status = params[:user_status]
+          @selected_saved_list = params[:selected_saved_list]
+
+          if @selected_saved_list.blank? #No list selected
+            if @user_status == '-1' #Include Both Students and Alumni
+              @users = User.where('extract(year from end_date) = ?', @grad_year)
+              login_array = Array.new
+              @users.each do |u|
+                login_array.push u.login
+              end
+              @results = login_array
+            end
+            if @user_status == '0' #Include Only Students
+              @users = User.where("status = '0' and extract(year from end_date) = ?", @grad_year)
+              login_array = Array.new
+              @users.each do |u|
+                login_array.push u.login
+              end
+              @results = login_array
+            end
+            if @user_status == '1' #Include Only Students
+              @users = User.where("status = '1' and extract(year from end_date) = ?", @grad_year)
+              login_array = Array.new
+              @users.each do |u|
+                login_array.push u.login
+              end
+              @results = login_array
+            end
+          else #Only users in the selected Saved List
+            @list = SavedList.find(@selected_saved_list)
+            if @user_status == '-1' #Include Both Students and Alumni
+              @users = @list.users.where('extract(year from end_date) = ?', @grad_year)
+              login_array = Array.new
+              @users.each do |u|
+                login_array.push u.login
+              end
+              @results = login_array
+            end
+            if @user_status == '0' #Include Only Students
+              @users = @list.users.where("status = '0' and extract(year from end_date) = ?", @grad_year)
+              login_array = Array.new
+              @users.each do |u|
+                login_array.push u.login
+              end
+              @results = login_array
+            end
+            if @user_status == '1' #Include Only Students
+              @users = @list.users.where("status = '1' and extract(year from end_date) = ?", @grad_year)
+              login_array = Array.new
+              @users.each do |u|
+                login_array.push u.login
+              end
+              @results = login_array
+            end
+          end
+
+          # if @selected_saved_list == ""
+          #   if @user_status == -1
+          #     @results = User.undergraduate_degrees.all.where('extract(year from graduation_date) = ?', @grad_year)
+          #   else
+          #     @results = User.undergraduate_degrees.all.where('extract(year from graduation_date) = ? and status = ?', @grad_year, @user_status)
+          #   end
+          # else
+          #   if @user_status == -1
+          #     @results = Login.find(current_user).saved_lists.find(@selected_saved_list).saved_list_users.undergraduate_degrees.all.where('extract(year from created_at) = ? and extract(month from created_at) = ?', @grad_year)
+          #   else
+          #     if !@month.nil? && !@year.nil?
+          #       @results = Login.find(1).saved_lists.find(@selected_saved_list).saved_list_users.where('extract(year from created_at) = ? and extract(month from created_at) = ? and status = ?', @year, @month, @user_status)
+          #     else @month.nil?
+          #       @results = Login.find(1).saved_lists.find(@selected_saved_list).saved_list_users.where('extract(year from created_at) = ? and status = ?', @year, @user_status)
+          #     end
+          #   end
+          # end
+
         # when "grad_program"
         #
         # when "employer"
