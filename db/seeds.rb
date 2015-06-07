@@ -95,7 +95,7 @@ list_users1 = SavedListUser.create(saved_list_id: list1.id, user_id: user3.id)
 # user_survey_response23 = UserSurveyResponse.create(user_survey_id: user_survey2.id, survey_question_id: survey_question3.id, response_text: survey_question_option31.display_order.to_s() + ',' + survey_question_option33.display_order.to_s())
 # user_survey_response24 = UserSurveyResponse.create(user_survey_id: user_survey2.id, survey_question_id: survey_question4.id, response_text: survey_question_option_ch43.display_order.to_s() + ',' + survey_question_option_ch42.display_order.to_s() + ',' + survey_question_option_ch41.display_order.to_s())
 
-rapidfire_question_group1 = Rapidfire::QuestionGroup.create(name: "Test Survey")
+rapidfire_question_group1 = Rapidfire::Survey.create(name: "Test Survey")
 
 rapidfire_question1 = Rapidfire::Question.create(question_group_id: rapidfire_question_group1.id, type: "Rapidfire::Questions::Checkbox", question_text: "Checkbox Question", position: 0, answer_options: "Option 1\r\nOption 2\r\nOption 3")
 rapidfire_question2 = Rapidfire::Question.create(question_group_id: rapidfire_question_group1.id, type: "Rapidfire::Questions::Date", question_text: "Date Question", position: 1, answer_options: "")
