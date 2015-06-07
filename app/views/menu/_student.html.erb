@@ -34,10 +34,10 @@
                    <a href="#">My Profile</a>
                    <ul class="dropdown">
                        <li>
-                         <%= link_to "View", '/user_informations/:current_login.id' %>
+                         <%= link_to "View", main_app.user_informations_path, :method => :show %>
                        </li>
                        <li>
-                         <%= link_to 'Edit', '/user_informations/:current_login.id/edit' %>
+                         <%= link_to 'Edit', main_app.user_informations_path, :method => :edit %>
                        </li>
                        <li>
                               <!--sign out added by Ryan and Andrew-->
