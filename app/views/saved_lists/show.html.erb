@@ -10,10 +10,10 @@
   </thead>
   <tbody>
     <tr>
-      <td><%= @login.first_name + ' ' + @login.last_name %></td>
+      <td><%= link_to @login.first_name + ' ' + @login.last_name, user_informations_path + '/' + @user.login_id.to_s, :style => 'color:#0011CC;' %></td>
       <td><%= @login.email %></td>
       <td><%= @user.program %></td>
-      <td><%= link_to 'X', '#', class: "secondary button" %></td>
+      <td><%= link_to 'X', remove_saved_list_user_path(@user.login_id), class: "secondary button" %></td>
     </tr>
   </tbody>
 </table>

@@ -9,4 +9,14 @@ class SavedListsController < ApplicationController
     @user = User.find(SavedListUser.find(@saved_list.login_id).user_id)
     @login = Login.find(@user.login_id)
   end
+  
+  def new
+    @saved_list = SavedList.find(params[:id])
+  end
+  
+  def delete_user
+    @saved_list = SavedList.find(params[:id])
+    @saved_list_user = SavedListUser.find(@saved_list.login_id)
+    SavedListUser.destroy(@user.user_id)
+  end
 end
