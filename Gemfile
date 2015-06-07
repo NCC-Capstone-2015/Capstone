@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 #Rapidfire survey builder
-gem 'rapidfire'
+gem 'rapidfire', git: 'https://github.com/DrewOlehy/rapidfire.git', branch: 'v3.0.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.1'
 # Use mysql as the database for Active Record
