@@ -1,5 +1,4 @@
 <!-- Craig Sterling -->
-<%= render "menu/student" %>
 <section>
 	<fieldset>
 		<legend>User Information</legend>
@@ -11,7 +10,7 @@
 					<p><%= "User Name: " + @login.username %></p>
 				</div>
 				<div class="small-12">
-					<img src=<%= get_photo_path(@login.last_name, @login.first_name) %>>
+					<img src=<%= get_photo_path(@login.id) %>>
 				</div>
 			</div>
 
@@ -39,15 +38,17 @@
 							<!-- Contact Information Tab block -->
 							<div class="content active" id="pnlContactInfo">
 								<p>Address:<br>
-									<%= @login.user.street.present? ? @login.user.street : "" %></br>
-									<%= @login.user.city.present? ? @login.user.city : "" %> ,
-									<%= @login.user.state.present? ? @login.user.state : "" %>
-									<%= @login.user.zip.present? ? @login.user.zip : "" %><br>
+									<% if (@login.user.present?) %>
+										<%= @login.user.street %><br>
+										<%= @login.user.city %> ,
+										<%= @login.user.state %>
+										<%= @login.user.zip %><br>
+									<% end %>
 								</p>
 								<p>email: <%= @login.email %></p>
-								<p>Phone Numbers:
+								<p><ins>Phone Numbers</ins>
 									<ul id="user_phones">
-										<% if !(@login.user.user_phones.all.blank?) %>
+										<% if (@login.user.present?) and (@login.user.user_phones.all.present?) %>
 									  	<% @login.user.user_phones.all.each do |c| %>
 											  <li>
 													<%= convert_phone_type(c.user_phone_type) + ": " +
@@ -63,10 +64,12 @@
 							</div>
 							<!-- Education Information Tab block -->
 							<div class="content" id="pnlEducationInfo">
-								<p>Student status: <%= convert_user_status_to_words(@login.user.status) %></p>
-								<p>Degrees:
+								<p>Education status: <%= @login.user.present? ?
+																				convert_user_status_to_words(@login.user.status) :
+																				"" %></p>
+								<p><ins>Degrees</ins>
 									<ul id="degrees">
-										<% if !(@login.user.undergraduate_degrees.all.blank?) %>
+										<% if (@login.user.present?) and (@login.user.undergraduate_degrees.all.present?) %>
 									  	<% @login.user.undergraduate_degrees.all.each do |ud| %>
 										  <li>
 												<%= convert_degree_type(ud.degree.degree_type) %>
@@ -76,7 +79,7 @@
 										  </li>
 										  <% end %>
 										<% end %>
-										<% if (@login.user.graduate_degrees.present?) %>
+										<% if (@login.user.present?) and (@login.user.graduate_degrees.present?) %>
 									  	<% @login.user.graduate_degrees.all.each do |gd| %>
 										  <li>
 												<%= convert_degree_type(gd.degree.degree_type) %>
@@ -85,17 +88,18 @@
 														<%= gd.graduation_date %>
 										  </li>
 										  <% end %>
-										<% end %>									</ul>
+										<% end %>
+									</ul>
 								</p>
 							</div>
 							<!-- Employment Information Tab block -->
 							<div class="content" id="pnlEmploymentInfo">
 								<p>
-									<%= @login.user.company_info.company.company_name %><br>
-									<%= @login.user.job_title %>
+									<%= @login.user.present? ? @login.user.company_info.company.company_name : "" %><br>
+									<%= @login.user.present? ? @login.user.job_title : "" %>
 								</p>
 								<p>Address:<br>
-								<% if @login.user.company_info.present? %>
+								<% if (@login.user.present?) and (@login.user.company_info.present?) %>
 										<%= @login.user.company_info.street %><br>
 										<%= @login.user.company_info.city %>,
 										<%= @login.user.company_info.state %>
@@ -108,29 +112,29 @@
 																				 @login.user.company_info.suffix) %>
 								</p>
 								<% end %>
-								<p>Salary Range: <%= convert_salary_range_to_words(@login.user.salary_range) %></p>
-								<p>Start Date: <%= @login.user.start_date %><br>
-									End Date: <%= @login.user.end_date %>
+								<p>Salary Range: <%= @login.user.present? ? convert_salary_range_to_words(@login.user.salary_range) : "" %></p>
+								<p>Start Date: <%= @login.user.present? ? @login.user.start_date : "" %><br>
+									End Date: <%= @login.user.present? ? @login.user.end_date : "" %>
 								</p>
 							</div>
 							<!-- Personal Information Tab block -->
 							<div class="content" id="pnlPersonalInfo">
-								<p>Birth Date: <%= @login.user.birth_day %></p>
-								<p>Ethnicity: <%= @login.user.ethnicity %></p>
-								<p>Spouse Name: <%= @login.user.spouse_first_name %>
-															 <%= @login.user.spouse_middle_initial %>
-															 <%= @login.user.spouse_last_name %>
+								<p>Birth Date: <%= @login.user.present? ? @login.user.birth_day : ""%></p>
+								<p>Ethnicity: <%= @login.user.present? ? @login.user.ethnicity : "" %></p>
+								<p>Spouse Name: <%= @login.user.present? ? @login.user.spouse_first_name : "" %>
+															 <%= @login.user.present? ? @login.user.spouse_middle_initial : "" %>
+															 <%= @login.user.present? ? @login.user.spouse_last_name : "" %>
 								</p>
-								<p>Number of children: <%= @login.user.number_children %></p>
+								<p>Number of children: <%= @login.user.present? ? @login.user.number_children : "" %></p>
 							</div>
 							<!-- Privacy Information Tab block -->
 							<div class="content" id="pnlPrivacyInfo">
 								<fieldset>
 									<legend>Opt In?</legend>
-										<p>General: <%= convert_opt_in_to_words(@login.user.general_opt_in) %></p>
-										<p>Email: <%= convert_opt_in_to_words(@login.user.email_opt_in) %></p>
-										<p>Phone: <%= convert_opt_in_to_words(@login.user.phone_opt_in) %></p>
-										<p>Badges: <%= convert_opt_in_to_words(@login.user.badges_opt_in) %></p>
+										<p>General: <%= convert_opt_in_to_words(@login.user.present? ? @login.user.general_opt_in : 0) %></p>
+										<p>Email: <%= convert_opt_in_to_words(@login.user.present? ? @login.user.email_opt_in : 0) %></p>
+										<p>Phone: <%= convert_opt_in_to_words(@login.user.present? ? @login.user.phone_opt_in : 0) %></p>
+										<p>Badges: <%= convert_opt_in_to_words(@login.user.present? ? @login.user.badges_opt_in : 0) %></p>
 								</fieldset>
 							</div>
 						</div>

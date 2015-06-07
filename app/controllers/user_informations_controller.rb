@@ -1,6 +1,6 @@
 # Author: Craig Sterling
 # Date: 5/20/2015
-class UserInformationsController < ApplicationController
+class UserInformationsController < UserAuthController
   before_action :set_user_information, only: [:show, :edit, :update, :destroy]
 
   # GET /user_informations
@@ -72,6 +72,7 @@ class UserInformationsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_user_information
       @login = Login.find(params[:id])
+#      @phones = User.includes(:user_phones).where("user_phones.user_id", @login.user.id)
     end
 
     # Never trust parameters from the scary internet,

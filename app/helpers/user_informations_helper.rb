@@ -108,14 +108,24 @@ module UserInformationsHelper
     end
   end
 
-  # helper method to get phot_path if it exists,
+  # helper method to get photo_path if it exists,
   # otherwise get the default photo_path
-  def get_photo_path (l_name, f_name)
-    photo_file_name = l_name + "_" + f_name + ".png"
+  def get_photo_path (id_num)
+    photo_file_name = "user_image_ " + id_num.to_s
     photo_path_and_file_name = Rails.root.join "app", "assets", "images",
                                                               photo_file_name
-    if (File.file?(photo_path_and_file_name))
-      asset_name = "/assets/" + photo_file_name
+    if (File.file?(photo_path_and_file_name + ".bmp"))
+      asset_name = "/assets/" + photo_file_name + ".bmp"
+    elsif (File.file?(photo_path_and_file_name + ".gif"))
+      asset_name = "/assets/" + photo_file_name + ".gif"
+    elsif (File.file?(photo_path_and_file_name + ".jpg"))
+      asset_name = "/assets/" + photo_file_name + ".jpg"
+    elsif (File.file?(photo_path_and_file_name + ".jpeg"))
+      asset_name = "/assets/" + photo_file_name + ".jpeg"
+    elsif (File.file?(photo_path_and_file_name + ".png"))
+      asset_name = "/assets/" + photo_file_name + ".png"
+    elsif (File.file?(photo_path_and_file_name + ".tiff"))
+      asset_name = "/assets/" + photo_file_name + ".tiff"
     else
       asset_name = "/assets/placeholder-person.png"
     end

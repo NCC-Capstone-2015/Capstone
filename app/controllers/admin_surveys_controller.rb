@@ -1,4 +1,4 @@
-class AdminSurveysController < AuthenticationController
+class AdminSurveysController < AdminAuthController
   before_action :set_admin_survey, only: [:show, :edit, :update, :destroy]
 
   # GET /admin_surveys
@@ -23,7 +23,7 @@ class AdminSurveysController < AuthenticationController
   end
 
   def question_type
-    
+
   end
 
   # GET /admin_surveys/1/edit
