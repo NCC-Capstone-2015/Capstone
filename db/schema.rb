@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150604072342) do
+ActiveRecord::Schema.define(version: 20150607021344) do
 
   create_table "account_logins", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -125,6 +125,47 @@ ActiveRecord::Schema.define(version: 20150604072342) do
   end
 
   add_index "logins", ["email"], name: "index_logins_on_email", unique: true, using: :btree
+
+  create_table "rapidfire_answers", force: :cascade do |t|
+    t.integer  "attempt_id",  limit: 4
+    t.integer  "question_id", limit: 4
+    t.text     "answer_text", limit: 65535
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "rapidfire_answers", ["attempt_id"], name: "index_rapidfire_answers_on_attempt_id", using: :btree
+  add_index "rapidfire_answers", ["question_id"], name: "index_rapidfire_answers_on_question_id", using: :btree
+
+  create_table "rapidfire_attempts", force: :cascade do |t|
+    t.integer  "survey_id",  limit: 4
+    t.integer  "user_id",    limit: 4
+    t.string   "user_type",  limit: 255
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "rapidfire_attempts", ["survey_id"], name: "index_rapidfire_attempts_on_survey_id", using: :btree
+  add_index "rapidfire_attempts", ["user_id", "user_type"], name: "index_rapidfire_attempts_on_user_id_and_user_type", using: :btree
+
+  create_table "rapidfire_questions", force: :cascade do |t|
+    t.integer  "survey_id",        limit: 4
+    t.string   "type",             limit: 255
+    t.string   "question_text",    limit: 255
+    t.integer  "position",         limit: 4
+    t.text     "answer_options",   limit: 65535
+    t.text     "validation_rules", limit: 65535
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "rapidfire_questions", ["survey_id"], name: "index_rapidfire_questions_on_survey_id", using: :btree
+
+  create_table "rapidfire_surveys", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "report_displays", force: :cascade do |t|
     t.datetime "created_at", null: false

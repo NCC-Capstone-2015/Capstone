@@ -72,6 +72,7 @@ class UserInformationsController < UserAuthController
     # Use callbacks to share common setup or constraints between actions.
     def set_user_information
       @login = Login.find(params[:id])
+#      @phones = User.includes(:user_phones).where("user_phones.user_id", @login.user.id)
     end
 
     # Never trust parameters from the scary internet,

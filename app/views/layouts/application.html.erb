@@ -6,13 +6,15 @@
 
     <title><%= content_for?(:title) ? yield(:title) : 'The Alumbook' %></title>
 
-    <%= stylesheet_link_tag    'application' %>
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
     <%= javascript_include_tag 'vendor/modernizr' %>
     <%= csrf_meta_tags %>
 
   </head>
 
   <body>
+<<<<<<< HEAD
 
     <% if login_signed_in? %>
 
@@ -33,6 +35,19 @@
     <div class="text-center noprint" align="center" style="position: fixed; bottom:0; width:100%; text-align: center;">
 
       <br /><%= link_to "Privacy Policy", privacy_policy_disclaimers_path %> | <%= link_to "Contact Us", contact_us_disclaimers_path %><br /><br />
+=======
+    <% if login_signed_in? %>
+      <% if current_login.login_type == 1 %>
+        <%= render "menu/admin" %>
+      <% else %>
+        <%= render "menu/student" %>
+      <% end %>
+    <% end %>
+    <%= yield %>    
+    <!-- Disclaimers by James Maher -->
+    <div class="text-center noprint" align="center" style="position: fixed; bottom:0; width:100%; text-align: center;">
+      <br /><%= link_to "Privacy Policy", main_app.privacy_policy_disclaimers_path %> | <%= link_to "Contact Us", main_app.contact_us_disclaimers_path %><br /><br />
+>>>>>>> da1a216d81e5b24994df0f46d742d859af5ac567
     </div>
 
   </body>
