@@ -91,12 +91,16 @@ require 'csv'
         # Query used for testing purposes
         #   Comment out the switch statement above and uncomment this line
         #   to show all users and their information
-        @results = Login.all.where("login_type = ?", 2)
+        #@results = Login.all.where("login_type = ?", 2)
 
         # Specify fields to hide when displaying information from login table
         @keys_blacklist = ['login_type', 'password', 'encrypted_password', 'reset_password_token', 'reset_password_sent_at', 'remember_created_at', 'current_sign_in_ip', 'last_sign_in_ip', 'middle_initial', 'last_login_timestamp']
         # Specify fields to hide when displaying information from user table
         @user_blacklist = ['login_id', 'company_id', 'id', 'created_at', 'updated_at', 'status']
+        # Specify fields to hide when displaying information from degree tables
+        @degree_blacklist = ['id', 'user_id', 'created_at', 'updated_at']
+        # Specify fields to hide when displaying information from user phones table
+        @phone_blacklist = ['created_at', 'updated_at']
 
       format.csv
     end
