@@ -34,21 +34,21 @@
                    <a href="#">My Profile</a>
                    <ul class="dropdown">
                        <li>
-                           <%= link_to 'View', {:action => 'show', :controller => 'user_informations', :id => current_login.id} %>
+                         <%= link_to "View", '/user_informations/:current_login.id' %>
                        </li>
                        <li>
-                           <%= link_to 'Edit', {:action => 'edit', :controller => 'user_informations', :id => current_login.id} %>
+                         <%= link_to 'Edit', '/user_informations/:current_login.id/edit' %>
                        </li>
                        <li>
                               <!--sign out added by Ryan and Andrew-->
 				  <li>
-				<%= link_to('Sign Out', destroy_login_session_path, :method => :delete) %>
+				<%= link_to('Sign Out', main_app.destroy_login_session_path, :method => :delete) %>
                                   </li>
                              </li>
                    </ul>
                </li>
                <li class="inactive">
-                 <%= link_to image_tag("search.png"), basic_searches_path %> <!-- James Maher -->
+                 <%= link_to image_tag("search.png"), main_app.basic_searches_path %> <!-- James Maher -->
                </li>
            </ul>
            <!-- Right Nav Section -->
