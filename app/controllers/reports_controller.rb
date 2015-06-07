@@ -18,7 +18,6 @@ require 'csv'
           @year = params[:selected_date][:year]
           @user_status = params[:user_status]
           @selected_saved_list = params[:selected_saved_list]
-
           if @selected_saved_list.blank? #No list selected
             if @user_status == '-1' #All students
               if @month.blank? #All months, Selected Year
@@ -29,169 +28,135 @@ require 'csv'
             elsif @user_status == '0' #Student
               if @month.blank? #All months, Selected Year
                 @logins = Login.all.where('login_type = 2 and extract(year from created_at) = ?', @year)
-                login_array = Array.new
-                @logins.each do |l|
-                  l.user.status == 0 ? (login_array.push l) : 0
-                end
-                @results = login_array
               else #Selected Month and Year
                 @logins = Login.all.where('login_type = 2 and extract(year from created_at) = ? and extract(month from created_at) = ?', @year, @month)
-                login_array = Array.new
-                @logins.each do |l|
-                  l.user.status == 0 ? (login_array.push l) : 0
-                end
-                @results = login_array
               end
+              login_array = Array.new
+              @logins.each do |l|
+                l.user.status == 0 ? (login_array.push l) : 0
+              end
+              @results = login_array
             elsif @user_status == '1' #Alumni
               if @month.blank? #All months, Selected Year
                 @logins = Login.all.where('login_type = 2 and extract(year from created_at) = ?', @year)
-                login_array = Array.new
-                @logins.each do |l|
-                  l.user.status == 1 ? (login_array.push l) : 0
-                end
-                @results = login_array
               else #Selected Month and Year
                 @logins = Login.all.where('login_type = 2 and extract(year from created_at) = ? and extract(month from created_at) = ?', @year, @month)
-                login_array = Array.new
-                @logins.each do |l|
-                  l.user.status == 1 ? (login_array.push l) : 0
-                end
-                @results = login_array
               end
+              login_array = Array.new
+              @logins.each do |l|
+                l.user.status == 1 ? (login_array.push l) : 0
+              end
+              @results = login_array
             end
           else #Only users in the selected Saved List
             @list = SavedList.find(@selected_saved_list)
             if @user_status == '-1' #All students
               if @month.blank? #All months, Selected Year
                 @users = @list.users.all.where('extract(year from users.created_at) = ?', @year)
-                login_array = Array.new
-                @users.each do |u|
-                  login_array.push u.login
-                end
-                @results = login_array
               else #Selected Month and Year
                 @users = @list.users.all.where('extract(year from users.created_at) = ? and extract(month from users.created_at) = ?', @year, @month)
-                login_array = Array.new
-                @users.each do |u|
-                  login_array.push u.login
-                end
-                @results = login_array
               end
             elsif @user_status == '0' #Student
               if @month.blank? #All months, Selected Year
                 @users = @list.users.where("status = '0' and extract(year from users.created_at) = ?", @year)
-                login_array = Array.new
-                @users.each do |u|
-                  login_array.push u.login
-                end
-                @results = login_array
               else #Selected Month and Year
                 @users = @list.users.where("status = '0' and extract(year from users.created_at) = ? and extract(month from users.created_at) = ?", @year, @month)
-                login_array = Array.new
-                @users.each do |u|
-                  login_array.push u.login
-                end
-                @results = login_array
               end
             elsif @user_status == '1' #Alumni
               if @month.blank? #All months, Selected Year
                 @users = @list.users.where("status = '1' and extract(year from users.created_at) = ?", @year)
-                login_array = Array.new
-                @users.each do |u|
-                  login_array.push u.login
-                end
-                @results = login_array
               else #Selected Month and Year
                 @users = @list.users.where("status = '1' and extract(year from users.created_at) = ? and extract(month from users.created_at) = ?", @year, @month)
-                login_array = Array.new
-                @users.each do |u|
-                  login_array.push u.login
-                end
-                @results = login_array
               end
             end
+            login_array = Array.new
+            @users.each do |u|
+              login_array.push u.login
+            end
+            @results = login_array
           end
 
         when "grad_class" # Stores all users who graduate in a specific year into the @results variable
           @grad_year = params[:grad_year][:year]
           @user_status = params[:user_status]
           @selected_saved_list = params[:selected_saved_list]
-
           if @selected_saved_list.blank? #No list selected
             if @user_status == '-1' #Include Both Students and Alumni
               @users = User.where('extract(year from end_date) = ?', @grad_year)
-              login_array = Array.new
-              @users.each do |u|
-                login_array.push u.login
-              end
-              @results = login_array
-            end
-            if @user_status == '0' #Include Only Students
+            elsif @user_status == '0' #Include Only Students
               @users = User.where("status = '0' and extract(year from end_date) = ?", @grad_year)
-              login_array = Array.new
-              @users.each do |u|
-                login_array.push u.login
-              end
-              @results = login_array
-            end
-            if @user_status == '1' #Include Only Students
+            elsif @user_status == '1' #Include Only Alumni
               @users = User.where("status = '1' and extract(year from end_date) = ?", @grad_year)
-              login_array = Array.new
-              @users.each do |u|
-                login_array.push u.login
-              end
-              @results = login_array
             end
           else #Only users in the selected Saved List
             @list = SavedList.find(@selected_saved_list)
             if @user_status == '-1' #Include Both Students and Alumni
               @users = @list.users.where('extract(year from end_date) = ?', @grad_year)
-              login_array = Array.new
-              @users.each do |u|
-                login_array.push u.login
-              end
-              @results = login_array
-            end
-            if @user_status == '0' #Include Only Students
+            elsif @user_status == '0' #Include Only Students
               @users = @list.users.where("status = '0' and extract(year from end_date) = ?", @grad_year)
-              login_array = Array.new
-              @users.each do |u|
-                login_array.push u.login
-              end
-              @results = login_array
-            end
-            if @user_status == '1' #Include Only Students
+            elsif @user_status == '1' #Include Only Alumni
               @users = @list.users.where("status = '1' and extract(year from end_date) = ?", @grad_year)
-              login_array = Array.new
-              @users.each do |u|
-                login_array.push u.login
+            end
+          end
+          login_array = Array.new
+          @users.each do |u|
+            login_array.push u.login
+          end
+          @results = login_array
+
+        when "grad_program"
+          @selected_program = params[:selected_program]
+          @user_status = params[:user_status]
+          @selected_saved_list = params[:selected_saved_list]
+          if @selected_saved_list.blank? #No list selected
+            if @user_status == '-1' #Include Both Students and Alumni
+              @users = User.where('program = ?', @selected_program)
+            elsif @user_status == '0' #Include Only Students
+              @users = User.where("status = '0' and program = ?", @selected_program)
+            elsif @user_status == '1' #Include Only Alumni
+              @users = User.where("status = '1' and program = ?", @selected_program)
+            end
+          else
+            @list = SavedList.find(@selected_saved_list)
+            if @user_status == '-1' #Include Both Students and Alumni
+              @users = @list.users.where('program = ?', @selected_program)
+            elsif @user_status == '0' #Include Only Students
+              @users = @list.users.where("status = '0' and program = ?", @selected_program)
+            elsif @user_status == '1' #Include Only Alumni
+              @users = @list.users.where("status = '1' and program = ?", @selected_program)
+            end
+          end
+          login_array = Array.new
+          @users.each do |u|
+            login_array.push u.login
+          end
+          @results = login_array
+
+        when "employer"
+          @selected_employer = params[:selected_employer]
+          @user_status = params[:user_status]
+          @selected_saved_list = params[:selected_saved_list]
+          @users = User.all
+          if @selected_saved_list.blank? #No list selected
+            if @user_status == '-1' #Include Both Students and Alumni
+              #@users.first.company_info.company.company_name
               end
-              @results = login_array
+            elsif @user_status == '0' #Include Only Students
+              @users = User.where("status = '0' and program = ?", @selected_program)
+            elsif @user_status == '1' #Include Only Alumni
+              @users = User.where("status = '1' and program = ?", @selected_program)
+            end
+          else
+            @list = SavedList.find(@selected_saved_list)
+            if @user_status == '-1' #Include Both Students and Alumni
+              @users = @list.users.where('program = ?', @selected_program)
+            elsif @user_status == '0' #Include Only Students
+              @users = @list.users.where("status = '0' and program = ?", @selected_program)
+            elsif @user_status == '1' #Include Only Alumni
+              @users = @list.users.where("status = '1' and program = ?", @selected_program)
             end
           end
 
-          # if @selected_saved_list == ""
-          #   if @user_status == -1
-          #     @results = User.undergraduate_degrees.all.where('extract(year from graduation_date) = ?', @grad_year)
-          #   else
-          #     @results = User.undergraduate_degrees.all.where('extract(year from graduation_date) = ? and status = ?', @grad_year, @user_status)
-          #   end
-          # else
-          #   if @user_status == -1
-          #     @results = Login.find(current_user).saved_lists.find(@selected_saved_list).saved_list_users.undergraduate_degrees.all.where('extract(year from created_at) = ? and extract(month from created_at) = ?', @grad_year)
-          #   else
-          #     if !@month.nil? && !@year.nil?
-          #       @results = Login.find(1).saved_lists.find(@selected_saved_list).saved_list_users.where('extract(year from created_at) = ? and extract(month from created_at) = ? and status = ?', @year, @month, @user_status)
-          #     else @month.nil?
-          #       @results = Login.find(1).saved_lists.find(@selected_saved_list).saved_list_users.where('extract(year from created_at) = ? and status = ?', @year, @user_status)
-          #     end
-          #   end
-          # end
-
-        # when "grad_program"
-        #
-        # when "employer"
-        #
         # when "given_back"
         #
         # when "survey_completion"
@@ -228,8 +193,24 @@ require 'csv'
 
     if @report_type == "survey_completion" || @report_type == "survey_results" || @report_type == "user_survey_response"
       @survey_array = Survey.all #.where('status = ?', 1)
+    #Removes duplicate programs
+    #By Cornelius Donley
     elsif @report_type == "grad_program"
-      @grad_program_array = Degree.all
+      u_array = User.all
+      p_array = Array.new.uniq
+      u_array.each do |u|
+        p_array.push u.program
+      end
+      @program_array = p_array
+    #Removes duplicate employers
+    #By Cornelius Donley
+    elsif @report_type == 'employer'
+      c_array = Company.all
+      e_array = Array.new.uniq
+      c_array.each do |c|
+        e_array.push c.company_name
+      end
+      @employer_array = e_array
     elsif @report_type == ""
 
       redirect_to reports_path
