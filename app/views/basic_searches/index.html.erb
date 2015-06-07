@@ -8,6 +8,8 @@
       </div>
       <%= f.submit "Search", :class => "button" %>
     <% end %>
-    <%= render "results" %>
+    <% if @display_results %>
+      <%= render "results" %>
+    <% end %>
   </div>
 </div>
