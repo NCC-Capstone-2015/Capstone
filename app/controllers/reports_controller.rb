@@ -1,6 +1,6 @@
-# Created by Andrew Bockus
+# Created by Andrew Bockus and Cornelius Donley
 
-class ReportsController < AuthenticationController
+class ReportsController < AdminAuthController
   skip_before_filter :verify_authenticity_token, :only => :create
 
 require 'csv'
@@ -91,7 +91,7 @@ require 'csv'
         # Query used for testing purposes
         #   Comment out the switch statement above and uncomment this line
         #   to show all users and their information
-        #@results = Login.all.where("login_type = ?", 2)
+        @results = Login.all.where("login_type = ?", 2)
 
         # Specify fields to hide when displaying information from login table
         @keys_blacklist = ['login_type', 'password', 'encrypted_password', 'reset_password_token', 'reset_password_sent_at', 'remember_created_at', 'current_sign_in_ip', 'last_sign_in_ip', 'middle_initial', 'last_login_timestamp']
@@ -100,9 +100,9 @@ require 'csv'
         # Specify fields to hide when displaying information from degree tables
         @degree_blacklist = ['id', 'user_id', 'created_at', 'updated_at']
         # Specify fields to hide when displaying information from user phones table
-        @phone_blacklist = ['created_at', 'updated_at']
+        @phone_blacklist = ['created_at', 'updated_at', 'id', 'user_id']
 
-      format.csv
+      format.xls  {send_file(filename, filename:  '#{@report_type}_Report_' + Date.now + '.xls')  }
     end
   end
 
@@ -115,7 +115,6 @@ require 'csv'
     elsif @report_type == "grad_program"
       @grad_program_array = Degree.all
     elsif @report_type == ""
-
       redirect_to reports_path
     end
 
