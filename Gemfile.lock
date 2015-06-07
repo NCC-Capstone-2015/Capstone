@@ -1,3 +1,12 @@
+GIT
+  remote: https://github.com/NCC-Capstone-2015/rapidfire.git
+  revision: efb5a1f77782d454d035e69ef92e3eaf8f573c62
+  branch: v3.0.0
+  specs:
+    rapidfire (2.1.0)
+      active_model_serializers (~> 0.8.1)
+      rails (>= 3.2.13)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -141,9 +150,6 @@ GEM
       activesupport (>= 3.0)
       i18n
       polyamorous (~> 1.2)
-    rapidfire (2.1.0)
-      active_model_serializers (~> 0.8.1)
-      rails (>= 3.2.13)
     rdoc (4.2.0)
       json (~> 1.4)
     responders (2.1.0)
@@ -219,7 +225,7 @@ DEPENDENCIES
   mysql2
   rails (= 4.2.1)
   ransack
-  rapidfire
+  rapidfire!
   rspec-rails
   sass-rails
   sdoc (~> 0.4.0)
