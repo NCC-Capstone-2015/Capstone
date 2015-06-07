@@ -30,6 +30,7 @@ user_phone3 = UserPhone.create(user_id: user3.id, area_code: '110', prefix: '120
 login4 = Login.create(username: 'cwuser', password: 'password', first_name: 'Christian', last_name: 'Winger', email: 'cwinger@noctrl.edu', created_at: DateTime.now, sign_in_count: 0, updated_at: DateTime.now, login_type: 2)
 user4 = User.create(login_id: login4.id, city: 'Bloomington', state: 'IL', zip: '61705', program: 'Mathematics', number_children: 0, ethnicity: 'caucasian', general_opt_in: 0, email_opt_in: 1, phone_opt_in: 1, badges_opt_in: 1, status: 0, birth_day: '1993-04-10', start_date:'2011-09-15', salary_range: 0, street: '9507 Grandville')
 user_phone4 = UserPhone.create(user_id: user4.id, area_code: '309', prefix: '826', suffix: '2303', user_phone_type: 0)
+user_phone41 = UserPhone.create(user_id: user4.id, area_code: '309', prefix: '260', suffix: '8756', user_phone_type: 1)
 college6 = College.create(college_name: 'Illinois State')
 degree6 = Degree.create(major_name: 'Computer Science', degree_type: 3)
 undergraduate_degree4 = UndergraduateDegree.create(user_id: user4.id, college_id: college6.id, degree_id: degree6.id, graduation_date: '2012-12-21')

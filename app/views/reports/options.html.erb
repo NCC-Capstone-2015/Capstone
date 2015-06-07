@@ -14,12 +14,12 @@
 
     <hr/><br />
     <div class="row">
-      <div class="large-6 large-centered small-12 columns">
+      <div class="large-6 medium-6 large-centered small-12 columns">
         <div class="row">
-          <div class="large-6 small-12 column">
+          <div class="large-6 medium-6 small-12 column">
             <h4>Student Status:</h4>
           </div>
-          <div class="large-6 small-12 column">
+          <div class="large-6 medium-6 small-12 column">
             <%= select_tag "user_status", options_for_select([["All Students", -1], ["Current Students", 0], ["Alumni", 1]]) %>
           </div>
         </div>
@@ -27,12 +27,12 @@
     </div>
     <br />
     <div class="row">
-      <div class="large-6 large-centered small-12 columns">
+      <div class="large-6 medium-6 large-centered small-12 columns">
         <div class="row">
-          <div class="large-6 small-12 column">
+          <div class="large-6 medium-6 small-12 column">
           <h4>Apply to Saved List?</h4>
         </div>
-        <div class="large-6 small-12 column">
+        <div class="large-6 medium-6 small-12 column">
           <%= select_tag "selected_saved_list", options_from_collection_for_select(@saved_list_array, "id", "list_name"), {:include_blank => 'No'} %>
         </div>
         <%= hidden_field_tag "report_type", @report_type %>
