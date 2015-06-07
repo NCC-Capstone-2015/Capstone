@@ -15,43 +15,53 @@ require 'csv'
     respond_to do |format|
       format.html
         @report_type = report_params
-        # case @report_type
-        # when "date" # Stores all users who were entered into the system during a certain month / year into the @results variable
-        #   @month = params[:selected_date][:month]
-        #   @year = params[:selected_date][:year]
-        #   @user_status = params[:user_status]
-        #   @selected_saved_list = params[:selected_saved_list]
-        #
-        #   if @selected_saved_list == ""
-        #     if @user_status == -1
-        #       if !@month.nil? && !@year.nil?
-        #         @results = User.all.where('extract(year from created_at) = ? and extract(month from created_at) = ?', @year, @month)
-        #       else @month.nil?
-        #         @results = User.all.where('extract(year from created_at) = ?', @year)
-        #       end
-        #     else
-        #       if !@month.nil? && !@year.nil?
-        #         @results = User.all.where('extract(year from created_at) = ? and extract(month from created_at) = ? and status = ?', @year, @month, @user_status)
-        #       else @month.nil?
-        #         @results = User.all.where('extract(year from created_at) = ? and status = ?', @year, @user_status)
-        #       end
-        #     end
-        #   else
-        #     if @user_status == -1
-        #       if !@month.nil? && !@year.nil?
-        #         @results = Login.find(current_user).saved_lists.find(@selected_saved_list).saved_list_users.where('extract(year from created_at) = ? and extract(month from created_at) = ?', @year, @month)
-        #       else @month.nil?
-        #         @results = Login.find(1).saved_lists.find(@selected_saved_list).saved_list_users.where('extract(year from created_at) = ?', @year)
-        #       end
-        #     else
-        #       if !@month.nil? && !@year.nil?
-        #         @results = Login.find(1).saved_lists.find(@selected_saved_list).saved_list_users.where('extract(year from created_at) = ? and extract(month from created_at) = ? and status = ?', @year, @month, @user_status)
-        #       else @month.nil?
-        #         @results = Login.find(1).saved_lists.find(@selected_saved_list).saved_list_users.where('extract(year from created_at) = ? and status = ?', @year, @user_status)
-        #       end
-        #     end
-        #   end
-        #
+        case @report_type
+        when "date" # Stores all users who were entered into the system during a certain month / year into the @results variable
+          @month = params[:selected_date][:month]
+          @year = params[:selected_date][:year]
+          @user_status = params[:user_status]
+          @selected_saved_list = params[:selected_saved_list]
+
+          if @selected_saved_list == '' #No list selected
+            if @user_status == -1 #All students
+              if @month == '' #All months, Selected Year
+                @results = User.all.where('extract(year from created_at) = ?', @year)
+              else #Selected Month and Year
+                @results = User.all.where('extract(year from created_at) = ? and extract(month from created_at) = ?', @year, @month)
+              end
+            end
+          end
+
+          # if @selected_saved_list == ""
+          #   if @user_status == 0
+          #     if !@month.nil? && !@year.nil?
+          #       @results = User.all.where('extract(year from created_at) = ? and extract(month from created_at) = ?', @year, @month)
+          #     else @month.nil?
+          #       @results = User.all.where('extract(year from created_at) = ?', @year)
+          #     end
+          #   else
+          #     if !@month.nil? && !@year.nil?
+          #       @results = User.all.where('extract(year from created_at) = ? and extract(month from created_at) = ? and status = ?', @year, @month, @user_status)
+          #     else @month.nil?
+          #       @results = User.all.where('extract(year from created_at) = ? and status = ?', @year, @user_status)
+          #     end
+          #   end
+          # else
+          #   if @user_status == 1
+          #     if !@month.nil? && !@year.nil?
+          #       @results = Login.find(current_user).saved_lists.find(@selected_saved_list).saved_list_users.where('extract(year from created_at) = ? and extract(month from created_at) = ?', @year, @month)
+          #     else @month.nil?
+          #       @results = Login.find(1).saved_lists.find(@selected_saved_list).saved_list_users.where('extract(year from created_at) = ?', @year)
+          #     end
+          #   else
+          #     if !@month.nil? && !@year.nil?
+          #       @results = Login.find(1).saved_lists.find(@selected_saved_list).saved_list_users.where('extract(year from created_at) = ? and extract(month from created_at) = ? and status = ?', @year, @month, @user_status)
+          #     else @month.nil?
+          #       @results = Login.find(1).saved_lists.find(@selected_saved_list).saved_list_users.where('extract(year from created_at) = ? and status = ?', @year, @user_status)
+          #     end
+          #   end
+          # end
+
         # when "grad_class" # IN PROGRESS - Stores all users who graduate in a specific year into the @results variable
         #   @grad_year = params[:grad_year]
         #   @user_status = params[:user_status]
@@ -86,10 +96,10 @@ require 'csv'
         # when "survey_results"
         #
         # when "user_survey_response"
-        #
-        # else
-        #   redirect_to reports_path
-        # end
+
+        else
+          redirect_to reports_path
+        end
 
         # Query used for testing purposes
         #   Comment out the switch statement above and uncomment this line
