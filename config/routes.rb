@@ -29,6 +29,7 @@ Rails.application.routes.draw do
   end
   resources :welcomes
   resources :user_informations
+  resources :saved_lists
   get 'welcomes/index'
 
   post 'reports/options' => 'reports#options'
