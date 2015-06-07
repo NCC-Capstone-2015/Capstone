@@ -11,6 +11,7 @@ class SearchesController < AuthenticationController
     @q = Login.ransack params[:q]
     @searches = @q.result
     @q.build_condition if @q.conditions.empty?
+    @saved_lists = Login.find(current_login.id).saved_lists.all
   end
   def search
     index
