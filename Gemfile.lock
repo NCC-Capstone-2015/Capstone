@@ -1,6 +1,6 @@
 GIT
-  remote: https://github.com/DrewOlehy/rapidfire.git
-  revision: c74010b97f0b20a0c09c1d7cbdd729bc236a8f5b
+  remote: https://github.com/NCC-Capstone-2015/rapidfire.git
+  revision: efb5a1f77782d454d035e69ef92e3eaf8f573c62
   branch: v3.0.0
   specs:
     rapidfire (2.1.0)
