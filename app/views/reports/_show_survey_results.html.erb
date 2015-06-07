@@ -1,0 +1,30 @@
+<!-- Created by Andrew Bockus, Christian Winger, and Cornelius Donley -->
+
+<div class="row">
+  <div class="large-12 large-centered medium-12 small-12 columns">
+    <div id="displayResults" style="overflow: auto; height: 100%; width: 100%;">
+      <table>
+          <tr>
+            <!-- Print out survey questions
+            <% Login.try(:first).try(:attributes).try(:except, *@keys_blacklist).try(:each) do |attr_name, attr_value| %>
+                <% if attr_name != 'id' %>
+                  <td><%= attr_name.humanize %></td>
+                <% end %>
+            <% end %>
+
+            .gsub(/\n/, ', ')
+            -->
+            <% Rapidfire::Survey.find(@survey_id).question.all.each do |question| %>
+              <% question.question_text do |question_text| %>
+                <td><%= question_text %></td>
+              <% end %>
+            <% end %>
+          </tr>
+
+        <% @results.try(:each) do |result| %>
+
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>

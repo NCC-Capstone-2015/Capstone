@@ -1,6 +1,6 @@
 # Created by Andrew Bockus
 # Report queries by Cornelius Donley
-class ReportsController < AuthenticationController
+class ReportsController < AdminAuthController
   skip_before_filter :verify_authenticity_token, :only => :create
 
 require 'csv'
@@ -181,9 +181,9 @@ require 'csv'
         # Specify fields to hide when displaying information from degree tables
         @degree_blacklist = ['id', 'user_id', 'created_at', 'updated_at']
         # Specify fields to hide when displaying information from user phones table
-        @phone_blacklist = ['created_at', 'updated_at']
+        @phone_blacklist = ['created_at', 'updated_at', 'id', 'user_id']
 
-      format.csv
+      format.xls  {send_file(filename, filename:  '#{@report_type}_Report_' + Date.now + '.xls')  }
     end
   end
 
@@ -212,7 +212,6 @@ require 'csv'
       end
       @employer_array = e_array
     elsif @report_type == ""
-
       redirect_to reports_path
     end
 
