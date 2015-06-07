@@ -6,29 +6,51 @@
       <table>
           <tr>
             <!-- Print out attribute names -->
-            <% @results.try(:first).try(:attributes).try(:except, *@keys_blacklist).try(:each) do |attr_name, attr_value| %>
+            <% Login.try(:first).try(:attributes).try(:except, *@keys_blacklist).try(:each) do |attr_name, attr_value| %>
                 <% if attr_name != 'id' %>
                   <td><%= attr_name.humanize %></td>
                 <% end %>
             <% end %>
-            <% @results.try(:first).try(:user).try(:attributes).try(:except, *@user_blacklist).try(:each) do |attr_name, attr_value| %>
+
+            <% User.try(:first).try(:attributes).try(:except, *@user_blacklist).try(:each) do |attr_name, attr_value| %>
               <td><%= attr_name.humanize %></td>
             <% end %>
-            <% @results.try(:first).try(:user).try(:user_phones).try(:first).try(:attributes).try(:each) do |attr_name, attr_value| %>
+
+            <% UserPhone.try(:first).try(:attributes).try(:except, *@phone_blacklist).try(:each) do |attr_name, attr_value| %>
               <td><%= attr_name.humanize %></td>
             <% end %>
-            <% @results.try(:first).try(:user).try(:undergraduate_degrees).try(:first).try(:attributes).try(:except, *@degree_blacklist).try(:each) do |attr_name, attr_value| %>
-              <td><%= attr_name.humanize %></td>
+
+            <% UndergraduateDegree.try(:first).try(:attributes).try(:except, *@degree_blacklist).try(:each) do |attr_name, attr_value| %>
+              <% if attr_name == "degree_id" %>
+                <td><%= "Undergraduate " + attr_name.humanize %></td>
+              <% elsif attr_name == "college_id" %>
+                <td><%= "Undergraduate " + attr_name.humanize %></td>
+              <% else %>
+                <td><%= attr_name.humanize %></td>
+              <% end %>
             <% end %>
-            <% @results.try(:first).try(:user).try(:graduate_degrees).try(:first).try(:attributes).try(:except, *@degree_blacklist).try(:each) do |attr_name, attr_value| %>
-              <td><%= attr_name.humanize %>
+
+            <td>Degree Type</td>
+
+            <% GraduateDegree.try(:first).try(:attributes).try(:except, *@degree_blacklist).try(:each) do |attr_name, attr_value| %>
+              <% if attr_name == "degree_id" %>
+                <td><%= "Graduate " + attr_name.humanize %></td>
+              <% elsif attr_name == "college_id" %>
+                <td><%= "Graduate " + attr_name.humanize %></td>
+              <% else %>
+                <td><%= attr_name.humanize %></td>
+              <% end %>
             <% end %>
+
+            <!-- <td>Degree Type</td> -->
+
           </tr>
 
         <% @results.try(:each) do |result| %>
           <% result.user.try(:undergraduate_degrees).try(:each) do |undergrad| %>
             <% result.user.try(:graduate_degrees).try(:each) do |grad_degree| %>
               <tr>
+                <!-- Print user login information -->
                 <% result.attributes.except(*@keys_blacklist).each do |attr_name, attr_value| %>
                   <% if attr_name == 'id' %>
                     <% @login_id = attr_value %>
@@ -41,20 +63,38 @@
 
                 <!-- Print user information -->
                 <% result.user.try(:attributes).try(:except, *@user_blacklist).try(:each) do |attr_name, attr_value| %>
-                  <td><%= attr_value %></td>
+                  <% if attr_name == 'company_info_id' %>
+                    <td><%= result.user.try(:company_info).try(:company).try(:company_name) %></td>
+                  <% else %>
+                    <td><%= attr_value %></td>
+                  <% end %>
                 <% end %>
 
                 <!-- Print first user phone -->
-                <% result.user.try(:user_phones).try(:first).try(:attributes).try(:each) do |attr_name, attr_value| %>
+                <% result.user.try(:user_phones).try(:first).try(:attributes).try(:except, *@phone_blacklist).try(:each) do |attr_name, attr_value| %>
                   <td><%= attr_value %></td>
                 <% end %>
 
                 <!-- Print user undergraduate degrees -->
                 <% undergrad.try(:attributes).try(:except, *@degree_blacklist).try(:each) do |attr_name, attr_value| %>
                   <% if attr_name == "college_id" %>
-                    <td><%= College.find(attr_value).college_name %></td>
+                    <td><%= College.try(:find, attr_value).try(:college_name) %></td>
                   <% elsif attr_name == "degree_id" %>
-                    <td><%= Degree.find(attr_value).major_name %></td>
+                    <td><%= Degree.try(:find, attr_value).try(:major_name) %></td>
+                    <% @undergrad_variable = attr_value %>
+                  <% else %>
+                    <td><%= attr_value %></td>
+                  <% end %>
+                <% end %>
+                <td><%= Degree.try(:find, @undergrad_variable).try(:degree_type) %></td>
+
+                <!-- Print user undergraduate degrees -->
+                <% undergrad.try(:degrees).try(:attributes).try(:except, *@degree_blacklist).try(:each) do |attr_name, attr_value| %>
+                  <% if attr_name == "college_id" %>
+                    <td><%= College.try(:find, attr_value).try(:college_name) %></td>
+                  <% elsif attr_name == "degree_id" %>
+                    <td><%= Degree.try(:find, attr_value).try(:major_name) %></td>
+                    <% @grad_variable = attr_value %>
                   <% else %>
                     <td><%= attr_value %></td>
                   <% end %>
@@ -63,9 +103,9 @@
                 <!-- Print user graduate degrees -->
                 <% grad_degree.try(:attributes).try(:except, *@degree_blacklist).try(:each) do |attr_name, attr_value| %>
                   <% if attr_name == "college_id" %>
-                    <td><%= College.find(attr_value).college_name %></td>
+                    <td><%= College.try(:find, attr_value).try(:college_name) %></td>
                   <% elsif attr_name == "degree_id" %>
-                    <td><%= Degree.find(attr_value).major_name %></td>
+                    <td><%= Degree.try(:find, attr_value).try(:major_name) %></td>
                   <% else %>
                     <td><%= attr_value %></td>
                   <% end %>
