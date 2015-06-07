@@ -11,7 +11,7 @@
         <h4>Employer Name:</h4>
       </div>
       <div class="large-6 columns">
-        <%= text_field :employer, :name %>
+        <%= select_tag "selected_employer", options_for_select(@employer_array), {:include_blank => 'None'} %>
       </div>
     </div>
   </div>
