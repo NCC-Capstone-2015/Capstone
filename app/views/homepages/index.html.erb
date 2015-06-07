@@ -1,6 +1,31 @@
-<!--<p id="notice"><%= notice %></p>
+<div class="test">
+<% if login_signed_in? %>
+
+  <%if current_login.login_type == 0 || current_login.login_type == 1 %>
+    <%= render "menu/admin" %>
+<%else%>
+    <%= render "menu/student" %>
+<%end%>
+
+<!--<p id="notice"><%= notice %></p>-->
+<p class="getfit"><img src="https://farm8.staticflickr.com/7382/9548360790_818826c12b_h.jpg"></p>
+-->
+<!--<%image_tag "ncc.jpg", alt: "NCC", width: '100%', :style => "background-size: cover"%>
+
+<style>
+  background-image: url(/assets/ncc.jpg);
+  background-size: 100% auto;
+</style>
+
+<%end%>
+
+<p id="notice"><%= notice %></p>
 
 <%image_tag "ncc.jpg", alt: "NCC", width: '100%', :style => "background-size: cover"%>
+
+<p class="getfit"><img src=https://farm8.staticflickr.com/7382/9548360790_818826c12b_h.jpg</p>
 -->
 <!--image from url-->
-<p class="getfit"><img src=https://farm8.staticflickr.com/7382/9548360790_818826c12b_h.jpg</p>
+
+
+</div>

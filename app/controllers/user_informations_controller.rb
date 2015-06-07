@@ -1,6 +1,6 @@
 # Author: Craig Sterling
 # Date: 5/20/2015
-class UserInformationsController < ApplicationController
+class UserInformationsController < UserAuthController
   before_action :set_user_information, only: [:show, :edit, :update, :destroy]
 
   # GET /user_informations
