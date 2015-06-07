@@ -1,8 +1,11 @@
+<!-- Created by Andrew Bockus -->
+
 <div class="row">
   <div class="large-12 large-centered medium-12 small-12 columns">
     <div id="displayResults" style="overflow: auto; height: 100%; width: 100%;">
       <table>
           <tr>
+            <!-- Print out attribute names -->
             <% @results.try(:first).try(:attributes).try(:except, *@keys_blacklist).try(:each) do |attr_name, attr_value| %>
                 <% if attr_name != 'id' %>
                   <td><%= attr_name.humanize %></td>
@@ -45,7 +48,7 @@
                 <% result.user.try(:user_phones).try(:first).try(:attributes).try(:each) do |attr_name, attr_value| %>
                   <td><%= attr_value %></td>
                 <% end %>
-                
+
                 <!-- Print user undergraduate degrees -->
                 <% undergrad.try(:attributes).try(:each) do |attr_name, attr_value| %>
                   <td><%= attr_value %></td>
