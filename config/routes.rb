@@ -29,6 +29,7 @@ Rails.application.routes.draw do
   end
   resources :welcomes
   resources :user_informations
+  resources :saved_lists
   get 'welcomes/index'
 
   post 'reports/options' => 'reports#options'
@@ -41,54 +42,11 @@ Rails.application.routes.draw do
   post 'admin_surveys/question_type' => 'admin_surveys#question_type'
   post 'admin_surveys/options' => 'admin_surveys#options'
 
-  post 'user_informations/:id' => 'user_informations#update'
+  post 'user_informations/:id' => 'user_informations#show'
+  post 'user_informations/:id/edit' => 'user_informations#edit'
+  post 'users/:id' => 'users#edit'
+  post '/users/:id/edit(.:format)' => 'users#edit'
 
-  # Example of regular route:
-  #   get 'products/:id' => 'catalog#view'
-
-  # Example of named route that can be invoked with purchase_url(id: product.id)
-  #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
-
-  # Example resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
-
-  # Example resource route with options:
-  #   resources :products do
-  #     member do
-  #       get 'short'
-  #       post 'toggle'
-  #     end
-  #
-  #     collection do
-  #       get 'sold'
-  #     end
-  #   end
-
-  # Example resource route with sub-resources:
-  #   resources :products do
-  #     resources :comments, :sales
-  #     resource :seller
-  #   end
-
-  # Example resource route with more complex sub-resources:
-  #   resources :products do
-  #     resources :comments
-  #     resources :sales do
-  #       get 'recent', on: :collection
-  #     end
-  #   end
-
-  # Example resource route with concerns:
-  #   concern :toggleable do
-  #     post 'toggle'
-  #   end
-  #   resources :posts, concerns: :toggleable
-  #   resources :photos, concerns: :toggleable
-
-  # Example resource route within a namespace:
-  #   namespace :admin do
-  #     # Directs /admin/products/* to Admin::ProductsController
-  #     # (app/controllers/admin/products_controller.rb)
-  #     resources :products
-  #   end
+  mount Rapidfire::Engine => "/rapidfire"
+  #get 'rapidfire/user_informations' => '/user_informations#show'
 end

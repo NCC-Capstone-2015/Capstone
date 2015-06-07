@@ -1,0 +1,20 @@
+<h1><%= @saved_list.list_name %></h1>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Program</th>
+      <th>Remove</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= link_to @login.first_name + ' ' + @login.last_name, user_informations_path + '/' + @user.login_id.to_s, :style => 'color:#0011CC;' %></td>
+      <td><%= @login.email %></td>
+      <td><%= @user.program %></td>
+      <td><%= link_to 'X', remove_saved_list_user_path(@user.login_id), class: "secondary button" %></td>
+    </tr>
+  </tbody>
+</table>
+<%= link_to 'Back', saved_lists_path, class: "button" %>

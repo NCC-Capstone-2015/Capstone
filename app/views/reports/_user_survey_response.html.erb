@@ -1,15 +1,4 @@
 <!-- Created by Andrew Bockus -->
-<script>
-function isNumber(key){
-  var char = (key.which) ? key.which : event.keyCode
-  if (char > 31 && (char < 48 || char > 57))
-      return false;
-  return true;
-}
-// http://stackoverflow.com/questions/13952686/how-to-make-html-input-tag-only-accept-numerical-values
-</script>
-
-
 <div class="row">
   <div class="small-12 small-centered columns">
     <h2 align="center">User Survey Response Report Options</h2>
@@ -22,7 +11,7 @@ function isNumber(key){
         <h4>User:</h4>
       </div>
       <div class="large-6 small-12 column">
-        <%= text_field_tag 'selected_user', nil, maxlength: 7, onkeypress: 'return isNumber(event)' %>
+        <%= text_field_tag :selected_user %>
       </div>
     </div>
     <div class="row">
@@ -30,7 +19,7 @@ function isNumber(key){
         <h4>Survey:</h4>
       </div>
       <div class="large-6 small-12 column">
-        <%= select_tag "selected_survey", options_from_collection_for_select(@survey_array, "id", "survey_name"), {:include_blank => 'None'} %>
+        <%= select_tag :selected_survey, options_from_collection_for_select(@survey_array, "id", "survey_name"), {:include_blank => 'None'} %>
       </div>
     </div>
   </div>

@@ -1,12 +1,12 @@
 <!--Login page configured by Ryan and Andrew-->
-<%= render "menu/login" %>
 
 <br />
+
 <div class="row">
   <div class="large-12 small-12" align="center">
- 
+
  <div class="panel" style="width: 350px">
-  
+
 <h2>Log in</h2>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
@@ -35,5 +35,7 @@
     <%= f.submit "Log in", :class => "button radius" %>
   </div>
 <% end %>
+
+</table>
 
 </div>

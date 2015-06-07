@@ -1,58 +1,35 @@
 <% content_for :title, "Alumbook | Report Display" %>
 
-<%= render "menu/admin" %>
-
 <p id="notice"><%= notice %></p>
 <br />
 <div class="row">
   <div class="large-12 large-centered columns">
     <div class="row">
-      <div class="large-12 small-12 small-centered large-centered columns">
+      <div class="large-12 medium-12 small-12 small-centered large-centered columns">
         <h1 align="center"><%= @report_type.humanize %> Report</h1>
       </div>
     </div>
     <hr class="noprint"/><br />
-    <div class="row">
-      <div class="large-12 large-centered small-12 columns">
-        <div id="displayResults" style="overflow: auto; height: 100%; width: 100%;">
-          <!-- <%= params %> -->
-          <table>
-              <tr>
-                <% @results.first.attributes.except(*@keys_blacklist).each do |attr_name, attr_value| %>
-                    <% if attr_name != 'id' %>
-                      <td><%= attr_name.humanize %></td>
-                    <% end %>
-                <% end %>
-                <% @results.first.user.try(:attributes).try(:except, *@user_blacklist).try(:each) do |attr_name, attr_value| %>
-                  <td><%= attr_name.humanize %></td>
-                <% end %>
-              </tr>
 
-
-            <% @results.each do |result| %>
-              <tr>
-                <% result.attributes.except(*@keys_blacklist).each do |attr_name, attr_value| %>
-                  <% if attr_name == 'id' %>
-                    <% @login_id = attr_value %>
-                  <% elsif attr_name == 'username' %>
-                    <td><%= link_to attr_value, user_information_path(@login_id), style: "color: #0000AA;" %></td>
-                  <% else %>
-                    <td><%= attr_value %></td>
-                  <% end %>
-                <% end %>
-                <%= result.user.try(:inspect) %>
-                <% result.user.try(:attributes).try(:except, *@user_blacklist).try(:each) do |attr_name, attr_value| %>
-                  <td><%= attr_value %></td>
-                <% end %>
-              </tr>
-            <% end %>
-          </table>
+    <% if @results.nil? || @results.blank? %>
+      <div class="row">
+        <div class="large-6 medium-6 small-12 small-centered">
+          <h4>Sorry, there were no results for your report.</h4>
         </div>
       </div>
-    </div>
+    <% else %>
+      <% if @report_type == "survey_results" || @report_type == "user_survey_response" %>
+        <%= render 'show_survey_results' %>
+      <% elsif @report_type == "survey_completion" %>
+        <%= render 'show_survey_completion' %>
+      <% else %>
+        <%= render 'show_user_information' %>
+      <% end %>
+    <% end %>
+
     <hr class="noprint" /><br />
     <div class="row noprint">
-      <div class="large-12 large-centered columns">
+      <div class="large-12 large-centered medium-12 columns">
         <div align="center">
           <a onclick="printPage()" class="button radius">Print</a>
           <a href="<%= reports_path %>" class="button radius">Back</a>

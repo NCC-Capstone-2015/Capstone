@@ -30,6 +30,7 @@ user_phone3 = UserPhone.create(user_id: user3.id, area_code: '110', prefix: '120
 login4 = Login.create(username: 'cwuser', password: 'password', first_name: 'Christian', last_name: 'Winger', email: 'cwinger@noctrl.edu', created_at: DateTime.now, sign_in_count: 0, updated_at: DateTime.now, login_type: 2)
 user4 = User.create(login_id: login4.id, city: 'Bloomington', state: 'IL', zip: '61705', program: 'Mathematics', number_children: 0, ethnicity: 'caucasian', general_opt_in: 0, email_opt_in: 1, phone_opt_in: 1, badges_opt_in: 1, status: 0, birth_day: '1993-04-10', start_date:'2011-09-15', salary_range: 0, street: '9507 Grandville')
 user_phone4 = UserPhone.create(user_id: user4.id, area_code: '309', prefix: '826', suffix: '2303', user_phone_type: 0)
+user_phone41 = UserPhone.create(user_id: user4.id, area_code: '309', prefix: '260', suffix: '8756', user_phone_type: 1)
 college6 = College.create(college_name: 'Illinois State')
 degree6 = Degree.create(major_name: 'Computer Science', degree_type: 3)
 undergraduate_degree4 = UndergraduateDegree.create(user_id: user4.id, college_id: college6.id, degree_id: degree6.id, graduation_date: '2012-12-21')
@@ -44,57 +45,77 @@ login5 = Login.create(username: 'worker', password: 'password', first_name: 'Jan
 list1 = SavedList.create(login_id: login1.id, list_name: 'My First List', date_saved: '2015-05-28')
 list_users1 = SavedListUser.create(saved_list_id: list1.id, user_id: user3.id)
 
+# survey1 = Survey.create(login_id: login5.id, survey_name: 'Seed Survey', status: 0, survey_description: 'A survey for testing', date_created: Date.current)
+#
+# survey_question1 = SurveyQuestion.create(survey_id: survey1.id, survey_question_type: 0, display_order: 0, required: true, text: 'Sample text response question')
+#
+# survey_question2 = SurveyQuestion.create(survey_id: survey1.id, survey_question_type: 1, display_order: 1, required: true, text: 'Sample single answer question')
+# survey_question_option21 = SurveyQuestionOption.create(survey_question_id: survey_question2.id, display_order: 0, text: 'Option 1')
+# survey_question_option22 = SurveyQuestionOption.create(survey_question_id: survey_question2.id, display_order: 1, text: 'Option 2')
+# survey_question_option23 = SurveyQuestionOption.create(survey_question_id: survey_question2.id, display_order: 2, text: 'Option 3')
+#
+# survey_question3 = SurveyQuestion.create(survey_id: survey1.id, survey_question_type: 2, display_order: 2, required: true, text: 'Sample multiple answer question')
+# survey_question_option31 = SurveyQuestionOption.create(survey_question_id: survey_question3.id, display_order: 0, text: 'Option 1')
+# survey_question_option32 = SurveyQuestionOption.create(survey_question_id: survey_question3.id, display_order: 1, text: 'Option 2')
+# survey_question_option33 = SurveyQuestionOption.create(survey_question_id: survey_question3.id, display_order: 2, text: 'Option 3')
+#
+# survey_question4 = SurveyQuestion.create(survey_id: survey1.id, survey_question_type: 3, display_order: 3, required: true, text: 'Sample multiple sub-question')
+# survey_question_option41 = SurveyQuestionOption.create(survey_question_id: survey_question4.id, display_order: 0, text: 'Sub-Question 1')
+# survey_question_option42 = SurveyQuestionOption.create(survey_question_id: survey_question4.id, display_order: 1, text: 'Sub-Question 2')
+# survey_question_option43 = SurveyQuestionOption.create(survey_question_id: survey_question4.id, display_order: 2, text: 'Sub-Question 3')
+# survey_question_option_ch41 = SurveyQuestionOptionChoice.create(survey_question_id: survey_question4.id, display_order: 0, text: 'Choice 1')
+# survey_question_option_ch42 = SurveyQuestionOptionChoice.create(survey_question_id: survey_question4.id, display_order: 1, text: 'Choice 2')
+# survey_question_option_ch43 = SurveyQuestionOptionChoice.create(survey_question_id: survey_question4.id, display_order: 2, text: 'Choice 3')
+#
+# survey2 = Survey.create(login_id: login5.id, survey_name: 'Seed Survey Complete', status: 1, survey_description: 'A complete survey for testing', date_created: Date.current)
+#
+# survey_question1 = SurveyQuestion.create(survey_id: survey2.id, survey_question_type: 0, display_order: 0, required: true, text: 'Sample text response question')
+#
+# survey_question2 = SurveyQuestion.create(survey_id: survey2.id, survey_question_type: 1, display_order: 1, required: true, text: 'Sample single answer question')
+# survey_question_option21 = SurveyQuestionOption.create(survey_question_id: survey_question2.id, display_order: 0, text: 'Option 1')
+# survey_question_option22 = SurveyQuestionOption.create(survey_question_id: survey_question2.id, display_order: 1, text: 'Option 2')
+# survey_question_option23 = SurveyQuestionOption.create(survey_question_id: survey_question2.id, display_order: 2, text: 'Option 3')
+#
+# survey_question3 = SurveyQuestion.create(survey_id: survey2.id, survey_question_type: 2, display_order: 2, required: true, text: 'Sample multiple answer question')
+# survey_question_option31 = SurveyQuestionOption.create(survey_question_id: survey_question3.id, display_order: 0, text: 'Option 1')
+# survey_question_option32 = SurveyQuestionOption.create(survey_question_id: survey_question3.id, display_order: 1, text: 'Option 2')
+# survey_question_option33 = SurveyQuestionOption.create(survey_question_id: survey_question3.id, display_order: 2, text: 'Option 3')
+#
+# survey_question4 = SurveyQuestion.create(survey_id: survey2.id, survey_question_type: 3, display_order: 3, required: true, text: 'Sample multiple sub-question')
+# survey_question_option41 = SurveyQuestionOption.create(survey_question_id: survey_question4.id, display_order: 0, text: 'Sub-Question 1')
+# survey_question_option42 = SurveyQuestionOption.create(survey_question_id: survey_question4.id, display_order: 1, text: 'Sub-Question 2')
+# survey_question_option43 = SurveyQuestionOption.create(survey_question_id: survey_question4.id, display_order: 2, text: 'Sub-Question 3')
+# survey_question_option_ch41 = SurveyQuestionOptionChoice.create(survey_question_id: survey_question4.id, display_order: 0, text: 'Choice 1')
+# survey_question_option_ch42 = SurveyQuestionOptionChoice.create(survey_question_id: survey_question4.id, display_order: 1, text: 'Choice 2')
+# survey_question_option_ch43 = SurveyQuestionOptionChoice.create(survey_question_id: survey_question4.id, display_order: 2, text: 'Choice 3')
+#
+# #Survey entry for User 2
+# user_survey2 = UserSurvey.create(user_id: user2.id, survey_id: survey1.id, date_completed: DateTime.now, anonymous: false)
+# user_survey_response21 = UserSurveyResponse.create(user_survey_id: user_survey2.id, survey_question_id: survey_question1.id, response_text: 'Response to a text field question.')
+# user_survey_response22 = UserSurveyResponse.create(user_survey_id: user_survey2.id, survey_question_id: survey_question2.id, response_text: survey_question_option22.display_order.to_s())
+# user_survey_response23 = UserSurveyResponse.create(user_survey_id: user_survey2.id, survey_question_id: survey_question3.id, response_text: survey_question_option31.display_order.to_s() + ',' + survey_question_option33.display_order.to_s())
+# user_survey_response24 = UserSurveyResponse.create(user_survey_id: user_survey2.id, survey_question_id: survey_question4.id, response_text: survey_question_option_ch43.display_order.to_s() + ',' + survey_question_option_ch42.display_order.to_s() + ',' + survey_question_option_ch41.display_order.to_s())
 
-survey1 = Survey.create(login_id: login5.id, survey_name: 'Seed Survey', status: 0, survey_description: 'A survey for testing', date_created: Date.current)
+rapidfire_question_group1 = Rapidfire::Survey.create(name: "Test Survey")
 
-survey_question1 = SurveyQuestion.create(survey_id: survey1.id, survey_question_type: 0, display_order: 0, required: true, text: 'Sample text response question')
+rapidfire_question1 = Rapidfire::Question.create(survey_id: rapidfire_question_group1.id, type: "Rapidfire::Questions::Checkbox", question_text: "Checkbox Question", position: 0, answer_options: "Option 1\r\nOption 2\r\nOption 3")
+rapidfire_question2 = Rapidfire::Question.create(survey_id: rapidfire_question_group1.id, type: "Rapidfire::Questions::Date", question_text: "Date Question", position: 1, answer_options: "")
+rapidfire_question3 = Rapidfire::Question.create(survey_id: rapidfire_question_group1.id, type: "Rapidfire::Questions::Radio", question_text: "Radio Question", position: 2, answer_options: "Option 1\r\nOption 2\r\nOption 3")
+rapidfire_question4 = Rapidfire::Question.create(survey_id: rapidfire_question_group1.id, type: "Rapidfire::Questions::Select", question_text: "Select Question", position: 3, answer_options: "Option 1\r\nOption 2\r\nOption 3")
+rapidfire_question5 = Rapidfire::Question.create(survey_id: rapidfire_question_group1.id, type: "Rapidfire::Questions::Numeric", question_text: "Numeric Question", position: 4, answer_options: "")
+rapidfire_question6 = Rapidfire::Question.create(survey_id: rapidfire_question_group1.id, type: "Rapidfire::Questions::Long", question_text: "Long Answer Question", position: 5, answer_options: "")
+rapidfire_question7 = Rapidfire::Question.create(survey_id: rapidfire_question_group1.id, type: "Rapidfire::Questions::Short", question_text: "Short Answer Question", position: 6, answer_options: "")
 
-survey_question2 = SurveyQuestion.create(survey_id: survey1.id, survey_question_type: 1, display_order: 1, required: true, text: 'Sample single answer question')
-survey_question_option21 = SurveyQuestionOption.create(survey_question_id: survey_question2.id, display_order: 0, text: 'Option 1')
-survey_question_option22 = SurveyQuestionOption.create(survey_question_id: survey_question2.id, display_order: 1, text: 'Option 2')
-survey_question_option23 = SurveyQuestionOption.create(survey_question_id: survey_question2.id, display_order: 2, text: 'Option 3')
+rapidfire_attempt1 = Rapidfire::Attempt.create(survey_id: rapidfire_question_group1.id, user_id: user2.id)
 
-survey_question3 = SurveyQuestion.create(survey_id: survey1.id, survey_question_type: 2, display_order: 2, required: true, text: 'Sample multiple answer question')
-survey_question_option31 = SurveyQuestionOption.create(survey_question_id: survey_question3.id, display_order: 0, text: 'Option 1')
-survey_question_option32 = SurveyQuestionOption.create(survey_question_id: survey_question3.id, display_order: 1, text: 'Option 2')
-survey_question_option33 = SurveyQuestionOption.create(survey_question_id: survey_question3.id, display_order: 2, text: 'Option 3')
+rapidfire_answer11 = Rapidfire::Answer.create(attempt_id: rapidfire_attempt1.id, question_id: rapidfire_question1.id, answer_text: "Option 1/r/nOption 3")
+rapidfire_answer12 = Rapidfire::Answer.create(attempt_id: rapidfire_attempt1.id, question_id: rapidfire_question2.id, answer_text: "12/12/12")
+rapidfire_answer13 = Rapidfire::Answer.create(attempt_id: rapidfire_attempt1.id, question_id: rapidfire_question3.id, answer_text: "Option 2")
+rapidfire_answer14 = Rapidfire::Answer.create(attempt_id: rapidfire_attempt1.id, question_id: rapidfire_question4.id, answer_text: "Option 3")
+rapidfire_answer15 = Rapidfire::Answer.create(attempt_id: rapidfire_attempt1.id, question_id: rapidfire_question5.id, answer_text: "")
+rapidfire_answer16 = Rapidfire::Answer.create(attempt_id: rapidfire_attempt1.id, question_id: rapidfire_question6.id, answer_text: "Loooooooooooooooooong Answer is Loooooooooooong")
+rapidfire_answer17 = Rapidfire::Answer.create(attempt_id: rapidfire_attempt1.id, question_id: rapidfire_question7.id, answer_text: "Short Answer")
 
-survey_question4 = SurveyQuestion.create(survey_id: survey1.id, survey_question_type: 3, display_order: 3, required: true, text: 'Sample multiple sub-question')
-survey_question_option41 = SurveyQuestionOption.create(survey_question_id: survey_question4.id, display_order: 0, text: 'Sub-Question 1')
-survey_question_option42 = SurveyQuestionOption.create(survey_question_id: survey_question4.id, display_order: 1, text: 'Sub-Question 2')
-survey_question_option43 = SurveyQuestionOption.create(survey_question_id: survey_question4.id, display_order: 2, text: 'Sub-Question 3')
-survey_question_option_ch41 = SurveyQuestionOptionChoice.create(survey_question_id: survey_question4.id, display_order: 0, text: 'Choice 1')
-survey_question_option_ch42 = SurveyQuestionOptionChoice.create(survey_question_id: survey_question4.id, display_order: 1, text: 'Choice 2')
-survey_question_option_ch43 = SurveyQuestionOptionChoice.create(survey_question_id: survey_question4.id, display_order: 2, text: 'Choice 3')
-
-survey2 = Survey.create(login_id: login5.id, survey_name: 'Seed Survey Complete', status: 1, survey_description: 'A complete survey for testing', date_created: Date.current)
-
-survey_question1 = SurveyQuestion.create(survey_id: survey2.id, survey_question_type: 0, display_order: 0, required: true, text: 'Sample text response question')
-
-survey_question2 = SurveyQuestion.create(survey_id: survey2.id, survey_question_type: 1, display_order: 1, required: true, text: 'Sample single answer question')
-survey_question_option21 = SurveyQuestionOption.create(survey_question_id: survey_question2.id, display_order: 0, text: 'Option 1')
-survey_question_option22 = SurveyQuestionOption.create(survey_question_id: survey_question2.id, display_order: 1, text: 'Option 2')
-survey_question_option23 = SurveyQuestionOption.create(survey_question_id: survey_question2.id, display_order: 2, text: 'Option 3')
-
-survey_question3 = SurveyQuestion.create(survey_id: survey2.id, survey_question_type: 2, display_order: 2, required: true, text: 'Sample multiple answer question')
-survey_question_option31 = SurveyQuestionOption.create(survey_question_id: survey_question3.id, display_order: 0, text: 'Option 1')
-survey_question_option32 = SurveyQuestionOption.create(survey_question_id: survey_question3.id, display_order: 1, text: 'Option 2')
-survey_question_option33 = SurveyQuestionOption.create(survey_question_id: survey_question3.id, display_order: 2, text: 'Option 3')
-
-survey_question4 = SurveyQuestion.create(survey_id: survey2.id, survey_question_type: 3, display_order: 3, required: true, text: 'Sample multiple sub-question')
-survey_question_option41 = SurveyQuestionOption.create(survey_question_id: survey_question4.id, display_order: 0, text: 'Sub-Question 1')
-survey_question_option42 = SurveyQuestionOption.create(survey_question_id: survey_question4.id, display_order: 1, text: 'Sub-Question 2')
-survey_question_option43 = SurveyQuestionOption.create(survey_question_id: survey_question4.id, display_order: 2, text: 'Sub-Question 3')
-survey_question_option_ch41 = SurveyQuestionOptionChoice.create(survey_question_id: survey_question4.id, display_order: 0, text: 'Choice 1')
-survey_question_option_ch42 = SurveyQuestionOptionChoice.create(survey_question_id: survey_question4.id, display_order: 1, text: 'Choice 2')
-survey_question_option_ch43 = SurveyQuestionOptionChoice.create(survey_question_id: survey_question4.id, display_order: 2, text: 'Choice 3')
-
-#Survey entry for User 2
-user_survey2 = UserSurvey.create(user_id: user2.id, survey_id: survey1.id, date_completed: DateTime.now, anonymous: false)
-user_survey_response21 = UserSurveyResponse.create(user_survey_id: user_survey2.id, survey_question_id: survey_question1.id, response_text: 'Response to a text field question.')
-user_survey_response22 = UserSurveyResponse.create(user_survey_id: user_survey2.id, survey_question_id: survey_question2.id, response_text: survey_question_option22.display_order.to_s())
-user_survey_response23 = UserSurveyResponse.create(user_survey_id: user_survey2.id, survey_question_id: survey_question3.id, response_text: survey_question_option31.display_order.to_s() + ',' + survey_question_option33.display_order.to_s())
-user_survey_response24 = UserSurveyResponse.create(user_survey_id: user_survey2.id, survey_question_id: survey_question4.id, response_text: survey_question_option_ch43.display_order.to_s() + ',' + survey_question_option_ch42.display_order.to_s() + ',' + survey_question_option_ch41.display_order.to_s())
 
 #Giving Back for User 2
 giving_back2 = GivingBack.create(user_id: user2.id, company_info_id: company_info1.id, subject: 'Internship', position: 'Summer Intern', description: 'A summer internship in tech support!', requirements: 'None really.', approved: false, completed: false, giving_back_type: 0, contact_first_name: 'Bill', contact_last_name: 'Gates', contact_email: 'BillGates@Microsoft.com')
