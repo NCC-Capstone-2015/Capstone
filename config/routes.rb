@@ -42,7 +42,8 @@ Rails.application.routes.draw do
   post 'admin_surveys/question_type' => 'admin_surveys#question_type'
   post 'admin_surveys/options' => 'admin_surveys#options'
 
-  post 'user_informations/:id' => 'user_informations#update'
+  post 'user_informations/:id' => 'user_informations#show'
+  post 'user_informations/:id/edit' => 'user_informations#edit'
   post 'users/:id' => 'users#edit'
   post '/users/:id/edit(.:format)' => 'users#edit'
 
