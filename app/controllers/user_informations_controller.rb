@@ -31,9 +31,10 @@ class UserInformationsController < AuthenticationController
   # PATCH/PUT /user_informations/1
   def update
 
-    @login = Login.find(params[:id])
+    @login = Login.find(current_login.id)
     @login.first_name = params[:first_name]
     @login.middle_initial = params[:middle_initial]
+    @login.last_name = params[:last_name]
     @login.email = params[:email]
     @login.user.street = params[:street]
     @login.user.city = params[:city]
@@ -46,7 +47,7 @@ class UserInformationsController < AuthenticationController
     @login.user.spouse_first_name = params[:spouse_first_name]
     @login.user.spouse_middle_initial = params[:spouse_middle_initial]
     @login.user.number_children = params[:number_children]
-    @login.user.birth_day = Date.parse(params[:birth_day]).strftime("%Y-%m-%d")
+    # @login.user.birth_day = Date.parse(params[:birth_day]).strftime("%Y-%m-%d")
     @login.user.ethnicity = params[:ethnicity]
     @login.user.general_opt_in = params[:general_opt_in]
     @login.user.email_opt_in = params[:email_opt_in]
@@ -54,9 +55,9 @@ class UserInformationsController < AuthenticationController
     @login.user.badges_opt_in = params[:badges_opt_in]
     @login.user.salary_range = convert_salary_range_to_number(params[:salary_range])
     @login.user.job_title = params[:job_title]
-    @login.user.start_date = Date.parse(params[:start_date]).strftime("%Y-%m-%d")
-    @login.user.end_date = Date.parse(params[:end_date]).strftime("%Y-%m-%d")
-    @login.save
+    #@login.user.start_date = Date.parse(params[:start_date]).strftime("%Y-%m-%d")
+    #@login.user.end_date = Date.parse(params[:end_date]).strftime("%Y-%m-%d")
+    @login.update
     @login.user.save
 
     redirect_to '/user_informations/' + @login.id.to_s
@@ -71,7 +72,7 @@ class UserInformationsController < AuthenticationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user_information
-      @login = Login.find(params[:id])
+      @login = Login.find(current_login.id)
 #      @phones = User.includes(:user_phones).where("user_phones.user_id", @login.user.id)
     end
 
