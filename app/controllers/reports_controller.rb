@@ -1,12 +1,9 @@
+# Created by Andrew Bockus
 
 class ReportsController < AuthenticationController
   skip_before_filter :verify_authenticity_token, :only => :create
 
 require 'csv'
-
-
-  #skip_before_filter :verify_authenticity_token, :only => :create
-
 
   def index
   end
@@ -52,7 +49,7 @@ require 'csv'
         #     end
         #   end
         #
-        # when "grad_class" # IN PROGRESS - Stores all users who graduate in a specific year into the @results variable
+        # when "grad_class" # Stores all users who graduate in a specific year into the @results variable
         #   @grad_year = params[:grad_year]
         #   @user_status = params[:user_status]
         #   @selected_saved_list = params[:selected_saved_list]
@@ -99,7 +96,11 @@ require 'csv'
         # Specify fields to hide when displaying information from login table
         @keys_blacklist = ['login_type', 'password', 'encrypted_password', 'reset_password_token', 'reset_password_sent_at', 'remember_created_at', 'current_sign_in_ip', 'last_sign_in_ip', 'middle_initial', 'last_login_timestamp']
         # Specify fields to hide when displaying information from user table
-        @user_blacklist = ['login_id', 'company_id', 'id', 'created_at', 'updated_at']
+        @user_blacklist = ['login_id', 'company_id', 'id', 'created_at', 'updated_at', 'status']
+        # Specify fields to hide when displaying information from degree tables
+        @degree_blacklist = ['id', 'user_id', 'created_at', 'updated_at']
+        # Specify fields to hide when displaying information from user phones table
+        @phone_blacklist = ['created_at', 'updated_at']
 
       format.csv
     end
@@ -114,12 +115,13 @@ require 'csv'
     elsif @report_type == "grad_program"
       @grad_program_array = Degree.all
     elsif @report_type == ""
+
       redirect_to reports_path
     end
 
     # Get array of saved lists to populate dropdown from collection
     # @saved_list_array = Login.find(session[:id]).saved_lists.all
-    @saved_list_array = Login.find(1).saved_lists.all
+    @saved_list_array = Login.find(current_login.id).saved_lists.all
   end
 
   def show
