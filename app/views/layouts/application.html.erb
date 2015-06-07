@@ -14,40 +14,37 @@
   </head>
 
   <body>
-<<<<<<< HEAD
-
-    <% if login_signed_in? %>
-
-      <%if current_login.login_type == 0 || current_login.login_type == 1 %>
-        <%= render "menu/admin" %>
-    <%else%>
-        <%= render "menu/student" %>
-      <%end%>
-    <%end%>
-
-    <%= yield %>
-    <%= javascript_include_tag 'application' %>
-
-    <!-- James Maher -->
-    <div class="row">
-
-    </div>
-    <div class="text-center noprint" align="center" style="position: fixed; bottom:0; width:100%; text-align: center;">
-
-      <br /><%= link_to "Privacy Policy", privacy_policy_disclaimers_path %> | <%= link_to "Contact Us", contact_us_disclaimers_path %><br /><br />
-=======
     <% if login_signed_in? %>
       <% if current_login.login_type == 1 %>
         <%= render "menu/admin" %>
-      <% else %>
+        <%end%>
+      <% if current_login.login_type == 0  %>
+        <%= render "menu/worker" %>
+      <% end %>
+      <% if current_login.login_type == 2  %>
         <%= render "menu/student" %>
       <% end %>
+    <% else %>
+      <%= render "menu/login" %>
     <% end %>
-    <%= yield %>    
+    <div class="alerts">
+      <div class="row">
+        <div class="small-10 small-centered medium-9 large-8 columns">
+          <% flash.each do |name, msg| %>
+            <% if msg.is_a?(String) %>
+              <div data-alert <%= 'data-timeout="1.75"'.html_safe unless name == 'alert' %> class="alert-box <%= name %> radius">
+                <%= msg %>
+                <a href="#" class="close">&times;</a>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <%= yield %>
     <!-- Disclaimers by James Maher -->
     <div class="text-center noprint" align="center" style="position: fixed; bottom:0; width:100%; text-align: center;">
       <br /><%= link_to "Privacy Policy", main_app.privacy_policy_disclaimers_path %> | <%= link_to "Contact Us", main_app.contact_us_disclaimers_path %><br /><br />
->>>>>>> da1a216d81e5b24994df0f46d742d859af5ac567
     </div>
 
   </body>
