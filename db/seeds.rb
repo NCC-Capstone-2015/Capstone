@@ -96,15 +96,26 @@ list_users1 = SavedListUser.create(saved_list_id: list1.id, user_id: user3.id)
 # user_survey_response23 = UserSurveyResponse.create(user_survey_id: user_survey2.id, survey_question_id: survey_question3.id, response_text: survey_question_option31.display_order.to_s() + ',' + survey_question_option33.display_order.to_s())
 # user_survey_response24 = UserSurveyResponse.create(user_survey_id: user_survey2.id, survey_question_id: survey_question4.id, response_text: survey_question_option_ch43.display_order.to_s() + ',' + survey_question_option_ch42.display_order.to_s() + ',' + survey_question_option_ch41.display_order.to_s())
 
-rapidfire_question_group1 = Rapidfire::QuestionGroup.create(name: "Test Survey")
+rapidfire_question_group1 = Rapidfire::Survey.create(name: "Test Survey")
 
-rapidfire_question1 = Rapidfire::Question.create(question_group_id: rapidfire_question_group1.id, type: "Rapidfire::Questions::Checkbox", question_text: "Checkbox Question", position: 0, answer_options: "Option 1\r\nOption 2\r\nOption 3")
-rapidfire_question2 = Rapidfire::Question.create(question_group_id: rapidfire_question_group1.id, type: "Rapidfire::Questions::Date", question_text: "Date Question", position: 1, answer_options: "")
-rapidfire_question3 = Rapidfire::Question.create(question_group_id: rapidfire_question_group1.id, type: "Rapidfire::Questions::Radio", question_text: "Radio Question", position: 2, answer_options: "Option 1\r\nOption 2\r\nOption 3")
-rapidfire_question4 = Rapidfire::Question.create(question_group_id: rapidfire_question_group1.id, type: "Rapidfire::Questions::Select", question_text: "Select Question", position: 3, answer_options: "Option 1\r\nOption 2\r\nOption 3")
-rapidfire_question5 = Rapidfire::Question.create(question_group_id: rapidfire_question_group1.id, type: "Rapidfire::Questions::Numeric", question_text: "Numeric Question", position: 4, answer_options: "")
-rapidfire_question6 = Rapidfire::Question.create(question_group_id: rapidfire_question_group1.id, type: "Rapidfire::Questions::Long", question_text: "Long Answer Question", position: 5, answer_options: "")
-rapidfire_question7 = Rapidfire::Question.create(question_group_id: rapidfire_question_group1.id, type: "Rapidfire::Questions::Short", question_text: "Short Answer Question", position: 6, answer_options: "")
+rapidfire_question1 = Rapidfire::Question.create(survey_id: rapidfire_question_group1.id, type: "Rapidfire::Questions::Checkbox", question_text: "Checkbox Question", position: 0, answer_options: "Option 1\r\nOption 2\r\nOption 3")
+rapidfire_question2 = Rapidfire::Question.create(survey_id: rapidfire_question_group1.id, type: "Rapidfire::Questions::Date", question_text: "Date Question", position: 1, answer_options: "")
+rapidfire_question3 = Rapidfire::Question.create(survey_id: rapidfire_question_group1.id, type: "Rapidfire::Questions::Radio", question_text: "Radio Question", position: 2, answer_options: "Option 1\r\nOption 2\r\nOption 3")
+rapidfire_question4 = Rapidfire::Question.create(survey_id: rapidfire_question_group1.id, type: "Rapidfire::Questions::Select", question_text: "Select Question", position: 3, answer_options: "Option 1\r\nOption 2\r\nOption 3")
+rapidfire_question5 = Rapidfire::Question.create(survey_id: rapidfire_question_group1.id, type: "Rapidfire::Questions::Numeric", question_text: "Numeric Question", position: 4, answer_options: "")
+rapidfire_question6 = Rapidfire::Question.create(survey_id: rapidfire_question_group1.id, type: "Rapidfire::Questions::Long", question_text: "Long Answer Question", position: 5, answer_options: "")
+rapidfire_question7 = Rapidfire::Question.create(survey_id: rapidfire_question_group1.id, type: "Rapidfire::Questions::Short", question_text: "Short Answer Question", position: 6, answer_options: "")
+
+rapidfire_attempt1 = Rapidfire::Attempt.create(survey_id: rapidfire_question_group1.id, user_id: user2.id)
+
+rapidfire_answer11 = Rapidfire::Answer.create(attempt_id: rapidfire_attempt1.id, question_id: rapidfire_question1.id, answer_text: "Option 1/r/nOption 3")
+rapidfire_answer12 = Rapidfire::Answer.create(attempt_id: rapidfire_attempt1.id, question_id: rapidfire_question2.id, answer_text: "12/12/12")
+rapidfire_answer13 = Rapidfire::Answer.create(attempt_id: rapidfire_attempt1.id, question_id: rapidfire_question3.id, answer_text: "Option 2")
+rapidfire_answer14 = Rapidfire::Answer.create(attempt_id: rapidfire_attempt1.id, question_id: rapidfire_question4.id, answer_text: "Option 3")
+rapidfire_answer15 = Rapidfire::Answer.create(attempt_id: rapidfire_attempt1.id, question_id: rapidfire_question5.id, answer_text: "")
+rapidfire_answer16 = Rapidfire::Answer.create(attempt_id: rapidfire_attempt1.id, question_id: rapidfire_question6.id, answer_text: "Loooooooooooooooooong Answer is Loooooooooooong")
+rapidfire_answer17 = Rapidfire::Answer.create(attempt_id: rapidfire_attempt1.id, question_id: rapidfire_question7.id, answer_text: "Short Answer")
+
 
 #Giving Back for User 2
 giving_back2 = GivingBack.create(user_id: user2.id, company_info_id: company_info1.id, subject: 'Internship', position: 'Summer Intern', description: 'A summer internship in tech support!', requirements: 'None really.', approved: false, completed: false, giving_back_type: 0, contact_first_name: 'Bill', contact_last_name: 'Gates', contact_email: 'BillGates@Microsoft.com')
