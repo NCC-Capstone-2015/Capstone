@@ -2,6 +2,9 @@ class UsersController < AuthenticationController
   def index
     @users = User.all
   end
+  def redirect
+    redirect_to users_path
+  end
 
   def show
     @user = User.find(params[:id])
@@ -25,40 +28,53 @@ class UsersController < AuthenticationController
   end
 
   def edit
-    @user = User.find(params[:id])
+    change = false
+    user = User.find(params[:id])
     if not params["first_name"].nil? and !params["first_name"].blank?
-      @user.login.update(first_name: params["first_name"])
+      change = true
+      user.login.update(first_name: params["first_name"])
     end
     if not params["last_name"].nil? and !params["last_name"].blank?
-      @user.login.update(last_name: params["last_name"])
+      change = true
+      user.login.update(last_name: params["last_name"])
     end
     if not params["password"].nil? and !params["password"].blank?
-      @user.login.update(password: params["password"])
+      change = true
+      user.login.update(password: params["password"])
     end
     if not params["middle_initial"].nil? and !params["middle_initial"].blank?
-      @user.login.update(middle_initial: params["middle_initial"])
+      change = true
+      user.login.update(middle_initial: params["middle_initial"])
     end
     if not params["login_type"].nil? and !params["login_type"].blank?
-      @user.login.update(login_type: params["login_type"].to_i)
+      change = true
+      user.login.update(login_type: params["login_type"].to_i)
     end
     if not params["username"].nil? and !params["username"].blank?
-      @user.login.update(username: params["username"])
+      change = true
+      user.login.update(username: params["username"])
     end
     if not params["email"].nil? and !params["email"].blank?
-      @user.login.update(email: params["email"])
+      change = true
+      user.login.update(email: params["email"])
     end
     if not params["login_type"].nil? and !params["login_type"].blank?
-      @user.login.update(login_type: params["login_type"])
+      change = true
+      user.login.update(login_type: params["login_type"])
     end
     #@user.login.update(updated_at: DateTime.now)
 
     if not params["program"].nil? and !params["program"].blank?
-      @user.update(program: params["program"])
+      change = true
+      user.update(program: params["program"])
     end
     if not params["status"].nil? and !params["status"].blank?
-      @user.update(status: params["status"])
+      change = true
+      user.update(status: params["status"])
     end
-    redirect_to user_path
+    if change
+      redirect_to users_path
+    end
   end
 
   def destroy

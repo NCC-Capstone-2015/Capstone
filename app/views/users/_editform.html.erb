@@ -1,5 +1,5 @@
 <%-# authored by Matthew Kachlik -%>
-<%= form_tag({controller: "users", action: "edit"}, method: "post") do%>
+<%= form_tag({controller: "users", action: "update"}, method: "post") do%>
 <div class= "row">
   <div class="large-6 columns">
     <%= label_tag 'username','Username: (must be unique)' %>
@@ -57,7 +57,7 @@
     <div class="row">
       <div class="text-center">
           <%= link_to 'Back', users_path,class: "button radius" %>
-          <%= submit_tag "submit",class: "button radius"%>
+          <%= submit_tag "submit", class: "button radius", :onclick => user_path %>
       </div>
     </div>
 <%end%>
