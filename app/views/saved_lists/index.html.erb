@@ -7,8 +7,7 @@
     <h4><%= saved_list.list_name %></h4>
     <tr>
       <td><%= link_to 'Show', saved_list_path(saved_list) %></td>
-      <td><%= link_to 'Edit', edit_saved_list_path(saved_list) %></td>
-      <td><%= link_to 'Destroy', saved_list_path(saved_list), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <td><%= link_to 'Delete', saved_list_path(saved_list), method: :delete, data: { confirm: 'Are you sure?' } %></td>
     </tr>
   <% end %>
 </div>
