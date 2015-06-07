@@ -1,5 +1,4 @@
 <!-- James Maher -->
-<%= render "menu/admin" %>
 <div class="row">
   <div class="small-12 medium-12 large-12 column" id="content">
     <h1>Advanced Search</h1>
@@ -13,6 +12,5 @@
     <% if @display_results %>
       <%= render "results" %>
     <% end %>
-    <%= collection_select(:saved_list, :login_id, Login.all, :id, nil, prompt: true) %>
   </div>
 </div>
