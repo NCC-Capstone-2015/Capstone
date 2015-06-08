@@ -1,7 +1,5 @@
 <!--Login page configured by Ryan and Andrew-->
-
 <br />
-
 <div class="row">
   <div class="large-12 small-12" align="center">
 
@@ -12,16 +10,16 @@
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="field">
     <div style="width:300px">
-    <%= f.label :Username %><br />
-    <%= f.text_field :logon, autofocus: true %>
+      <%= f.label :Username %><br />
+      <%= f.text_field :logon, autofocus: true %>
     </div>
   </div>
 
   <div class="field">
     <div style="width:300px">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-    </div>
+      <%= f.label :password %><br />
+      <%= f.password_field :password, autocomplete: "off" %>
+      </div>
   </div>
 
   <% if devise_mapping.rememberable? -%>

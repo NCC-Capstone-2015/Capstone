@@ -12,5 +12,17 @@ added blank top bar for login page
               <a href="#">Menu</a>
           </li>
       </ul>
+      <section class="top-bar-section">
+          <ul class="right">
+              <!-- Andrew Bockus -->
+              <li class="has-dropdown">
+                <a href="#">About</a>
+                <ul class="dropdown">
+                <li><%= link_to "Privacy Policy", main_app.privacy_policy_disclaimers_path %></li>
+                <li><%= link_to "Contact Us", main_app.contact_us_disclaimers_path %></li>
+                </ul>
+              </li>
+          </ul>
+      </section>
     </nav>
 </nav>

@@ -8,39 +8,30 @@
           </li>
       </ul>
       <section class="top-bar-section">
-          <ul class="right">
-              <li class="inactive">
-                <%= link_to 'Surveys', main_app.admin_surveys_path %>
-              </li>
-              <li class="inactive">
-                  <a href="#" class="a">Giving Back</a>
-              </li>
-              <li class="inactive">
-                <%= link_to 'Reports', main_app.reports_path %>
-              </li>
-              <li class="has-dropdown">
-                 <a href="#">My Profile</a>
-                 <ul class="dropdown">
-                   <li>
-                     <%= link_to 'View', '/user_informations/:id' %>
-                   </li>
-                   <li>
-                     <%= link_to 'Edit', '/user_informations/:id/edit' %>
-                   </li>
-              <li>
-<!--sign out added by Ryan and Andrew-->
-				<% if login_signed_in? %>
-				  <li>
-				<%= link_to('Sign Out', destroy_login_session_path, :method => :delete) %>
-				  </li>
-				<% end %>
-                             </li>
-                         </ul>
-                     </li>
-              <li class="inactive">
-                <%= link_to 'Search People', main_app.searches_path %>
-              </li>
-          </ul>
+        <ul class="right">
+            <li class="inactive">
+              <%= link_to 'Surveys', main_app.rapidfire_path %>
+            </li>
+            <li class="inactive">
+                <a href="#" class="a">Giving Back</a>
+            </li>
+            <li class="inactive">
+              <%= link_to 'Reports', main_app.reports_path %>
+            </li>
+            <li class="inactive">
+              <%= link_to "Search", main_app.searches_path %> <!-- James Maher -->
+            </li>
+            <li class="inactive">
+              <%= link_to('Sign Out', main_app.destroy_login_session_path, :method => :delete) %>
+            <!-- Andrew Bockus and Cornelius Donley -->
+            <li class="has-dropdown">
+              <a href="#">About</a>
+              <ul class="dropdown">
+              <li><%= link_to "Privacy Policy", main_app.privacy_policy_disclaimers_path %></li>
+              <li><%= link_to "Contact Us", main_app.contact_us_disclaimers_path %></li>
+              </ul>
+            </li>
+        </ul>
           <!-- Right Nav Section -->
           <!-- Left Nav Section -->
           <ul class="left">
