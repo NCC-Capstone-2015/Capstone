@@ -5,8 +5,6 @@
 <table>
   <thead>
     <tr>
-      <th>User</th>
-      <th>Company info</th>
       <th>Subject</th>
       <th>Position</th>
       <th>Description</th>
@@ -24,26 +22,29 @@
   <tbody>
     <% @giving_backs.each do |giving_back| %>
       <tr>
-        <td><%= giving_back.user_id %></td>
-        <td><%= giving_back.company_info_id %></td>
         <td><%= giving_back.subject %></td>
         <td><%= giving_back.position %></td>
         <td><%= giving_back.description %></td>
         <td><%= giving_back.requirements %></td>
         <td><%= giving_back.approved %></td>
         <td><%= giving_back.completed %></td>
-        <td><%= giving_back.giving_back_type %></td>
+        <td><% if giving_back.giving_back_type.to_i == 0 %>
+          Internship
+        <%elsif giving_back.giving_back_type.to_i == 1 %>
+          Mentoring
+        <%elsif giving_back.giving_back_type.to_i == 2 %>
+          Guest Speaking
+        <%else%>
+          Other
+        <% end %></td>
         <td><%= giving_back.contact_first_name %></td>
         <td><%= giving_back.contact_last_name %></td>
         <td><%= giving_back.contact_email %></td>
-        <td><%= link_to 'Show', giving_back %></td>
-        <td><%= link_to 'Edit', edit_giving_back_path(giving_back) %></td>
-        <td><%= link_to 'Destroy', giving_back, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show',giving_back_path(giving_back),class: "small radius button" %>
+          <%= link_to 'Delete', giving_back, method: :delete, data: { confirm: 'Are you sure?' },class: "small radius button" %>
+        </td>
+
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Giving back', new_giving_back_path %>
