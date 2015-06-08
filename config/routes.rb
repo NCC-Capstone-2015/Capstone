@@ -12,7 +12,8 @@ Rails.application.routes.draw do
       match 'contact_us' => 'disclaimers#contact_us', via: [:get]
     end
   end
-  #paths to custom methods in giving_back controller
+  #paths to custom methods in giving_back controller, Matthew Kachlik
+  #this allows for the link to send the id in and used in a method
   get '/giving_back/:id/completed' => 'giving_backs#completed', :as => :completed_giving_backs
   get '/giving_back/:id/approve' => 'giving_backs#approve', :as => :approve_giving_backs
   resources :giving_backs
@@ -42,6 +43,7 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
   # You can have the root of your site routed with "root"
   root 'homepages#index'
+
 
   post 'admin_surveys/question_type' => 'admin_surveys#question_type'
   post 'admin_surveys/options' => 'admin_surveys#options'
