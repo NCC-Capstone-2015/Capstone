@@ -9,9 +9,12 @@ require 'csv'
   end
 
   def display
+    # Respond to html and xls formats
     respond_to do |format|
       format.html
         @report_type = report_params
+
+        # Switch for report queries based on type of report
         case @report_type
         when "date" # Stores all users who were entered into the system during a certain month / year into the @results variable
           @month = params[:selected_date][:month]
@@ -104,7 +107,7 @@ require 'csv'
           end
           @results = login_array
 
-        when "grad_program" #Displays users enrolled int he specified degree program
+        when "grad_program" # Displays users enrolled in the specified degree program
           @selected_program = params[:selected_program]
           @user_status = params[:user_status]
           @selected_saved_list = params[:selected_saved_list]
@@ -132,7 +135,7 @@ require 'csv'
           end
           @results = login_array
 
-        when "employer" #Diplays users who work at the specified employer
+        when "employer" # Diplays users who work at the specified employer
           @selected_employer = params[:selected_employer]
           @user_status = params[:user_status]
           @selected_saved_list = params[:selected_saved_list]
@@ -200,7 +203,7 @@ require 'csv'
           end
           @results = login_array
 
-        when "given_back"
+        when "given_back" # Displays all users who have given back
           @selected_giving_back = params[:selected_giving_back]
           @user_status = params[:user_status]
           @selected_saved_list = params[:selected_saved_list]
@@ -339,7 +342,7 @@ require 'csv'
         # Specify fields to hide when displaying information from user phones table
         @phone_blacklist = ['created_at', 'updated_at', 'id', 'user_id']
 
-      format.xls  {send_file(filename, filename:  '#{@report_type}_Report_' + Date.now + '.xls')  }
+      format.xls
     end
   end
 
@@ -349,8 +352,8 @@ require 'csv'
 
     if @report_type == "survey_completion" || @report_type == "survey_results" || @report_type == "user_survey_response"
       @survey_array = Survey.all #.where('status = ?', 1)
-    #Removes duplicate programs
-    #By Cornelius Donley
+    # Removes duplicate programs
+    # By Cornelius Donley
     elsif @report_type == "grad_program"
       u_array = User.all
       p_array = Array.new.uniq
@@ -358,8 +361,8 @@ require 'csv'
         p_array.push u.program
       end
       @program_array = p_array
-    #Removes duplicate employers
-    #By Cornelius Donley
+    # Removes duplicate employers
+    # By Cornelius Donley
     elsif @report_type == 'employer'
       c_array = Company.all
       e_array = Array.new.uniq
