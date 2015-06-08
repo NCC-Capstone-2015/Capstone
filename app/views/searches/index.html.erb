@@ -1,7 +1,7 @@
 <!-- James Maher -->
 <br /><br />
 <div class="row panel radius">
-  <div class="small-12 medium-12 large-12 column" id="content">
+  <div class="small-12 medium-12 large-12 column">
     <h1>Advanced Search</h1>
     <%= search_form_for @q, url: search_searches_path, html: { method: :post } do |f| %>
       <%= f.condition_fields do |c| %>
