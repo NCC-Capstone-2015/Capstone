@@ -9,32 +9,64 @@
     </ul>
   <% end %>
 
-  <%= f.label :type %>
-  <%= f.select :type, ::Rapidfire::QuestionForm::QUESTION_TYPES, {}, id: "question_type" %>
+  <div class="row">
+    <div class="large-6 medium-6 small-12 columns">
+      <%= f.label :type %>
+      <%= f.select :type, ::Rapidfire::QuestionForm::QUESTION_TYPES, {}, id: "question_type" %>
+    </div>
+  </div>
 
-  <%= f.label :question_text %>
-  <%= f.text_field :question_text %>
+  <div class="row">
+    <div class="large-6 medium-6 small-12 columns">
+      <%= f.label :question_text %>
+      <%= f.text_field :question_text %>
+    </div>
+  </div>
 
-  <%= f.label :answer_options %>
-  <%= f.text_area :answer_options, rows: 5 %>
+  <div class="row">
+    <div class="large-6 medium-6 small-12 columns">
+      <%= f.label :answer_options %>
+      <%= f.text_area :answer_options, rows: 5 %>
+    </div>
+  </div>
 
   <h4>Other options</h4>
   <hr/>
 
-  <%= f.label :answer_presence %>
-  <%= f.check_box :answer_presence %>
+  <div class="row">
+    <div class="large-6 medium-6 small-12 columns">
+      <%= f.label :answer_presence, "Require Answer" %>
+      <%= f.check_box :answer_presence %>
+    </div>
+  </div>
 
-  <%= f.label :answer_minimum_length %>
-  <%= f.text_field :answer_minimum_length %>
+  <div class="row">
+    <div class="large-6 medium-6 small-12 columns">
+      <%= f.label :answer_minimum_length %>
+      <%= f.text_field :answer_minimum_length %>
+    </div>
+  </div>
 
-  <%= f.label :answer_maximum_length %>
-  <%= f.text_field :answer_maximum_length %>
+  <div class="row">
+    <div class="large-6 medium-6 small-12 columns">
+      <%= f.label :answer_maximum_length %>
+      <%= f.text_field :answer_maximum_length %>
+    </div>
+  </div>
 
-  <%= f.label :answer_greater_than_or_equal_to %>
-  <%= f.text_field :answer_greater_than_or_equal_to %>
+  <div class="row">
+    <div class="large-6 medium-6 small-12 columns">
+      <%= f.label :answer_greater_than_or_equal_to %>
+      <%= f.text_field :answer_greater_than_or_equal_to %>
+    </div>
+  </div>
 
-  <%= f.label :answer_less_than_or_equal_to %>
-  <%= f.text_field :answer_less_than_or_equal_to %>
+  <div class="row">
+    <div class="large-6 medium-6 small-12 columns">
+      <%= f.label :answer_less_than_or_equal_to %>
+      <%= f.text_field :answer_less_than_or_equal_to %>
+    </div>
+  </div>
 
-  <%= f.submit submit_text %>
+  <%= f.submit 'Create Question', :class => 'radius button' %>
 <% end %>

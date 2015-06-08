@@ -13,7 +13,7 @@ login1 = Login.create(username: 'cvdonley', password: 'RonPaul2012', email: 'cvd
 company_info1 = CompanyInfo.create(street: '1 Microsoft Way', city: 'Redmond', state: 'WA', zip: '98052', country_code: '+1', area_code: '425', prefix: '882', suffix: '8080')
 company1 = Company.create(company_name: 'Microsoft Corporation', company_info_id: company_info1.id)
 login2 = Login.create(username: 'jduser', password: 'password', email: 'jjdoe@noctrl.edu', created_at: DateTime.now, sign_in_count: 0, updated_at: DateTime.now, first_name: 'John', last_name: 'Doe', login_type: 2)
-user2 = User.create(login_id: login2.id, city: 'Naperville', state: 'IL', zip: '60540', program: 'Computer Science', spouse_first_name: 'Jane', spouse_last_name: 'Doe', spouse_middle_initial: 'J', number_children: 1, ethnicity: 'hispanic', general_opt_in: 1, email_opt_in: 1, phone_opt_in: 1, badges_opt_in: 1, status: 1, company_info_id: company_info1.id, job_title: 'Systems Analyst', birth_day: '1980-01-01', start_date:'2014-09-15', salary_range: 3, street: '610 N. Brainard St.')
+user2 = User.create(login_id: login2.id, city: 'Naperville', state: 'IL', zip: '60540', program: 'Computer Science', spouse_first_name: 'Jane', spouse_last_name: 'Doe', spouse_middle_initial: 'J', number_children: 1, ethnicity: 'hispanic', general_opt_in: 1, email_opt_in: 1, phone_opt_in: 1, badges_opt_in: 1, status: 1, company_info_id: company_info1.id, job_title: 'Systems Analyst', birth_day: '1980-01-01', start_date: '2014-09-15', end_date: '2015-06-13', salary_range: 3, street: '610 N. Brainard St.')
 user_phone2 = UserPhone.create(user_id: user2.id, country_code: '1', area_code: '260', prefix: '630', suffix: '1031', user_phone_type: 1)
 college2 = College.create(college_name: 'North Central College')
 degree2 = Degree.create(major_name: 'Computer Science', degree_type: 3)
@@ -44,6 +44,7 @@ login5 = Login.create(username: 'worker', password: 'password', first_name: 'Jan
 
 list1 = SavedList.create(login_id: login1.id, list_name: 'My First List', date_saved: '2015-05-28')
 list_users1 = SavedListUser.create(saved_list_id: list1.id, user_id: user3.id)
+list_users2 = SavedListUser.create(saved_list_id: list1.id, user_id: user2.id)
 
 # survey1 = Survey.create(login_id: login5.id, survey_name: 'Seed Survey', status: 0, survey_description: 'A survey for testing', date_created: Date.current)
 #
