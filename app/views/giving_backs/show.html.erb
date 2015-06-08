@@ -42,7 +42,15 @@
 
 <p>
   <strong>Giving back type:</strong>
-  <%= @giving_back.giving_back_type %>
+  <% if @giving_back.giving_back_type.to_i == 0 %>
+    Internship
+  <%elsif @giving_back.giving_back_type.to_i == 1 %>
+    Mentoring
+  <%elsif @giving_back.giving_back_type.to_i == 2 %>
+    Guest Speaking
+  <%else%>
+    Other
+  <% end %>
 </p>
 
 <p>
@@ -59,6 +67,6 @@
   <strong>Contact email:</strong>
   <%= @giving_back.contact_email %>
 </p>
-
-<%= link_to 'Edit', edit_giving_back_path(@giving_back) %> |
-<%= link_to 'Back', giving_backs_path %>
+<%= link_to "Completed", completed_giving_backs_path(@giving_back),class: "small radius button" %>|
+<%= link_to 'Approve', approve_giving_backs_path(@giving_back),class: "small radius button" %>|
+<%= link_to 'Back', giving_backs_path,class: "small radius button" %>

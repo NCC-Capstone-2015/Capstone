@@ -1,3 +1,4 @@
+<%-# authored by Matthew Kachlik -%>
 <%= form_for(@giving_back) do |f| %>
   <% if @giving_back.errors.any? %>
     <div id="error_explanation">
@@ -11,55 +12,53 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :user_id %><br>
-    <%= f.text_field :user_id %>
+  <div class="row">
+    <div class="large-6 columns">
+      <%= f.label :subject %>
+      <%= f.text_field :subject %>
+    </div>
+    <div class="large-6 columns">
+      <%= f.label :position %>
+      <%= f.text_field :position %>
+    </div>
+
   </div>
-  <div class="field">
-    <%= f.label :company_info_id %><br>
-    <%= f.text_field :company_info_id %>
+
+  <div class="row">
+    <div class="large-12 columns">
+      <%= f.label :description %>
+      <%= f.text_area :description %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :subject %><br>
-    <%= f.text_field :subject %>
+  <div class="row">
+    <div class="large-12 columns">
+      <%= f.label :requirements %>
+      <%= f.text_area :requirements %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :position %><br>
-    <%= f.text_field :position %>
+  <div class="row">
+    <div class="large-3 columns">
+      <%= f.label :giving_back_type %>
+      <%= f.select "giving_back_type",options_for_select([['Internship', 0],["Mentoring",1],['Guest speaking', 2],["Other",3]]) %>
+    </div>
+
+    <div class="large-3 columns">
+      <%= f.label :contact_first_name %>
+      <%= f.text_field :contact_first_name %>
+    </div>
+    <div class="large-3 columns">
+      <%= f.label :contact_last_name %>
+      <%= f.text_field :contact_last_name %>
+    </div>
+    <div class="large-3 columns">
+      <%= f.label :contact_email %>
+      <%= f.text_field :contact_email %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_field :description %>
-  </div>
-  <div class="field">
-    <%= f.label :requirements %><br>
-    <%= f.text_field :requirements %>
-  </div>
-  <div class="field">
-    <%= f.label :approved %><br>
-    <%= f.check_box :approved %>
-  </div>
-  <div class="field">
-    <%= f.label :completed %><br>
-    <%= f.check_box :completed %>
-  </div>
-  <div class="field">
-    <%= f.label :giving_back_type %><br>
-    <%= f.number_field :giving_back_type %>
-  </div>
-  <div class="field">
-    <%= f.label :contact_first_name %><br>
-    <%= f.text_field :contact_first_name %>
-  </div>
-  <div class="field">
-    <%= f.label :contact_last_name %><br>
-    <%= f.text_field :contact_last_name %>
-  </div>
-  <div class="field">
-    <%= f.label :contact_email %><br>
-    <%= f.text_field :contact_email %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="row">
+    <div class="text-center">
+      <%= f.submit 'submit', :class => 'button radius'%>
+      <%= link_to 'Back', giving_backs_path, :class => 'button radius' %>
+    </div>
   </div>
 <% end %>

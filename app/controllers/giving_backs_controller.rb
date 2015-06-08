@@ -17,14 +17,28 @@ class GivingBacksController < ApplicationController
     @giving_back = GivingBack.new
   end
 
-  # GET /giving_backs/1/edit
   def edit
   end
+  def completed
 
+    @giving_back = GivingBack.find(params[:id])
+    @giving_back.completed = true
+    @giving_back.save
+    redirect_to giving_backs_url
+  end
+  def approve
+
+    @giving_back = GivingBack.find(params[:id])
+    @giving_back.approve = true
+    @giving_back.save
+    redirect_to giving_backs_url
+  end
   # POST /giving_backs
   # POST /giving_backs.json
   def create
     @giving_back = GivingBack.new(giving_back_params)
+    @giving_back.approved = false
+    @giving_back.completed = false
 
     respond_to do |format|
       if @giving_back.save
