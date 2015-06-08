@@ -104,7 +104,7 @@ require 'csv'
           end
           @results = login_array
 
-        when "grad_program"
+        when "grad_program" #Displays users enrolled int he specified degree program
           @selected_program = params[:selected_program]
           @user_status = params[:user_status]
           @selected_saved_list = params[:selected_saved_list]
@@ -132,34 +132,75 @@ require 'csv'
           end
           @results = login_array
 
-        when "employer"
+        when "employer" #Diplays users who work at the specified employer
           @selected_employer = params[:selected_employer]
           @user_status = params[:user_status]
           @selected_saved_list = params[:selected_saved_list]
-          @users = User.all
+          company_array = Company.where('company_name = ?', @selected_employer)
+          company = company_array.first
+          user_array = User.all
+          @users = Array.new
           if @selected_saved_list.blank? #No list selected
             if @user_status == '-1' #Include Both Students and Alumni
-              #@users.first.company_info.company.company_name
+              user_array.each do |u|
+                if u.company_info_id != nil
+                  if u.company_info.company.company_name == @selected_employer
+                    @users.push u
+                  end
+                end
               end
             elsif @user_status == '0' #Include Only Students
-              @users = User.where("status = '0' and program = ?", @selected_program)
+              user_array.each do |u|
+                if u.company_info_id != nil
+                  if u.company_info.company.company_name == @selected_employer && u.status == 0
+                    @users.push u
+                  end
+                end
+              end
             elsif @user_status == '1' #Include Only Alumni
-              @users = User.where("status = '1' and program = ?", @selected_program)
+              user_array.each do |u|
+                if u.company_info_id != nil
+                  if u.company_info.company.company_name == @selected_employer && u.status == 1
+                    @users.push u
+                  end
+                end
+              end
             end
-          else
+          else #Only users in the selected Saved List
             @list = SavedList.find(@selected_saved_list)
             if @user_status == '-1' #Include Both Students and Alumni
-              @users = @list.users.where('program = ?', @selected_program)
+              @list.users.each do |u|
+                if u.company_info_id != nil
+                  if u.company_info.company.company_name == @selected_employer
+                    @users.push u
+                  end
+                end
+              end
             elsif @user_status == '0' #Include Only Students
-              @users = @list.users.where("status = '0' and program = ?", @selected_program)
+              @list.users.each do |u|
+                if u.company_info_id != nil
+                  if u.company_info.company.company_name == @selected_employer  && u.status == 0
+                    @users.push u
+                  end
+                end
+              end
             elsif @user_status == '1' #Include Only Alumni
-              @users = @list.users.where("status = '1' and program = ?", @selected_program)
+              @list.users.each do |u|
+                if u.company_info_id != nil
+                  if u.company_info.company.company_name == @selected_employer && u.status == 1
+                    @users.push u
+                  end
+                end
+              end
             end
           end
+          login_array = Array.new
+          @users.each do |u|
+            login_array.push u.login
+          end
+          @results = login_array
 
         # when "given_back"
-        #
-        # when "survey_completion"
         #
         # when "survey_results"
         #
