@@ -93,13 +93,13 @@
 								</p>
 							</div>
 							<!-- Employment Information Tab block -->
-							<div class="content" id="pnlEmploymentInfo">
+							<div class="content" id="pnlEmploymentInfo">'
+                              <% if (@login.user.present?) and (@login.user.company_info.present?) %>
 								<p>
 									<%= @login.user.present? ? @login.user.company_info.company.company_name : "" %><br>
 									<%= @login.user.present? ? @login.user.job_title : "" %>
 								</p>
 								<p>Address:<br>
-								<% if (@login.user.present?) and (@login.user.company_info.present?) %>
 										<%= @login.user.company_info.street %><br>
 										<%= @login.user.company_info.city %>,
 										<%= @login.user.company_info.state %>
