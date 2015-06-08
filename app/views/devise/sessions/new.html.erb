@@ -1,4 +1,6 @@
 <!--Login page configured by Ryan and Andrew-->
+<!--allowed users to log in with Username-->
+<!--added forgot password functionality-->
 <br />
 <div class="row">
   <div class="large-12 small-12" align="center">
@@ -32,7 +34,12 @@
   <div class="actions">
     <%= f.submit "Log in", :class => "button radius" %>
   </div>
+
+  <div class="field">
+    <%= link_to 'Forgot password?', '/disclaimers/contact_us/' %>
+  </div>
 <% end %>
+
 
 </table>
 
