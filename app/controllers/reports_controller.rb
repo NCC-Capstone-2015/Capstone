@@ -116,7 +116,7 @@ require 'csv'
             elsif @user_status == '1' #Include Only Alumni
               @users = User.where("status = '1' and program = ?", @selected_program)
             end
-          else
+          else #Only users in the selected Saved List
             @list = SavedList.find(@selected_saved_list)
             if @user_status == '-1' #Include Both Students and Alumni
               @users = @list.users.where('program = ?', @selected_program)
@@ -200,8 +200,79 @@ require 'csv'
           end
           @results = login_array
 
-        # when "given_back"
-        #
+        when "given_back"
+          @selected_giving_back = params[:selected_giving_back]
+          @user_status = params[:user_status]
+          @selected_saved_list = params[:selected_saved_list]
+          giving_back_array = GivingBack.all
+          user_array = Array.new.uniq
+          if @selected_saved_list.blank?
+            if @user_status == '-1' #Include Both Students and Alumni
+              if @selected_giving_back != '-1'
+                giving_back_array = GivingBack.where('giving_back_type = ?', @selected_giving_back)
+              end
+              giving_back_array.each do |gb|
+                user_array.push gb.user
+              end
+              @users = user_array
+            elsif @user_status == '0' #Include Only Students
+              if @selected_giving_back != '-1'
+                giving_back_array = GivingBack.where('giving_back_type = ?', @selected_giving_back)
+              end
+              giving_back_array.each do |gb|
+                gb.user.status == 0 ? (user_array.push gb.user) : 0
+              end
+              @users = user_array
+            elsif @user_status == '1' #Includ Only Alumni
+              if @selected_giving_back != '-1'
+                giving_back_array = GivingBack.where('giving_back_type = ?', @selected_giving_back)
+              end
+              giving_back_array.each do |gb|
+                gb.user.status == 1 ? (user_array.push gb.user) : 0
+              end
+              @users = user_array
+            end
+          else #Only users in the selected Saved List
+            @list = SavedList.find(@selected_saved_list)
+            list_users = @list.users
+            if @user_status == '-1' #Include Both Students and Alumni
+              if @selected_giving_back != '-1'
+                list_users.each do |lu|
+                  giving_back_array = lu.giving_backs.where('giving_back_type = ?', @selected_giving_back)
+                end
+              else
+                list_users.each do |lu|
+                  giving_back_array = lu.giving_backs.all
+                end
+              end
+              giving_back_array.each do |gb|
+                user_array.push gb.user
+              end
+              @users = user_array
+            elsif @user_status == '0' #Include Only Students
+              if @selected_giving_back != '-1'
+                giving_back_array = GivingBack.where('giving_back_type = ?', @selected_giving_back)
+              end
+              giving_back_array.each do |gb|
+                gb.user.status == 0 ? (user_array.push gb.user) : 0
+              end
+              @users = user_array
+            elsif @user_status == '1' #Includ Only Alumni
+              if @selected_giving_back != '-1'
+                giving_back_array = GivingBack.where('giving_back_type = ?', @selected_giving_back)
+              end
+              giving_back_array.each do |gb|
+                gb.user.status == 1 ? (user_array.push gb.user) : 0
+              end
+              @users = user_array
+            end
+          end
+          login_array = Array.new
+          @users.each do |u|
+            login_array.push u.login
+          end
+          @results = login_array
+
         # when "survey_results"
         #
         # when "user_survey_response"
