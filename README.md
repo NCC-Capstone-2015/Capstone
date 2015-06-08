@@ -1,5 +1,7 @@
 # Capstone Project
 
+#### GitGUI and SourceTree Tutorials created by Cornelius Donley
+
 ## Setting up project using Git GUI
 
 #### Git GUI

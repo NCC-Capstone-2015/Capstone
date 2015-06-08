@@ -1,25 +1,21 @@
 # Author: Craig Sterling
 # Date: 5/20/2015
-class UserInformationsController < AuthenticationController
-  helper_method :convert_opt_in, :convert_user_status, :concatenate_phone,
-                :convert_phone_type, :get_photo_path
+class UserInformationsController < UserAuthController
   before_action :set_user_information, only: [:show, :edit, :update, :destroy]
 
   # GET /user_informations
-  # GET /user_informations.json
   def index
-    @user_informations = UserInformation.all
+
   end
 
   # GET /user_informations/1
-  # GET /user_informations/1.json
   def show
 
 	end
 
   # GET /user_informations/new
   def new
-    @user_information = UserInformation.new
+
   end
 
   # GET /user_informations/1/edit
@@ -28,108 +24,55 @@ class UserInformationsController < AuthenticationController
   end
 
   # POST /user_informations
-  # POST /user_informations.json
   def create
-    @user_information = UserInformation.new(user_information_params)
 
-    respond_to do |format|
-      if @user_information.save
-        format.html { redirect_to @user_information, notice: 'User information was successfully created.' }
-        format.json { render :show, status: :created, location: @user_information }
-      else
-        format.html { render :new }
-        format.json { render json: @user_information.errors, status: :unprocessable_entity }
-      end
-    end
   end
 
   # PATCH/PUT /user_informations/1
-  # PATCH/PUT /user_informations/1.json
   def update
-    respond_to do |format|
-      if @user_information.update(user_information_params)
-        format.html { redirect_to @user_information, notice: 'User information was successfully updated.' }
-        format.json { render :show, status: :ok, location: @user_information }
-      else
-        format.html { render :edit }
-        format.json { render json: @user_information.errors, status: :unprocessable_entity }
-      end
-    end
+
+    @login = Login.find(params[:id])
+    @login.first_name = params[:first_name]
+    @login.middle_initial = params[:middle_initial]
+    @login.email = params[:email]
+    @login.user.street = params[:street]
+    @login.user.city = params[:city]
+    @login.user.state = params[:state]
+    @login.user.zip = params[:zip]
+#    logger.debug "Status Text: #{params[:status]}"
+    logger.debug "Status Number: #{convert_user_status_to_number(params[:status])}"
+    @login.user.status = convert_user_status_to_number(params[:status])
+    @login.user.spouse_last_name = params[:spouse_last_name]
+    @login.user.spouse_first_name = params[:spouse_first_name]
+    @login.user.spouse_middle_initial = params[:spouse_middle_initial]
+    @login.user.number_children = params[:number_children]
+    @login.user.birth_day = Date.parse(params[:birth_day]).strftime("%Y-%m-%d")
+    @login.user.ethnicity = params[:ethnicity]
+    @login.user.general_opt_in = params[:general_opt_in]
+    @login.user.email_opt_in = params[:email_opt_in]
+    @login.user.phone_opt_in = params[:phone_opt_in]
+    @login.user.badges_opt_in = params[:badges_opt_in]
+    @login.user.salary_range = convert_salary_range_to_number(params[:salary_range])
+    @login.user.job_title = params[:job_title]
+    @login.user.start_date = Date.parse(params[:start_date]).strftime("%Y-%m-%d")
+    @login.user.end_date = Date.parse(params[:end_date]).strftime("%Y-%m-%d")
+    @login.save
+    @login.user.save
+
+    redirect_to '/user_informations/' + @login.id.to_s
+
   end
 
   # DELETE /user_informations/1
-  # DELETE /user_informations/1.json
   def destroy
-    @user_information.destroy
-    respond_to do |format|
-      format.html { redirect_to user_informations_url, notice: 'User information was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user_information
       @login = Login.find(params[:id])
-      @user = User.find_by_login_id(@login.id)
-      @user_phones = UserPhone.where(user_id: @user.id)
-      @company = Company.find(@user.company_id)
-      @company_info = CompanyInfo.find_by_company_id(@company.id)
-    end
-
-    # helper method to convert user.status from number stored in tables
-    # to verbiage
-    def convert_user_status (status)
-
-      if status == 0
-        status_description = "Enrolled"
-      else
-        status_description = "Alumni"
-      end
-    end
-
-    # helper method to convert opt_in_values from number stored in tables
-    # to verbiage
-    def convert_opt_in (opt_in_value)
-      if opt_in_value == 0
-        opt_in_text = "No"
-      else
-        opt_in_text = "Yes"
-      end
-    end
-
-    # helper method to concatenate the elements of the phone number into
-    # a string
-    def concatenate_phone (phone_country_code, phone_area_code,
-                           phone_prefix, phone_suffix)
-      phone_text = (phone_country_code + "." + phone_area_code + "." +
-                   phone_prefix + "." + phone_suffix)
-    end
-
-    # helper method to convert phone_type from number stored in tables
-    # to verbiage
-    def convert_phone_type (phone_type)
-      if phone_type == 0
-        phone_type_text = "Home"
-      elsif phone_type == 1
-        phone_type_text = "Work"
-      else phone_type == 2
-        phone_type_text = "Mobile"
-      end
-    end
-
-    # helper method to get phot_path if it exists,
-    # otherwise get the default photo_path
-    def get_photo_path (l_name, f_name)
-      photo_file_name = l_name + "_" + f_name + ".png"
-      photo_path_and_file_name = Rails.root.join "app", "assets", "images",
-                                                                photo_file_name
-      if (File.file?(photo_path_and_file_name))
-        asset_name = "/assets/" + photo_file_name
-      else
-        asset_name = "/assets/placeholder-person.png"
-      end
-      return asset_name
+#      @phones = User.includes(:user_phones).where("user_phones.user_id", @login.user.id)
     end
 
     # Never trust parameters from the scary internet,
@@ -137,4 +80,29 @@ class UserInformationsController < AuthenticationController
     def user_information_params
       params[:user_information]
     end
+
+    # Method to convert user.status from text to a number
+    def convert_user_status_to_number (status_text)
+      if status_text == "Student"
+        status_num = 0
+      elsif status_text == "Alumni"
+        status_num = 1
+      end
+    end
+
+    # Method to convert salary_range from words to a number
+    def convert_salary_range_to_number (salary_range_text)
+      if salary_range_text == "< $ 49,000"
+        salary_range_num = 0
+      elsif salary_range_text == "$ 50,000 to $ 99,000"
+        salary_range_num = 1
+      elsif salary_range_text == "$ 100,000 to $ 149,000"
+        salary_range_num = 2
+      elsif salary_range_text == "$ 150,000 to $ 199,000"
+        salary_range_text_num = 3
+      else salary_range_text == "> $ 200,000"
+        salary_range_num = 4
+      end
+    end
+
 end

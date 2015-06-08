@@ -1,26 +1,60 @@
 <% content_for :title, "Alumbook | Report Display" %>
 
-<%= render "menu/admin" %>
+<<<<<<< HEAD
 
+
+=======
+>>>>>>> da1a216d81e5b24994df0f46d742d859af5ac567
 <p id="notice"><%= notice %></p>
 <br />
 <div class="row">
   <div class="large-12 large-centered columns">
-    <div class="row noprint">
+    <div class="row">
       <div class="large-12 small-12 small-centered large-centered columns">
-        <h1 align="center">Display</h1>
+        <h1 align="center"><%= @report_type.humanize %> Report</h1>
       </div>
     </div>
-    <hr /><br />
-    <div class="row noprint">
+    <hr class="noprint"/><br />
+    <div class="row">
       <div class="large-12 large-centered small-12 columns">
         <div id="displayResults" style="overflow: auto; height: 100%; width: 100%;">
-        <%= params %>
+          <!-- <%= params %> -->
+          <table>
+              <tr>
+                <% @results.first.attributes.except(*@keys_blacklist).each do |attr_name, attr_value| %>
+                    <% if attr_name != 'id' %>
+                      <td><%= attr_name.humanize %></td>
+                    <% end %>
+                <% end %>
+                <% @results.first.user.try(:attributes).try(:except, *@user_blacklist).try(:each) do |attr_name, attr_value| %>
+                  <td><%= attr_name.humanize %></td>
+                <% end %>
+              </tr>
+
+
+            <% @results.each do |result| %>
+              <tr>
+                <% result.attributes.except(*@keys_blacklist).each do |attr_name, attr_value| %>
+                  <% if attr_name == 'id' %>
+                    <% @login_id = attr_value %>
+                  <% elsif attr_name == 'username' %>
+                    <td><%= link_to attr_value, user_information_path(@login_id), style: "color: #0000AA;" %></td>
+                  <% else %>
+                    <td><%= attr_value %></td>
+                  <% end %>
+                <% end %>
+                <%= result.user.try(:inspect) %>
+                <% result.user.try(:attributes).try(:except, *@user_blacklist).try(:each) do |attr_name, attr_value| %>
+                  <td><%= attr_value %></td>
+                <% end %>
+              </tr>
+            <% end %>
+          </table>
         </div>
       </div>
     </div>
-    <hr /><br />
-    <div class="row">
+    <hr class="noprint" /><br />
+    <div class="row noprint">
       <div class="large-12 large-centered columns">
         <div align="center">
           <a onclick="printPage()" class="button radius">Print</a>

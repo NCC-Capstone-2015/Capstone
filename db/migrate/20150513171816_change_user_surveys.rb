@@ -1,3 +1,5 @@
+# Created by Cornelius Donley
+# Changed text response from type string to type text
 class ChangeUserSurveys < ActiveRecord::Migration
   def change
     change_table :user_survey_responses do |t|

@@ -1,7 +1,4 @@
-<!-- Author: Craig Sterling -->
-<!-- Date: 5/20/2015 -->
-
-<%= render "menu/student" %>
+<!-- Craig Sterling -->
 <section>
 	<fieldset>
 		<legend>User Information</legend>
@@ -9,11 +6,11 @@
 			<!-- User Name and Photo block -->
 			<div class="small-12 large-3 columns">
 				<div class="small-12">
-					<p><%= @login.last_name + ", " + @login.first_name %></p>
+					<p><%= @login.last_name %>, <%= @login.first_name %> <%= @login.middle_initial %></p>
 					<p><%= "User Name: " + @login.username %></p>
 				</div>
 				<div class="small-12">
-					<img src=<%= get_photo_path(@login.last_name, @login.first_name) %>>
+					<img src=<%= get_photo_path(@login.id) %>>
 				</div>
 			</div>
 
@@ -41,20 +38,25 @@
 							<!-- Contact Information Tab block -->
 							<div class="content active" id="pnlContactInfo">
 								<p>Address:<br>
-									<%= @user.street %><br>
-									<%= @user.city + ", " +  @user.state + " " + @user.zip %><br>
+									<% if (@login.user.present?) %>
+										<%= @login.user.street %><br>
+										<%= @login.user.city %> ,
+										<%= @login.user.state %>
+										<%= @login.user.zip %><br>
+									<% end %>
 								</p>
-								<p>email: <%=@user.email_addr %><br>
+								<p>email: <%= @login.email %></p>
+								<p><ins>Phone Numbers</ins>
 									<ul id="user_phones">
-										<% if !(@user_phones.blank?) %>
-									  	<% @user_phones.each do |c| %>
-										  <li>
-												<%= convert_phone_type(c.user_phone_type) + ": " +
-														concatenate_phone(c.country_code,
-																							c.area_code,
-																							c.prefix,
-																							c.suffix) %>
-										  </li>
+										<% if (@login.user.present?) and (@login.user.user_phones.all.present?) %>
+									  	<% @login.user.user_phones.all.each do |c| %>
+											  <li>
+													<%= convert_phone_type(c.user_phone_type) + ": " +
+															concatenate_phone(c.country_code,
+																								c.area_code,
+																								c.prefix,
+																								c.suffix) %>
+											  </li>
 										  <% end %>
 										<% end %>
 									</ul>
@@ -62,17 +64,28 @@
 							</div>
 							<!-- Education Information Tab block -->
 							<div class="content" id="pnlEducationInfo">
-								<p><%= convert_user_status(@user.status) %></p>
-								<p>Degrees
+								<p>Education status: <%= @login.user.present? ?
+																				convert_user_status_to_words(@login.user.status) :
+																				"" %></p>
+								<p><ins>Degrees</ins>
 									<ul id="degrees">
-										<% if !(@user_phones.blank?) %>
-									  	<% @user_phones.each do |c| %>
+										<% if (@login.user.present?) and (@login.user.undergraduate_degrees.all.present?) %>
+									  	<% @login.user.undergraduate_degrees.all.each do |ud| %>
 										  <li>
-										    <%= convert_phone_type(c.user_phone_type) + ": " +
-														concatenate_phone(c.country_code,
-																							c.area_code,
-																							c.prefix,
-																							c.suffix) %>
+												<%= convert_degree_type(ud.degree.degree_type) %>
+												 		<%= ud.degree.major_name %> from
+														<%= ud.college.college_name %> on
+														<%= ud.graduation_date %>
+										  </li>
+										  <% end %>
+										<% end %>
+										<% if (@login.user.present?) and (@login.user.graduate_degrees.present?) %>
+									  	<% @login.user.graduate_degrees.all.each do |gd| %>
+										  <li>
+												<%= convert_degree_type(gd.degree.degree_type) %>
+												 		<%= gd.degree.major_name %> from
+														<%= gd.college.college_name %> on
+														<%= gd.graduation_date %>
 										  </li>
 										  <% end %>
 										<% end %>
@@ -81,43 +94,47 @@
 							</div>
 							<!-- Employment Information Tab block -->
 							<div class="content" id="pnlEmploymentInfo">
-								<p><%= @company.company_name %><br>
-									<%= @user.job_title %>
+								<p>
+									<%= @login.user.present? ? @login.user.company_info.company.company_name : "" %><br>
+									<%= @login.user.present? ? @login.user.job_title : "" %>
 								</p>
 								<p>Address:<br>
-									<%= @company_info.street %><br>
-									<%= @company_info.city + ", " +
-											@company_info.state + " " +
-											@company_info.zip %>
+								<% if (@login.user.present?) and (@login.user.company_info.present?) %>
+										<%= @login.user.company_info.street %><br>
+										<%= @login.user.company_info.city %>,
+										<%= @login.user.company_info.state %>
+										<%= @login.user.company_info.zip  %>
 								</p>
-								<p><%= concatenate_phone(@company_info.country_code,
-																				 @company_info.area_code,
-																			   @company_info.prefix,
-																				 @company_info.suffix) %>
+
+								<p><%= concatenate_phone(@login.user.company_info.country_code,
+																				 @login.user.company_info.area_code,
+																				 @login.user.company_info.prefix,
+																				 @login.user.company_info.suffix) %>
 								</p>
-								<p>Salary Range: <%= @user.salary_range %></p>
-								<p>Start Date: <%= @user.start_date %><br>
-									End Date: <%= @user.end_date %>
+								<% end %>
+								<p>Salary Range: <%= @login.user.present? ? convert_salary_range_to_words(@login.user.salary_range) : "" %></p>
+								<p>Start Date: <%= @login.user.present? ? @login.user.start_date : "" %><br>
+									End Date: <%= @login.user.present? ? @login.user.end_date : "" %>
 								</p>
 							</div>
 							<!-- Personal Information Tab block -->
 							<div class="content" id="pnlPersonalInfo">
-								<p>Birth Date: <%= @user.birth_day %></p>
-								<p>Ethnicity <%= @user.ethnicity %></p>
-								<p>Spouse Name <%= @user.spouse_first_name %>
-															 <%= @user.spouse_middle_initial %>
-															 <%= @user.spouse_last_name %>
+								<p>Birth Date: <%= @login.user.present? ? @login.user.birth_day : ""%></p>
+								<p>Ethnicity: <%= @login.user.present? ? @login.user.ethnicity : "" %></p>
+								<p>Spouse Name: <%= @login.user.present? ? @login.user.spouse_first_name : "" %>
+															 <%= @login.user.present? ? @login.user.spouse_middle_initial : "" %>
+															 <%= @login.user.present? ? @login.user.spouse_last_name : "" %>
 								</p>
-								<p>Number of children: <%= @user.number_children %></p>
+								<p>Number of children: <%= @login.user.present? ? @login.user.number_children : "" %></p>
 							</div>
 							<!-- Privacy Information Tab block -->
 							<div class="content" id="pnlPrivacyInfo">
 								<fieldset>
 									<legend>Opt In?</legend>
-										<p>General opt in: <%= convert_opt_in(@user.general_opt_in) %></p>
-										<p>Email opt in: <%= convert_opt_in(@user.email_opt_in) %></p>
-										<p>Phone opt in: <%= convert_opt_in(@user.phone_opt_in) %></p>
-										<p>Badges opt in: <%= convert_opt_in(@user.badges_opt_in) %></p>
+										<p>General: <%= convert_opt_in_to_words(@login.user.present? ? @login.user.general_opt_in : 0) %></p>
+										<p>Email: <%= convert_opt_in_to_words(@login.user.present? ? @login.user.email_opt_in : 0) %></p>
+										<p>Phone: <%= convert_opt_in_to_words(@login.user.present? ? @login.user.phone_opt_in : 0) %></p>
+										<p>Badges: <%= convert_opt_in_to_words(@login.user.present? ? @login.user.badges_opt_in : 0) %></p>
 								</fieldset>
 							</div>
 						</div>
@@ -125,5 +142,4 @@
 				</div>
 			</div>
 	</fieldset>
-	<a class="button radius" href="/user_informations/1/edit"> Edit</a>
 </section>

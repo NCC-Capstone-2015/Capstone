@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
-
+#Rapidfire survey builder
+gem 'rapidfire', git: 'https://github.com/DrewOlehy/rapidfire.git', branch: 'v3.0.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.1'
 # Use mysql as the database for Active Record
@@ -21,8 +22,6 @@ gem 'coffee-script-source', '1.8.0'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
-# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
@@ -56,9 +55,9 @@ group :development, :test do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
-  
+
   # Devise added by Andrew and Ryan
   gem 'devise'
-  
-  
+
+
 end
