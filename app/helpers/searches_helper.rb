@@ -10,9 +10,16 @@ module SearchesHelper
     link_to(name, '#', class: "add_fields " + locals[:class], data: {id: id, fields: fields.gsub("\n", "")})
   end
   def display_search_results(objects)
-    # display advanced search results table
+    # display basic search results table
+    count = 1
+    holder = Array.new(3)
     objects.each_with_object('') do |object, string|
-      string << content_tag(:tr, display_search_results_row(object))
+      holder[count - 1] = content_tag(:div, content_tag(:div, tag("img", src: get_photo_path(object.send(:id))), class: "row") + display_basic_search_results_row(object), class: ["large-3 small-3 column"])
+      if (count % 3 == 0) || (count == objects.size)
+        string << content_tag(:div, holder[0] + holder[1] + holder[2], class: "row text-center")
+        count = 0
+      end
+      count += 1
     end
   end
   def display_basic_search_results(objects)
@@ -22,7 +29,7 @@ module SearchesHelper
     objects.each_with_object('') do |object, string|
       holder[count - 1] = content_tag(:div, content_tag(:div, tag("img", src: get_photo_path(object.send(:id))), class: "row") + display_basic_search_results_row(object), class: ["large-3 small-3 column"])
       if (count % 3 == 0) || (count == objects.size)
-        string << content_tag(:div, holder[0] + holder[1] + holder[2] + holder[3], class: "row text-center")
+        string << content_tag(:div, holder[0] + holder[1] + holder[2], class: "row text-center")
         count = 0
       end
       count += 1
