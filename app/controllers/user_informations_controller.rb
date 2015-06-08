@@ -1,6 +1,6 @@
 # Author: Craig Sterling
 # Date: 5/20/2015
-class UserInformationsController < UserAuthController
+class UserInformationsController < AuthenticationController
   before_action :set_user_information, only: [:show, :edit, :update, :destroy]
 
   # GET /user_informations
@@ -31,35 +31,105 @@ class UserInformationsController < UserAuthController
   # PATCH/PUT /user_informations/1
   def update
 
-    @login = Login.find(params[:id])
-    @login.first_name = params[:first_name]
-    @login.middle_initial = params[:middle_initial]
-    @login.email = params[:email]
-    @login.user.street = params[:street]
-    @login.user.city = params[:city]
-    @login.user.state = params[:state]
-    @login.user.zip = params[:zip]
-#    logger.debug "Status Text: #{params[:status]}"
-    logger.debug "Status Number: #{convert_user_status_to_number(params[:status])}"
-    @login.user.status = convert_user_status_to_number(params[:status])
-    @login.user.spouse_last_name = params[:spouse_last_name]
-    @login.user.spouse_first_name = params[:spouse_first_name]
-    @login.user.spouse_middle_initial = params[:spouse_middle_initial]
-    @login.user.number_children = params[:number_children]
-    @login.user.birth_day = Date.parse(params[:birth_day]).strftime("%Y-%m-%d")
-    @login.user.ethnicity = params[:ethnicity]
-    @login.user.general_opt_in = params[:general_opt_in]
-    @login.user.email_opt_in = params[:email_opt_in]
-    @login.user.phone_opt_in = params[:phone_opt_in]
-    @login.user.badges_opt_in = params[:badges_opt_in]
-    @login.user.salary_range = convert_salary_range_to_number(params[:salary_range])
-    @login.user.job_title = params[:job_title]
-    @login.user.start_date = Date.parse(params[:start_date]).strftime("%Y-%m-%d")
-    @login.user.end_date = Date.parse(params[:end_date]).strftime("%Y-%m-%d")
-    @login.save
-    @login.user.save
+    change = false
+    login = Login.find(current_login.id)
 
-    redirect_to '/user_informations/' + @login.id.to_s
+    if params["first_name"].present?
+      change = true
+      login.update(first_name: params["first_name"])
+    end
+    if params["last_name"].present?
+      change = true
+      login.update(last_name: params["last_name"])
+    end
+    if params["middle_initial"].present?
+      change = true
+      login.update(middle_initial: params["middle_initial"])
+    end
+    if params["email"].present?
+      change = true
+      login.update(email: params["email"])
+    end
+    if params["street"].present?
+      change = true
+      login.user.update(street: params["street"])
+    end
+    if params["city"].present?
+      change = true
+      login.user.update(city: params["city"])
+    end
+    if params["state"].present?
+      change = true
+      login.user.update(state: params["state"])
+    end
+    if params["zip"].present?
+      change = true
+      login.user.update(zip: params["zip"])
+    end
+    if params["status"].present?
+      change = true
+      login.user.update(status: convert_user_status_to_number(params["status"]))
+    end
+    if params["spouse_last_name"].present?
+      change = true
+      login.user.update(spouse_last_name: params["spouse_last_name"])
+    end
+    if params["spouse_first_name"].present?
+      change = true
+      login.user.update(spouse_first_name: params["spouse_first_name"])
+    end
+    if params["spouse_middle_initial"].present?
+      change = true
+      login.user.update(spouse_middle_initial: params["spouse_middle_initial"])
+    end
+    if params["number_children"].present?
+      change = true
+      login.user.update(number_children: params["number_children"])
+    end
+    if params["birth_day"].present?
+      change = true
+      login.user.update(birth_day: Date.parse(params["birth_day"]).strftime("%Y-%m-%d"))
+    end
+    if params["ethnicity"].present?
+      change = true
+      login.user.update(ethnicity: params["ethnicity"])
+    end
+    if params["general_opt_in"].present?
+      change = true
+      login.user.update(general_opt_in: params["general_opt_in"])
+    end
+    if params["email_opt_in"].present?
+      change = true
+      login.user.update(email_opt_in: params["email_opt_in"])
+    end
+    if params["phone_opt_in"].present?
+      change = true
+      login.user.update(phone_opt_in: params["phone_opt_in"])
+    end
+    if params["badges_opt_in"].present?
+      change = true
+      login.user.update(badges_opt_in: params["badges_opt_in"])
+    end
+    if params["salary_range"].present?
+      change = true
+      login.user.update(salary_range: convert_salary_range_to_number(params["salary_range"]))
+    end
+    if params["job_title"].present?
+      change = true
+      login.user.update(job_title: params["job_title"])
+    end
+    if params["start_date"].present?
+      change = true
+      login.user.update(start_date: Date.parse(params["start_date"]).strftime("%Y-%m-%d"))
+    end
+    if params["end_date"].present?
+      change = true
+      login.user.update(end_date: Date.parse(params["end_date"]).strftime("%Y-%m-%d"))
+    end
+
+    if change
+      redirect_to :action => "show", :id => :id
+    end
 
   end
 
@@ -71,7 +141,7 @@ class UserInformationsController < UserAuthController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user_information
-      @login = Login.find(params[:id])
+      @login = Login.find(current_login.id)
 #      @phones = User.includes(:user_phones).where("user_phones.user_id", @login.user.id)
     end
 

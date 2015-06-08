@@ -11,7 +11,7 @@
         <h4>Graduating Class:</h4>
       </div>
       <div class="large-6 small-12 column">
-        <%= select_year Date.today, :prefix => 'grad_year', start_year: Date.today.year, end_year: 1980 %>
+        <%= select_year Date.today, :prefix => 'grad_year', start_year: Date.today.year + 5, end_year: 1980 %>
       </div>
     </div>
   </div>

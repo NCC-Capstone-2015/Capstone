@@ -1,3 +1,4 @@
+#written by Matthew Kachlik
 class GivingBacksController < ApplicationController
   before_action :set_giving_back, only: [:show, :edit, :update, :destroy]
 
@@ -17,14 +18,38 @@ class GivingBacksController < ApplicationController
     @giving_back = GivingBack.new
   end
 
-  # GET /giving_backs/1/edit
   def edit
   end
+  #changes uncompleted giving back to completed
+  def completed
 
+    @giving_back = GivingBack.find(params[:id])
+    @giving_back.completed = true
+    respond_to do |format|
+      if @giving_back.save
+        format.html { redirect_to @giving_back, notice: 'Giving back was completed.' }
+      end
+    end
+  end
+  #changes the boolean to true on approve
+  def approve
+
+    @giving_back = GivingBack.find(params[:id])
+    @giving_back.approved = true
+    @giving_back.save
+    respond_to do |format|
+      if @giving_back.save
+        format.html { redirect_to @giving_back, notice: 'Giving back was approved.' }
+      end
+    end
+  end
   # POST /giving_backs
   # POST /giving_backs.json
   def create
     @giving_back = GivingBack.new(giving_back_params)
+    @giving_back.approved = false
+    @giving_back.completed = false
+    @giving_back.user_id = current_login.id
 
     respond_to do |format|
       if @giving_back.save

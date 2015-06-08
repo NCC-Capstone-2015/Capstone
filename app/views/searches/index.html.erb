@@ -12,5 +12,9 @@
     <% if @display_results %>
       <%= render "results" %>
     <% end %>
+    <!-- Saved lists drop down made with help from Andrew Bockus -->
+    <%= form_tag "saved_lists/new", :html=>{:id=>'saved_list_form'}, method: "post" do %>
+      <%= select_tag :list_type, options_from_collection_for_select(@saved_lists, "id", "list_name"), {:include_blank => 'New List', onchange: 'this.form.submit();'} %>
+    <% end %>
   </div>
 </div>

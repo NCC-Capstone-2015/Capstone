@@ -1,3 +1,4 @@
+#Matthew Kachlik
 class UsersController < AuthenticationController
   def index
     @users = User.all
@@ -26,7 +27,7 @@ class UsersController < AuthenticationController
     @user_phone = UserPhone.new()
     @user_phone.user_id = @user.id
   end
-
+  #checks if there are any changes to be made
   def edit
     change = false
     user = User.find(params[:id])
@@ -73,7 +74,9 @@ class UsersController < AuthenticationController
       user.update(status: params["status"])
     end
     if change
-      redirect_to users_path
+      respond_to do |format|
+        format.html { redirect_to user, notice: 'User was updated successfully.' }
+      end
     end
   end
 
@@ -99,15 +102,16 @@ class UsersController < AuthenticationController
     @login.sign_in_count = 0
 
 
-
-    if @login.save!
-      if params["login_type"].to_i == 2
+    #check if they are saved correctly or show an error message
+    if @login.save
       #only make a user profile if they are not a worker
+      if params["login_type"].to_i == 2
+
         @user = User.new()
         @user.login_id = @login.id
         @user.program = params["program"]
         @user.status = params["status"]
-        if @user.save!
+        if @user.save
           @user_phone = UserPhone.new()
           @user_phone.country_code = params["country_code"]
           @user_phone.area_code = params["area_code"]
@@ -115,19 +119,32 @@ class UsersController < AuthenticationController
           @user_phone.suffix = params["suffix"]
           @user_phone.user_id = @user.id
           @user_phone.user_phone_type = 1
-          if @user_phone.save!
-            redirect_to users_path
+          if @user_phone.save
+            respond_to do |format|
+                format.html { redirect_to @user, notice: 'Student was made successfully.' }
+            end
           else
-            redirect_to new_users_path
+            respond_to do |format|
+              format.html { redirect_to new_user_path, notice: 'Error while making user phone.' }
+              format.json { render json: @user_phone.errors, status: :unprocessable_entity }
+            end
           end
         else
-          redirect_to new_user_path
+          respond_to do |format|
+            format.html { redirect_to new_user_path, notice: 'Error while making user.' }
+            format.json { render json: @user.errors, status: :unprocessable_entity }
+          end
         end
       else
-        redirect_to users_path
+        respond_to do |format|
+            format.html { redirect_to users_path, notice: 'Student was made successfully.' }
+        end
       end
     else
-      redirect_to user_path
+      respond_to do |format|
+        format.html { redirect_to new_user_path, notice: 'Error while making user.' }
+        format.json { render json: @login.errors, status: :unprocessable_entity }
+      end
     end
 
 

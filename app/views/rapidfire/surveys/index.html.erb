@@ -1,12 +1,12 @@
 <h2>
   Surveys
-  <% if can_administer? %>
-    <%= link_to "New Survey", new_survey_path, class: "button radius" %>
-  <% end %>
 </h2>
 <hr/>
 
 <table>
+  <% if can_administer? %>
+    <%= link_to "New Survey", new_survey_path, class: "button radius success" %>
+  <% end %>
   <colgroup>
     <col>
     <col width="250">

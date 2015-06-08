@@ -2,7 +2,6 @@
 <div class="row">
   <%= content_tag :table do %>
     <div class="small-12 medium-5 large-5 column">
-      <%= content_tag :thead, display_sort_column_headers(@q), nil, false %>
       <%= content_tag :tbody, display_basic_search_results(@searches), nil, false %>
     </div>
   <% end %>

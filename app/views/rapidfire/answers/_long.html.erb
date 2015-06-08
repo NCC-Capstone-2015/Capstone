@@ -1,4 +1,9 @@
 <%= render partial: "rapidfire/answers/errors", locals: {answer: answer} %>
 
-<%= f.label :answer_text, answer.question.question_text %>
-<%= f.text_area :answer_text, :rows => 5 %>
+<div class="row">
+  <div class="large-6 medium-6 small-12 columns">
+      <%= f.label :answer_text, answer.question.question_text %>
+      <%= f.text_area :answer_text, :rows => 5 %>
+  </div>
+</div>
+<br />

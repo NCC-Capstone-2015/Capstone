@@ -10,5 +10,4 @@ class User < ActiveRecord::Base
   has_many :graduate_degrees, :dependent => :destroy
   has_many :undergraduate_degrees, :dependent => :destroy
   has_many :user_surveys, :dependent => :destroy
-
 end
