@@ -17,8 +17,15 @@ module SearchesHelper
   end
   def display_basic_search_results(objects)
     # display basic search results table
+    count = 1
+    holder = Array.new(3)
     objects.each_with_object('') do |object, string|
-      string << content_tag(:tr, display_basic_search_results_row(object))
+      holder[count - 1] = content_tag(:div, content_tag(:div, tag("img", src: get_photo_path(object.send(:id))), class: "row") + display_basic_search_results_row(object), class: ["large-3 small-3 column"])
+      if (count % 3 == 0) || (count == objects.size)
+        string << content_tag(:div, holder[0] + holder[1] + holder[2] + holder[3], class: "row text-center")
+        count = 0
+      end
+      count += 1
     end
   end
   def model_fields
@@ -40,9 +47,8 @@ module SearchesHelper
     .html_safe
   end
   def display_basic_search_results_row(object)
-    # display row without link in first name field
     model_fields.each_with_object('') do |field, string|
-      string << content_tag(:td, object.send(field))
+      string << content_tag(:div, object.send(field), class: "row")
     end
     .html_safe
   end
