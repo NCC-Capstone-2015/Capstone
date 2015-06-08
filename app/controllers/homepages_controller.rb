@@ -1,3 +1,4 @@
+# Created by Ryan and Andrew
 class HomepagesController < AuthenticationController
   before_action :set_homepage, only: [:show, :edit, :update, :destroy]
 
