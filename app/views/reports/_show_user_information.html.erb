@@ -42,79 +42,157 @@
               <% end %>
             <% end %>
 
+            <% GivingBack.try(:first).try(:attributes).try(:slice, *['giving_back_type', 'description']).try(:each) do |attr_name, attr_value| %>
+              <td><%= attr_name.humanize %></td>
+            <% end %>
             <!-- <td>Degree Type</td> -->
 
           </tr>
 
         <% @results.try(:each) do |result| %>
-          <% result.user.try(:undergraduate_degrees).try(:each) do |undergrad| %>
-            <% result.user.try(:graduate_degrees).try(:each) do |grad_degree| %>
-              <tr>
-                <!-- Print user login information -->
-                <% result.attributes.except(*@keys_blacklist).each do |attr_name, attr_value| %>
-                  <% if attr_name == 'id' %>
-                    <% @login_id = attr_value %>
-                  <% elsif attr_name == 'username' %>
-                    <td><%= link_to attr_value, user_information_path(@login_id), style: "color: #0000AA;" %></td>
-                  <% else %>
-                    <td><%= attr_value %></td>
-                  <% end %>
-                <% end %>
-
-                <!-- Print user information -->
-                <% result.user.try(:attributes).try(:except, *@user_blacklist).try(:each) do |attr_name, attr_value| %>
-                  <% if attr_name == 'company_info_id' %>
-                    <td><%= result.user.try(:company_info).try(:company).try(:company_name) %></td>
-                  <% else %>
-                    <td><%= attr_value %></td>
-                  <% end %>
-                <% end %>
-
-                <!-- Print first user phone -->
-                <% result.user.try(:user_phones).try(:first).try(:attributes).try(:except, *@phone_blacklist).try(:each) do |attr_name, attr_value| %>
+          <% if result.user.undergraduate_degrees.count < 1 || result.user.graduate_degrees.count < 1 %>
+            <tr>
+              <!-- Print user login information -->
+              <% result.attributes.except(*@keys_blacklist).each do |attr_name, attr_value| %>
+                <% if attr_name == 'id' %>
+                  <% @login_id = attr_value %>
+                <% elsif attr_name == 'username' %>
+                  <td><%= link_to attr_value, user_information_path(result.user.id), style: "color: #0000AA;" %></td>
+                <% else %>
                   <td><%= attr_value %></td>
                 <% end %>
+              <% end %>
 
-                <!-- Print user undergraduate degrees -->
-                <% undergrad.try(:attributes).try(:except, *@degree_blacklist).try(:each) do |attr_name, attr_value| %>
-                  <% if attr_name == "college_id" %>
-                    <td><%= College.try(:find, attr_value).try(:college_name) %></td>
-                  <% elsif attr_name == "degree_id" %>
-                    <td><%= Degree.try(:find, attr_value).try(:major_name) %></td>
-                    <% @undergrad_variable = attr_value %>
-                  <% else %>
+              <!-- Print user information -->
+              <% result.user.try(:attributes).try(:except, *@user_blacklist).try(:each) do |attr_name, attr_value| %>
+                <% if attr_name == 'company_info_id' %>
+                  <td><%= result.user.try(:company_info).try(:company).try(:company_name) %></td>
+                <% else %>
+                  <td><%= attr_value %></td>
+                <% end %>
+              <% end %>
+
+              <!-- Print first user phone -->
+              <% result.user.try(:user_phones).try(:first).try(:attributes).try(:except, *@phone_blacklist).try(:each) do |attr_name, attr_value| %>
+                <td><%= attr_value %></td>
+              <% end %>
+
+              <!-- Print user undergraduate degrees -->
+              <% result.user.try(:undergraduate_degrees).try(:first).try(:attributes).try(:except, *@degree_blacklist).try(:each) do |attr_name, attr_value| %>
+                <% if attr_name == "college_id" %>
+                  <td><%= College.try(:find, attr_value).try(:college_name) %></td>
+                <% elsif attr_name == "degree_id" %>
+                  <td><%= Degree.try(:find, attr_value).try(:major_name) %></td>
+                  <% @undergrad_variable = attr_value %>
+                <% else %>
+                  <td><%= attr_value %></td>
+                <% end %>
+              <% end %>
+              <td><%= Degree.try(:find, @undergrad_variable).try(:degree_type) %></td>
+
+              <!-- Print user graduate degrees -->
+              <% result.user.try(:graduate_degrees).try(:first).try(:attributes).try(:except, *@degree_blacklist).try(:each) do |attr_name, attr_value| %>
+                <% if attr_name == "college_id" %>
+                  <td><%= College.try(:find, attr_value).try(:college_name) %></td>
+                <% elsif attr_name == "degree_id" %>
+                  <td><%= Degree.try(:find, attr_value).try(:major_name) %></td>
+                <% else %>
+                  <td><%= attr_value %></td>
+                <% end %>
+              <% end %>
+
+              <!-- Print user giving back opportunities -->
+              <% result.user.try(:giving_backs).try(:each) do |giveback| %>
+                <% giveback.try(:attributes).try(:slice, *['giving_back_type', 'description']).try(:each) do |attr_name, attr_value| %>
+                  <td><%= attr_value %></td>
+                <% end %>
+              <% end %>
+            </tr>
+          <% else %>
+            <% result.user.try(:undergraduate_degrees).try(:each) do |undergrad| %>
+              <% result.user.try(:graduate_degrees).try(:each) do |grad_degree| %>
+                <tr>
+                  <!-- Print user login information -->
+                  <% result.attributes.except(*@keys_blacklist).each do |attr_name, attr_value| %>
+                    <% if attr_name == 'id' %>
+                      <% @login_id = attr_value %>
+                    <% elsif attr_name == 'username' %>
+                      <td><%= link_to attr_value, user_information_path(result.user.id), style: "color: #0000AA;" %></td>
+                    <% else %>
+                      <td><%= attr_value %></td>
+                    <% end %>
+                  <% end %>
+
+                  <!-- Print user information -->
+                  <% result.user.try(:attributes).try(:except, *@user_blacklist).try(:each) do |attr_name, attr_value| %>
+                    <% if attr_name == 'company_info_id' %>
+                      <td><%= result.user.try(:company_info).try(:company).try(:company_name) %></td>
+                    <% else %>
+                      <td><%= attr_value %></td>
+                    <% end %>
+                  <% end %>
+
+                  <!-- Print first user phone -->
+                  <% result.user.try(:user_phones).try(:first).try(:attributes).try(:except, *@phone_blacklist).try(:each) do |attr_name, attr_value| %>
                     <td><%= attr_value %></td>
                   <% end %>
-                <% end %>
-                <td><%= Degree.try(:find, @undergrad_variable).try(:degree_type) %></td>
 
-                <!-- Print user undergraduate degrees -->
-                <% undergrad.try(:degrees).try(:attributes).try(:except, *@degree_blacklist).try(:each) do |attr_name, attr_value| %>
-                  <% if attr_name == "college_id" %>
-                    <td><%= College.try(:find, attr_value).try(:college_name) %></td>
-                  <% elsif attr_name == "degree_id" %>
-                    <td><%= Degree.try(:find, attr_value).try(:major_name) %></td>
-                    <% @grad_variable = attr_value %>
-                  <% else %>
-                    <td><%= attr_value %></td>
+                  <!-- Print user undergraduate degrees -->
+                  <% undergrad.try(:attributes).try(:except, *@degree_blacklist).try(:each) do |attr_name, attr_value| %>
+                    <% if attr_name == "college_id" %>
+                      <td><%= College.try(:find, attr_value).try(:college_name) %></td>
+                    <% elsif attr_name == "degree_id" %>
+                      <td><%= Degree.try(:find, attr_value).try(:major_name) %></td>
+                      <% @undergrad_variable = attr_value %>
+                    <% else %>
+                      <td><%= attr_value %></td>
+                    <% end %>
                   <% end %>
-                <% end %>
+                  <td><%= Degree.try(:find, @undergrad_variable).try(:degree_type) %></td>
 
-                <!-- Print user graduate degrees -->
-                <% grad_degree.try(:attributes).try(:except, *@degree_blacklist).try(:each) do |attr_name, attr_value| %>
-                  <% if attr_name == "college_id" %>
-                    <td><%= College.try(:find, attr_value).try(:college_name) %></td>
-                  <% elsif attr_name == "degree_id" %>
-                    <td><%= Degree.try(:find, attr_value).try(:major_name) %></td>
-                  <% else %>
-                    <td><%= attr_value %></td>
+                  <!-- Print user undergraduate degrees -->
+                  <% undergrad.try(:degrees).try(:attributes).try(:except, *@degree_blacklist).try(:each) do |attr_name, attr_value| %>
+                    <% if attr_name == "college_id" %>
+                      <td><%= College.try(:find, attr_value).try(:college_name) %></td>
+                    <% elsif attr_name == "degree_id" %>
+                      <td><%= Degree.try(:find, attr_value).try(:major_name) %></td>
+                      <% @grad_variable = attr_value %>
+                    <% else %>
+                      <td><%= attr_value %></td>
+                    <% end %>
                   <% end %>
-                <% end %>
-              </tr>
+
+                  <!-- Print user graduate degrees -->
+                  <% grad_degree.try(:attributes).try(:except, *@degree_blacklist).try(:each) do |attr_name, attr_value| %>
+                    <% if attr_name == "college_id" %>
+                      <td><%= College.try(:find, attr_value).try(:college_name) %></td>
+                    <% elsif attr_name == "degree_id" %>
+                      <td><%= Degree.try(:find, attr_value).try(:major_name) %></td>
+                    <% else %>
+                      <td><%= attr_value %></td>
+                    <% end %>
+                  <% end %>
+
+                  <% result.user.try(:giving_backs).try(:each) do |giveback| %>
+                    <% giveback.try(:attributes).try(:slice, *['giving_back_type', 'description']).try(:each) do |attr_name, attr_value| %>
+                      <td><%= attr_value %></td>
+                    <% end %>
+                  <% end %>
+                </tr>
+              <% end %>
             <% end %>
           <% end %>
         <% end %>
       </table>
+    </div>
+  </div>
+</div><br />
+<div class="row noprint">
+  <div class="large-12 large-centered medium-12 columns">
+    <div align="center">
+      <a href="<%= reports_path %>" class="button radius">Back</a>
+      <a onclick="printPage()" class="button radius">Print</a>
+      <%= link_to "Excel", reports_display_path(format: "xls"), class: "button radius noprint" %>
     </div>
   </div>
 </div>
