@@ -8,8 +8,8 @@ class CreateGivingBacks < ActiveRecord::Migration
       t.string :position
       t.string :description
       t.string :requirements
-      t.boolean :approved, default: 0
-      t.boolean :completed, default: 0
+      t.boolean :approved, default: true
+      t.boolean :completed, default: true
       t.integer :giving_back_type
       t.string :contact_first_name
       t.string :contact_last_name
