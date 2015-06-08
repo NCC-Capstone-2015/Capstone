@@ -1,3 +1,5 @@
+<!-- Created by Rapidfire Edited by Drew Olehy -->
+
 <div class="panel radius">
 <h3>Question</h3>
 
@@ -10,6 +12,7 @@
     </ul>
   <% end %>
 
+  <!-- Select a type of question -->
   <div class="row">
     <div class="large-6 medium-6 small-12 columns">
       <%= f.label :type %>
@@ -33,35 +36,35 @@
 
   <h4>Other options</h4>
   <hr/>
-
+  <!-- Require an answer for the question -->
   <div class="row">
     <div class="large-6 medium-6 small-12 columns">
       <%= f.label :answer_presence, "Require Answer" %>
       <%= f.check_box :answer_presence %>
     </div>
   </div>
-
+  <!-- Minimum length for answer -->
   <div class="row">
     <div class="large-6 medium-6 small-12 columns">
       <%= f.label :answer_minimum_length %>
       <%= f.text_field :answer_minimum_length %>
     </div>
   </div>
-
+  <!-- Maximum length for answer -->
   <div class="row">
     <div class="large-6 medium-6 small-12 columns">
       <%= f.label :answer_maximum_length %>
       <%= f.text_field :answer_maximum_length %>
     </div>
   </div>
-
+  <!-- Greater than or equal to for numeric answers -->
   <div class="row">
     <div class="large-6 medium-6 small-12 columns">
       <%= f.label :answer_greater_than_or_equal_to %>
       <%= f.text_field :answer_greater_than_or_equal_to %>
     </div>
   </div>
-
+  <!-- Less than or equal to for numeric answers -->
   <div class="row">
     <div class="large-6 medium-6 small-12 columns">
       <%= f.label :answer_less_than_or_equal_to %>
