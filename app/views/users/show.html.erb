@@ -1,34 +1,62 @@
-<p>
-  <strong>User name:</strong>
-  <%= @user.login.username %>
-</p>
+<div class="row">
+  <div clas="large-6 columns">
+    <p class="text-center">
+      <strong>User name:</strong>
+      <%= @user.login.username %>
+    </p>
+  </div>
+</div>
+<div class="row">
+  <div clas="large-6 columns">
+    <p class="text-center">
+      <strong>First name:</strong>
+      <%= @user.login.first_name %>
+    </p>
+  </div>
+</div>
+<div class="row">
+  <div clas="large-6 columns">
+    <p class="text-center">
+      <strong>Middle initial:</strong>
+      <%= @user.login.middle_initial %>
+    </p>
+  </div>
+</div>
+<div class="row">
+  <div clas="large-6 columns">
+    <p class="text-center">
+      <strong>Last name:</strong>
+      <%= @user.login.last_name %>
+    </p>
+  </div>
+</div>
+<div class="row">
+  <div clas="large-6 columns">
+    <p class="text-center">
+      <strong>Type:</strong>
+      <% if @user.login.login_type == 0 %>
+        Worker
+      <% elsif @user.login.login_type == 2 %>
+        Student
+      <% end %>
+    </p>
+  </div>
+</div>
+<div class="row">
+  <div clas="large-6 columns">
+    <p class="text-center">
+      <strong>Last login:</strong>
+      <%= @user.login.last_sign_in_at %>
+    </p>
+  </div>
+</div>
 
-<p>
-  <strong>First name:</strong>
-  <%= @user.login.first_name %>
-</p>
-<p>
-  <strong>Middle initial:</strong>
-  <%= @user.login.middle_initial %>
-</p>
-<p>
-  <strong>Last name:</strong>
-  <%= @user.login.last_name %>
-</p>
-<p>
-  <strong>Type:</strong>
-  <% if @user.login.login_type == 0 %>
-    Worker
-  <% elsif @user.login.login_type == 2 %>
-    Student
-  <% end %>
-</p>
-<p>
-  <strong>Last login:</strong>
-  <%= @user.login.last_sign_in_at %>
-</p>
-
-
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'All users', users_path %> |
-<%= link_to 'Home', root_path %>
+<div class="row">
+  <div clas="large-6 columns">
+    <p class="text-center">
+      <%= link_to 'Edit', edit_user_path(@user),class: "button radius" %>
+      <%= link_to 'All users', users_path,class: "button radius" %>
+      <%= link_to 'Home', root_path,class: "button radius" %>
+    </p>
+  </div>
+</div>
