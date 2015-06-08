@@ -204,9 +204,9 @@ require 'csv'
           @selected_giving_back = params[:selected_giving_back]
           @user_status = params[:user_status]
           @selected_saved_list = params[:selected_saved_list]
-          giving_back_array = GivingBack.all
           user_array = Array.new.uniq
           if @selected_saved_list.blank?
+            giving_back_array = GivingBack.all
             if @user_status == '-1' #Include Both Students and Alumni
               if @selected_giving_back != '-1'
                 giving_back_array = GivingBack.where('giving_back_type = ?', @selected_giving_back)
@@ -234,15 +234,23 @@ require 'csv'
             end
           else #Only users in the selected Saved List
             @list = SavedList.find(@selected_saved_list)
-            list_users = @list.users
+            giving_back_array = Array.new
             if @user_status == '-1' #Include Both Students and Alumni
               if @selected_giving_back != '-1'
-                list_users.each do |lu|
-                  giving_back_array = lu.giving_backs.where('giving_back_type = ?', @selected_giving_back)
+                @list.users.each do |user|
+                  user.giving_backs.each do |give|
+                    if !give.nil?
+                      if give.giving_back_type.to_s() == @selected_giving_back
+                        giving_back_array.push give
+                      end
+                    end
+                  end
                 end
               else
-                list_users.each do |lu|
-                  giving_back_array = lu.giving_backs.all
+                @list.users.each do |user|
+                  user.giving_backs.each do |give|
+                    give.nil? ? 1 : (giving_back_array.push give)
+                  end
                 end
               end
               giving_back_array.each do |gb|
@@ -251,18 +259,54 @@ require 'csv'
               @users = user_array
             elsif @user_status == '0' #Include Only Students
               if @selected_giving_back != '-1'
-                giving_back_array = GivingBack.where('giving_back_type = ?', @selected_giving_back)
+                @list.users.each do |user|
+                  if user.status == 0
+                    user.giving_backs.each do |give|
+                      if !give.nil?
+                        if give.giving_back_type.to_s() == @selected_giving_back
+                          giving_back_array.push give
+                        end
+                      end
+                    end
+                  end
+                end
+              else
+                @list.users.each do |user|
+                  if user.status == 0
+                    user.giving_backs.each do |give|
+                      give.nil? ? 1 : (giving_back_array.push give)
+                    end
+                  end
+                end
               end
               giving_back_array.each do |gb|
-                gb.user.status == 0 ? (user_array.push gb.user) : 0
+                user_array.push gb.user
               end
               @users = user_array
             elsif @user_status == '1' #Includ Only Alumni
               if @selected_giving_back != '-1'
-                giving_back_array = GivingBack.where('giving_back_type = ?', @selected_giving_back)
+                @list.users.each do |user|
+                  if user.status == 1
+                    user.giving_backs.each do |give|
+                      if !give.nil?
+                        if give.giving_back_type.to_s() == @selected_giving_back
+                          giving_back_array.push give
+                        end
+                      end
+                    end
+                  end
+                end
+              else
+                @list.users.each do |user|
+                  if user.status == 1
+                    user.giving_backs.each do |give|
+                      give.nil? ? 1 : (giving_back_array.push give)
+                    end
+                  end
+                end
               end
               giving_back_array.each do |gb|
-                gb.user.status == 1 ? (user_array.push gb.user) : 0
+                user_array.push gb.user
               end
               @users = user_array
             end
