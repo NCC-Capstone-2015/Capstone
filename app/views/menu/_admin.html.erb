@@ -15,6 +15,18 @@
               <li class="inactive">
                   <a href="#" class="a">Giving Back</a>
               </li>
+              <!--About Us menu item added by Ryan and Andrew with inspiration from Drew-->
+               <li class="has-dropdown">
+                   <a href="#">About Us</a>
+                   <ul class="dropdown">
+                       <li>
+                       <%= link_to 'Privacy Policy', '/disclaimers/privacy_policy' %>
+                     </li>
+                     <li>
+                       <%= link_to 'Contact Us', '/disclaimers/contact_us' %>
+                     </li>
+                   </ul>
+               </li>
               <li class="inactive">
                 <%= link_to 'Reports', main_app.reports_path %>
               </li>

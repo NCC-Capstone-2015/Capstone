@@ -1,3 +1,5 @@
+#Created by Ryan and Andrew
+#Prevents access unless logged in as admin
 class AdminAuthController < AuthenticationController
   before_filter :authorized?
 
