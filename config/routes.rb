@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :giving_backs
+
   devise_for :logins
   resources :basic_searches do
     collection do
@@ -12,6 +12,10 @@ Rails.application.routes.draw do
       match 'contact_us' => 'disclaimers#contact_us', via: [:get]
     end
   end
+  #paths to custom methods in giving_back controller
+  get '/giving_back/:id/completed' => 'giving_backs#completed', :as => :completed_giving_backs
+  get '/giving_back/:id/approve' => 'giving_backs#approve', :as => :approve_giving_backs
+  resources :giving_backs
   resources :logins
   resources :homepages
   resources :account_logins
@@ -42,7 +46,8 @@ Rails.application.routes.draw do
   post 'admin_surveys/question_type' => 'admin_surveys#question_type'
   post 'admin_surveys/options' => 'admin_surveys#options'
 
-  post 'user_informations/:id' => 'user_informations#show'
+  #  post 'user_informations/:id' => 'user_informations#show'
+  post 'user_informations/:id' => 'user_informations#update'
   post 'user_informations/:id/edit' => 'user_informations#edit'
   post 'users/:id' => 'users#edit'
   post '/users/:id/edit(.:format)' => 'users#edit'
