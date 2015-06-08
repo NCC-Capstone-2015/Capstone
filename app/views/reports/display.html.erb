@@ -1,41 +1,35 @@
+<!-- Created by Andrew Bockus -->
+
 <% content_for :title, "Alumbook | Report Display" %>
 
 <p id="notice"><%= notice %></p>
 <br />
-<div class="row">
+<div class="row panel radius">
   <div class="large-12 large-centered columns">
     <div class="row">
       <div class="large-12 medium-12 small-12 small-centered large-centered columns">
-        <h1 align="center"><%= @report_type.humanize %> Report</h1>
+        <h1 align="center"><%= @report_type.titleize %> Report</h1>
       </div>
     </div>
     <hr class="noprint"/><br />
 
     <% if @results.nil? || @results.blank? %>
       <div class="row">
-        <div class="large-6 medium-6 small-12 small-centered">
-          <h4>Sorry, there were no results for your report.</h4>
+        <div class="large-6 medium-6 small-12 large-centered medium-centered small-centered">
+          <div align="center">
+            <h4>Sorry, there were no results for your report.</h4>
+            <a href="<%= reports_path %>" class="button radius">Back</a>
+          </div>
         </div>
       </div>
     <% else %>
       <% if @report_type == "survey_results" || @report_type == "user_survey_response" %>
         <%= render 'show_survey_results' %>
-      <% elsif @report_type == "survey_completion" %>
-        <%= render 'show_survey_completion' %>
       <% else %>
         <%= render 'show_user_information' %>
       <% end %>
     <% end %>
 
-    <hr class="noprint" /><br />
-    <div class="row noprint">
-      <div class="large-12 large-centered medium-12 columns">
-        <div align="center">
-          <a onclick="printPage()" class="button radius">Print</a>
-          <a href="<%= reports_path %>" class="button radius">Back</a>
-        </div>
-      </div>
-    </div>
   </div>
 </div>
 <script>

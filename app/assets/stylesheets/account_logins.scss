@@ -1,6 +1,7 @@
 // Place all the styles related to the AccountLogins controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
 .center.row {
   height: 300px;
   margin-left: auto;
@@ -41,4 +42,11 @@ p.title {
 
 .content {
   height: 450px;
+}
+
+body{
+  background-image: url("/assets/ncc.jpg");
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  background-size: cover;
 }

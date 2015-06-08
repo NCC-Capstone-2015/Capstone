@@ -1,4 +1,6 @@
-<h2>Please answer these Questions</h2>
+<br /><br />
+<div class="row panel radius">
+<h2>Please answer these questions:</h2>
 <hr/>
 
 <%= form_for([@survey, @attempt_builder]) do |f| %>
@@ -9,3 +11,5 @@
   <% end %>
   <%= f.submit 'Save', :class => 'radius button'%>
 <% end %>
+</div>
+<br />
