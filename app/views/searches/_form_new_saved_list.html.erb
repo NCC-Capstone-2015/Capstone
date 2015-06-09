@@ -23,6 +23,6 @@
     <%= hidden_field_tag(:login_id, current_login.id) %>
     <%= hidden_field_tag(:date_saved, Time.zone.now.beginning_of_day) %>
 
-    <%= submit_tag('Submit', :class => 'button') %>
+    <%= submit_tag 'Submit', class: 'button radius' %>
   <% end %>
 </div>

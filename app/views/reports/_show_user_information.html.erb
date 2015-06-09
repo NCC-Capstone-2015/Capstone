@@ -193,10 +193,6 @@
       <a href="<%= reports_path %>" class="button radius">Back</a>
       <a onclick="printPage()" class="button radius">Print</a>
       <%= link_to "Excel", reports_display_path(format: "xls"), class: "button radius noprint" %>
-      <% form_tag new_saved_list_path, method: 'post' do %>
-        <% hidden_field_tag 'saved_list_array', @saved_list_array %>
-        <%= submit_tag "Add to Saved List", class: "button radius noprint" %>
-      <% end %>
     </div>
   </div>
 </div>

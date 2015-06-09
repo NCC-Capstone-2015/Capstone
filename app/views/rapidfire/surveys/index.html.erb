@@ -2,27 +2,32 @@
 
 <br /><br />
 <div class="row panel radius">
-<h2>
-  Surveys
-</h2>
-<hr/>
-
-<table>
-  <% if can_administer? %> <!-- Check to make sure it is an admin -->
-    <%= link_to "New Survey", new_survey_path, class: "button radius success" %>
-  <% end %>
-  <colgroup>
-    <col>
-    <col width="250">
-  </colgroup>
-  <thead>
-    <tr>
-      <th>Survey</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <%= render partial: "survey", collection: @surveys %>
-  </tbody>
-</table>
+  <div class="large-12 medium-12 small-12 large-centered medium-centered small-centered columns">
+    <div align="center">
+      <h1>Surveys</h1>
+    </div>
+  <hr/>
+  </div>
+  <div class="large-12 medium-12 small-12 columns">
+    <table>
+      <div align="right">
+        <% if can_administer? %> <!-- Check to make sure it is an admin -->
+          <%= link_to "New Survey", new_survey_path, class: "button radius success" %>
+        <% end %>
+      </div>
+      <colgroup>
+        <col>
+        <col width="250">
+      </colgroup>
+      <thead>
+        <tr>
+          <th>Survey</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= render partial: "survey", collection: @surveys %>
+      </tbody>
+    </table>
+  </div>
 </div>

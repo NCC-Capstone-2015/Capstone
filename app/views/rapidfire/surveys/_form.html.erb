@@ -1,17 +1,26 @@
 <!-- Created by Rapidfire Edited by Drew Olehy -->
-
+<!-- Styled by Andrew Bockus -->
+<div align="center">
 <h3><%= survey.new_record? ? "New Survey" : "Edit Survey" %></h3>
-
-<%= form_for survey do |f| %>
-  <%- if survey.errors.any? %>
-    <ul>
-      <%- survey.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+</div><br />
+<div class="row">
+  <div class="large-6 medium-8 small-12 large-centered medium-centered small-centered columns">
+    <%= form_for survey do |f| %>
+      <%- if survey.errors.any? %>
+        <ul>
+          <%- survey.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
       <% end %>
-    </ul>
-  <% end %>
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+      <br />
+      <div align="center">
+        <%= link_to 'Back', main_app.rapidfire_path, class: "button radius" %>
+        <%= f.submit 'Create Survey', :class => 'radius button'%>
+      </div>
 
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-  <%= f.submit 'Create Survey', :class => 'radius button'%>
-<% end %>
+    <% end %>
+  </div>
+</div>
