@@ -10,29 +10,15 @@ module SearchesHelper
     link_to(name, '#', class: "add_fields " + locals[:class], data: {id: id, fields: fields.gsub("\n", "")})
   end
   def display_search_results(objects)
-    # display basic search results table
-    count = 1
-    holder = Array.new(3)
+    # display advanced search results
     objects.each_with_object('') do |object, string|
-      holder[count - 1] = content_tag(:div, content_tag(:div, tag("img", src: get_photo_path(object.send(:id))), class: "row") + display_search_results_row(object), class: ["large-3 small-3 column"])
-      if (count % 3 == 0) || (count == objects.size)
-        string << content_tag(:div, holder[0] + holder[1] + holder[2], class: "row text-center")
-        count = 0
-      end
-      count += 1
+      string << content_tag(:div, tag("img", src: get_photo_path(object.send(:id))) + display_search_results_row(object), class: ["large-3 small-3 column"])
     end
   end
   def display_basic_search_results(objects)
-    # display basic search results table
-    count = 1
-    holder = Array.new(3)
+    # display basic search results
     objects.each_with_object('') do |object, string|
-      holder[count - 1] = content_tag(:div, content_tag(:div, tag("img", src: get_photo_path(object.send(:id))), class: "row") + display_basic_search_results_row(object), class: ["large-3 small-3 column"])
-      if (count % 3 == 0) || (count == objects.size)
-        string << content_tag(:div, holder[0] + holder[1] + holder[2], class: "row text-center")
-        count = 0
-      end
-      count += 1
+      string << content_tag(:div, tag("img", src: get_photo_path(object.send(:id))) + display_basic_search_results_row(object), class: ["large-3 small-3 column"])
     end
   end
   def model_fields

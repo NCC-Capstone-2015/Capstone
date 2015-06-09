@@ -1,0 +1,37 @@
+<!-- author: Brett Bush -->
+<!-- modified by James Maher -->
+
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="Sheet1">
+
+    <!-- Table for displaying user information -->
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">First Name</Data></Cell>
+        <Cell><Data ss:Type="String">Middle Initial</Data></Cell>
+        <Cell><Data ss:Type="String">Last Name</Data></Cell>
+        <Cell><Data ss:Type="String">Program</Data></Cell>
+      </Row>
+
+      <!-- If there are users -->
+      <% if @users != nil %>
+
+        <!-- For each user, obtain and display information -->
+        <% @users.each do |user| %>
+          <% @login = Login.find(user.login_id) %>
+          <Row>
+            <Cell><Data ss:Type="String"><%= user.login.first_name %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= user.login.middle_initial %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= user.login.last_name %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= user.program %></Data></Cell>
+          </Row>
+        <% end %>
+      <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>
