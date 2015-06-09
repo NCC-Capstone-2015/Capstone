@@ -1,26 +1,28 @@
 <!-- Created by Rapidfire Edited by Drew Olehy -->
-
+<!-- Styled by Andrew Bockus -->
 <br /><br />
 <div class="row panel radius">
-<h2>
-  Questions
-</h2>
-<hr/>
-
-<table>
-  <%= link_to "New Question", new_survey_question_path(@survey), class: "button radius success" %>
-  <colgroup>
-    <col>
-    <col width="250">
-  </colgroup>
-  <thead>
-    <tr>
-      <th>Question</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <%= render partial: "question", collection: @questions %>
-  </tbody>
-</table>
+  <div class="large-12 medium-12 small-12 large-centered medium-centered small-centered columns">
+    <div align="center">
+      <h2>Questions</h2>
+    </div>
+  </div>
+  <table>
+    <div align="right">
+      <%= link_to "New Question", new_survey_question_path(@survey), class: "button radius success" %>
+    </div>
+    <colgroup>
+      <col>
+      <col width="250">
+    </colgroup>
+    <thead>
+      <tr>
+        <th>Question</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render partial: "question", collection: @questions %>
+    </tbody>
+  </table>
 </div>

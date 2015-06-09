@@ -1,77 +1,84 @@
 <!-- Created by Rapidfire Edited by Drew Olehy -->
+<!-- Styled by Andrew Bockus -->
+<div class="row radius">
+  <div class="large-12 medium-12 small-12 columns">
+    <div align="center">
+      <h3>Question</h3>
+    </div>
 
-<div class="panel radius">
-<h3>Question</h3>
+  <%= form_for form, as: :question, url: url, method: method do |f| %>
+    <%- unless form.errors.empty? %>
+      <ul>
+        <%- form.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    <% end %>
 
-<%= form_for form, as: :question, url: url, method: method do |f| %>
-  <%- unless form.errors.empty? %>
-    <ul>
-      <%- form.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-    </ul>
+    <!-- Select a type of question -->
+    <div class="row">
+      <div class="large-6 medium-6 small-12 large-centered medium-centered small-centered columns">
+        <%= f.label :type %>
+        <%= f.select :type, ::Rapidfire::QuestionForm::QUESTION_TYPES, {}, id: "question_type" %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="large-6 medium-6 small-12 large-centered medium-centered small-centered columns">
+        <%= f.label :question_text %>
+        <%= f.text_field :question_text %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="large-6 medium-6 small-12 large-centered medium-centered small-centered columns">
+        <%= f.label :answer_options %>
+        <%= f.text_area :answer_options, rows: 5 %>
+      </div>
+    </div>
+    <br />
+    <div align="center">
+      <h4>Other options</h4>
+    </div>
+    <!-- Require an answer for the question -->
+    <div class="row">
+      <div class="large-6 medium-6 small-12 large-centered medium-centered small-centered columns">
+        <%= f.label :answer_presence, "Require Answer?" %>
+        <%= f.check_box :answer_presence %>
+      </div>
+    </div>
+    <!-- Minimum length for answer -->
+    <div class="row">
+      <div class="large-6 medium-6 small-12 large-centered medium-centered small-centered columns">
+        <%= f.label :answer_minimum_length %>
+        <%= f.text_field :answer_minimum_length %>
+      </div>
+    </div>
+    <!-- Maximum length for answer -->
+    <div class="row">
+      <div class="large-6 medium-6 small-12 large-centered medium-centered small-centered columns">
+        <%= f.label :answer_maximum_length %>
+        <%= f.text_field :answer_maximum_length %>
+      </div>
+    </div>
+    <!-- Greater than or equal to for numeric answers -->
+    <div class="row">
+      <div class="large-6 medium-6 small-12 large-centered medium-centered small-centered columns">
+        <%= f.label :answer_greater_than_or_equal_to %>
+        <%= f.text_field :answer_greater_than_or_equal_to %>
+      </div>
+    </div>
+    <!-- Less than or equal to for numeric answers -->
+    <div class="row">
+      <div class="large-6 medium-6 small-12 large-centered medium-centered small-centered columns">
+        <%= f.label :answer_less_than_or_equal_to %>
+        <%= f.text_field :answer_less_than_or_equal_to %>
+      </div>
+    </div><br />
+    <div align="center">
+      <%= link_to 'Back', main_app.rapidfire_path, class: "button radius" %>
+      <%= f.submit 'Create Question', :class => 'radius button' %>
+    </div>
   <% end %>
-
-  <!-- Select a type of question -->
-  <div class="row">
-    <div class="large-6 medium-6 small-12 columns">
-      <%= f.label :type %>
-      <%= f.select :type, ::Rapidfire::QuestionForm::QUESTION_TYPES, {}, id: "question_type" %>
-    </div>
   </div>
-
-  <div class="row">
-    <div class="large-6 medium-6 small-12 columns">
-      <%= f.label :question_text %>
-      <%= f.text_field :question_text %>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="large-6 medium-6 small-12 columns">
-      <%= f.label :answer_options %>
-      <%= f.text_area :answer_options, rows: 5 %>
-    </div>
-  </div>
-
-  <h4>Other options</h4>
-  <hr/>
-  <!-- Require an answer for the question -->
-  <div class="row">
-    <div class="large-6 medium-6 small-12 columns">
-      <%= f.label :answer_presence, "Require Answer" %>
-      <%= f.check_box :answer_presence %>
-    </div>
-  </div>
-  <!-- Minimum length for answer -->
-  <div class="row">
-    <div class="large-6 medium-6 small-12 columns">
-      <%= f.label :answer_minimum_length %>
-      <%= f.text_field :answer_minimum_length %>
-    </div>
-  </div>
-  <!-- Maximum length for answer -->
-  <div class="row">
-    <div class="large-6 medium-6 small-12 columns">
-      <%= f.label :answer_maximum_length %>
-      <%= f.text_field :answer_maximum_length %>
-    </div>
-  </div>
-  <!-- Greater than or equal to for numeric answers -->
-  <div class="row">
-    <div class="large-6 medium-6 small-12 columns">
-      <%= f.label :answer_greater_than_or_equal_to %>
-      <%= f.text_field :answer_greater_than_or_equal_to %>
-    </div>
-  </div>
-  <!-- Less than or equal to for numeric answers -->
-  <div class="row">
-    <div class="large-6 medium-6 small-12 columns">
-      <%= f.label :answer_less_than_or_equal_to %>
-      <%= f.text_field :answer_less_than_or_equal_to %>
-    </div>
-  </div>
-
-  <%= f.submit 'Create Question', :class => 'radius button' %>
-<% end %>
 </div>

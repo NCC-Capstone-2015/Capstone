@@ -3,7 +3,7 @@
 <%= render partial: "rapidfire/answers/errors", locals: {answer: answer} %>
 
 <div class="row">
-  <div class="large-6 medium-6 small-12 columns">
+  <div class="large-6 medium-6 small-12 large-centered medium-centered small-centered columns">
     <%= f.label :answer_text, answer.question.question_text %>
     <%= f.select :answer_text, answer.question.options, include_blank: true %>
   </div>
