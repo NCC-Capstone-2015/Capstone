@@ -1,4 +1,24 @@
-<div class="panel radius">
+<!-- Created by Matt Kachlik -->
+<!-- Styled by Andrew Bockus -->
+<br /><br />
+<div class="row panel radius">
+<div class="row">
+  <div class="large-12 columns">
+    <div align="center">
+      <h1>
+        <% if @giving_back.giving_back_type.to_i == 0 %>
+          Internship
+        <% elsif @giving_back.giving_back_type.to_i == 1 %>
+          Mentoring
+        <% elsif @giving_back.giving_back_type.to_i == 2 %>
+          Guest Speaking
+        <% else%>
+          Other
+        <% end %>
+      </h1>
+    </div>
+  </div>
+</div><hr /><br />
 <div class="row">
   <div clas="large-6 columns">
     <p class="text-center">
@@ -111,13 +131,13 @@
       <%= @giving_back.contact_email %>
     </p>
   </div>
-</div>
+</div><br />
 <div class="row">
   <div clas="large-6 columns">
     <p class="text-center">
-      <%= link_to "Completed", completed_giving_backs_path(@giving_back),class: "small radius button" %>|
-      <%= link_to 'Approve', approve_giving_backs_path(@giving_back),class: "small radius button" %>|
-      <%= link_to 'Back', giving_backs_path,class: "small radius button" %>
+      <%= link_to "Completed", completed_giving_backs_path(@giving_back), class: "small radius button" %>
+      <%= link_to 'Approve', approve_giving_backs_path(@giving_back), class: "small radius button" %>
+      <%= link_to "Back", giving_backs_path, class: "small radius button" %>
     </p>
   </div>
 </div>

@@ -342,7 +342,18 @@ require 'csv'
         # Specify fields to hide when displaying information from user phones table
         @phone_blacklist = ['created_at', 'updated_at', 'id', 'user_id']
 
-      format.xls
+        # Create array of ids for saving to Saved List
+        @saved_list_array = Array.new
+        @results.each do |result|
+          @saved_list_array.push result.id
+        end
+        # Store in session variable for safe keeping
+        session[:saved_list_array] = @saved_list_array
+
+      format.xls do
+        # Create file name from: report name and current datetime, downcasing it, adding .xls extension, and replace all invalid file name characters with underscores (including spaces) - Author: Brett Bush
+        headers["Content-Disposition"] = "attachment; filename=\"" + @saved_list.list_name.downcase.gsub(/[\x00\/\\:\*\?\"<>\| ]/, '_') + "_" + DateTime.now.strftime("%m%d%Y_%I%M%p") + ".xls\""
+      end
     end
   end
 
