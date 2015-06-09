@@ -53,8 +53,8 @@ class GivingBacksController < ApplicationController
 
     respond_to do |format|
       if @giving_back.save
-        format.html { redirect_to @giving_back, notice: 'Giving back was successfully created.' }
-        format.json { render :show, status: :created, location: @giving_back }
+        format.html { redirect_to root_path, notice: 'Giving back was successfully created.' }
+        format.json { render root_path, status: :created, location: @giving_back }
       else
         format.html { render :new }
         format.json { render json: @giving_back.errors, status: :unprocessable_entity }
