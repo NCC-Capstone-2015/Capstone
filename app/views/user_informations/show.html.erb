@@ -65,9 +65,7 @@
 							</div>
 							<!-- Education Information Tab block -->
 							<div class="content" id="pnlEducationInfo">
-								<p>Education status: <%= @login.user.present? ?
-																				convert_user_status_to_words(@login.user.status) :
-																				"" %></p>
+								<p>Education status: <%= convert_user_status_to_words(@login.user.try(:status)) %></p>
 								<p><ins>Degrees</ins>
 									<ul id="degrees">
 										<% if (@login.user.present?) and (@login.user.undergraduate_degrees.all.present?) %>

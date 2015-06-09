@@ -140,9 +140,7 @@
 										<label>Employer</label>
 									</div>
 									<div class="small-4 columns end">
-										<%= text_field_tag "company_name", @login.user.present? ?
-																											 @login.user.company_info.company.company_name :
-																											 "" %>
+										<%= text_field_tag "company_name", @login.user.try(:company_info).try(:company).try(:company_name) %>
 									</div>
 								</div>
 								<div class="row">
@@ -150,8 +148,7 @@
 										<label>Job Title</label>
 									</div>
 									<div class="small-4 columns end">
-										<%= text_field_tag "job_title", @login.user.present? ?
-																										@login.user.job_title : "" %>
+										<%= text_field_tag "job_title", @login.user.try(:job_title) %>
 									</div>
 								</div>
 								<div class="row">
@@ -159,20 +156,16 @@
 										Address:
 									</div>
 									<div class="small-12 columns">
-										<%= text_field_tag "company_street", @login.user.present? ?
-																												 @login.user.company_info.street : "" %>
+										<%= text_field_tag "company_street", @login.user.try(:company_info).try(:street) %>
 									</div>
 									<div class="small-6 columns">
-										<%= text_field_tag "company_city", @login.user.present? ?
-																											 @login.user.company_info.city : "" %>
+										<%= text_field_tag "company_city", @login.user.try(:company_info).try(:city) %>
 									</div>
 									<div class="small-2 columns">
-										<%= text_field_tag "company_state", @login.user.present? ?
-																												@login.user.company_info.state : "" %>
+										<%= text_field_tag "company_state", @login.user.try(:company_info).try(:state) %>
 									</div>
 									<div class="small-2 columns end">
-										<%= text_field_tag "company_zip", @login.user.present? ?
-																											@login.user.company_info.zip : "" %>
+										<%= text_field_tag "company_zip", @login.user.try(:company_info).try(:zip) %>
 									</div>
 								</div>
 								<div class="row">
@@ -180,13 +173,11 @@
 										<label>Company Phone</label>
 									</div>
 									<div class="small-4 columns end">
-										<%= text_field_tag "company_phone", (@login.user.present? ?
-										 																		 concatenate_phone(
-																														@login.user.company_info.country_code,
-																						 								@login.user.company_info.area_code,
-																						 								@login.user.company_info.prefix,
-																						 								@login.user.company_info.suffix) :
-																														"") %>
+										<%= text_field_tag "company_phone", (concatenate_phone(
+																														@login.user.try(:company_info).try(:country_code),
+																						 								@login.user.try(:company_info).try(:area_code),
+																						 								@login.user.try(:company_info).try(:prefix),
+																						 								@login.user.try(:company_info).try(:suffix))) %>
 									</div>
 								</div>
 								<div class="row">
@@ -200,9 +191,7 @@
 																												"$ 100,000 to $ 149,000",
 																												"$ 150,000 to $ 199,000",
 																												"> $ 200,000" ],
-																												(@login.user.present? ?
-																												convert_salary_range_to_words(@login.user.salary_range) :
-																												"")) %>
+																												(convert_salary_range_to_words(@login.user.try(:salary_range)))) %>
 									</div>
 								</div>
 								<div class="row">
@@ -210,15 +199,13 @@
 										<label>Start Date</label>
 									</div>
 									<div class="small-2 columns">
-										<%= date_field_tag "start_date", @login.user.present? ?
-																											@login.user.start_date : "" %>
+										<%= date_field_tag "start_date", @login.user.try(:start_date) %>
 									</div>
 									<div class="small-2 columns">
 										<label>End Date</label>
 									</div>
 									<div class="small-2 columns end">
-										<%= date_field_tag "end_date", @login.user.present? ?
-																											@login.user.end_date : "" %>
+										<%= date_field_tag "end_date", @login.user.try(:end_date) %>
 									</div>
 								</div>
 							</div>
@@ -229,8 +216,7 @@
 										<label>Birth Date</label>
 									</div>
 									<div class="small-2 columns end">
-										<%= date_field_tag "birth_day", @login.user.present? ?
-																										@login.user.birth_day : "" %>
+										<%= date_field_tag "birth_day", @login.user.try(:birth_day) %>
 									</div>
 								</div>
 								<div class="row">
@@ -238,8 +224,7 @@
 										<label>Ethnicity</>
 									</div>
 									<div class="small-4 columns end">
-										<%= text_field_tag "etnicity", @login.user.present? ?
-																									 @login.user.ethnicity : "" %>
+										<%= text_field_tag "etnicity", @login.user.try(:ethnicity) %>
 									</div>
 								</div>
 								<div class="row">
@@ -247,16 +232,13 @@
 										<label>Spouse</label>
 									</div>
 									<div class="small-4 columns">
-										<%= text_field_tag "spouse_last_name", @login.user.present? ?
-																													 @login.user.spouse_last_name : "" %>
+										<%= text_field_tag "spouse_last_name", @login.user.try(:spouse_last_name) %>
 									</div>
 									<div class="small-3 columns">
-										<%= text_field_tag "spouse_first_name", @login.user.present? ?
-																														@login.user.spouse_first_name : "" %>
+										<%= text_field_tag "spouse_first_name", @login.user.try(:spouse_first_name) %>
 									</div>
 									<div class="small-2 columns end">
-										<%= text_field_tag "spouse_middle_initial", @login.user.present? ?
-																																@login.user.spouse_middle_initial : "" %>
+										<%= text_field_tag "spouse_middle_initial", @login.user.try(:spouse_middle_initial) %>
 									</div>
 								</div>
 								<div class="row">
@@ -264,8 +246,7 @@
 										<label>Number of children</label>
 									</div>
 									<div class="small-1 columns end">
-										<%= text_field_tag "number_children", @login.user.present? ?
-																													@login.user.number_children : "" %>
+										<%= text_field_tag "number_children", @login.user.try(:number_children) %>
 									</div>
 								</div>
 							</div>

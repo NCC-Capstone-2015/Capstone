@@ -6,10 +6,12 @@ module UserInformationsHelper
   # a string
   def concatenate_phone (phone_country_code, phone_area_code,
                          phone_prefix, phone_suffix)
-    phone_text = (phone_area_code + "." +
-                 phone_prefix + "." + phone_suffix)
-    if phone_country_code.present?
-      phone_text = phone_country_code + "." + phone_text
+    if phone_area_code.present? and phone_prefix.present? and phone_suffix.present?
+      phone_text = (phone_area_code + "." +
+                    phone_prefix + "." + phone_suffix)
+      if phone_country_code.present?
+        phone_text = phone_country_code + "." + phone_text
+      end
     end
     return phone_text
   end
