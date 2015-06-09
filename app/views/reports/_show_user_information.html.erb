@@ -192,7 +192,9 @@
     <div align="center">
       <a href="<%= reports_path %>" class="button radius">Back</a>
       <a onclick="printPage()" class="button radius">Print</a>
-      <%= link_to "Excel", reports_display_path(format: "xls"), class: "button radius noprint" %>
+      <!-- Assisted with by Brett Bush -->
+      <%= link_to "Excel", params.merge(:format => 'xls'), :class => "button radius noprint", method: :post %>
+      <a onclick="savedList()" class="button radius">Add to Saved List</a>
     </div>
   </div>
 </div>
