@@ -10,29 +10,15 @@ module SearchesHelper
     link_to(name, '#', class: "add_fields " + locals[:class], data: {id: id, fields: fields.gsub("\n", "")})
   end
   def display_search_results(objects)
-    # display basic search results table
-    count = 1
-    holder = Array.new(3)
+    # display advanced search results
     objects.each_with_object('') do |object, string|
-      holder[count - 1] = content_tag(:div, content_tag(:div, tag("img", src: get_photo_path(object.send(:id))), class: "row") + display_basic_search_results_row(object), class: ["large-3 small-3 column"])
-      if (count % 3 == 0) || (count == objects.size)
-        string << content_tag(:div, holder[0] + holder[1] + holder[2], class: "row text-center")
-        count = 0
-      end
-      count += 1
+      string << content_tag(:div, tag("img", src: get_photo_path(object.send(:id))) + display_search_results_row(object), class: ["large-3 small-3 column"])
     end
   end
   def display_basic_search_results(objects)
-    # display basic search results table
-    count = 1
-    holder = Array.new(3)
+    # display basic search results
     objects.each_with_object('') do |object, string|
-      holder[count - 1] = content_tag(:div, content_tag(:div, tag("img", src: get_photo_path(object.send(:id))), class: "row") + display_basic_search_results_row(object), class: ["large-3 small-3 column"])
-      if (count % 3 == 0) || (count == objects.size)
-        string << content_tag(:div, holder[0] + holder[1] + holder[2], class: "row text-center")
-        count = 0
-      end
-      count += 1
+      string << content_tag(:div, tag("img", src: get_photo_path(object.send(:id))) + display_basic_search_results_row(object), class: ["large-3 small-3 column"])
     end
   end
   def model_fields
@@ -45,9 +31,9 @@ module SearchesHelper
     model_fields.each_with_object('') do |field, string|
       # If this is the first column, make it a link to the user's profile
       if fieldCount == 0
-        string << content_tag(:td, link_to(object.send(field), user_informations_path + '/' + object.id.to_s, :style=>'color:#0011CC;'))
+        string << content_tag(:div, link_to(object.send(field), user_informations_path + '/' + object.id.to_s, :style=>'color:#0011CC;'))
       else # no link
-        string << content_tag(:td, object.send(field))
+        string << content_tag(:div, object.send(field))
       end
       fieldCount += 1
     end

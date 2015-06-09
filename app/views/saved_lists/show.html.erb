@@ -1,23 +1,48 @@
-<!-- James Maher and Andrew Bockus -->
-<div class="panel radius">
-<h1><%= @saved_list.list_name %></h1>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Email</th>
-      <th>Program</th>
-      <th>Remove</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><%= link_to @login.first_name + ' ' + @login.last_name, user_informations_path + '/' + @user.login_id.to_s, :style => 'color:#0011CC;' %></td>
-      <td><%= @login.email %></td>
-      <td><%= @user.program %></td>
-      <td><%= link_to 'X', 'saved_lists#delete_user(@user.login_id, @saved_list.id)', class: "secondary button" %></td>
-    </tr>
-  </tbody>
-</table>
-<%= link_to 'Back', saved_lists_path, class: "button" %>
+<!-- author: Brett Bush -->
+<!-- modified by James Maher -->
+
+<div class="row">
+  <div class="large-12 columns">
+
+    <h1><%= @saved_list.list_name %></h1>
+    <h3 id="print_date"></h3>
+
+    <!-- Excel Button -->
+    <%= link_to "Excel (.xls)", params.merge(:format => 'xls'), :class => "button small noprint", method: :post %>
+
+    <!-- Print Button -->
+    <button type="button" class="button small noprint" onclick="saved_list_print_page();">Print</button>
+
+    <!-- Table for displaying user information -->
+    <div class="user_listing" style="overflow-x:scroll;overflow-y:scroll;height:400px;width:100%;">
+      <table class="saved_list_table">
+        <thead>
+          <tr>
+            <th class="saved_list_td" style="white-space: nowrap">First Name</th>
+            <th class="saved_list_td" style="white-space: nowrap">Middle Initial</th>
+            <th class="saved_list_td" style="white-space: nowrap">Last Name</th>
+            <th class="saved_list_td" style="white-space: nowrap">Program</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <!-- If there are users -->
+          <% if @users != nil %>
+
+            <!-- For each user, obtain and display information -->
+            <% @users.each do |user| %>
+              <% @login = Login.find(user.login_id) %>
+              <tr>
+                <td class="saved_list_td"><%= user.login.first_name %></td>
+                <td class="saved_list_td"><%= user.login.middle_initial %></td>
+                <td class="saved_list_td"><%= user.login.last_name %></td>
+                <td class="saved_list_td"><%= user.program %></td>
+              </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <%= link_to 'Back', saved_lists_index_path, class: "button" %>
 </div>

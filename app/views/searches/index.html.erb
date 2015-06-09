@@ -1,7 +1,7 @@
 <!-- James Maher -->
 <br /><br />
 <div class="row panel radius">
-  <div class="small-12 medium-12 large-12 column" id="content">
+  <div class="small-12 medium-12 large-12 column">
     <h1>Advanced Search</h1>
     <%= search_form_for @q, url: search_searches_path, html: { method: :post } do |f| %>
       <%= f.condition_fields do |c| %>
@@ -12,10 +12,7 @@
     <% end %>
     <% if @display_results %>
       <%= render "results" %>
-    <% end %>
-    <!-- Saved lists drop down made with help from Andrew Bockus -->
-    <%= form_tag "saved_lists/new", :html=>{:id=>'saved_list_form'}, method: "post" do %>
-      <%= select_tag :list_type, options_from_collection_for_select(@saved_lists, "id", "list_name"), {:include_blank => 'New List', onchange: 'this.form.submit();'} %>
+      <%= render partial: 'searches/form_new_saved_list' %>
     <% end %>
   </div>
 </div>
