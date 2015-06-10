@@ -1,4 +1,5 @@
 <!-- James Maher -->
 <%= content_tag :table do %>
+  <%= content_tag :thead, display_sort_column_headers(@q), nil, false %>
   <%= content_tag :tbody, display_search_results(@searches), nil, false %>
 <% end %>

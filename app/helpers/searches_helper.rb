@@ -46,7 +46,7 @@ module SearchesHelper
     .html_safe
   end
   def display_sort_column_headers(search)
-    # display results table header
+    # display results table header with sort links
     model_fields.each_with_object('') do |field, string|
       string << content_tag(:th, sort_link(search, field, {}, method: :post))
     end
