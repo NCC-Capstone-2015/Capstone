@@ -2,7 +2,7 @@
 <br /><br />
 <div class="row panel radius">
 <section>
-	<%= form_tag({controller: "user_informations", action: "update"}, method: "post") do %>
+	<%= form_tag "/user_informations/"+@login.id.to_s, method: "post" do %>
 		<fieldset>
 			<legend>User Information</legend>
 			<div class="row">
