@@ -8,13 +8,13 @@
 				<!-- User Name and Photo block -->
 				<div class="small-12 large-3 columns">
 					<div class="small-12">
-						<%= text_field_tag "last_name", @login.last_name %>
+						<%= text_field_tag "last_name", @login.last_name, :title => "Last Name" %>
 					</div>
 					<div class="small-7">
-						<%= text_field_tag "first_name", @login.first_name %>
+						<%= text_field_tag "first_name", @login.first_name, :title => "First Name" %>
 					</div>
 					<div class="small-2">
-						<%= text_field_tag "middle_initial", @login.middle_initial %>
+						<%= text_field_tag "middle_initial", @login.middle_initial, :title => "Middel Initial" %>
 					</div>
 					<div class="small-12">
 						<img src=<%= get_photo_path(@login.id) %>>
@@ -50,16 +50,16 @@
 								</div>
 								<div class="row">
 									<div class="small-8 columns">
-										<%= text_field_tag "street", (@login.user.present? ? @login.user.street : "") %>
+										<%= text_field_tag "street", @login.user.try(:street), :title => "Street" %>
 									</div>
 									<div class="small-5 columns">
-										<%= text_field_tag "city", (@login.user.present? ? @login.user.city : "") %>
+										<%= text_field_tag "city", @login.user.try(:city), :title => "City" %>
 									</div>
 									<div class="small-1 columns">
-										<%= text_field_tag "state", (@login.user.present? ? @login.user.state : "") %>
+										<%= text_field_tag "state", @login.user.try(:state), :title => "State" %>
 									</div>
 									<div class="small-2 columns end">
-										<%= text_field_tag "zip", (@login.user.present? ? @login.user.zip : "") %>
+										<%= text_field_tag "zip", @login.user.try(:zip), :title => "Zip Code" %>
 									</div>
 								</div>
 								<div class="row">
@@ -67,7 +67,7 @@
 										<label>email:</label>
 									</div>
 									<div class="small-7 columns end">
-										<%= text_field_tag "email", @login.email %>
+										<%= text_field_tag "email", @login.email, :title => "eMail address" %>
 									</div>
 								</div>
 								<div class="row">
@@ -100,7 +100,7 @@
 										<%= select_tag "status", options_for_select([ "Alumni", "Student" ],
 																												(@login.user.present? ?
 																												convert_user_status_to_words(@login.user.status) :
-																												"Student")) %>
+																												"Student")), :title => "Enrollment Status" %>
 									</div>
 								</div>
 								<div class="row">
@@ -140,7 +140,7 @@
 										<label>Employer</label>
 									</div>
 									<div class="small-4 columns end">
-										<%= text_field_tag "company_name", @login.user.try(:company_info).try(:company).try(:company_name) %>
+										<%= text_field_tag "company_name", @login.user.try(:company_info).try(:company).try(:company_name), :title => "Company Name" %>
 									</div>
 								</div>
 								<div class="row">
@@ -148,7 +148,7 @@
 										<label>Job Title</label>
 									</div>
 									<div class="small-4 columns end">
-										<%= text_field_tag "job_title", @login.user.try(:job_title) %>
+										<%= text_field_tag "job_title", @login.user.try(:job_title), :title => "Job Title" %>
 									</div>
 								</div>
 								<div class="row">
@@ -156,28 +156,33 @@
 										Address:
 									</div>
 									<div class="small-12 columns">
-										<%= text_field_tag "company_street", @login.user.try(:company_info).try(:street) %>
+										<%= text_field_tag "company_street", @login.user.try(:company_info).try(:street), :title => "Street" %>
 									</div>
 									<div class="small-6 columns">
-										<%= text_field_tag "company_city", @login.user.try(:company_info).try(:city) %>
+										<%= text_field_tag "company_city", @login.user.try(:company_info).try(:city), :title => "City" %>
 									</div>
 									<div class="small-2 columns">
-										<%= text_field_tag "company_state", @login.user.try(:company_info).try(:state) %>
+										<%= text_field_tag "company_state", @login.user.try(:company_info).try(:state), :title => "State" %>
 									</div>
 									<div class="small-2 columns end">
-										<%= text_field_tag "company_zip", @login.user.try(:company_info).try(:zip) %>
+										<%= text_field_tag "company_zip", @login.user.try(:company_info).try(:zip), :title => "Zip Code" %>
 									</div>
 								</div>
 								<div class="row">
-									<div class="small-2 columns">
-										<label>Company Phone</label>
+									<div class="small-3 columns">
+										Company Phone:
 									</div>
-									<div class="small-4 columns end">
-										<%= text_field_tag "company_phone", (concatenate_phone(
-																														@login.user.try(:company_info).try(:country_code),
-																						 								@login.user.try(:company_info).try(:area_code),
-																						 								@login.user.try(:company_info).try(:prefix),
-																						 								@login.user.try(:company_info).try(:suffix))) %>
+									<div class="small-1 columns">
+										<%= text_field_tag "company_phone_country_code", @login.user.try(:company_info).try(:country_code), :title => "Country Code" %>
+									</div>
+									<div class="small-2 columns">
+										<%= text_field_tag "company_phone_area_code", @login.user.try(:company_info).try(:area_code), :title => "Area Code" %>
+									</div>
+									<div class="small-2 columns">
+										<%= text_field_tag "company_phone_prefix", @login.user.try(:company_info).try(:prefix), :title => "Phone Prefix" %>
+									</div>
+									<div class="small-2 columns end">
+										<%= text_field_tag "company_phone_suffix", @login.user.try(:company_info).try(:suffix), :title => "Phone Suffix" %>
 									</div>
 								</div>
 								<div class="row">
@@ -199,13 +204,13 @@
 										<label>Start Date</label>
 									</div>
 									<div class="small-3 columns">
-										<%= date_field_tag "start_date", @login.user.try(:start_date) %>
+										<%= date_field_tag "start_date", @login.user.try(:start_date), :title => "Employment Start Date" %>
 									</div>
 									<div class="small-2 columns">
 										<label>End Date</label>
 									</div>
 									<div class="small-3 columns end">
-										<%= date_field_tag "end_date", @login.user.try(:end_date) %>
+										<%= date_field_tag "end_date", @login.user.try(:end_date), :title => "Employment End Date" %>
 									</div>
 								</div>
 							</div>
@@ -216,7 +221,7 @@
 										<label>Birth Date</label>
 									</div>
 									<div class="small-2 columns end">
-										<%= date_field_tag "birth_day", @login.user.try(:birth_day) %>
+										<%= date_field_tag "birth_day", @login.user.try(:birth_day), :title => "Birth Date" %>
 									</div>
 								</div>
 								<div class="row">
@@ -224,7 +229,7 @@
 										<label>Ethnicity</>
 									</div>
 									<div class="small-4 columns end">
-										<%= text_field_tag "etnicity", @login.user.try(:ethnicity) %>
+										<%= text_field_tag "etnicity", @login.user.try(:ethnicity), :title => "Ethnicity" %>
 									</div>
 								</div>
 								<div class="row">
@@ -257,7 +262,8 @@
 									<div class="row">
 										<%= hidden_field_tag :general_opt_in, false %>
 										<%= check_box_tag 'general_opt_in', 1, (@login.user.present? ?
-																	convert_opt_in_to_true_false(@login.user.general_opt_in) : "") %>
+																	convert_opt_in_to_true_false(@login.user.general_opt_in) : ""),
+																	:title => "Allow your name to be searched by other users" %>
 										<label for="general_opt_in">General opt in</label>
 									</div>
 
@@ -265,14 +271,16 @@
 										<%= hidden_field_tag :email_opt_in, false %>
 										<%= check_box_tag 'email_opt_in', 1, (convert_opt_in_to_true_false(
 																														@login.user.present? ?
-																														@login.user.email_opt_in : 0)) %>
+																														@login.user.email_opt_in : 0)),
+																														:title => "Allow your email address to be visible by other users" %>
 										<label for="email_opt_in">eMail opt in</label>
 									</div>
 									<div class="row">
 										<%= hidden_field_tag :phone_opt_in, false %>
 										<%= check_box_tag 'phone_opt_in', 1,(convert_opt_in_to_true_false(
 																														@login.user.present? ?
-																														@login.user.phone_opt_in : 0)) %>
+																														@login.user.phone_opt_in : 0)),
+																														:title => "Allow your phone number to be visible by other users" %>
 										<label for="phone_opt_in">Phone opt in</label>
 									</div>
 									<div class="row">
