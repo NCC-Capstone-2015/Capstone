@@ -215,7 +215,7 @@ class UserInformationsController < AuthenticationController
     end
 
     if change
-      redirect_to :action => "show", :id => :id
+      redirect_to :action => "show", :id => login.id
     end
 
   end

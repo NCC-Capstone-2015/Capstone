@@ -88,7 +88,9 @@
                   <td><%= attr_value %></td>
                 <% end %>
               <% end %>
-              <td><%= Degree.try(:find, @undergrad_variable).try(:degree_type) %></td>
+              <% if !@undergrad_variable.nil? && !@undergrad_variable.blank? && @undergrad_variable != "" %>
+                <td><%= Degree.try(:find, @undergrad_variable).try(:degree_type) %></td>
+              <% end %>
 
               <!-- Print user graduate degrees -->
               <% result.user.try(:graduate_degrees).try(:first).try(:attributes).try(:except, *@degree_blacklist).try(:each) do |attr_name, attr_value| %>
@@ -148,7 +150,9 @@
                       <td><%= attr_value %></td>
                     <% end %>
                   <% end %>
-                  <td><%= Degree.try(:find, @undergrad_variable).try(:degree_type) %></td>
+                  <% if !@undergrad_variable.nil? && !@undergrad_variable.blank? && @undergrad_variable != "" %>
+                    <td><%= Degree.try(:find, @undergrad_variable).try(:degree_type) %></td>
+                  <% end %>
 
                   <!-- Print user undergraduate degrees -->
                   <% undergrad.try(:degrees).try(:attributes).try(:except, *@degree_blacklist).try(:each) do |attr_name, attr_value| %>
