@@ -34,6 +34,7 @@ class UserInformationsController < AuthenticationController
     change = false
     login = Login.find(current_login.id)
 
+    # login table fields
     if params["first_name"].present?
       change = true
       login.update(first_name: params["first_name"])
@@ -50,6 +51,7 @@ class UserInformationsController < AuthenticationController
       change = true
       login.update(email: params["email"])
     end
+    # user table fields
     if params["street"].present?
       change = true
       login.user.update(street: params["street"])
@@ -125,6 +127,58 @@ class UserInformationsController < AuthenticationController
     if params["end_date"].present?
       change = true
       login.user.update(end_date: Date.parse(params["end_date"]).strftime("%Y-%m-%d"))
+    end
+
+    # company_info table fields
+    if params["company_street"].present?
+      change = true
+      if login.user.company_info.present?
+        login.user.company_info.update(street: params["company_street"])
+      else
+        login.user.update(company_info_id: CompanyInfo.create(street: params["company_street"]).id)
+      end
+    end
+    if params["company_city"].present?
+      change = true
+      if login.user.company_info.present?
+        login.user.company_info.update(city: params["company_city"])
+      else
+        login.user.update(company_info_id: CompanyInfo.create(city: params["company_city"]).id)
+      end
+    end
+    if params["company_state"].present?
+      change = true
+      if login.user.company_info.present?
+        login.user.company_info.update(state: params["company_state"])
+      else
+        login.user.update(company_info_id: CompanyInfo.create(zip: params["company_state"]).id)
+      end
+    end
+    if params["company_zip"].present?
+      change = true
+      if login.user.company_info.present?
+        login.user.company_info.update(zip: params["company_zip"])
+      else
+        login.user.update(company_info_id: CompanyInfo.create(zip: params["company_zip"]).id)
+      end
+    end
+
+    # company table fields
+    if params["company_name"].present?
+      change = true
+      # company_info record is available
+      if login.user.company_info.present?
+        if login.user.company_info.company.present?
+          login.user.company_info.company.update(company_name: params["company_name"])
+        else
+          Company.create(company_name: params["company_name"], company_info_id: login.user.company_info.id)
+        end
+      else
+          #create company info record and company record
+          company_info = CompanyInfo.create()
+          Company.create(company_name: params["company_name"], company_info_id: company_info.id)
+          login.user.update(company_info_id: company_info.id)
+      end
     end
 
     if change

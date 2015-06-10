@@ -95,8 +95,8 @@
 							<div class="content" id="pnlEmploymentInfo">'
                               <% if (@login.user.present?) and (@login.user.company_info.present?) %>
 								<p>
-									<%= @login.user.present? ? @login.user.company_info.company.company_name : "" %><br>
-									<%= @login.user.present? ? @login.user.job_title : "" %>
+									<%= @login.user.try(:company_info).try(:company).try(:company_name) %><br>
+									<%= @login.user.try(:job_title) %>
 								</p>
 								<p>Address:<br>
 										<%= @login.user.company_info.street %><br>
