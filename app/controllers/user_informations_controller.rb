@@ -51,6 +51,7 @@ class UserInformationsController < AuthenticationController
       change = true
       login.update(email: params["email"])
     end
+
     # user table fields
     if params["street"].present?
       change = true
@@ -160,6 +161,38 @@ class UserInformationsController < AuthenticationController
         login.user.company_info.update(zip: params["company_zip"])
       else
         login.user.update(company_info_id: CompanyInfo.create(zip: params["company_zip"]).id)
+      end
+    end
+    if params["company_phone_country_code"].present?
+      change = true
+      if login.user.company_info.present?
+        login.user.company_info.update(country_code: params["company_phone_country_code"])
+      else
+        login.user.update(company_info_id: CompanyInfo.create(country_code: params["company_phone_country_code"]).id)
+      end
+    end
+    if params["company_phone_area_code"].present?
+      change = true
+      if login.user.company_info.present?
+        login.user.company_info.update(area_code: params["company_phone_area_code"])
+      else
+        login.user.update(company_info_id: CompanyInfo.create(area_code: params["company_phone_area_code"]).id)
+      end
+    end
+    if params["company_phone_prefix"].present?
+      change = true
+      if login.user.company_info.present?
+        login.user.company_info.update(prefix: params["company_phone_prefix"])
+      else
+        login.user.update(company_info_id: CompanyInfo.create(prefix: params["company_phone_prefix"]).id)
+      end
+    end
+    if params["company_phone_suffix"].present?
+      change = true
+      if login.user.company_info.present?
+        login.user.company_info.update(suffix: params["company_phone_suffix"])
+      else
+        login.user.update(company_info_id: CompanyInfo.create(suffix: params["company_phone_suffix"]).id)
       end
     end
 
