@@ -1,6 +1,14 @@
-<div class="panel radius">
+<br /><br />
+<div class="row panel radius">
 <div class="row">
-  <div clas="large-6 columns">
+  <div class="large-6 medium-8 small-12 large-centered medium-centered small-centered columns">
+    <div align="center">
+      <h2><%= @user.login.first_name %> <%= @user.login.last_name %></h2>
+    </div>
+  </div>
+</div><br />
+<div class="row">
+  <div class="large-6 medium-8 small-12 large-centered medium-centered small-centered columns">
     <p class="text-center">
       <strong>User name:</strong>
       <%= @user.login.username %>
@@ -8,7 +16,7 @@
   </div>
 </div>
 <div class="row">
-  <div clas="large-6 columns">
+  <div class="large-6 medium-8 small-12 large-centered medium-centered small-centered columns">
     <p class="text-center">
       <strong>First name:</strong>
       <%= @user.login.first_name %>
@@ -16,7 +24,7 @@
   </div>
 </div>
 <div class="row">
-  <div clas="large-6 columns">
+  <div class="large-6 medium-8 small-12 large-centered medium-centered small-centered columns">
     <p class="text-center">
       <strong>Middle initial:</strong>
       <%= @user.login.middle_initial %>
@@ -24,7 +32,7 @@
   </div>
 </div>
 <div class="row">
-  <div clas="large-6 columns">
+  <div class="large-6 medium-8 small-12 large-centered medium-centered small-centered columns">
     <p class="text-center">
       <strong>Last name:</strong>
       <%= @user.login.last_name %>
@@ -32,7 +40,7 @@
   </div>
 </div>
 <div class="row">
-  <div clas="large-6 columns">
+  <div class="large-6 medium-8 small-12 large-centered medium-centered small-centered columns">
     <p class="text-center">
       <strong>Type:</strong>
       <% if @user.login.login_type == 0 %>
@@ -44,16 +52,15 @@
   </div>
 </div>
 <div class="row">
-  <div clas="large-6 columns">
+  <div class="large-6 medium-8 small-12 large-centered medium-centered small-centered columns">
     <p class="text-center">
       <strong>Last login:</strong>
       <%= @user.login.last_sign_in_at %>
     </p>
   </div>
-</div>
-
+</div><br />
 <div class="row">
-  <div clas="large-6 columns">
+  <div class="large-6 medium-8 small-12 large-centered medium-centered small-centered columns">
     <p class="text-center">
       <%= link_to 'Edit', edit_user_path(@user),class: "button radius" %>
       <%= link_to 'All users', users_path,class: "button radius" %>

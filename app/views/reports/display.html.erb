@@ -2,7 +2,6 @@
 
 <% content_for :title, "Alumbook | Report Display" %>
 
-<p id="notice"><%= notice %></p>
 <br />
 <div class="row panel radius">
   <div class="large-12 large-centered columns">
@@ -12,19 +11,9 @@
       </div>
     </div>
     <hr class="noprint"/><br />
-    <div class="row" id='saved_list_display' style="display: none;">
-      <div class="large-12 medium-12 small-12 large-centered medium-centered small-centered columns">
-        <% form_tag "saved_lists#create", method: 'post' do %>
-          <% hidden_field_tag "user_ids", @user_array %>
-          <h4>New list name: <%= text_field_tag :new_saved_list %></h4>
-          <%= select_tag :add_saved_list, options_from_collection_for_select(@saved_list_array, 'id', 'list_name'), {:include_blank => '-- Add to Saved List --'} %>
-          <% submit_tag "Save" %>
-        <% end %>
-      </div>
-    </div>
     <% if @results.nil? || @results.blank? %>
       <div class="row">
-        <div class="large-6 medium-6 small-12 large-centered medium-centered small-centered">
+        <div class="large-6 medium-6 small-12 large-centered medium-centered small-centered columns">
           <div align="center">
             <h4>Sorry, there were no results for your report.</h4>
             <a href="<%= reports_path %>" class="button radius">Back</a>
@@ -32,18 +21,33 @@
         </div>
       </div>
     <% else %>
-      <% if @report_type == "survey_results" || @report_type == "user_survey_response" %>
-        <%= render 'show_survey_results' %>
-      <% else %>
         <%= render 'show_user_information' %>
-      <% end %>
     <% end %>
   </div>
+  <div class="row noprint">
+    <div class="large-6 medium-8 small-12 large-centered medium-centered small-centered columns">
+      <div class="saved_list_display" id="saved_list_display" style="display: none;">
+        <%= form_tag saved_lists_create_path, method: "post" do %>
+          <% @user_array.try(:each) do |user| %>
+            <%= hidden_field_tag "user_ids[]", user.try(:id) %>
+          <% end %>
+          <%= hidden_field_tag(:login_id, current_login.id) %>
+          <%= hidden_field_tag(:date_saved, Time.zone.now.beginning_of_day) %>
+          <%= label_tag "New list name:" %><%= text_field_tag :new_list_name %>
+          <%= select_tag :list_name, options_from_collection_for_select(@saved_list_array, 'id', 'list_name'), {:include_blank => '-- Add to Saved List --'} %>
+          <div align="center">
+            <%= submit_tag "Save", class: "button radius" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>
+
 <script>
 function savedList()
 {
-  document.getElementById('saved_list_display').style.display = "inline";
+  document.getElementById('saved_list_display').style.display = "block";
 }
 
 // Created by Caroline St. Clair

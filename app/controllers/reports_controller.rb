@@ -345,7 +345,7 @@ require 'csv'
         # Create array of ids for saving to Saved List
         @user_array = Array.new
         @results.each do |result|
-          @user_array.push result.id
+          @user_array.push result
         end
 
         @saved_list_array = Login.find(current_login.id).saved_lists

@@ -32,7 +32,7 @@ class UserInformationsController < AuthenticationController
   def update
 
     change = false
-    login = Login.find(current_login.id)
+    login = Login.find(params[:id])
 
     # login table fields
     if params["first_name"].present?
@@ -228,7 +228,7 @@ class UserInformationsController < AuthenticationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user_information
-      @login = Login.find(current_login.id)
+      @login = Login.find(params[:id])
 #      @phones = User.includes(:user_phones).where("user_phones.user_id", @login.user.id)
     end
 

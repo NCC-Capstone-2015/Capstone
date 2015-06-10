@@ -56,9 +56,11 @@ Rails.application.routes.draw do
 
   mount Rapidfire::Engine => "/rapidfire"
   #get 'rapidfire/user_informations' => '/user_informations#show'
+  get 'saved_lists' => 'saved_lists#index'
   get 'saved_lists/index' => 'saved_lists#index'
   post 'saved_lists/create' => 'saved_lists#create'
   get '/saved_lists/:id', to: 'saved_lists#show', as: 'saved_list'
   post '/saved_lists/:id', to: 'saved_lists#show'
   delete '/saved_lists/:id', to: 'saved_lists#destroy'
+  post '/saved_lists/delete_user/:id', to: "saved_lists#delete_user"
 end

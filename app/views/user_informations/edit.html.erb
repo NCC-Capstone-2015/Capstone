@@ -1,5 +1,6 @@
 <!-- Craig Sterling -->
-<div class="panel radius">
+<br /><br />
+<div class="row panel radius">
 <section>
 	<%= form_tag({controller: "user_informations", action: "update"}, method: "post") do %>
 		<fieldset>
@@ -220,7 +221,7 @@
 									<div class="small-2 columns">
 										<label>Birth Date</label>
 									</div>
-									<div class="small-2 columns end">
+									<div class="small-4 columns end">
 										<%= date_field_tag "birth_day", @login.user.try(:birth_day), :title => "Birth Date" %>
 									</div>
 								</div>

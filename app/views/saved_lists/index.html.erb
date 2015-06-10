@@ -1,11 +1,13 @@
 <!-- author: Brett Bush -->
+<!-- Re-styled by Andrew Bockus -->
 <br /><br />
 <div class="row panel radius">
   <div class="large-12 columns">
 
     <!-- Display this worker or admin's saved lists -->
-    <h1><%= current_login.first_name %>'s Saved Lists</h1>
-
+    <div align="center">
+      <h1><%= current_login.first_name %>'s Saved Lists</h1><br />
+    </div>
     <table style="width:100%;">
       <thead>
         <tr>
@@ -17,12 +19,12 @@
 
       <tbody>
         <!-- For each saved list of this worker or admin, display saved list name and date with Show and Delete options -->
-        <% @saved_lists.each do |saved_list| %>
+        <% @saved_lists.try(:each) do |saved_list| %>
           <tr>
             <td><%= saved_list.list_name %></td>
             <td><%= saved_list.date_saved %></td>
-            <td><%= link_to 'Show', saved_list %></td>
-            <td><%= link_to 'Delete', saved_list, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <td><%= link_to 'Show', saved_list, class: "button small radius" %></td>
+            <td><%= link_to 'Delete', saved_list, method: :delete, data: { confirm: 'Are you sure?' }, class: "button small radius" %></td>
           </tr>
         <% end %>
       </tbody>
