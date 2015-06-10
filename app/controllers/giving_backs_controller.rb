@@ -49,12 +49,12 @@ class GivingBacksController < ApplicationController
     @giving_back = GivingBack.new(giving_back_params)
     @giving_back.approved = false
     @giving_back.completed = false
-    @giving_back.user_id = current_login.id
+    @giving_back.user_id = current_login.user.id
 
     respond_to do |format|
       if @giving_back.save
-        format.html { redirect_to root_path, notice: 'Giving back was successfully created.' }
-        format.json { render root_path, status: :created, location: @giving_back }
+        format.html { redirect_to giving_backs_path, notice: 'Giving back was successfully created.' }
+        format.json { render giving_backs_path, status: :created, location: @giving_back }
       else
         format.html { render :new }
         format.json { render json: @giving_back.errors, status: :unprocessable_entity }
