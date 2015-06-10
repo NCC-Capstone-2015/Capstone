@@ -29,7 +29,7 @@
       <div class="saved_list_display" id="saved_list_display" style="display: none;">
         <%= form_tag saved_lists_create_path, method: "post" do %>
           <% @user_array.try(:each) do |user| %>
-            <%= hidden_field_tag "user_ids[]", user.try(:id) %>
+            <%= hidden_field_tag "user_ids[]", user.try(:id)-1 %>
           <% end %>
           <%= hidden_field_tag(:login_id, current_login.id) %>
           <%= hidden_field_tag(:date_saved, Time.zone.now.beginning_of_day) %>

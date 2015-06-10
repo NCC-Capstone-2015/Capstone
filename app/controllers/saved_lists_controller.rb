@@ -36,7 +36,7 @@ class SavedListsController < ApplicationController
   def delete_user
     saved_list = SavedList.find(params[:id])
     list_users = saved_list.saved_list_users
-    table_to_delete = list_users.where("user_id = ?", params[:user_id].to_i - 1)
+    table_to_delete = list_users.where("user_id = ?", params[:user_id])
     table_to_delete.first.delete
 
     redirect_to saved_lists_path
@@ -56,20 +56,18 @@ class SavedListsController < ApplicationController
         @user_ids_uniq.push u
       end
       @user_ids.each do |u|
-        @user_ids_uniq.push (u.to_i - 1)
+        @user_ids_uniq.push (u)
       end
       # End remove duplicates code
 
-      @saved_list.saved_list_users.delete_all
       @user_ids_uniq.each do |user_id|
         SavedListUser.create(saved_list_id: @saved_list.id, user_id: user_id)
       end
       @saved_list.save
       redirect_to @saved_list
-    elsif params[:new_list_name] != "" && !params[:new_list_name].nil? || !params[:new_list_name].blank?
+    elsif !params["user_ids"].nil? && (params[:new_list_name] != "" && !params[:new_list_name].nil? || !params[:new_list_name].blank?)
       # Create new saved list table entry
       @saved_list = SavedList.new
-
       # Store attributes
       @saved_list.list_name = params[:new_list_name]
       @saved_list.login_id = params[:login_id]
@@ -82,7 +80,7 @@ class SavedListsController < ApplicationController
           # Create new user saved list entries for all users in list
           @user_ids = params["user_ids"]
           @user_ids.each do |user_id|
-            SavedListUser.create(saved_list_id: @saved_list.id, user_id: user_id.to_i - 1)
+            SavedListUser.create(saved_list_id: @saved_list.id, user_id: user_id)
           end
 
           format.html { redirect_to @saved_list, notice: 'Saved list was successfully created.' }
