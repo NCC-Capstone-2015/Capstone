@@ -5,24 +5,22 @@
 
 <!-- New Saved List Form Render -->
 <div id="saved_list_form" class="noprint" style="display: none;">
-  <%= form_tag("/saved_lists/create", method:"post") do %>
-
-    <h3>Create Saved List</h3>
-    <p>Make a list of users by their employer name.</p>
-
-    <%= label_tag(:list_name, 'Saved list name:') %>
-    <%= text_field_tag(:list_name) %>
-
-    <!-- Hidden fields for User id of each user in list -->
-    <% @searches.each do |user| %>
-      <% puts "sending user #{user.id}" %>
-      <%= hidden_field_tag "user_ids[]", user.id %>
-    <% end %>
-
-    <!-- Hidden fields for current login worker or admin and date -->
-    <%= hidden_field_tag(:login_id, current_login.id) %>
-    <%= hidden_field_tag(:date_saved, Time.zone.now.beginning_of_day) %>
-
-    <%= submit_tag 'Submit', class: 'button radius' %>
-  <% end %>
+  <div class="row">
+    <div class="large-6 medium-8 small-12 large-centered medium-centered small-centered columns">
+      <%= form_tag saved_lists_create_path, method: "post" do %>
+        <% @search_array.try(:each) do |search| %>
+          <% if search.login_type == 2 %>
+            <%= hidden_field_tag "user_ids[]", search.user.try(:id) %>
+          <% end %>
+        <% end %>
+        <%= hidden_field_tag(:login_id, current_login.id) %>
+        <%= hidden_field_tag(:date_saved, Time.zone.now.beginning_of_day) %>
+        <%= label_tag "New list name:" %><%= text_field_tag :new_list_name %>
+        <%= select_tag :list_name, options_from_collection_for_select(@saved_list_array, 'id', 'list_name'), {:include_blank => '-- Add to Saved List --'} %>
+        <div align="center">
+          <%= submit_tag "Save", class: "button radius" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
 </div>

@@ -2,8 +2,7 @@
 
 <% content_for :title, "Alumbook | Reports" %>
 
-<p id="notice"><%= notice %></p>
-<br />
+<br /><br />
 <div class="row panel radius">
   <div class="large-6 large-centered column">
     <div class="row">
@@ -15,7 +14,7 @@
     <div class="row">
       <div class="large-6 large-centered small-12 columns">
         <%= form_tag "reports/options", :html=>{:id=>'report_form'}, method: "post" do %>
-        <%= select_tag(:report_type, options_for_select([["-- Choose Report --", ""], ["Date Entered", 'date'], ["Graduating Class", 'grad_class'], ["Graduate Program", 'grad_program'], ["User Employer", 'employer'], ["Given Back", 'given_back'], ["Survey Results", 'survey_results'], ["User Survey Response", 'user_survey_response']]))%>
+        <%= select_tag(:report_type, options_for_select([["-- Choose Report --", ""], ["Date Entered", 'date'], ["Graduating Class", 'grad_class'], ["Graduate Program", 'grad_program'], ["User Employer", 'employer'], ["Given Back", 'given_back']]))%>
         <br /><br />
         <div align="center">
           <%= submit_tag "Submit", class: "button radius" %>

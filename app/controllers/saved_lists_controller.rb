@@ -1,5 +1,5 @@
 # author: Brett Bush
-# modified by James Maher
+# modified by James Maher and Andrew Bockus
 
 class SavedListsController < ApplicationController
   before_action :set_saved_list, only: [:show, :edit, :update, :destroy]
@@ -12,7 +12,6 @@ class SavedListsController < ApplicationController
   # Display: views/saved_list/show.html.erb
   #      or: views/saved_list/show.xls.erb
   def show
-
     # Obtain selected saved list
     @saved_list = SavedList.find(params[:id])
 
@@ -33,34 +32,68 @@ class SavedListsController < ApplicationController
     end
   end
 
+  # Delete user method - Created by Andrew Bockus
+  def delete_user
+    saved_list = SavedList.find(params[:id])
+    list_users = saved_list.saved_list_users
+    table_to_delete = list_users.where("user_id = ?", params[:user_id].to_i - 1)
+    table_to_delete.first.delete
+
+    redirect_to saved_lists_path
+  end
+
   # Create new saved list
   # Redirect to: views/saved_list/index.html.erb
   def create
-
-    # Create new saved list table entry
-    @saved_list = SavedList.new
-
-    # Store attributes
-    @saved_list.login_id = params[:login_id]
-    @saved_list.list_name = params[:list_name]
-    @saved_list.date_saved = params[:date_saved]
-
-    # Save the saved list
-    respond_to do |format|
-      if @saved_list.save
-
-        # Create new user saved list entries for all users in list
-        @user_ids = params["user_ids"]
-        @user_ids.each do |user_id|
-          SavedListUser.create(saved_list_id: @saved_list.id, user_id: user_id.to_i - 1)
-        end
-
-        format.html { redirect_to @saved_list, notice: 'Saved list was successfully created.' }
-        format.json { render :show, status: :created, location: @saved_list }
-      else
-        format.html { render :new }
-        format.json { render json: @saved_list.errors, status: :unprocessable_entity }
+    if params[:new_list_name].nil? || params[:new_list_name].blank? && params[:list_name] != ""
+      @list_name = params[:list_name]
+      @saved_list = SavedList.find(params[:list_name])
+      @user_ids = params["user_ids"]
+      # Removes duplicates from Saved Lists
+      # Authored by Cornelius Donley
+      @user_ids_uniq = Array.new.uniq
+      @saved_list.users.each do |u|
+        @user_ids_uniq.push u
       end
+      @user_ids.each do |u|
+        @user_ids_uniq.push (u.to_i - 1)
+      end
+      # End remove duplicates code
+
+      @saved_list.saved_list_users.delete_all
+      @user_ids_uniq.each do |user_id|
+        SavedListUser.create(saved_list_id: @saved_list.id, user_id: user_id)
+      end
+      @saved_list.save
+      redirect_to @saved_list
+    elsif params[:new_list_name] != "" && !params[:new_list_name].nil? || !params[:new_list_name].blank?
+      # Create new saved list table entry
+      @saved_list = SavedList.new
+
+      # Store attributes
+      @saved_list.list_name = params[:new_list_name]
+      @saved_list.login_id = params[:login_id]
+      @saved_list.date_saved = params[:date_saved]
+
+      # Save the saved list
+      respond_to do |format|
+        if @saved_list.save
+
+          # Create new user saved list entries for all users in list
+          @user_ids = params["user_ids"]
+          @user_ids.each do |user_id|
+            SavedListUser.create(saved_list_id: @saved_list.id, user_id: user_id.to_i - 1)
+          end
+
+          format.html { redirect_to @saved_list, notice: 'Saved list was successfully created.' }
+          format.json { render :show, status: :created, location: @saved_list }
+        else
+          format.html { render :new }
+          format.json { render json: @saved_list.errors, status: :unprocessable_entity }
+        end
+      end
+    else
+      redirect_to saved_lists_path
     end
   end
 

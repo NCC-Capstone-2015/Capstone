@@ -1,17 +1,12 @@
 <!-- author: Brett Bush -->
-<!-- modified by James Maher -->
+<!-- modified by James Maher and Andrew Bockus -->
 <br /><br />
 <div class="row panel radius">
-  <div class="large-12 columns">
-
-    <h1><%= @saved_list.list_name %></h1>
+  <div class="large-12 medium-12 small-12 large-centered medium-centered small-centered columns">
+    <div align="center">
+      <h1><%= @saved_list.list_name %></h1><br />
+    </div>
     <h3 id="print_date"></h3>
-
-    <!-- Excel Button -->
-    <%= link_to "Excel (.xls)", params.merge(:format => 'xls'), :class => "button small noprint", method: :post %>
-
-    <!-- Print Button -->
-    <button type="button" class="button small noprint" onclick="saved_list_print_page();">Print</button>
 
     <!-- Table for displaying user information -->
     <div class="user_listing" style="overflow-x:scroll;overflow-y:scroll;height:400px;width:100%;">
@@ -22,6 +17,7 @@
             <th class="saved_list_td" style="white-space: nowrap">Middle Initial</th>
             <th class="saved_list_td" style="white-space: nowrap">Last Name</th>
             <th class="saved_list_td" style="white-space: nowrap">Program</th>
+            <th>Options</th>
           </tr>
         </thead>
         <tbody>
@@ -31,18 +27,29 @@
 
             <!-- For each user, obtain and display information -->
             <% @users.each do |user| %>
-              <% @login = Login.find(user.login_id) %>
               <tr>
-                <td class="saved_list_td"><%= user.login.first_name %></td>
+                <td class="saved_list_td"><%= link_to user.login.first_name, user_information_path(user.login_id), style: "color: #0000AA;" %></td>
                 <td class="saved_list_td"><%= user.login.middle_initial %></td>
                 <td class="saved_list_td"><%= user.login.last_name %></td>
                 <td class="saved_list_td"><%= user.program %></td>
+                <td>
+                  <%= form_tag "/saved_lists/delete_user/"+@saved_list.id.to_s, method: 'post' do %>
+                    <%= hidden_field_tag :user_id, user.login_id %>
+                    <%= submit_tag "Delete", class: "button small radius" %>
+                  <% end %>
+                </td>
               </tr>
             <% end %>
           <% end %>
         </tbody>
       </table>
     </div>
+  </div><br />
+  <div align="center">
+    <%= link_to 'Back', saved_lists_index_path, class: "button radius" %>
+    <!-- Print Button -->
+    <button type="button" class="button radius noprint" onclick="saved_list_print_page();">Print</button>
+    <!-- Excel Button -->
+    <%= link_to "Excel", params.merge(:format => 'xls'), :class => "button radius noprint", method: :post %>
   </div>
-  <%= link_to 'Back', saved_lists_index_path, class: "button" %>
 </div>

@@ -50,7 +50,7 @@
           </tr>
 
         <% @results.try(:each) do |result| %>
-          <% if result.user.undergraduate_degrees.count < 1 || result.user.graduate_degrees.count < 1 %>
+          <% if result.user.try(:undergraduate_degrees).try(:count) < 1 || result.user.try(:graduate_degrees).try(:count) < 1 %>
             <tr>
               <!-- Print user login information -->
               <% result.attributes.except(*@keys_blacklist).each do |attr_name, attr_value| %>
