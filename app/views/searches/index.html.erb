@@ -10,8 +10,9 @@
       <%= f.condition_fields do |c| %>
         <%= render "condition_fields", f: c %>
       <% end %>
-      <%= link_to_add_fields "+", f, :condition, class: "button" %><br>
-      <%= f.submit "Search", :class => "button" %>
+      <%= link_to_add_fields "+", f, :condition, class: "button radius" %>
+      &emsp;
+      <%= f.submit "Search", :class => "button radius" %>
     <% end %>
     <% if @display_results %>
       <%= render "results" %>

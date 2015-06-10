@@ -7,12 +7,21 @@
 <div class="row panel radius">
   <div class="large-12 large-centered columns">
     <div class="row">
-      <div class="large-12 medium-12 small-12 small-centered large-centered columns">
+      <div class="large-12 medium-12 small-12 small-centered medium-centered large-centered columns">
         <h1 align="center"><%= @report_type.titleize %> Report</h1>
       </div>
     </div>
     <hr class="noprint"/><br />
-
+    <div class="row" id='saved_list_display' style="display: none;">
+      <div class="large-12 medium-12 small-12 large-centered medium-centered small-centered columns">
+        <% form_tag "saved_lists#create", method: 'post' do %>
+          <% hidden_field_tag "user_ids", @user_array %>
+          <h4>New list name: <%= text_field_tag :new_saved_list %></h4>
+          <%= select_tag :add_saved_list, options_from_collection_for_select(@saved_list_array, 'id', 'list_name'), {:include_blank => '-- Add to Saved List --'} %>
+          <% submit_tag "Save" %>
+        <% end %>
+      </div>
+    </div>
     <% if @results.nil? || @results.blank? %>
       <div class="row">
         <div class="large-6 medium-6 small-12 large-centered medium-centered small-centered">
@@ -29,10 +38,15 @@
         <%= render 'show_user_information' %>
       <% end %>
     <% end %>
-
   </div>
 </div>
 <script>
+function savedList()
+{
+  document.getElementById('saved_list_display').style.display = "inline";
+}
+
+// Created by Caroline St. Clair
 function printPage()
 {
   $('.noprint').hide();

@@ -1,17 +1,26 @@
 <!-- Created by Rapidfire Edited by Drew Olehy -->
-
+<!-- Styled by Andrew Bockus -->
 <br /><br />
 <div class="row panel radius">
-<h2>Please answer these questions:</h2>
-<hr/>
-
-<%= form_for([@survey, @attempt_builder]) do |f| %>
-  <%- @attempt_builder.answers.each do |answer| %>
-    <%= f.fields_for("#{answer.question.id}", answer) do |answer_form| %>
-      <%= render_answer_form_helper(answer, answer_form) %>
-    <% end %>
-  <% end %>
-  <%= f.submit 'Save', :class => 'radius button'%>
-<% end %>
+  <div class="large-12 medium-12 small-12 large-centered medium-centered small-centered columns">
+    <div align="center">
+      <h3>Please answer these questions:</h3><br />
+    </div>
+    <div class="row">
+      <div class="large-12 medium-8 small-12 large-centered medium-centered small-centered columns">
+        <%= form_for([@survey, @attempt_builder]) do |f| %>
+          <%- @attempt_builder.answers.each do |answer| %>
+            <%= f.fields_for("#{answer.question.id}", answer) do |answer_form| %>
+              <%= render_answer_form_helper(answer, answer_form) %>
+            <% end %>
+          <% end %>
+          <div align="center">
+            <%= link_to 'Back', main_app.rapidfire_path, class: "button radius" %>
+            <%= f.submit 'Save', :class => 'radius button'%>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>
 <br />

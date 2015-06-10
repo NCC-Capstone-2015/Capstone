@@ -3,7 +3,7 @@
 <%= render partial: "rapidfire/answers/errors", locals: {answer: answer} %>
 
 <div class="row">
-  <div class="large-6 medium-6 small-12 columns">
+  <div class="large-6 medium-6 small-12 large-centered medium-centered small-centered columns">
     <!-- Date can only be entered as yyyy-mm-dd -->
     <%= f.label :answer_text, answer.question.question_text %><%= "(yyyy-mm-dd)" %><br />
     <%= f.text_field :answer_text %>
