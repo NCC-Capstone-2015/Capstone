@@ -1,4 +1,4 @@
-<%-# authored by Matthew Kachlik -%>
+<!-- authored by Matthew Kachlik -->
 <%= form_for(@giving_back) do |f| %>
   <% if @giving_back.errors.any? %>
     <div id="error_explanation">
@@ -57,8 +57,8 @@
   </div>
   <div class="row">
     <div class="text-center">
-      <%= f.submit 'submit', :class => 'button radius'%>
       <%= link_to 'Back', giving_backs_path, :class => 'button radius' %>
+      <%= f.submit 'Submit', :class => 'button radius'%>
     </div>
   </div>
 <% end %>

@@ -57,7 +57,7 @@
                 <% if attr_name == 'id' %>
                   <% @login_id = attr_value %>
                 <% elsif attr_name == 'username' %>
-                  <td><%= link_to attr_value, user_information_path(result.user.id), style: "color: #0000AA;" %></td>
+                  <td><%= link_to attr_value, user_information_path((result.user.id+1)), style: "color: #0000AA;" %></td>
                 <% else %>
                   <td><%= attr_value %></td>
                 <% end %>
@@ -117,7 +117,7 @@
                     <% if attr_name == 'id' %>
                       <% @login_id = attr_value %>
                     <% elsif attr_name == 'username' %>
-                      <td><%= link_to attr_value, user_information_path(result.user.id), style: "color: #0000AA;" %></td>
+                      <td><%= link_to attr_value, user_information_path((result.user.id+1)), style: "color: #0000AA;" %></td>
                     <% else %>
                       <td><%= attr_value %></td>
                     <% end %>
